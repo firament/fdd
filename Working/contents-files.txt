@@ -1,0 +1,228 @@
+sending incremental file list
+10-Readme.md
+TODO.md
+fdd-data.sh
+fdd-lib.sh
+setup-fdd.sh
+signRepo
+10-Apps/
+10-Apps/10-Base/
+10-Apps/10-Base/dotnet-sdk-2.0.3-linux-x64.tar.gz
+10-Apps/10-Base/go1.9.2.linux-amd64.tar.gz
+10-Apps/10-Base/jre-8u152-linux-x64.tar.gz
+10-Apps/10-Base/node-v8.9.1-linux-x64.tar.xz
+10-Apps/10-Base/drivers/
+10-Apps/10-Base/drivers/jtds-1.3.3.jar
+10-Apps/10-Base/drivers/mongo-java-driver-3.5.0-javadoc.jar
+10-Apps/10-Base/drivers/mongo-java-driver-3.5.0.jar
+10-Apps/10-Base/drivers/mysql-connector-java-5.1.44-bin.jar
+10-Apps/10-Base/drivers/sqljdbc41.jar
+10-Apps/10-Base/drivers/sqljdbc42.jar
+10-Apps/20-DEV/
+10-Apps/20-DEV/GitEye-2.0.0-linux.x86_64.zip
+10-Apps/20-DEV/Visual_Paradigm_CE_14_2_20171107_Linux64_InstallFree.tar.gz
+10-Apps/20-DEV/atom-1.22.1-amd64.tar.gz
+10-Apps/20-DEV/code-stable-code_1.18.1-1510857349_amd64.tar.gz
+10-Apps/20-DEV/projectlibre-1.7.0.tar.gz
+10-Apps/30-EXT/
+10-Apps/30-EXT/Oracle_VM_VirtualBox_Extension_Pack-5.1.22-115126.vbox-extpack
+10-Apps/30-EXT/mongodb-linux-x86_64-ubuntu1604-3.4.10.tgz
+10-Apps/30-EXT/robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
+20-Resources/
+20-Resources/Copy/
+20-Resources/Copy/PinguyBuilder.conf
+20-Resources/Copy/bg-black.png
+20-Resources/Copy/vs-code-settings.json
+20-Resources/Copy/ShortCuts/
+20-Resources/Copy/ShortCuts/DesktopEditors.desktop
+20-Resources/Copy/ShortCuts/atom.desktop
+20-Resources/Copy/ShortCuts/code.desktop
+20-Resources/Copy/ShortCuts/giteye.desktop
+20-Resources/Copy/ShortCuts/project-libre.desktop
+20-Resources/Copy/ShortCuts/vpuml-ce.desktop
+20-Resources/Copy/ShortCuts/zekr.desktop
+20-Resources/Copy/ShortCuts/icons/
+20-Resources/Copy/ShortCuts/icons/App-icon.png
+20-Resources/Copy/ShortCuts/icons/AutoRun.png
+20-Resources/Copy/ShortCuts/icons/asc-de-48.png
+20-Resources/Copy/ShortCuts/icons/atom.png
+20-Resources/Copy/ShortCuts/icons/code.png
+20-Resources/Copy/ShortCuts/icons/fb-8.gif
+20-Resources/Copy/ShortCuts/icons/folderNav.png
+20-Resources/Copy/ShortCuts/icons/giteye.png
+20-Resources/Copy/ShortCuts/icons/project-libre.ico
+20-Resources/Copy/ShortCuts/icons/project-libre.png
+20-Resources/Copy/ShortCuts/icons/vpuml.png
+20-Resources/Copy/ShortCuts/icons/zekr.png
+20-Resources/Copy/bin/
+20-Resources/Copy/bin/PlatformVars.sh
+20-Resources/Copy/bin/Visual_Paradigm
+20-Resources/Copy/bin/clear-sys
+20-Resources/Copy/bin/eAutoRun
+20-Resources/Copy/bin/jClock.jar
+20-Resources/Copy/bin/jclock
+20-Resources/Copy/bin/make-live-image
+20-Resources/Copy/bin/mntBookShelf
+20-Resources/Copy/bin/mntISO
+20-Resources/Copy/bin/mntRepository
+20-Resources/Copy/bin/mntSquashFS
+20-Resources/Copy/bin/onlyoffice-desktopeditors
+20-Resources/Copy/bin/set-swap.sh
+20-Resources/Copy/bin/setmon
+20-Resources/Copy/bin/squash-bookshelf
+20-Resources/Copy/bin/update-live-image
+20-Resources/Copy/bin/windUP.sh
+20-Resources/Install/
+20-Resources/Install/Sans-OTF/
+20-Resources/Install/Sans-OTF/AbrilFatface-Regular.otf
+20-Resources/Install/Sans-OTF/CooperHewitt-Book.otf
+20-Resources/Install/Sans-OTF/Cuprum.otf
+20-Resources/Install/Sans-OTF/Economica-Bold-OTF.otf
+20-Resources/Install/Sans-OTF/Economica-BoldItalic-OTF.otf
+20-Resources/Install/Sans-OTF/Economica-Italic-OTF.otf
+20-Resources/Install/Sans-OTF/Economica-Regular-OTF.otf
+20-Resources/Install/Sans-OTF/Inconsolata.otf
+20-Resources/Install/Sans-OTF/PermianSansTypeface-Bold.otf
+20-Resources/Install/Sans-OTF/PermianSansTypeface-Italic.otf
+20-Resources/Install/Sans-OTF/PermianSansTypeface.otf
+20-Resources/Install/Sans-OTF/QuattrocentoSans-Bold.otf
+20-Resources/Install/Sans-OTF/QuattrocentoSans-BoldItalic.otf
+20-Resources/Install/Sans-OTF/QuattrocentoSans-Italic.otf
+20-Resources/Install/Sans-OTF/QuattrocentoSans-Regular.otf
+20-Resources/Install/Sans-OTF/Quicksand-Bold.otf
+20-Resources/Install/Sans-OTF/Quicksand-BoldItalic.otf
+20-Resources/Install/Sans-OTF/Quicksand-Italic.otf
+20-Resources/Install/Sans-OTF/Quicksand-Light.otf
+20-Resources/Install/Sans-OTF/Quicksand-LightItalic.otf
+20-Resources/Install/Sans-OTF/Quicksand-Regular.otf
+20-Resources/Install/Sans-OTF/Quicksand_Dash.otf
+20-Resources/Install/Sans-OTF/Tenderness.otf
+20-Resources/Install/Sans-TTF/
+20-Resources/Install/Sans-TTF/Antonio-Bold.ttf
+20-Resources/Install/Sans-TTF/Antonio-Light.ttf
+20-Resources/Install/Sans-TTF/Antonio-Regular.ttf
+20-Resources/Install/Sans-TTF/Candal.ttf
+20-Resources/Install/Sans-TTF/Carlito-Bold.ttf
+20-Resources/Install/Sans-TTF/Carlito-BoldItalic.ttf
+20-Resources/Install/Sans-TTF/Carlito-Italic.ttf
+20-Resources/Install/Sans-TTF/Carlito-Regular.ttf
+20-Resources/Install/Sans-TTF/CoventryScriptFLF.ttf
+20-Resources/Install/Sans-TTF/F25_Bank_Printer.ttf
+20-Resources/Install/Sans-TTF/F25_Bank_Printer_Bold.ttf
+20-Resources/Install/Sans-TTF/Niconne-Regular.ttf
+20-Resources/Install/Sans-TTF/Oswald-Heavy.ttf
+20-Resources/Install/Sans-TTF/Plumeria_sans.ttf
+20-Resources/Install/Sans-TTF/Resagnicto.ttf
+20-Resources/Install/Sans-TTF/ResagnictoBold.ttf
+20-Resources/Install/Sans-TTF/ResagnictoItalic.ttf
+20-Resources/Install/Sans-TTF/WinterthurCondensed.ttf
+20-Resources/Install/Sans-TTF/england.ttf
+20-Resources/Install/Sans-TTF/luximb.ttf
+20-Resources/Install/Sans-TTF/luximbi.ttf
+20-Resources/Install/Sans-TTF/luximr.ttf
+20-Resources/Install/Sans-TTF/luximri.ttf
+20-Resources/Install/Serif-OTF/
+20-Resources/Install/Serif-OTF/AftaSerifThin-Italic.otf
+20-Resources/Install/Serif-OTF/AftaSerifThin-Regular.otf
+20-Resources/Install/Serif-OTF/Alegreya-Bold.otf
+20-Resources/Install/Serif-OTF/Alegreya-BoldItalic.otf
+20-Resources/Install/Serif-OTF/Alegreya-Italic.otf
+20-Resources/Install/Serif-OTF/Alegreya-Regular.otf
+20-Resources/Install/Serif-OTF/Andada-Bold.otf
+20-Resources/Install/Serif-OTF/Andada-BoldItalic.otf
+20-Resources/Install/Serif-OTF/Andada-Italic.otf
+20-Resources/Install/Serif-OTF/Andada-Regular.otf
+20-Resources/Install/Serif-OTF/Bentham.otf
+20-Resources/Install/Serif-OTF/Brawler.otf
+20-Resources/Install/Serif-OTF/Heuristica-Bold.otf
+20-Resources/Install/Serif-OTF/Heuristica-BoldItalic.otf
+20-Resources/Install/Serif-OTF/Heuristica-Italic.otf
+20-Resources/Install/Serif-OTF/Heuristica-Regular.otf
+20-Resources/Install/Serif-OTF/Mate-Italic.otf
+20-Resources/Install/Serif-OTF/Mate-Regular.otf
+20-Resources/Install/Serif-OTF/MateSC-Regular.otf
+20-Resources/Install/Serif-OTF/PlayfairDisplay-Bold.otf
+20-Resources/Install/Serif-OTF/PlayfairDisplay-BoldItalic.otf
+20-Resources/Install/Serif-OTF/PlayfairDisplay-Italic.otf
+20-Resources/Install/Serif-OTF/PlayfairDisplay-Regular.otf
+20-Resources/Install/Serif-OTF/lmroman10-bold.otf
+20-Resources/Install/Serif-OTF/lmroman10-bolditalic.otf
+20-Resources/Install/Serif-OTF/lmroman10-italic.otf
+20-Resources/Install/Serif-OTF/lmroman10-regular.otf
+20-Resources/Install/Serif-TTF/
+20-Resources/Install/Serif-TTF/COMMI___.ttf
+20-Resources/Install/Serif-TTF/COMMSB__.ttf
+20-Resources/Install/Serif-TTF/COMMS___.ttf
+20-Resources/Install/Serif-TTF/COMMUNIS.ttf
+20-Resources/Install/Serif-TTF/Caladea-Bold.ttf
+20-Resources/Install/Serif-TTF/Caladea-BoldItalic.ttf
+20-Resources/Install/Serif-TTF/Caladea-Italic.ttf
+20-Resources/Install/Serif-TTF/Caladea-Regular.ttf
+20-Resources/Install/Serif-TTF/CharisSILB.ttf
+20-Resources/Install/Serif-TTF/CharisSILBI.ttf
+20-Resources/Install/Serif-TTF/CharisSILI.ttf
+20-Resources/Install/Serif-TTF/CharisSILR.ttf
+20-Resources/Install/Serif-TTF/CreditValley.ttf
+20-Resources/Install/Serif-TTF/CreditValleyBoldItalic.ttf
+20-Resources/Install/Serif-TTF/CreditValleyItalic.ttf
+20-Resources/Install/Serif-TTF/CreditValleybold.ttf
+20-Resources/Install/Serif-TTF/Dustismo_Roman.ttf
+20-Resources/Install/Serif-TTF/Dustismo_Roman_Bold.ttf
+20-Resources/Install/Serif-TTF/Dustismo_Roman_Italic.ttf
+20-Resources/Install/Serif-TTF/Dustismo_Roman_Italic_Bold.ttf
+20-Resources/Install/Serif-TTF/InknutAntiqua-Bold.ttf
+20-Resources/Install/Serif-TTF/InknutAntiqua-Regular.ttf
+20-Resources/Install/Serif-TTF/Kameron-Bold.ttf
+20-Resources/Install/Serif-TTF/Kameron-Regular.ttf
+20-Resources/Install/Serif-TTF/OldStandard-Bold.ttf
+20-Resources/Install/Serif-TTF/OldStandard-Italic.ttf
+20-Resources/Install/Serif-TTF/OldStandard-Regular.ttf
+20-Resources/Install/Serif-TTF/Oranienbaum-Regular.ttf
+20-Resources/Install/Serif-TTF/TheanoDidot-Regular.ttf
+20-Resources/Install/Serif-TTF/TheanoModern-Regular.ttf
+20-Resources/Install/Serif-TTF/TheanoOldStyle-Regular.ttf
+20-Resources/Install/fonts-zekr/
+20-Resources/Install/fonts-zekr/PDMS_Saleem_QuranFont-signed.ttf
+20-Resources/Install/fonts-zekr/Scheherazade-R.ttf
+20-Resources/Install/fonts-zekr/UthmanTN1 Ver10.otf
+20-Resources/Install/fonts-zekr/UthmanTN1B Ver10.otf
+20-Resources/Install/fonts-zekr/XB Kayhan.ttf
+20-Resources/Install/fonts-zekr/XB KayhanBd.ttf
+20-Resources/Install/fonts-zekr/XB KayhanBdIt.ttf
+20-Resources/Install/fonts-zekr/XB KayhanIt.ttf
+20-Resources/Install/fonts-zekr/XB KayhanNavaar.ttf
+20-Resources/Install/fonts-zekr/XB KayhanPook.ttf
+20-Resources/Install/fonts-zekr/XB KayhanSayeh.ttf
+20-Resources/Install/fonts-zekr/XB Shiraz.ttf
+20-Resources/Install/fonts-zekr/XB ShirazBd.ttf
+20-Resources/Install/fonts-zekr/XB ShirazBdIt.ttf
+20-Resources/Install/fonts-zekr/XB ShirazIt.ttf
+20-Resources/Install/fonts-zekr/XB Yas.ttf
+20-Resources/Install/fonts-zekr/XB YasBd.ttf
+20-Resources/Install/fonts-zekr/XB YasBdIt.ttf
+20-Resources/Install/fonts-zekr/XB YasIt.ttf
+20-Resources/Install/fonts-zekr/XB Zar.ttf
+20-Resources/Install/fonts-zekr/XB ZarBd.ttf
+20-Resources/Install/fonts-zekr/XB ZarBdIt.ttf
+20-Resources/Install/fonts-zekr/XB ZarIt.ttf
+20-Resources/Install/fonts-zekr/XB ZarOblique.ttf
+20-Resources/Install/fonts-zekr/XB ZarObliqueBd.ttf
+20-Resources/Install/fonts-zekr/noorehira.ttf
+20-Resources/T-OneUse/
+20-Resources/T-OneUse/vp-help.jar
+20-Resources/certs/
+20-Resources/certs/FDD-RepoSign-pub.key
+20-Resources/certs/ODP-RepoSign-pub.key
+20-Resources/certs/ODP-RepoSign-pvt.key
+20-Resources/certs/SKYPE-GPG-KEY
+Working/
+Working/app-setup-plan.md
+Working/customizer-manual.md
+Working/grub-NP540U3C.cfg
+Working/grub-dpm6700.cfg
+Working/sql-server-on-linux.md
+Working/work-notes.md
+deb-paks-Ax64/
+
+sent 6,840 bytes  received 708 bytes  15,096.00 bytes/sec
+total size is 1,365,622,964  speedup is 180,925.14 (DRY RUN)
