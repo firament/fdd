@@ -37,19 +37,24 @@ Init(){
 
 	#### MOUNT OFFLINE REPO AND UPGRADE
 	#------------------------------------------------------------------------------#
-	# Add certificate to apt, one time need
-	sudo apt-key add ${SIGNATR_PUB_KEY};
-	sudo apt-key add ${SKYPE-GPG-KEY};
-
 	# Mount repository to well known location
 	mountRepository;
 
 	# Add specific repositories
-	sudo touch /etc/apt/sources.list.d/google-chrome.list;
-	echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list;
+	if [ ! -e /etc/apt/sources.list.d/google-chrome.list ]; then
+		# Add certificate to apt, one time need
+		# https://dl-ssl.google.com/linux/linux_signing_key.pub
+		sudo apt-key add ${GOOGLE-GPG-KEY};
+		sudo touch /etc/apt/sources.list.d/google-chrome.list;
+		echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list;
+	fi;
 	#
-	sudo touch /etc/apt/sources.list.d/skype-stable.list;
-	echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee -a /etc/apt/sources.list.d/skype-stable.list;
+	if [ ! -e /etc/apt/sources.list.d/skype-stable.list ]; then
+		# Add certificate to apt, one time need
+		sudo apt-key add ${SKYPE-GPG-KEY};
+		sudo touch /etc/apt/sources.list.d/skype-stable.list;
+		echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee -a /etc/apt/sources.list.d/skype-stable.list;
+	fi;
 
 	# Update all repos
 	sudo apt-get -y  update;
@@ -62,8 +67,8 @@ Init(){
 	sudo chmod 666 /boot/grub/grub.cfg
 	touch ${SETUPS_LOG_LOCN}/grub-orig.cfg;
 	touch ${SETUPS_LOG_LOCN}/grub-curr.cfg
-	sudo cp -fv /boot/grub/grub.cfg /boot/grub/grub-bak.cfg	# Add time stamp to file name
-	sudo cat    /boot/grub/grub.cfg >${SETUPS_LOG_LOCN}/grub-orig.cfg;
+	sudo cp -fv /boot/grub/grub.cfg /boot/grub/grub-$(date +"%Y%m%d-%s").cfg	# Add time stamp to file name
+	sudo cat    /boot/grub/grub.cfg >${SETUPS_LOG_LOCN}/grub-$(date +"%Y%m%d-%s").cfg;
 	# sudo cat ${RESOURCE_FOLDER}/2_copy/grub-updated.cfg >${SETUPS_LOG_LOCN}/grub-curr.cfg;
 	# sudo cat ${RESOURCE_FOLDER}/2_copy/grub-updated.cfg >/boot/grub/grub.cfg;
 
@@ -77,12 +82,9 @@ Init(){
 
 	## COPY SHORTCUTS
 	echo "Copying files and linking.";
-	# mkdir -p /10-Base/Copy/ShortCuts;
-	# rsync -vrh ${RESOURCE_FOLDER}/Copy/ShortCuts/ /10-Base/ShortCuts;
 	rsync -vhr ${RESOURCE_FOLDER}/Copy/ShortCuts /10-Base/;
 	chmod -v 755 /10-Base/ShortCuts/*desktop;
 	# Make shortcuts universally availaible
-	# sudo cp -fvR /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN}; # Use rsync for this also
 	sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
 
 	## COPY DRIVERS
@@ -126,7 +128,6 @@ alias s2d='sed "s/ /-/g" <<< '
 alias runauto='/10-Base/bin/AutoRun 2>&1 | tee ${AUTORUN_LOG}'
 alias clean-cjk='bash /media/sak/70_Current/Work/CanesJK/clean-ws.sh'
 alias tb='thunderbird --ProfileManager &'
-alias gg='/usr/lib/git-core/git-gui &'
 alias git-gui='/usr/lib/git-core/git-gui &'
 EOALIAS
 
@@ -139,9 +140,9 @@ EOALIAS
 	cat /etc/environment                                        # Get contents to log, for verification
 	# Update contents
 sudo cat > /etc/environment <<EOENV
-PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:${ORA_JRE_PATH}/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
+PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
 GOROOT="${GOLANG_PATH}"
-JAVA_HOME="${ORA_JRE_PATH}"
+PL_LOADED=1
 EOENV
 	sudo chmod -vc 644 /etc/environment; ls -l /etc/environment;   # Reset Permission flags
 
@@ -191,7 +192,8 @@ InstallCoreApps(){
 	echo;
 	echo "Install Dev Tool Chain and Productivity Packages";
 	# sudo touch /etc/default/google-chrome;	# Uncomment if chrome is not be be updated
-	aptInstallApp git git-gui meld google-chrome-stable bleachbit skypeforlinux build-essential manpages-dev libunwind8 ruby-full;
+	aptInstallApp git meld google-chrome-stable bleachbit skypeforlinux build-essential manpages-dev libunwind8 ruby-full zlib1g-dev openjdk-8-jre;
+	# git-gui
 	# bootstrap4 build dependencies
 	# build-essential manpages-dev libunwind8 ruby-full;
 	sudo gem install bundler    # for bootstrap compile
@@ -209,10 +211,10 @@ SetupDevApps(){
 
 	#### INSTALL Oracle JRE
 	#------------------------------------------------------------------------------#
-	echo "Setting up Oracle JRE now";
-	ClearFolder ${ORA_JRE_PATH};   # Remove if upgrading
-	tar -xz -C ${APPS_BAS_DIR} -f ${ORA_JRE_TAR};
-	mv -vf ${ORA_JRE_PATH}* ${ORA_JRE_PATH};
+	# echo "Setting up Oracle JRE now";
+	# ClearFolder ${ORA_JRE_PATH};   # Remove if upgrading
+	# tar -xz -C ${APPS_BAS_DIR} -f ${ORA_JRE_TAR};
+	# mv -vf ${ORA_JRE_PATH}* ${ORA_JRE_PATH};
 
 	#### INSTALL NodeJS -- test for xz
 	#------------------------------------------------------------------------------#
@@ -232,14 +234,12 @@ SetupDevApps(){
 	ClearFolder ${DNETCORE_PATH};   # Remove if upgrading
 	makeOwnFolder ${DNETCORE_PATH}  # Folder needs to exist for tar to work
 	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
-	# mv -vf ${DNETCORE_PATH}* ${DNETCORE_PATH};
 
 	#### INSTALL GO LANG
 	#------------------------------------------------------------------------------#
 	echo "Setting up GO Lang now";
 	ClearFolder ${GOLANG_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_BAS_DIR} -f ${GOLANG_TAR};
-	# mv -vf ${GOLANG_PATH}* ${GOLANG_PATH};
 
 
 	## /20-DEV
@@ -257,8 +257,11 @@ SetupDevApps(){
 	echo "Setting up Visual Studio Code now";
 	ClearFolder ${VSCODE_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_DEV_DIR} -f ${VSCODE_TAR};
-	# mv -vf ${VSCODE_PATH}* ${VSCODE_PATH}; # No version suffix here
 	sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
+	# touch ${HOME}/.config/Code/User/settings.json;
+	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json ${HOME}/.config/Code/User/settings.json;
+	# touch ${HOME}/.config/Code/User/keybindings.json;
+	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
 
 	#### INSTALL VPUML CE
 	#------------------------------------------------------------------------------#
@@ -266,7 +269,6 @@ SetupDevApps(){
 	ClearFolder ${VPUML_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_DEV_DIR} -f ${VPUML_TARFILE};
 	mv -vf ${VPUML_PATH}* ${VPUML_PATH};
-	# rm -fRv ${VPUML_PATH}/jre;
 	sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
 
 	#### INSTALL GitEye
@@ -282,9 +284,6 @@ SetupDevApps(){
 	ClearFolder ${PLIB_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_DEV_DIR} -f ${PLIB_TARFILE};
 	mv -vf ${PLIB_PATH}* ${PLIB_PATH};
-	# ls -1d ${PLIB_PATH}* | while read LDIRS; do
-	# 	mv -vf ${LDIRS} ${PLIB_PATH};
-	# done;
 
 
 	# /30-EXT
@@ -306,6 +305,15 @@ SetupDevApps(){
 	# fix for ubuntu error
 	mkdir -v -p ${ROBO3T_PATH}/lib-bak;
 	mv -vf ${ROBO3T_PATH}/lib/libstdc++.so* ${ROBO3T_PATH}/lib-bak
+
+	#### INSTALL Pandoc
+	#------------------------------------------------------------------------------#
+	echo "Setting up pandoc now";
+	ClearFolder ${PANDOC_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_EXT_DIR} -f ${PANDOC_TARFILE};
+	mv -vf ${PANDOC_PATH}* ${PANDOC_PATH};
+	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
+	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
 
 
 

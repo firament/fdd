@@ -1,17 +1,20 @@
-# ODP Post setup customizations
+# Post setup customizations
 
 ## Size suffixes
-	Suffix    Units                   Byte Equivalent
-	b         Blocks                  SIZE x 512
-	B         Kilobytes               SIZE x 1024
-	c         Bytes                   SIZE
-	G         Gigabytes               SIZE x 1024^3
-	K         Kilobytes               SIZE x 1024
-	k         Kilobytes               SIZE x 1024
-	M         Megabytes               SIZE x 1024^2
-	P         Petabytes               SIZE x 1024^5
-	T         Terabytes               SIZE x 1024^4
-	w         Words                   SIZE x 2
+
+| Suffix | Units     | Byte Equivalent |
+|:------:| --------- | --------------- |
+|   b    | Blocks    | SIZE x 512      |
+|   B    | Kilobytes | SIZE x 1024     |
+|   c    | Bytes     | SIZE            |
+|   G    | Gigabytes | SIZE x 1024^3   |
+|   K    | Kilobytes | SIZE x 1024     |
+|   k    | Kilobytes | SIZE x 1024     |
+|   M    | Megabytes | SIZE x 1024^2   |
+|   P    | Petabytes | SIZE x 1024^5   |
+|   T    | Terabytes | SIZE x 1024^4   |
+|   w    | Words     | SIZE x 2        |
+
 ---
 
 ## Notes:
@@ -56,20 +59,112 @@ Set default fonts in
 **Packages for Fonts:**
 1. `fonts-crosextra-caladea_*.deb`
 2. `fonts-crosextra-carlito_*.deb`
+
 ---
 
-## Visual Studio Code
-- insertdatetime extension
-- `@sort:installs `
+## Menu Panel - Favourites
+Right click on taskbar > `Add to Panel` > `MATE Menu (Advanced Mate Menu)`
+
+```
+dconf Editor > org > mate > mate-menu > plugins > applications
+	H	W	IS	Panel
+	480	520	16	applications
+	???	???	??	places
+	???	???	??	recent
+	???	???	??	system_management
+```
+> ### Arrange/Sort favourites
+- Edit file `~/.config/mate-menu/applications.list`
+- and manually rearrange entries to get the order you like.
+- *'Reload Plugins' applies the changes right away.*
+
+ > **Customized Contents**
+
+```
+location:/usr/share/applications/code.desktop
+location:/home/sak/.local/share/applications/atom.desktop
+location:/home/sak/.local/share/applications/vpuml-ce.desktop
+location:/usr/share/applications/giteye.desktop
+separator
+location:/usr/share/applications/google-chrome.desktop
+location:/usr/share/applications/vivaldi-stable.desktop
+location:/usr/share/applications/thunderbird.desktop
+location:/usr/share/applications/skypeforlinux.desktop
+location:/usr/share/applications/vlc.desktop
+location:/usr/share/applications/galculator.desktop
+separator
+location:/usr/share/applications/libreoffice-writer.desktop
+location:/usr/share/applications/mate-display-properties.desktop
+location:/usr/share/applications/libreoffice-calc.desktop
+location:/usr/share/applications/transmission-gtk.desktop
+location:/usr/share/applications/mate-system-log.desktop
+location:/usr/share/applications/virtualbox.desktop
+```
+
+ > **Remove non-needed entries from Places
+ > - in file `/etc/xdg/user-dirs.defaults`, will work after caja/nautilus reload
+
 ---
+
+## Bookmarks in Caja/Nautilus
+**Files:**
+1. `~/.gtk-bookmarks`
+**Contents:**
+	```
+	file:///media/sak/70_Current/_Notes
+	file:///media/sak/70_Current/Work
+	file:///media/sak/70_Current/Downloads
+	file:///cdrom D1-Cache
+	```
+2. `~/.config/gtk-3.0/bookmarks`
+	- _Also see. Works even if this file is deleted._
+
+**Alternate**
+- `Places` in Panel only, entries from bookmark will also get added
+- `org > mate > mate-menu > plugins > places >`
+	- custom-names = "`['Notes', 'Work', 'Downloads']`"
+	- custom paths = "`['/media/sak/70_Current/_Notes', '/media/sak/70_Current/Work', '/media/sak/70_Current/Downloads']`"
+
+**Remove Unwanted folder links:**
+- The XDG user dirs configuration is stored in the user-dirs.dir file in the location pointed to by the XDG_CONFIG_HOME environment variable.
+- File is `/etc/xdg/user-dirs.defaults`
+- Environment var `XDG_CONFIG_HOME` on installation does not exist
+
+---
+
+## Visual Studio Code Extensions
+
+```
+ext install ms-vscode.csharp
+ext install lukehoban.go
+ext install jsynowiec.vscode-insertdatestring
+ext install chrmarti.regex
+ext install shd101wyy.markdown-preview-enhanced
+ext install darkriszty.markdown-table-prettify
+ext install AlanWalk.markdown-toc
+
+ext install PeterJausovec.vscode-docker
+ext install joelday.docthis
+ext install dbaeumer.vscode-eslint
+```
+
+---
+
 ## Install grub to drive - Worked
+
+> make efi compatible, and verify
+
 1. `sudo grub-install --no-floppy --root-directory=/media/linuxUser/SONY_64GB /dev/sde`
 2. `sudo grub-install --no-floppy --root-directory=/media/ubuntu-mate/70_Current /dev/sdb`
 
 ---
+
 ## VP UML
+- Add Work folder to additional folders
+- Add drivers path to Class Paths
 - help file link
-- `https://www.visual-paradigm.com/installers/vp14.2/vp-help.jar`
+	- `https://www.visual-paradigm.com/installers/vp14.2/vp-help.jar`
+
 
 ---
 ## firefox
@@ -79,26 +174,20 @@ Set default fonts in
 	- `markdown preview`
 
 ---
-## google-chrome-stable
-**[Google down load - permalink](https://www.ubuntuupdates.org/google-chrome-stable)**
-1. Setup key with:
-	- `wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - `
-2. Setup repository with:
-	- `sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'`
-3. Setup package with:
-	- `sudo apt-get update; `
-	- `sudo touch /etc/default/google-chrome;`
-	- `sudo apt-get install google-chrome-stable;`
-
----
-## pluma
-
----
 ## Auto enter `SUDO` mode from script
 `sudo -S echo "Entering SUDO mode now." <<<"plain-text-password";	# run sudo to set creds`
 
 ---
+## Timestamp in backup file
+```sh
+date +"%Y-%m-%d  %H:%M:%S-%N  %s";
+cp -fv 10-Init.log 10-Init-$(date +"%Y-%m-%d-%s").bak;
+```
+
+---
 ## FROM `/etc/PinguyBuilder.conf`
+**TODO**: Verify '-' can be used in label?
+
 ``` bash
 BUILDLABEL="FDDa-Ax64-Mate-a"
 LIVECDLABEL="${BUILDLABEL}"
@@ -106,7 +195,30 @@ CUSTOMISO="${BUILDLABEL}.iso"
 ```
 
 ---
-## Code to create virtual Disk
+
+## MakeDVD
+```bash
+# pre-requisites
+# sudo apt-get -Vy install xorriso cdck     # for creating bootable ISO
+# also qemu-utils,                          # for testing ISO
+
+DVD_CONTENT="./folder-to-be-root-of-DVD/";     # Contents of this folder will be at root of DVD
+DVD_PARENT="/parent-folder-of-${DVD_CONTENT}"; # Also location of ISO file created
+ISO_NAME="name-of-ISO-file.iso";
+ISO_LABL="label-of-ISO_DVD-when-mounted";
+
+# make DVD
+pushd ${DVD_PARENT};
+grub-mkrescue -o ${ISO_NAME} ${DVD_CONTENT} -- -volid ${ISO_LABL} | tee ${ISO_NAME}.txt
+popd
+
+# to test
+qemu-system-x86_64 ${DVD_PARENT}/${ISO_NAME}
+```
+
+---
+
+## Code for virtual Disk
 ``` bash
 #// Abridged for cleaner reading. //#
 
@@ -122,7 +234,7 @@ getFirstFreeNBD(){
 	}
 
 ## Part 2 - Create and initialize disk #########################################
-WORK_FILE_NAME="/cdrom/sak/curr/work-2GB-ext2.qc2";
+WORK_FILE_NAME="/cdrom/sak/curr/work-2GB-ext4.qc2";
 MOUNT_POINT="/50-PARKING";
 RUN_AS="${USER}";
 # TODO: use 'NBD=$(getFirstFreeNBD);' instead of hardcoding '/dev/nbd5'
@@ -136,9 +248,9 @@ sudo chown -vR ${RUN_AS}:${RUN_AS} ${MOUNT_POINT};
 ## Part 3 - Mount virtual disk for use #########################################
 NBD=$(getFirstFreeNBD);
 sudo qemu-nbd -c ${NBD} ${CUR_WORK_FILE};
-sudo mount -v -t ext2 ${NBD} /70-CurrentWork;
+sudo mount -v -t ext4 ${NBD} /70-CurrentWork;
 # sudo mount ${NBD} /70-CurrentWork;	        # for auto detect format
-# sudo mount -v -l -t ext2 ${NBD} ${DIR_MOUNT}; # what are the parms?
+# sudo mount -v -l -t ext4 ${NBD} ${DIR_MOUNT}; # what are the parms?
 
 ## Part 4 - Cleanup after use (Release all nbd mounts) #########################
 read -a BLOKDEVS <<<$(lsblk | grep nbd | cut -d " " -f1);
@@ -236,71 +348,6 @@ menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menu
 }
 ```
 
----
-## Menu Panel - Favourites
-Right click on taskbar > `Add to Panel` > `MATE Menu (Advanced Mate Menu)`
-
-```
-dconf Editor > org > mate > mate-menu > plugins > applications
-	H	W	IS	Panel
-	480	520	16	applications
-	???	???	??	places
-	???	???	??	recent
-	???	???	??	system_management
-```
-> ### Arrange/Sort favourites
-Edit file `~/.config/mate-menu/applications.list`
-and manually rearrange entries to get the order you like. 
-*'Reload Plugins' applies the changes right away.*
-
-> **Customized Contents**
-```
-location:/usr/share/applications/code.desktop
-location:/usr/share/applications/atom.desktop
-location:/usr/share/applications/vpuml-ce.desktop
-location:/usr/share/applications/giteye.desktop
-separator
-location:/usr/share/applications/google-chrome.desktop
-location:/usr/share/applications/firefox.desktop
-location:/usr/share/applications/thunderbird.desktop
-location:/usr/share/applications/skypeforlinux.desktop
-location:/usr/share/applications/vlc.desktop
-location:/usr/share/applications/galculator.desktop
-separator
-location:/usr/share/applications/libreoffice-writer.desktop
-location:/usr/share/applications/mate-display-properties.desktop
-location:/usr/share/applications/libreoffice-calc.desktop
-location:/usr/share/applications/transmission-gtk.desktop
-location:/usr/share/applications/mate-system-log.desktop
-location:/usr/share/applications/virtualbox.desktop
-```
-
-> **Remove non-needed entries from Places
-- in file `/etc/xdg/user-dirs.defaults`, will work after caja/nautilus reload
----
-
-## Bookmarks in Caja/Nautilus
-**Files:**
-1. `~/.gtk-bookmarks`
-**Contents:**
-	```
-	file:///media/sak/70_Current/_Notes
-	file:///media/sak/70_Current/Work
-	file:///media/sak/70_Current/Downloads
-	file:///cdrom D1-Cache
-	```
-2. `~/.config/gtk-3.0/bookmarks` _Also see. Works even if this file is deleted._
-
-**Alternate**
-- `Places` in Panel only, entries from bookmark will also get added
-- `org > mate > mate-menu > plugins > places >`
-	- custom-names = "`['Notes', 'Work', 'Downloads']`"
-	- custom paths = "`['/media/sak/70_Current/_Notes', '/media/sak/70_Current/Work', '/media/sak/70_Current/Downloads']`"
-
-**Remove Unwanted folder links:**
-- The XDG user dirs configuration is stored in the user-dirs.dir file in the location pointed to by the XDG_CONFIG_HOME environment variable.
-- File is `/etc/xdg/user-dirs.defaults`
-- Environment var `XDG_CONFIG_HOME` on installation does not exist
 ---
 
 ## Create folder structure
@@ -417,72 +464,17 @@ See [customizer-manual.md](customizer-manual.md)
 
 ---
 
-## MakeDVD
-```bash
-# pre-requisites
-# sudo apt-get -Vy install xorriso cdck     # for creating bootable ISO
-# also qemu-utils,                          # for testing ISO
-
-DVD_CONTENT="./folder-to-be-root-of-DVD/";          # Contents of this folder will be at root of DVD
-DVD_PARENT="/path-to/parent-folder/of-DVD_CONTENT"; # Also location of ISO file created
-ISO_NAME="name-of-ISO-file.iso";
-ISO_LABL="label-of-DVD-when-mounted";
-
-# make DVD
-pushd ${DVD_PARENT};
-grub-mkrescue -o ${ISO_NAME} ${DVD_CONTENT} -- -volid ${ISO_LABL} | tee ${ISO_NAME}.txt
-popd
-
-# to test
-qemu-system-x86_64 ${DVD_PARENT}/${ISO_NAME}
-```
-
----
 ## TODO
 
-### Upgrade installation
-- line 162,
-	- add `aptInstallApp build-essential manpages-dev;`
-	- needed for compiling from source, and size increase not significant
 
-### Copy to repo
-- GO Lang
-	- Add setup in `SetupDevApps`
-	- Add install go-tools steps
-- .NET Core
-	- Add setup in `SetupDevApps`
-- Update `/etc/environment`
-```sh
-# export GOROOT=/30-EXT/go
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+- Dependencies libunwind8
+	- _What is this a dependency for?_
 
-# Update order to save few CPU cycles
-# /bin
-# /usr/sbin
-# /usr/bin
-# /sbin
-# /usr/games
-# /30-EXT/DNC
-# /30-EXT/go/bin
-# /usr/local/sbin
-# /usr/local/bin
-# /usr/local/games
-
-# New to set
-PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:/30-EXT/DNC:/30-EXT/go/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
-GOROOT="/30-EXT/go"
-```
-	- Dependencies libunwind8
-
-- Atom
-	- ~~add to install script~~
-	- make `update-atom.sh` script for manual update
-
-- ~~Add panel for second Monitor~~
+- Add panel for second Monitor
 	- Mate Menu [Advanced MATE Menu]
 	- ~~[**Dont Add**] Window List [Open windows on all panels]~~
 		- ~~Will show only windows from desktop~~
-	- ~~Windows Picker~~
+	- Windows Picker
 		- All windows from all desktops
 		- as icons
 	- Window Selector [Switch between open windows using a menu]
@@ -491,44 +483,15 @@ GOROOT="/30-EXT/go"
 - Files to Delete
 	- /10-Base/bin/img-test
 
-- Include pandoc in script
-
-## Done
-- ~~Add function `ClearFolder` to clean up dir when upgrading~~
-- ~~Remove DesktopEditors from install script~~
-- ~~Files to update~~
-	- /10-Base/bin/PlatformVars.sh
-	- /etc/PinguyBuilder.conf
-	- /10-Base/bin/clear-sys
-- ~~Exclude 'Desktop Editors' from image~~
-	- `/30-EXT/desktopeditors`
-- ~~Atom IDE~~
-	- ln -sv /30-EXT/atom/atom /10-Base/bin/atom
-	- apm install date [DDD, DD-MMM-YYYY HH24:MM:SS +0530]
-Thu 2017-May-04 08:43:04.357 +05:30
-
-- ~~Libre Office~~
-	- Set Window sizes
-- ~~VP-UML~~
+- VP-UML
 	- Add Work folder to additional folders
 	- Add drivers path to Class Paths ??
-- ~~Update Favourites~~
-- ~~Associate~~
-	- ~~with Atom~~
-		- Folders
-	- ~~with VS Code~~
-		- bash files
-		- Folders
-		- xml
-	- ~~with firefox~~
-		- mht
-- ~~Add alias~~
-	- `alias clean-cjk='bash /media/sak/70_Current/Work/CanesJK/clean-ws.sh'`
+
+- Include pandoc in script
+	- see manual `70_Current/Downloads/New/pandoc-MANUAL.pdf`
+	- https://github.com/jgm/pandoc/releases
+	- `10-Apps/30-EXT/pandoc-2.1.1-linux.tar.gz`
+
+## Done
 - ~~Copy Drivers~~
 	- `cp -vf ${SETUP_BASE_LOCN}/10-Apps/10-Base/drivers/* to  /10-Base/`
-- ~~Install makeDVD depends~~
-	- `sudo apt-get -Vy install xorriso cdck`
-		- cdck_0.7.0+dfsg-1_amd64.deb
-		- libisoburn1_1.4.4-1build1_amd64.deb
-		- xorriso_1.4.4-1build1_amd64.deb
-- ~~Add alias for thunderbird, configured for Live image~~

@@ -6,7 +6,8 @@
 ################################################################################
 # SET EACH TIME BEFORE SIGNING REPOSITORY                                      #
 #------------------------------------------------------------------------------#
-readonly SETUP_ROOT_LOCN="/same/path/as/in/fdd-data.sh/";
+SETUP_ROOT_LOCN="/cdrom/Work-ODP9/setup-fdd-a";	# update to use base location
+# readonly SETUP_ROOT_LOCN="/same/path/as/in/fdd-data.sh/";
 readonly REPOSITORIES="deb-paks-Ax64 deb-paks-ubuntu-Yx64";
 /
 
@@ -14,8 +15,8 @@ readonly REPOSITORIES="deb-paks-Ax64 deb-paks-ubuntu-Yx64";
 # Set each time before creating keys                                           #
 #------------------------------------------------------------------------------#
 readonly KEY_LOCN="${SETUP_ROOT_LOCN}/20-Resources/certs";
-readonly KEY_PUB="FDD-RepoSign-pub.key";
-readonly KEY_PVT="FDD-RepoSign-pvt.key";
+readonly KEY_PUB="Fdd-RepoSign-pub.key";
+readonly KEY_PVT="Fdd-RepoSign-pvt.key";
 
 #------------------------------------------------------------------------------#
 # WRITE HEADER IN CONSOLE                                                      #
@@ -28,10 +29,13 @@ echo -n "running script $0 - "; date +"%T [%a] %d %b %Y";
 #------------------------------------------------------------------------------#
 KEY_ID="";
 KEY_OP="generated-key.txt"
-PASS_PHRASE="fsap-dev-passphrase";
+PASS_PHRASE="fsap-infra-passphrase";
 # TODO update with current cert
 # gpg --fingerprint
-#
+# pub   rsa2048 2017-12-14 [SC]
+#       3C1762638E3392A48BB006BB847C9C926C3C4D1D
+# uid                      firament infra <infra@firament.com>
+# sub   rsa2048 2017-12-14 [E]
 CONTINUE_FLAG="";
 
 
@@ -144,7 +148,7 @@ prepNexportCert(){
 	#### IDENTIFY GENERATED KEY FROM OUTPUT
 	#------------------------------------------------------------------------------#
 	ARG_ARRAY=(`echo $(cat ${KEY_OP} | cut -s -d " " -f 1-)`);
-	KEY_ID = ${ARG_ARRAY[4]}
+	KEY_ID=${ARG_ARRAY[4]}
 
 	echo "----------------------------------------------------------------------";
 	echo "${KEY_ID} << Using this key";

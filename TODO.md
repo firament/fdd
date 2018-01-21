@@ -1,25 +1,22 @@
 # TODO List
-30 Nov 2017
+21 Jan 2018
 
-> Tasks to be done for preparing the FDD setup script
+> Tasks to be done for refining FDD setup script
 
-- [x] fix google chrome install
-	- [x] Test
-- [x] Organize applications by destination
-- [ ] Add HSS apps also
-	- [x] mysql-server-5.7 (mysql-server-5.7_5.7.18-0ubuntu0.16.10.1_amd64.deb)
-	- [x] mysql-workbench (mysql-server-5.7_5.7.18-0ubuntu0.16.10.1_amd64.deb)
-	- [ ] command to start mongodb and launch robo3t
-- [ ] Prepare cert
-- [ ] create symlinks in `/usr/bin` for
-	- [x] code
-	- [x] atom
-	- [x] robo3t
-	- [x] vpuml
-- [x] include meld in base install
-- [x] Define public bin location
-	- [x] `PUBLIC_BIN_LOCN="/bin";`
-- [x] Update shortcuts to use ${PUBLIC_BIN} paths
-	- [x] Update Project libre version in shortcut
-- [ ] ~~Test and add git-Cola to base apps list~~
-- [x] Cleanup legacy code blocks
+- [ ] Add GO Tools installation also to script
+	- [ ] refer env setup notes and update
+- [ ] Update Working/contents-files.txt with current content
+- [ ] Add shortcuts for MongoDB
+- [ ] Add Shortcut for Robo3T
+- [ ] Include VP-UML settings file, for copy
+- [ ] Cleanup `20-Resources/Copy/ShortCuts/icons/`
+- [ ] pandoc instructions in 30-Ext
+	- [x] Add
+	- [ ] Verify
+- [ ] Add Mongo DB command support
+	- [ ] Command `start-mongo` in /10-Base/bin
+	- [ ] change default port to custom port
+- [ ] Add Robo3T commands
+	- [ ] in /10-Base/bin
+	- [ ] Shortcut, in 'Programming'
+- [ ] task placeholder

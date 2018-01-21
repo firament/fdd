@@ -1,5 +1,9 @@
-sending incremental file list
+# Directory Contents
+from path, run foll command to generate list
+`rsync -nvhr --exclude .git/ . ${HOME}/tmp-01 | tee ${HOME}/Documents/content-files.txt`
+
 10-Readme.md
+README.md
 TODO.md
 fdd-data.sh
 fdd-lib.sh
@@ -7,10 +11,9 @@ setup-fdd.sh
 signRepo
 10-Apps/
 10-Apps/10-Base/
-10-Apps/10-Base/dotnet-sdk-2.0.3-linux-x64.tar.gz
+10-Apps/10-Base/dotnet-sdk-2.1.4-linux-x64.tar.gz
 10-Apps/10-Base/go1.9.2.linux-amd64.tar.gz
-10-Apps/10-Base/jre-8u152-linux-x64.tar.gz
-10-Apps/10-Base/node-v8.9.1-linux-x64.tar.xz
+10-Apps/10-Base/node-v8.9.4-linux-x64.tar.xz
 10-Apps/10-Base/drivers/
 10-Apps/10-Base/drivers/jtds-1.3.3.jar
 10-Apps/10-Base/drivers/mongo-java-driver-3.5.0-javadoc.jar
@@ -21,20 +24,22 @@ signRepo
 10-Apps/20-DEV/
 10-Apps/20-DEV/GitEye-2.0.0-linux.x86_64.zip
 10-Apps/20-DEV/Visual_Paradigm_CE_14_2_20171107_Linux64_InstallFree.tar.gz
-10-Apps/20-DEV/atom-1.22.1-amd64.tar.gz
-10-Apps/20-DEV/code-stable-code_1.18.1-1510857349_amd64.tar.gz
+10-Apps/20-DEV/Visual_Paradigm_CE_14_2_20180101_Linux64_InstallFree.tar.gz
+10-Apps/20-DEV/atom-1.23.3-amd64.tar.gz
+10-Apps/20-DEV/code-stable-code_1.19.2-1515599945_amd64.tar.gz
 10-Apps/20-DEV/projectlibre-1.7.0.tar.gz
 10-Apps/30-EXT/
 10-Apps/30-EXT/Oracle_VM_VirtualBox_Extension_Pack-5.1.22-115126.vbox-extpack
-10-Apps/30-EXT/mongodb-linux-x86_64-ubuntu1604-3.4.10.tgz
+10-Apps/30-EXT/mongodb-linux-x86_64-ubuntu1604-3.6.2.tgz
+10-Apps/30-EXT/pandoc-2.1.1-linux.tar.gz
 10-Apps/30-EXT/robo3t-1.1.1-linux-x86_64-c93c6b0.tar.gz
 20-Resources/
 20-Resources/Copy/
 20-Resources/Copy/PinguyBuilder.conf
 20-Resources/Copy/bg-black.png
+20-Resources/Copy/vs-code-keybindings.json
 20-Resources/Copy/vs-code-settings.json
 20-Resources/Copy/ShortCuts/
-20-Resources/Copy/ShortCuts/DesktopEditors.desktop
 20-Resources/Copy/ShortCuts/atom.desktop
 20-Resources/Copy/ShortCuts/code.desktop
 20-Resources/Copy/ShortCuts/giteye.desktop
@@ -66,9 +71,6 @@ signRepo
 20-Resources/Copy/bin/mntISO
 20-Resources/Copy/bin/mntRepository
 20-Resources/Copy/bin/mntSquashFS
-20-Resources/Copy/bin/onlyoffice-desktopeditors
-20-Resources/Copy/bin/set-swap.sh
-20-Resources/Copy/bin/setmon
 20-Resources/Copy/bin/squash-bookshelf
 20-Resources/Copy/bin/update-live-image
 20-Resources/Copy/bin/windUP.sh
@@ -211,12 +213,12 @@ signRepo
 20-Resources/T-OneUse/
 20-Resources/T-OneUse/vp-help.jar
 20-Resources/certs/
-20-Resources/certs/FDD-RepoSign-pub.key
-20-Resources/certs/ODP-RepoSign-pub.key
-20-Resources/certs/ODP-RepoSign-pvt.key
+20-Resources/certs/Fdd-RepoSign-pub.key
+20-Resources/certs/Fdd-RepoSign-pvt.key
 20-Resources/certs/SKYPE-GPG-KEY
 Working/
 Working/app-setup-plan.md
+Working/contents-files.txt
 Working/customizer-manual.md
 Working/grub-NP540U3C.cfg
 Working/grub-dpm6700.cfg
@@ -224,5 +226,5 @@ Working/sql-server-on-linux.md
 Working/work-notes.md
 deb-paks-Ax64/
 
-sent 6,840 bytes  received 708 bytes  15,096.00 bytes/sec
-total size is 1,365,622,964  speedup is 180,925.14 (DRY RUN)
+sent 6.95K bytes  received 770 bytes  15.44K bytes/sec
+total size is 1.74G  speedup is 225,809.30 (DRY RUN)
