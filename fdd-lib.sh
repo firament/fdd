@@ -240,6 +240,18 @@ SetupDevApps(){
 	echo "Setting up GO Lang now";
 	ClearFolder ${GOLANG_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_BAS_DIR} -f ${GOLANG_TAR};
+	# Initialize environment
+	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
+	mkdir -v -p ${APPS_BAS_DIR}/go-path-virt;
+	export GOROOT="${GOLANG_PATH}";
+	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"; # Will be used by vscode to install tools
+	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
+	ln -fsvT ${GOLANG_PATH} ${APPS_BAS_DIR}/go-path-virt;
+	# Install Common tools/packages, Needs active network
+	export GOPATH="/${APPS_BAS_DIR}/go-path-virt";
+	go get golang.org/x/tools/cmd/goimports;
+	# Add command to install go-tools directly from here
+	# Add GO settings to VS Code settings file
 
 
 	## /20-DEV
