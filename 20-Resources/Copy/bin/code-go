@@ -1,0 +1,26 @@
+#!/bin/bash
+
+TEMPDIR="${HOME}/go-project-$(date +"%Y%m%d-%s")";
+DIRNAME="";
+
+# Start code with GO environment initialized
+export PATH="/10-Base/go/bin:/10-Base/go-tools/bin:/30-EXT/mongodb/bin:/30-EXT/robo3t/bin:${PATH}";
+export GOROOT="/10-Base/go";
+export TOOLSGOPATH="/10-Base/go-tools/bin";
+
+
+# These will be applied again in workspace settings
+# export GOROOT="/10-Base/go";
+# export TOOLSGOPATH="/10-Base/go-tools/bin";
+# export GOPATH="/10-Base/go-package-lib:/01-Work/aapi";
+
+# Add code to add the project path to GOPATH
+if [[ ${1} && -d ${1} ]]; then
+	DIRNAME=${1};
+else
+	DIRNAME="${TEMPDIR}";
+	mkdir -v -p ${DIRNAME};
+fi;
+export GOPATH="/10-Base/go-package-lib:${DIRNAME}";
+
+/bin/code ${1};

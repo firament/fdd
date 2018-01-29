@@ -1,0 +1,6 @@
+#!/bin/bash -e
+#
+# /10-Base/bin/jclock
+# 2014/04/20 22:13:40
+
+java -jar /10-Base/bin/jClock.jar &

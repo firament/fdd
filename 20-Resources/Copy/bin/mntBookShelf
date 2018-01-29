@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# /10-Base/bin/mntBookShelf
+# 2014/04/20 22:13:40
+
+# parameter is squash directory location
+
+# SHELVES="B_O_O_K_S D_O_C_S N_O_T_E_S R_E_A_D_s";
+
+# get paltform variable definitions
+[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
+
+
+CS_SHELF=""
+MNTPOINT="";
+
+showUsage(){
+	echo "";
+	echo "USAGE::";
+	echo "";
+	echo "mntBookShelf <location where bookshelves are>";
+	echo "";
+	echo "";
+	}
+
+mountSFS(){
+	# $1 is shelf to mount
+	# $2 is mount point
+	CS_SHELF="${BOOKSHELF_SFS_LOCN}/${1}.sfs"
+	echo "Mounting Shelf \"${CS_SHELF}\"";
+	sudo mount -srv -o loop -t squashfs ${CS_SHELF} ${2};
+	}
+	
+# better is check for missing parm
+if [ -z $1 ]; then
+	if [ ! -d ${BOOKSHELF_SFS_LOCN} ]; then
+		showUsage;
+	fi;	
+	exit 10;
+fi;
+
+if [ -d $1 ]; then
+	BOOKSHELF_SFS_LOCN=$1;
+else
+	echo "Non-Existent location. $1";
+	showUsage;
+	exit 20;
+fi;
+
+mountSFS N_O_T_E_S /10-BookShelf/N_O_T_E_S
+mountSFS B_O_O_K_S /10-BookShelf/B_O_O_K_S
+mountSFS R_E_A_D_s /10-BookShelf/R_E_A_D_s
+mountSFS D_O_C_S /10-BookShelf/D_O_C_S
+
+echo "ALL VALID SHELVES MOUNTED";

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# /10-Base/bin/squash-bookshelf
+# 2014/04/20 22:13:40
+
+# get paltform variable definitions
+[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
+setLogLocation;		# This will update 'LOGROOT' with correct value
+
+SHELVES="B_O_O_K_S D_O_C_S N_O_T_E_S R_E_A_D_s";
+
+LOGFILE="";
+
+processShelf(){
+	# parm 1 = source folder
+	# parm 2 = squash file path
+	# delete file if it already exists
+	rm -v ${2};
+	mksquashfs ${1} ${2} -no-recovery -always-use-fragments -b 512K -force-uid 1000;
+	}
+	
+# LOGROOT=${LOGROOT_OPT2};	# set from include file
+LOGFILE=$(date +"${LOGROOT}/squash-bookshelf-%Y%m%d-%H%M%S.log");
+touch ${LOGFILE}
+
+echo "Writing log to ${LOGFILE}"
+
+for SHELF in ${SHELVES};
+do
+	# do quick check to confirm valid source
+	[[ ! -d ${SQUASH_FROM}/${SHELF} ]] && continue;
+	echo "Processing Shelf \"${SQUASH_FROM}/${SHELF}\"";
+	processShelf ${SQUASH_FROM}/${SHELF} ${SQUASH_DEST}/${SHELF}.sfs | tee -a ${LOGFILE}
+done
+
+echo "ALL WORK DONE";

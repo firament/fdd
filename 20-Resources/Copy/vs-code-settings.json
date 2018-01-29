@@ -1,0 +1,57 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.fontSize": 16,
+    "editor.fontFamily": "'Noto Mono', 'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
+    "editor.insertSpaces": false,
+    "editor.wrappingIndent": "indent",
+    "editor.wordWrapColumn": 120,
+    "editor.dragAndDrop": true,
+    "files.insertFinalNewline": true,
+    "files.defaultLanguage": "md",
+    "html.format.wrapAttributes": "force-aligned",
+    "zenMode.hideTabs": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+	"insertDateString.format": "DDD YYYY-MMM-DD hh:mm:ss.SS Z\n",
+    //
+    // markdown
+    "markdown.styles": [],
+    "markdown.preview.fontFamily": "Calibri, Carlito, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
+    //
+    // markdown-toc
+    "markdown-toc.orderedList": true,
+    //
+    // markdown-pdf
+    // Output format: pdf, html, png, jpeg
+    // "markdown-pdf.type": "html",
+    "markdown-pdf.outputDirectory": "/media/sak/70_Current/_Notes/formatted-docs",
+    // Page Option. Page size: A3, A4, A5, Legal, Letter, Tabloid
+    "markdown-pdf.format": "Legal",
+    "markdown-pdf.styles": [],
+    // Set the style file name. for example: github.css, monokai.css ...
+    // ~/.vscode/extensions/yzane.markdown-pdf-0.1.7/styles/*.css
+    "markdown-pdf.highlightStyle": "github.css",
+    "markdown-pdf.breaks": true,
+    //
+    "markdown-pdf.border.top": "1.0cm",
+    "markdown-pdf.border.bottom": "1.0cm",
+    "markdown-pdf.border.right": "1cm",
+    "markdown-pdf.border.left": "1.5cm",
+    //
+    "markdown-pdf.header.contents": "<div style=\"text-align: right;\"><strong>Static Text, need to replace for each export</strong></div><hr/></br>",
+    "markdown-pdf.header.height": "2.9cm",
+    //
+    "markdown-pdf.footer.height": "1.8cm",
+    "markdown-pdf.footer.contents": "<hr/><div style=\"float:left;\">&copy;2017 oblak consulting</div><div style=\"float:right;\">Page {{page}} of {{pages}}</div>",
+    //
+    "reflow.preferredLineLength": 120,
+    "docthis.includeDescriptionTag": true,
+    "editor.minimap.enabled": false,
+    //
+    "git.path": "/usr/bin/git",
+    //
+    // GO LANG Settings
+    //
+    "go.goroot": "/30-EXT/go",
+    "go.toolsGopath": "/30-EXT/go-tools"
+}

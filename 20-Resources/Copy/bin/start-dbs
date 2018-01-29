@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export PATH="/30-EXT/mongodb/bin:/30-EXT/robo3t/bin:${PATH}";
+
+sudo su;
+
+# Start MySQL Server
+sudo systemctl start mysql;
+
+# Start mongodb with appropiate parameters
+
+## Set a parameter to run this only first time
+echo "TODO: Start mongo with appropiate parameters";
+mkdir -v -p /70-CurrentWork/mongodb/;
+mongod --dbpath /70-CurrentWork/mongodb/ &
+
+echo "TODO: Open robo3T each time with appropiate parms";
+/30-EXT/robo3t/bin/robo3t &

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Zekr
+Comment=Study The Quran
+GenericName=Quranic Browser
+Exec=bash /10-Base/zekr/zekr
+Terminal=false
+Type=Application
+Icon=/10-Base/ShortCuts/icons/zekr.png
+Categories=X-Islamic-Software;X-Quran;Utility;
+MimeType=

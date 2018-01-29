@@ -1,0 +1,7 @@
+#! /bin/bash
+
+# make-live-image
+pluma /etc/PinguyBuilder.conf
+sudo PinguyBuilder clean
+sudo PinguyBuilder backup
+# pluma /home/PinguyBuilder/PinguyBuilder/blacklabimager.log &

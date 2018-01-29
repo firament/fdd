@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# /10-Base/bin/mountSquashFS
+# 2014/04/20 22:13:40
+
+if [ -z $1 ];
+then
+	echo "FATAL ERROR:: File Name is not specified" && exit 10;
+	# TODO - show usage
+fi;
+
+if [ ! -e $1 ];
+then
+	echo "FATAL ERROR:: File \"${1}\" does not exist" && exit 20;
+fi;
+
+# get filename without extension
+MNTFOLDR=$(basename $1 | sed "s%\.[a-z0-9]*%%");
+MNTPOINT=/media/${USER}/SFS_${MNTFOLDR};
+
+sudo mkdir -p ${MNTPOINT};
+sudo mount -srvl -o loop -o nosuid,nodev,x-gvfs-show,x-gvfs-name=${MNTFOLDR} -t squashfs ${1} ${MNTPOINT};
+# sudo mount -srvl -o loop -o nosuid,nodev,nofail,x-gvfs-show,x-gvfs-name=${MNTFOLDR} -t squashfs ${1} ${MNTPOINT};
+# sudo mount -srv -o loop -t squashfs ${1} ${MNTPOINT};
+
+exit;

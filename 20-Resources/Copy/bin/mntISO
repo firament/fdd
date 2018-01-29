@@ -1,0 +1,55 @@
+#! /bin/bash
+
+# /10-Base/bin/mntISO
+# 2014/04/20 22:13:40
+
+#------------------------------------------------------------------------------#
+# Script to mount an ISO file in default mount point
+
+# TODO:
+# mount to /media, bookmark is auto (i think)
+# use ISO label for folder name
+
+# un-mount if already mounted 
+[[ -n "$(mount | grep "${ISO_MOUNT_POINT}")" ]] sudo umount -v -d ${ISO_MOUNT_POINT};
+[[ -f $1 ]] && sudo mount -r -o loop -o exec $1 ${ISO_MOUNT_POINT} || {
+	echo " "
+	echo " "
+	echo "#------------------------------------------------------------------------------#"
+	echo $1
+	echo " No such file"
+	echo "#------------------------------------------------------------------------------#"
+	echo " "
+	echo " "
+	}
+exit 0
+
+## 
+# OLD VERBOSE CODE
+##
+
+# un-mount if already mounted 
+if [ -n "$(mount | grep "${ISO_MOUNT_POINT}")" ]
+	sudo umount -v -d ${ISO_MOUNT_POINT};
+else
+	sudo mkdir -p ${ISO_MOUNT_POINT};
+fi
+
+if [ -f $1 ]; then
+	# mount the file
+	sudo mount -r -o loop -o exec $1 ${ISO_MOUNT_POINT}
+ else
+	# ERROR, file does not exist, inform user
+	echo " "
+	echo " "
+	echo "#------------------------------------------------------------------------------#"
+	echo $1
+	echo " No such file"
+	echo "#------------------------------------------------------------------------------#"
+	echo " "
+	echo " "
+fi
+
+exit 0
+#------------------------------------------------------------------------------#
+

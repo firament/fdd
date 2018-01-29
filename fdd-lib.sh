@@ -1,4 +1,3 @@
-####################################################################################################
 #                                                                                                  #
 #	fdd-lib.sh
 #   Working code to be called from the setup scripts
@@ -126,9 +125,10 @@ Init(){
 cat >> ~/.bash_aliases <<EOALIAS
 alias s2d='sed "s/ /-/g" <<< '
 alias runauto='/10-Base/bin/AutoRun 2>&1 | tee ${AUTORUN_LOG}'
-alias clean-cjk='bash /media/sak/70_Current/Work/CanesJK/clean-ws.sh'
+alias jc="java -jar jClock.jar &"
 alias tb='thunderbird --ProfileManager &'
 alias git-gui='/usr/lib/git-core/git-gui &'
+alias clean-cjk='bash /media/sak/70_Current/Work/CanesJK/clean-ws.sh'
 EOALIAS
 
 	#### UPDATE ENVIRONMENT FILE
@@ -142,6 +142,8 @@ EOALIAS
 sudo cat > /etc/environment <<EOENV
 PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
 GOROOT="${GOLANG_PATH}"
+TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"
+GOPATH="/${APPS_BAS_DIR}/go-path-virt"
 PL_LOADED=1
 EOENV
 	sudo chmod -vc 644 /etc/environment; ls -l /etc/environment;   # Reset Permission flags
@@ -243,16 +245,20 @@ SetupDevApps(){
 	# Initialize environment
 	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
 	mkdir -v -p ${APPS_BAS_DIR}/go-path-virt;
+	mkdir -v -p ${APPS_BAS_DIR}/go-package-lib;
+	#
+	ln -fsvT ${GOLANG_PATH} ${APPS_BAS_DIR}/go-path-virt;
+	#
 	export GOROOT="${GOLANG_PATH}";
 	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"; # Will be used by vscode to install tools
 	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
-	ln -fsvT ${GOLANG_PATH} ${APPS_BAS_DIR}/go-path-virt;
 	# Install Common tools/packages, Needs active network
 	export GOPATH="/${APPS_BAS_DIR}/go-path-virt";
 	go get golang.org/x/tools/cmd/goimports;
 	# Add command to install go-tools directly from here
 	# Add GO settings to VS Code settings file
-
+	# unset path to normal
+	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
 
 	## /20-DEV
 

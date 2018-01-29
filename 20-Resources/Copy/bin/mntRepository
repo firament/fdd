@@ -1,0 +1,78 @@
+#!/bin/bash
+#  /10-Base/bin/mntRepository
+# 2014/04/20 22:13:40
+#  
+#  Copyright 2013 oblak <oblak@oblak-350V5X>
+#  
+################################################################################
+#                                                                              #
+# /10-Base/bin/mountRepository                                                 #
+#                v 0.2                                                         #
+#                                                                              #
+#        script to mount relevent repository to well-known location            #
+#        Run before any installing anything using APT from local repository    #
+#                                                                              #
+################################################################################
+
+# get paltform variable definitions
+[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
+
+# REPOSITORY_LOCN="/media/EXT2-26GB/Custom_Installs/deb-paks-Ubuntu-Pi386";
+# REPOSITORY_LOCL="/60-APT-REPOSITORY";
+TMP_FILE=`mktemp`-MR-temp;
+
+################################################################################
+# MOUNT REPOSITORY TO WELL-KNOWN LOCATION                                      #
+#------------------------------------------------------------------------------#
+mountRepository(){
+	echo "Mounting repository to well-known location";
+	# if location does not exist, prepare it '/60-APT-REPOSITORY'
+
+	# check if it is already mounted
+	if [ -n "$(mount | grep "${REPOSITORY_LOCL}")" ]
+	then
+		echo "MOUNTED already ${REPOSITORY_LOCL}";
+	else
+		echo "MOUNTING ${REPOSITORY_LOCL}";
+		sudo mount -v -R ${REPOSITORY_LOCN} ${REPOSITORY_LOCL}
+		sudo mount -v -o remount,ro ${REPOSITORY_LOCL}
+	fi;
+
+	if [ -n "$(head /etc/apt/sources.list | grep "^deb file:${REPOSITORY_LOCL}")" ]
+	then
+		echo "FOUND \"${REPOSITORY_LOCL}\" on top of Repository List";
+	else
+		echo "Importing KEYs into APT";
+		ls -1 ${REPOSITORY_LOCL}/*key | while read KEYFILE;
+		do
+			sudo apt-key add ${KEYFILE};
+			echo "imported ${KEYFILE}";
+			echo;
+		done;
+		echo "List of Current Keys on machine are...";
+		sudo apt-key list;
+		echo;
+
+		echo "Adding \"${REPOSITORY_LOCL}\" to top of Repository List";
+		TMP_FILE=`mktemp`.list-odesetup;
+		sudo chmod -v 666 /etc/apt/sources.list; # need xtra perms 
+		tac /etc/apt/sources.list >${TMP_FILE};
+		echo "deb file:${REPOSITORY_LOCL} ./" >>${TMP_FILE};
+		sudo tac ${TMP_FILE} >/etc/apt/sources.list;
+		sudo chmod -v 644 /etc/apt/sources.list; # reset perms back
+		echo;
+		echo "added";
+		echo;
+		sleep 3;	# allow update to be flushed fully
+		head -vn 3 /etc/apt/sources.list;
+
+		echo "Applying changes to APT";
+		sudo apt-get -yV update;
+		echo "done";
+	fi
+	
+}
+
+goSUDO;
+mountRepository;
+exit 0;

@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# /10-Base/bin/update-live-image
+# 2014/04/20 22:13:40
+
+# get paltform variable definitions
+[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
+
+updateImage(){
+#	$1 = destination
+	echo "";
+	echo "Cleaning up old files";
+	rm -r -v ${1}/*;
+	echo "Copying new files";
+	echo "";
+	touch ${1}/grub-curr.cfg;
+	cat /boot/grub/grub.cfg >${1}/grub-$(date +"%Y%m%d-%s").cfg
+	cp -v ../../*iso.md5 ${1};
+	cp -vR ../.disk ${1};
+	cp -v filesystem.manifest-desktop ${1};
+	cp -v filesystem.manifest ${1};
+	cp -v README.diskdefines ${1};
+	cp -v filesystem.size ${1};
+	cp -v initrd.gz ${1};
+	cp -v vmlinuz ${1};
+	cp -v filesystem.squashfs ${1};
+	# one off activity 
+	# cp -v ../../ODP6-Tx64-Mate-k.iso ${1};
+	}
+
+## CONFIRM SOURCE EXISTS
+echo "updating live image from:";
+echo "${LIVE_IMG_SRC}";
+echo "";
+if [ ! -d ${LIVE_IMG_SRC} ]; then
+	echo "Bad location. Does NOT exist";
+	exit 110;
+fi;
+putLine;
+
+## CONFIRM TARGETS EXISTS
+BAD_COUNT=0;
+echo "Checking Destinations:";
+echo "";
+for LI_TGT in ${LIVE_IMG_TGTS}; do
+	if [ -d ${LI_TGT} ]; then
+		echo "Good           : ${LI_TGT}";
+	else
+		echo "Bad Destination: ${LI_TGT}";
+		(( BAD_COUNT++ ));
+	fi;
+done
+if [ ${BAD_COUNT} -gt 0 ]; then
+	putLine;
+	echo "";
+	echo "Press CTRL+C to abort."
+	echo "";
+	putLine;
+	sleep 20;
+else
+	putLine;
+fi;
+
+## PREPARE TO START WORKING
+cd ${LIVE_IMG_SRC};
+
+## Is vmlinuz readable
+[[ -r  vmlinuz ]] || { 	echo "Making vmlinuz READable"; goSUDO; sudo chmod +r vmlinuz; putLine; }
+
+for LI_TGT in ${LIVE_IMG_TGTS}; do
+	echo "";
+	echo "updating live image to: ${LI_TGT}";
+	if [ ! -d ${LI_TGT} ]; then	# SKIP IF BAD DESTINATION
+		echo "Bad location. Does NOT exist";
+		putLine;
+		continue;
+	fi;
+	updateImage ${LI_TGT};
+	putLine;
+done;
+
+echo "";
+echo "done";
+
+exit 0;
