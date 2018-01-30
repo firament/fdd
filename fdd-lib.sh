@@ -43,14 +43,14 @@ Init(){
 	if [ ! -e /etc/apt/sources.list.d/google-chrome.list ]; then
 		# Add certificate to apt, one time need
 		# https://dl-ssl.google.com/linux/linux_signing_key.pub
-		sudo apt-key add ${GOOGLE-GPG-KEY};
+		sudo apt-key add ${GOOGL_PUB_KEY};
 		sudo touch /etc/apt/sources.list.d/google-chrome.list;
-		echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list;
+		echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list.d/google-chrome.list;
 	fi;
 	#
 	if [ ! -e /etc/apt/sources.list.d/skype-stable.list ]; then
 		# Add certificate to apt, one time need
-		sudo apt-key add ${SKYPE-GPG-KEY};
+		sudo apt-key add ${SKYPE_PUB_KEY};
 		sudo touch /etc/apt/sources.list.d/skype-stable.list;
 		echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee -a /etc/apt/sources.list.d/skype-stable.list;
 	fi;
