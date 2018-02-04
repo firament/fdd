@@ -37,13 +37,13 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly ORA_JRE_TAR="${APPS_BAS_SRC}/jre-8u152-linux-x64.tar.gz";
 readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v8.9.4-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v9.5.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
 readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.4-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 #
-readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.9.2.linux-amd64.tar.gz";
+readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.9.3.linux-amd64.tar.gz";
 readonly GOLANG_PATH="${APPS_BAS_DIR}/go";
 
 ##
@@ -53,10 +53,10 @@ readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.23.3-amd64.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.19.2-1515599945_amd64.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.19.3-1516876437_amd64.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_14_2_20180101_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_14_2_20180202_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
 readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.0.0-linux.x86_64.zip";
@@ -64,6 +64,9 @@ readonly GITEYE_PATH="${APPS_DEV_DIR}/giteye";
 #
 readonly PLIB_TARFILE="${APPS_DEV_SRC}/projectlibre-1.7.0.tar.gz";
 readonly PLIB_PATH="${APPS_DEV_DIR}/projectlibre";
+#
+readonly SQLVQB_TARFILE="${APPS_DEV_SRC}/SQLeoVQB.2017.09.rc1.zip";
+readonly SQLVQB_PATH="${APPS_DEV_DIR}/SQLeoVQB";
 
 ##
 readonly APPS_EXT_DIR="/30-EXT";
@@ -82,9 +85,6 @@ readonly PANDOC_PATH="${APPS_EXT_DIR}/pandoc";
 ##
 readonly FIREFOX_TAR="${RESOURCE_FOLDER}/Install/firefox-55.0.3.tar.bz2";
 readonly TBIRD_TAR="${RESOURCE_FOLDER}/Install/thunderbird-52.3.0.tar.bz2";
-#
-readonly DESKTOPEDIT_TAR="${APPS_EXT_SRC}/onlyoffice-desktopeditors-x64.tar.gz";
-readonly DESKTOPEDIT_PATH="${APPS_EXT_DIR}/desktopeditors";
 
 
 ################################################################################
@@ -239,4 +239,40 @@ WriteFooter(){
 	echo "";
 	echo "================================================================================";
 	echo "";
+}
+
+################################################################################
+# UTILITY FUNCTION - Verify all required file present                          #
+# Comment out files not in current use                                         #
+#------------------------------------------------------------------------------#
+HealthCheck(){
+	echo "";
+	echo -n "BEGIN checking files - "; date +"%d-%b-%Y %T";
+	echo "";
+
+	#	echo -n "Checking ORA_JRE_TAR      >> "; [[ -f ${ORA_JRE_TAR} ]]     && echo "OK" || echo "FAIL - ${ORA_JRE_TAR}";
+	echo -n "Checking NODEJS_TAR       >> "; [[ -f ${NODEJS_TAR} ]]      && echo "OK" || echo "FAIL - ${NODEJS_TAR}";
+	echo -n "Checking DNETCORE_TAR     >> "; [[ -f ${DNETCORE_TAR} ]]    && echo "OK" || echo "FAIL - ${DNETCORE_TAR}";
+	echo -n "Checking GOLANG_TAR       >> "; [[ -f ${GOLANG_TAR} ]]      && echo "OK" || echo "FAIL - ${GOLANG_TAR}";
+	echo -n "Checking ATOM_TAR         >> "; [[ -f ${ATOM_TAR} ]]        && echo "OK" || echo "FAIL - ${ATOM_TAR}";
+	echo -n "Checking VSCODE_TAR       >> "; [[ -f ${VSCODE_TAR} ]]      && echo "OK" || echo "FAIL - ${VSCODE_TAR}";
+	echo -n "Checking VPUML_TARFILE    >> "; [[ -f ${VPUML_TARFILE} ]]   && echo "OK" || echo "FAIL - ${VPUML_TARFILE}";
+	echo -n "Checking GITEYE_TAR       >> "; [[ -f ${GITEYE_TAR} ]]      && echo "OK" || echo "FAIL - ${GITEYE_TAR}";
+	echo -n "Checking PLIB_TARFILE     >> "; [[ -f ${PLIB_TARFILE} ]]    && echo "OK" || echo "FAIL - ${PLIB_TARFILE}";
+	echo -n "Checking SQLVQB_TARFILE   >> "; [[ -f ${SQLVQB_TARFILE} ]]  && echo "OK" || echo "FAIL - ${SQLVQB_TARFILE}";
+	echo -n "Checking MONGODB_TARFILE  >> "; [[ -f ${MONGODB_TARFILE} ]] && echo "OK" || echo "FAIL - ${MONGODB_TARFILE}";
+	echo -n "Checking ROBO3T_TARFILE   >> "; [[ -f ${ROBO3T_TARFILE} ]]  && echo "OK" || echo "FAIL - ${ROBO3T_TARFILE}";
+	echo -n "Checking PANDOC_TARFILE   >> "; [[ -f ${PANDOC_TARFILE} ]]  && echo "OK" || echo "FAIL - ${PANDOC_TARFILE}";
+	#	echo -n "Checking FIREFOX_TAR      >> "; [[ -f ${FIREFOX_TAR} ]]     && echo "OK" || echo "FAIL - ${FIREFOX_TAR}";
+
+	echo "";
+	echo -n "DONE checking files - "; date +"%d-%b-%Y %T";
+
+	# Safety valve to abort on missing files
+	echo "";
+	echo "";
+	read -p "Press CTRL+C to abort, or ENTER to continue." -t 45;
+	echo "";
+
+	# read: usage: read [-ers] [-a array] [-d delim] [-i text] [-n nchars] [-N nchars] [-p prompt] [-t timeout] [-u fd] [name ...]
 }

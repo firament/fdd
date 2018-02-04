@@ -25,12 +25,12 @@ echo "Writing log to files in ${SETUPS_LOG_LOCN}";
 echo;
 
 ## Individual steps that are to be executed
-
-	Init               2>&1 | tee ${SETUPS_LOG_LOCN}/10-Init.log;
-	InstallCoreApps    2>&1 | tee ${SETUPS_LOG_LOCN}/20-InstallCoreApps.log;
-	SetupDevApps       2>&1 | tee ${SETUPS_LOG_LOCN}/30-10-SetupDevApps.log;
-	UpgradeBundledApps 2>&1 | tee ${SETUPS_LOG_LOCN}/40-UpgradeBundledApps.log;
-	InstallHssApps     2>&1 | tee ${SETUPS_LOG_LOCN}/50-InstallHssApps.log;
+	HealthCheck        2>&1 | tee ${SETUPS_LOG_LOCN}/00-FileCheck.log;
+#	Init               2>&1 | tee ${SETUPS_LOG_LOCN}/10-Init.log;
+#	InstallCoreApps    2>&1 | tee ${SETUPS_LOG_LOCN}/20-InstallCoreApps.log;
+#	SetupDevApps       2>&1 | tee ${SETUPS_LOG_LOCN}/30-10-SetupDevApps.log;
+#	UpgradeBundledApps 2>&1 | tee ${SETUPS_LOG_LOCN}/40-UpgradeBundledApps.log;
+#	InstallHssApps     2>&1 | tee ${SETUPS_LOG_LOCN}/50-InstallHssApps.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

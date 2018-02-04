@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=SQLeo VQB
+Comment=SQLeo Visual Query Builder
+Exec=/10-Base/bin/start-sqleovqb
+Icon=/10-Base/ShortCuts/icons/SQLeoVQB.png
+Categories=Database;Development;Console;java
+StartupNotify=false
+Version=1.1
+Type=Application
+Terminal=0
+Terminal=false
+MimeType=text/plain;

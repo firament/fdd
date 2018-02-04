@@ -4,7 +4,7 @@
 #                                                                                                  #
 ####################################################################################################
 
-echo "INFO: Loading data from fdd-data.sh";
+echo "INFO: Loading data from fdd-lib.sh";
 
 Init(){
 	echo;
@@ -188,7 +188,7 @@ InstallCoreApps(){
 
 	echo;
 	echo "Install Live Imaging and Virtualization";
-	aptInstallApp qemu qemu-utils xorriso cdck pinguybuilder # virtualbox	# Virtualbox is very heavy, install on need basis
+	aptInstallApp qemu qemu-utils xorriso cdck # pinguybuilder # virtualbox	# Virtualbox is very heavy, install on need basis
 	# pinguybuilder
 
 	echo;
@@ -302,6 +302,13 @@ SetupDevApps(){
 	ClearFolder ${PLIB_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_DEV_DIR} -f ${PLIB_TARFILE};
 	mv -vf ${PLIB_PATH}* ${PLIB_PATH};
+
+	#### INSTALL SQLeo Visual Query Builder
+	#------------------------------------------------------------------------------#
+	echo "Setting up SQLeo Visual Query Builder";
+	ClearFolder ${SQLVQB_PATH}; # Remove if upgrading
+	unzip ${SQLVQB_TARFILE} -d ${APPS_DEV_DIR};
+	mv -vf ${SQLVQB_PATH}* ${SQLVQB_PATH};
 
 
 	# /30-EXT
