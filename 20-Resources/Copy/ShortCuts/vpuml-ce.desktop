@@ -2,10 +2,9 @@
 Encoding=UTF-8
 Name=VP-UML CE
 Comment=Modelling Software - Community Edition
-Exec=/bin/sh "/20-DEV/Visual_Paradigm_CE/Visual_Paradigm"
+Exec=/10-Base/bin/Visual_Paradigm %F
 Icon=/10-Base/ShortCuts/icons/vpuml.png
 Categories=Application;Development;Modeller;Java;C#;IDE
 Version=1.0
 Type=Application
 Terminal=0
-

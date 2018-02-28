@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Project Libre
 Comment=The Smarter Way to Manage Projects
-Exec=java -Xms128m -Xmx768m -jar /20-DEV/projectlibre/projectlibre.jar %u
+Exec=java -Xms128m -Xmx768m -jar /20-DEV/projectlibre/projectlibre.jar %F
 Icon=/10-Base/ShortCuts/icons/project-libre.png
 Categories=Application;Development
 Version=1.0
