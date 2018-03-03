@@ -188,7 +188,7 @@ InstallCoreApps(){
 
 	echo;
 	echo "Install Live Imaging and Virtualization";
-	aptInstallApp qemu qemu-utils xorriso cdck # pinguybuilder # virtualbox	# Virtualbox is very heavy, install on need basis
+	aptInstallApp qemu qemu-utils qemu-efi xorriso cdck dconf-editor # pinguybuilder # virtualbox	# Virtualbox is very heavy, install on need basis
 	# pinguybuilder
 
 	echo;
@@ -198,10 +198,14 @@ InstallCoreApps(){
 	# git-gui
 	# bootstrap4 build dependencies
 	# build-essential manpages-dev libunwind8 ruby-full;
+	echo "installing ruby gem bundler";
 	sudo gem install bundler    # for bootstrap compile
 	#
 
-	echo "Copying live imaging config to ${LIVE_IMG_CONFIG}";
+	echo;
+	echo "INSTALL PINGUYBUILDER";
+	sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
+	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
 	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
 
 	echo "DONE  - InstallCoreApps()";
@@ -323,13 +327,13 @@ SetupDevApps(){
 	#### INSTALL Robo 3T
 	#------------------------------------------------------------------------------#
 	echo "Setting up Robo 3T now";
-	ClearFolder ${ROBO3T_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_EXT_DIR} -f ${ROBO3T_TARFILE};
-	mv -vf ${ROBO3T_PATH}* ${ROBO3T_PATH};
-	sudo ln -vsT ${ROBO3T_PATH}/bin/robo3t ${PUBLIC_BIN_LOCN}/robo3t;
-	# fix for ubuntu error
-	mkdir -v -p ${ROBO3T_PATH}/lib-bak;
-	mv -vf ${ROBO3T_PATH}/lib/libstdc++.so* ${ROBO3T_PATH}/lib-bak
+	#	ClearFolder ${ROBO3T_PATH}; # Remove if upgrading
+	#	tar -xz -C ${APPS_EXT_DIR} -f ${ROBO3T_TARFILE};
+	#	mv -vf ${ROBO3T_PATH}* ${ROBO3T_PATH};
+	#	sudo ln -vsT ${ROBO3T_PATH}/bin/robo3t ${PUBLIC_BIN_LOCN}/robo3t;
+	#	# fix for ubuntu error
+	#	mkdir -v -p ${ROBO3T_PATH}/lib-bak;
+	#	mv -vf ${ROBO3T_PATH}/lib/libstdc++.so* ${ROBO3T_PATH}/lib-bak
 
 	#### INSTALL Pandoc
 	#------------------------------------------------------------------------------#
@@ -453,7 +457,30 @@ InstallZekr(){
 ## HSS applications
 InstallHssApps(){
 	echo "Install HSS applications";
-	aptInstallApp mysql-workbench mysql-server-5.7
+	aptInstallApp mysql-workbench mysql-server-5.7;
+}
 
+## Align to HSS installation
+AlignToHSS(){
+	echo "Aligning paths for seamless debugging of HSS apps";
+	ln -vsT ${VSCODE_PATH}  /10-Base/VSCode-linux-x64;
+	ln -vsT ${SQLVQB_PATH}  /10-Base/SQLeoVQB;
+	ln -vsT ${MONGODB_PATH} /10-Base/mongodb;
+}
 
+## Pinguybuilder test
+Stub01(){
+	echo "INSTALL PINGUYBUILDER";
+	sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
+	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
+}
+
+## VPUML Update
+Stub02(){
+	#### INSTALL VPUML CE
+	#------------------------------------------------------------------------------#
+	echo "Setting up VP UML CE now";
+	ClearFolder ${VPUML_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_DEV_DIR} -f ${VPUML_TARFILE};
+	mv -vf ${VPUML_PATH}* ${VPUML_PATH};
 }

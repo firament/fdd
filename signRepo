@@ -6,8 +6,7 @@
 ################################################################################
 # SET EACH TIME BEFORE SIGNING REPOSITORY                                      #
 #------------------------------------------------------------------------------#
-SETUP_ROOT_LOCN="/cdrom/Work-ODP9/setup-fdd-a";	# update to use base location
-# readonly SETUP_ROOT_LOCN="/same/path/as/in/fdd-data.sh/";
+# readonly SETUP_ROOT_LOCN="/same/path/as/in/fdd-data.sh/";		# update to use base location
 readonly REPOSITORIES="deb-paks-Ax64 deb-paks-ubuntu-Yx64";
 /
 
@@ -194,7 +193,7 @@ instalCertInAPT(){
 #------------------------------------------------------------------------------#
 
 #  CREATE AND EXPORT KEYS FOR SIGNING REPOSITORIES ----------------------------#
-prepNexportCert;	# to generate and save new certificate
+# prepNexportCert;	# to generate and save new certificate
 
 #  INSTALL EXISTING KEY TO APT, TO RECOGNIZE SIGNED REPOSITORY ----------------#
 # instalCertInAPT;	# Install certificate in APT, to recognize signature
