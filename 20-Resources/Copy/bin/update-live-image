@@ -53,10 +53,9 @@ done
 if [ ${BAD_COUNT} -gt 0 ]; then
 	putLine;
 	echo "";
-	echo "Press CTRL+C to abort."
+	read -p "Press CTRL+C to abort, or ENTER to continue." -t 45;
 	echo "";
 	putLine;
-	sleep 20;
 else
 	putLine;
 fi;

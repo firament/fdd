@@ -143,7 +143,7 @@ sudo cat > /etc/environment <<EOENV
 PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
 GOROOT="${GOLANG_PATH}"
 TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"
-GOPATH="/${APPS_BAS_DIR}/go-path-virt"
+GOPATH="${APPS_BAS_DIR}/go-package-lib"
 PL_LOADED=1
 EOENV
 	sudo chmod -vc 644 /etc/environment; ls -l /etc/environment;   # Reset Permission flags
@@ -248,7 +248,7 @@ SetupDevApps(){
 	tar -xz -C ${APPS_BAS_DIR} -f ${GOLANG_TAR};
 	# Initialize environment
 	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
-	mkdir -v -p ${APPS_BAS_DIR}/go-path-virt;
+	# mkdir -v -p ${APPS_BAS_DIR}/go-path-virt;
 	mkdir -v -p ${APPS_BAS_DIR}/go-package-lib;
 	#
 	ln -fsvT ${GOLANG_PATH} ${APPS_BAS_DIR}/go-path-virt;

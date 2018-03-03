@@ -4,7 +4,7 @@ TEMPDIR="${HOME}/go-project-$(date +"%Y%m%d-%s")";
 DIRNAME="";
 
 # Start code with GO environment initialized
-export PATH="/10-Base/go/bin:/10-Base/go-tools/bin:/30-EXT/mongodb/bin:/30-EXT/robo3t/bin:${PATH}";
+export PATH="/10-Base/go/bin:/10-Base/go-tools/bin:/30-EXT/mongodb/bin:${PATH}";
 export GOROOT="/10-Base/go";
 export TOOLSGOPATH="/10-Base/go-tools/bin";
 
