@@ -14,11 +14,10 @@ IS_LIVE_IMAGE=true;
 AUTORN_SCRIPT_HOOK="fdd-autorun";
 AUTORUN_DONE_FLAGF="${HOME}/AutoRun_Complete_Success";
 # used in bootstrap - DELETE, this is now redundant
-# CUSTOM_SCRIPT_HOOK="odp-update-script";			# GRUB tag
 
 RET_VAL="";										# GENERIC VAR FOR USER PROMPTS
 SKIP_LIVE_SCRIPTS="/SKIP_LIVE_SCRIPT.txt";		# flag to indicate if this is live image
-# AUTORUN_LOG="/10-S_A_K/logs/autorun.log";		# Moved to E17 Environment Vars
+# AUTORUN_LOG="/10-S_A_K/logs/autorun.log";		# Move to Environment Vars
 
 # used in mntBookShelf
 BOOKSHELF_SFS_LOCN="";
@@ -58,9 +57,6 @@ WINDUP_DATA=/10-Base/bin/cleanup-data
 WINDUP_LOG=true;	# keep this OFF, will write log on each shutdown
 					# turn on only for debugging
 
-# FIXME - UPDATE TO CORRECT VERSION NUMBER
-# WEB_OBLAK_HOME="${CATALINA_HOME}/webapps/ohome";
-
 ## Set sudo mode
 function goSUDO(){
 	sudo -S echo "NeverGue55" <<<"HSS2017";	# run sudo to set creds
@@ -98,6 +94,7 @@ function setLogLocation(){
 	[[ -e ${SKIP_LIVE_SCRIPTS} ]] && LOGROOT=${LOGROOT_ORIGN} || LOGROOT=${LOGROOT_IMAGE};
 	mkdir -vp ${LOGROOT};
 }
+
 function getLogFileName(){
 #	$1 = suffix to log file basename
 	setLogLocation;	# set path

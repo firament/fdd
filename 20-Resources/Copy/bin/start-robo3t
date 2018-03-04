@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# start-robo3t
+#
+# 04-03-2018
+# Utility script to start Robo 3T
+#
+up-mongo;
+robo3t;

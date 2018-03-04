@@ -31,9 +31,12 @@ echo;
 #	SetupDevApps       2>&1 | tee ${SETUPS_LOG_LOCN}/30-10-SetupDevApps.log;
 #	UpgradeBundledApps 2>&1 | tee ${SETUPS_LOG_LOCN}/40-UpgradeBundledApps.log;
 #	InstallHssApps     2>&1 | tee ${SETUPS_LOG_LOCN}/50-InstallHssApps.log;
-#	AlignToHSS         2>&1 | tee ${SETUPS_LOG_LOCN}/50-AlignToHSS-a.log;
+
+## Post Install stabilization patches
 #	Stub01             2>&1 | tee ${SETUPS_LOG_LOCN}/60-Stub01-a.log;
 #	Stub02             2>&1 | tee ${SETUPS_LOG_LOCN}/60-Stub02-a.log;
+#	ApplyPatch01       2>&1 | tee ${SETUPS_LOG_LOCN}/61-Patch01-a.log;
+#	ApplyPatch02       2>&1 | tee ${SETUPS_LOG_LOCN}/61-Patch02-c.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

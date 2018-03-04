@@ -88,7 +88,7 @@ Init(){
 
 	## COPY DRIVERS
 	echo "Copying drivers.";
-	rsync -vhr ${SETUP_BASE_LOCN}/10-Apps/10-Base/drivers /10-Base;
+	rsync -vhr ${SETUP_BASE_LOCN}/10-Base/drivers /10-Base;
 
 	## COPY WALLPAPER
 	echo "Copying wallpaper to ${HOME}/Pictures.";
@@ -123,12 +123,16 @@ Init(){
  	echo "Setting ALIASes. Will work after reboot.";
 	touch ~/.bash_aliases; # fix error that fails if file does not exist
 cat >> ~/.bash_aliases <<EOALIAS
+# Entries created by setup script - BEGIN
+# $(date +"%d-%b-%Y %T");
+#
 alias s2d='sed "s/ /-/g" <<< '
 alias runauto='/10-Base/bin/AutoRun 2>&1 | tee ${AUTORUN_LOG}'
 alias jc="java -jar jClock.jar &"
 alias tb='thunderbird --ProfileManager &'
-alias git-gui='/usr/lib/git-core/git-gui &'
-alias clean-cjk='bash /media/sak/70_Current/Work/CanesJK/clean-ws.sh'
+alias clean-vpuml='rm -vf *.vpp.bak*'
+#
+# Entries created by setup script - END
 EOALIAS
 
 	#### UPDATE ENVIRONMENT FILE
@@ -139,12 +143,17 @@ EOALIAS
 	sudo cp -fv /etc/environment /etc/environment.$(date +"%Y%m%d-%s").bak           # backup for reference
 	cat /etc/environment                                        # Get contents to log, for verification
 	# Update contents
-sudo cat > /etc/environment <<EOENV
+cat > /etc/environment <<EOENV
+# Entries created by setup script - BEGIN
+# $(date +"%d-%b-%Y %T");
+#
 PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
 GOROOT="${GOLANG_PATH}"
-TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"
+TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"
 GOPATH="${APPS_BAS_DIR}/go-package-lib"
 PL_LOADED=1
+#
+# Entries created by setup script - END
 EOENV
 	sudo chmod -vc 644 /etc/environment; ls -l /etc/environment;   # Reset Permission flags
 
@@ -246,23 +255,27 @@ SetupDevApps(){
 	echo "Setting up GO Lang now";
 	ClearFolder ${GOLANG_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_BAS_DIR} -f ${GOLANG_TAR};
+
 	# Initialize environment
+	echo "Initializing GO Environment.";
 	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
-	# mkdir -v -p ${APPS_BAS_DIR}/go-path-virt;
 	mkdir -v -p ${APPS_BAS_DIR}/go-package-lib;
-	#
-	ln -fsvT ${GOLANG_PATH} ${APPS_BAS_DIR}/go-path-virt;
-	#
+
 	export GOROOT="${GOLANG_PATH}";
-	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"; # Will be used by vscode to install tools
+	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
 	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
-	# Install Common tools/packages, Needs active network
-	export GOPATH="/${APPS_BAS_DIR}/go-path-virt";
-	go get golang.org/x/tools/cmd/goimports;
-	# Add command to install go-tools directly from here
-	# Add GO settings to VS Code settings file
-	# unset path to normal
 	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+
+	echo " - inspect values before running"
+	echo "   GOROOT =      ${GOROOT}";
+	echo "   GOPATH =      ${GOPATH}";
+	echo "   TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "   PATH =        ${PATH}";
+	echo;
+
+	echo " - installing package 'goimports'";
+	go get golang.org/x/tools/cmd/goimports;
+
 
 	## /20-DEV
 
@@ -280,9 +293,8 @@ SetupDevApps(){
 	ClearFolder ${VSCODE_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_DEV_DIR} -f ${VSCODE_TAR};
 	sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
-	# touch ${HOME}/.config/Code/User/settings.json;
-	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json ${HOME}/.config/Code/User/settings.json;
-	# touch ${HOME}/.config/Code/User/keybindings.json;
+	# Initialize settings
+	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
 	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
 
 	#### INSTALL VPUML CE
@@ -327,13 +339,13 @@ SetupDevApps(){
 	#### INSTALL Robo 3T
 	#------------------------------------------------------------------------------#
 	echo "Setting up Robo 3T now";
-	#	ClearFolder ${ROBO3T_PATH}; # Remove if upgrading
-	#	tar -xz -C ${APPS_EXT_DIR} -f ${ROBO3T_TARFILE};
-	#	mv -vf ${ROBO3T_PATH}* ${ROBO3T_PATH};
-	#	sudo ln -vsT ${ROBO3T_PATH}/bin/robo3t ${PUBLIC_BIN_LOCN}/robo3t;
-	#	# fix for ubuntu error
-	#	mkdir -v -p ${ROBO3T_PATH}/lib-bak;
-	#	mv -vf ${ROBO3T_PATH}/lib/libstdc++.so* ${ROBO3T_PATH}/lib-bak
+	ClearFolder ${ROBO3T_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_EXT_DIR} -f ${ROBO3T_TARFILE};
+	mv -vf ${ROBO3T_PATH}* ${ROBO3T_PATH};
+	sudo ln -vsT ${ROBO3T_PATH}/bin/robo3t ${PUBLIC_BIN_LOCN}/robo3t;
+	# fix for ubuntu error
+	mkdir -v -p ${ROBO3T_PATH}/lib-bak;
+	mv -vf ${ROBO3T_PATH}/lib/libstdc++.so* ${ROBO3T_PATH}/lib-bak
 
 	#### INSTALL Pandoc
 	#------------------------------------------------------------------------------#
@@ -343,7 +355,7 @@ SetupDevApps(){
 	mv -vf ${PANDOC_PATH}* ${PANDOC_PATH};
 	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
 	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
-
+	# Add templates to a well-known-folder
 
 
 
@@ -456,31 +468,137 @@ InstallZekr(){
 
 ## HSS applications
 InstallHssApps(){
-	echo "Install HSS applications";
-	aptInstallApp mysql-workbench mysql-server-5.7;
-}
 
-## Align to HSS installation
-AlignToHSS(){
 	echo "Aligning paths for seamless debugging of HSS apps";
 	ln -vsT ${VSCODE_PATH}  /10-Base/VSCode-linux-x64;
 	ln -vsT ${SQLVQB_PATH}  /10-Base/SQLeoVQB;
 	ln -vsT ${MONGODB_PATH} /10-Base/mongodb;
+
+	echo "Install HSS applications";
+	aptInstallApp mysql-workbench mysql-server-5.7;
+
 }
 
-## Pinguybuilder test
-Stub01(){
-	echo "INSTALL PINGUYBUILDER";
-	sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
-	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
-}
+## Patch 1
+ApplyPatch01(){
 
-## VPUML Update
-Stub02(){
-	#### INSTALL VPUML CE
+	## SET-LINK BIN FOLDER. PATH WILL AUTO UPDATE ON REBOOT
+	echo "Preparing bin contents";
+	[ -d ${HOME}/bin ] && rm -fRv ${HOME}/bin;
+	mkdir -p /10-Base/bin;
+	rsync -vrh ${RESOURCE_FOLDER}/Copy/bin/ /10-Base/bin;
+	chmod -v +x /10-Base/bin/*;
+	ln -fsvT /10-Base/bin ${HOME}/bin;
+
+	## COPY SHORTCUTS
+	echo "Copying files and linking.";
+	rsync -vhr ${RESOURCE_FOLDER}/Copy/ShortCuts /10-Base/;
+	chmod -v 755 /10-Base/ShortCuts/*desktop;
+	# Make shortcuts universally availaible
+	sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
+
+	## COPY DRIVERS
+	echo "Copying drivers.";
+	rsync -vhr ${SETUP_BASE_LOCN}/10-Base/drivers /10-Base;
+
+	#### SET ALIAS
 	#------------------------------------------------------------------------------#
-	echo "Setting up VP UML CE now";
-	ClearFolder ${VPUML_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_DEV_DIR} -f ${VPUML_TARFILE};
-	mv -vf ${VPUML_PATH}* ${VPUML_PATH};
+	echo;
+ 	echo "Setting ALIASes. Will work after reboot.";
+	touch ~/.bash_aliases; # fix error that fails if file does not exist
+cat > ~/.bash_aliases <<EOALIAS
+# Entries created by setup script - BEGIN
+# $(date +"%d-%b-%Y %T");
+alias s2d='sed "s/ /-/g" <<< '
+alias runauto='/10-Base/bin/AutoRun 2>&1 | tee ${AUTORUN_LOG}'
+alias jc="java -jar jClock.jar &"
+alias tb='thunderbird --ProfileManager &'
+alias clean-vpuml='rm -vf *.vpp.bak*'
+# Entries created by setup script - END
+EOALIAS
+
+	#### UPDATE ENVIRONMENT FILE
+	#------------------------------------------------------------------------------#
+	echo;
+ 	echo "Updating environment file. Will work after reboot.";
+	sudo chmod -vc 666 /etc/environment;                        # Enable editing
+	sudo cp -fv /etc/environment /etc/environment.$(date +"%Y%m%d-%s").bak           # backup for reference
+	cat /etc/environment                                        # Get contents to log, for verification
+	# Update contents
+cat > /etc/environment <<EOENV
+# Entries created by setup script - BEGIN
+# date +"%d-%b-%Y %T";
+PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
+GOROOT="${GOLANG_PATH}"
+TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"
+GOPATH="${APPS_BAS_DIR}/go-package-lib"
+PL_LOADED=1
+# Entries created by setup script - END
+EOENV
+	sudo chmod -vc 644 /etc/environment; ls -l /etc/environment;   # Reset Permission flags
+
+
+	## Apply GO Patch
+	# mkdir -v -p ${APPS_BAS_DIR}/go-path-virt;
+	rm -vfrd  ${APPS_BAS_DIR}/go-path-virt;
+	rmdir -v ${APPS_BAS_DIR}/go-path-virt;
+	ln -fsvT ${GOLANG_PATH} ${APPS_BAS_DIR}/go-path-virt;
+	#
+	export GOROOT="${GOLANG_PATH}";
+	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"; # Will be used by vscode to install tools
+	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
+	# Install Common tools/packages, Needs active network
+	export GOPATH="/${APPS_BAS_DIR}/go-path-virt";
+	go get golang.org/x/tools/cmd/goimports;
+	# Add command to install go-tools directly from here
+	# Add GO settings to VS Code settings file
+	# unset path to normal
+	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+
+
+	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json ${HOME}/.config/Code/User/settings.json;
+
+	#### INSTALL Robo 3T
+	#------------------------------------------------------------------------------#
+	echo "Setting up Robo 3T now";
+	ClearFolder ${ROBO3T_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_EXT_DIR} -f ${ROBO3T_TARFILE};
+	mv -vf ${ROBO3T_PATH}* ${ROBO3T_PATH};
+	sudo ln -vsT ${ROBO3T_PATH}/bin/robo3t ${PUBLIC_BIN_LOCN}/robo3t;
+	# fix for ubuntu error
+	mkdir -v -p ${ROBO3T_PATH}/lib-bak;
+	mv -vf ${ROBO3T_PATH}/lib/libstdc++.so* ${ROBO3T_PATH}/lib-bak
+
+}
+
+## Patch 1
+ApplyPatch02(){
+	echo "Inspect values from prev run"
+	echo "GOROOT =      ${GOROOT}";
+	echo "GOPATH =      ${GOPATH}";
+	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "PATH =        ${PATH}";
+	echo;
+
+	## Need working net connection to install import tool
+
+	export GOROOT="${GOLANG_PATH}";
+	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
+	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
+	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+
+	echo "Inspect values before running"
+	echo "GOROOT =      ${GOROOT}";
+	echo "GOPATH =      ${GOPATH}";
+	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "PATH =        ${PATH}";
+	echo;
+
+	# Installing go package 'goimports'
+	go get golang.org/x/tools/cmd/goimports;
+	# Add command to install go-tools directly from here
+	# Add GO settings to VS Code settings file
+	# unset path to normal
+	# export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+
 }

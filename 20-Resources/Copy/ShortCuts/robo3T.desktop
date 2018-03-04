@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Robo 3T
 Comment=free lightweight GUI for MongoDB
-Exec=/10-Base/bin/start-mongo
+Exec=start-robo3t
 Icon=/10-Base/ShortCuts/icons/robo3T.png
 Categories=Database;Development;Console
 StartupNotify=false
