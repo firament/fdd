@@ -94,6 +94,17 @@ Init(){
 	echo "Copying wallpaper to ${HOME}/Pictures.";
 	cp -fvR ${RESOURCE_FOLDER}/Copy/bg-black.png ${HOME}/Pictures;
 
+	## COPY CUSTOM FAVOURITES APP LIST
+	echo "Copying Favourites application list to ${HOME}/.config/mate-menu/applications.list.";
+	cat ${HOME}/.config/mate-menu/applications.list | tee ${SETUPS_LOG_LOCN}/applications-$(date +"%Y%m%d-%s").list;
+	cat ${RESOURCE_FOLDER}/Copy/app-list.txt        | tee ${HOME}/.config/mate-menu/applications.list;
+
+	## COPY THUNDERBIRD PROFILES
+	echo "Copying Thunderbird Profiles to ${HOME}/.thunderbird/";
+	mkdir -p ${HOME}/.thunderbird;
+	cp -vf ${RESOURCE_FOLDER}/Copy/thunderbird-profiles.ini ${HOME}/.thunderbird/profiles.ini;
+
+
 	## COPY NETWORK CONNECTIONS - skip for this version
 	# echo "Create Network Connections";
 	# sudo cp -fv ${SETUP_BASE_LOCN}/apps/Networks/* /etc/NetworkManager/system-connections;
@@ -121,8 +132,8 @@ Init(){
 	#------------------------------------------------------------------------------#
 	echo;
  	echo "Setting ALIASes. Will work after reboot.";
-	touch ~/.bash_aliases; # fix error that fails if file does not exist
-cat >> ~/.bash_aliases <<EOALIAS
+	touch ${HOME}/.bash_aliases; # fix error that fails if file does not exist
+cat >> ${HOME}/.bash_aliases <<EOALIAS
 # Entries created by setup script - BEGIN
 # $(date +"%d-%b-%Y %T");
 #
@@ -138,7 +149,7 @@ EOALIAS
 	#### UPDATE ENVIRONMENT FILE
 	#------------------------------------------------------------------------------#
 	echo;
- 	echo "Updating environment file. Will work after reboot.";
+ 	echo "Updating Environment file. Will work after reboot.";
 	sudo chmod -vc 666 /etc/environment;                        # Enable editing
 	sudo cp -fv /etc/environment /etc/environment.$(date +"%Y%m%d-%s").bak           # backup for reference
 	cat /etc/environment                                        # Get contents to log, for verification
@@ -149,7 +160,9 @@ cat > /etc/environment <<EOENV
 #
 PL_LOADED=1;
 AUTORUN_LOG="/cdrom/logs/autorun.log";
+#
 PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games";
+#
 GOROOT="${GOLANG_PATH}";
 TOOLSGOPATH="${APPS_BAS_DIR}/go-tools";
 GOPATH="${APPS_BAS_DIR}/go-package-lib";
@@ -157,6 +170,19 @@ GOPATH="${APPS_BAS_DIR}/go-package-lib";
 # Entries created by setup script - END
 EOENV
 	sudo chmod -vc 644 /etc/environment; ls -l /etc/environment;   # Reset Permission flags
+
+
+	#### SET BOOKMARKS
+	#------------------------------------------------------------------------------#
+	echo;
+ 	echo "Setting Bookmarks. Will work after reboot.";
+	touch ${HOME}/.gtk-bookmarks; # fix error that fails if file does not exist
+cat >> ${HOME}/.gtk-bookmarks <<EOABMS
+file:///media/sak/70_Current/_Notes
+file:///media/sak/70_Current/Work
+file:///media/sak/70_Current/Downloads
+file:///cdrom D1-Cache
+EOABMS
 
 
 	#### ADDING FONTS ##
@@ -604,5 +630,24 @@ ApplyPatch02(){
 	# Add GO settings to VS Code settings file
 	# unset path to normal
 	# export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+}
 
+## Patch 3
+ApplyPatch03(){
+	## COPY CUSTOM FAVOURITES APP LIST
+	echo "Copying Favourites application list to ${HOME}/.config/mate-menu/applications.list.";
+	cat ${HOME}/.config/mate-menu/applications.list | tee ${SETUPS_LOG_LOCN}/applications-$(date +"%Y%m%d-%s").list;
+	cat ${RESOURCE_FOLDER}/Copy/app-list.txt        | tee ${HOME}/.config/mate-menu/applications.list;
+
+	## COPY Thunderbird Profiles
+	echo "Copying Thunderbird Profiles to ${HOME}/.thunderbird/";
+	mkdir -p ${HOME}/.thunderbird;
+	cp -vf ${RESOURCE_FOLDER}/Copy/thunderbird-profiles.ini ${HOME}/.thunderbird/profiles.ini;
+
+	echo "Inspect values from prev run"
+	echo "GOROOT =      ${GOROOT}";
+	echo "GOPATH =      ${GOPATH}";
+	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "PATH =        ${PATH}";
+	echo;
 }
