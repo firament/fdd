@@ -7,7 +7,7 @@
 #
 
 [[ ! -z $(ps -e | grep "mongod") ]] && exit 1;
-
+#
 MONDO_DIR="/media/sak/70_Current/Work/mongodb";
 mkdir -v -p ${MONDO_DIR};
 if [[ ! -d ${MONDO_DIR} ]]; then
@@ -15,7 +15,8 @@ if [[ ! -d ${MONDO_DIR} ]]; then
 	echo "Cannot start instance, aborting now";
 	exit 1;
 fi;
-
+#
 export PATH="/10-Base/mongodb/bin:${PATH}";
 mongod --dbpath "${MONDO_DIR}" &
 #
+

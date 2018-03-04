@@ -147,11 +147,12 @@ cat > /etc/environment <<EOENV
 # Entries created by setup script - BEGIN
 # $(date +"%d-%b-%Y %T");
 #
-PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
-GOROOT="${GOLANG_PATH}"
-TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"
-GOPATH="${APPS_BAS_DIR}/go-package-lib"
-PL_LOADED=1
+PL_LOADED=1;
+AUTORUN_LOG="/cdrom/logs/autorun.log";
+PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games";
+GOROOT="${GOLANG_PATH}";
+TOOLSGOPATH="${APPS_BAS_DIR}/go-tools";
+GOPATH="${APPS_BAS_DIR}/go-package-lib";
 #
 # Entries created by setup script - END
 EOENV
@@ -476,7 +477,7 @@ InstallHssApps(){
 
 	echo "Install HSS applications";
 	aptInstallApp mysql-workbench mysql-server-5.7;
-
+	sudo systemctl disable mysql;	# Keep to start on demand
 }
 
 ## Patch 1
@@ -527,12 +528,15 @@ EOALIAS
 	# Update contents
 cat > /etc/environment <<EOENV
 # Entries created by setup script - BEGIN
-# date +"%d-%b-%Y %T";
+# $(date +"%d-%b-%Y %T");
+#
 PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
 GOROOT="${GOLANG_PATH}"
-TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"
+TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"
 GOPATH="${APPS_BAS_DIR}/go-package-lib"
+AUTORUN_LOG="/cdrom/logs/autorun.log";
 PL_LOADED=1
+#
 # Entries created by setup script - END
 EOENV
 	sudo chmod -vc 644 /etc/environment; ls -l /etc/environment;   # Reset Permission flags

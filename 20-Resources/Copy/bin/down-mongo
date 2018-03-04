@@ -6,7 +6,9 @@
 # Utility script to stop mongo database engine
 #
 [[ -z $(ps -e | grep "mongod") ]] && exit 1;
+#
 export PATH="/30-EXT/mongodb/bin:/10-Base/robo3t/bin:${PATH}";
 MONDO_DIR="/media/sak/70_Current/Work/mongodb";
 mongod --dbpath ${MONDO_DIR} --shutdown &
 #
+

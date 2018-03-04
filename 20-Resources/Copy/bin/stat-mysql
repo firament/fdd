@@ -5,5 +5,9 @@
 # 06 Feb 2018
 # Utility script to test status of MySQL database engine
 #
+[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
+goSUDO;
 sudo systemctl status mysql;
+echo "${PL_LOADED}";
 #
+
