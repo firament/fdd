@@ -56,7 +56,7 @@ readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.20.1-1518535978_amd64.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_0_20180228_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_0_20180231_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
 readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.0.0-linux.x86_64.zip";
