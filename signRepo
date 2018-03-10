@@ -1,14 +1,16 @@
 #!/bin/bash
-# Last Update: Sun 2017-Mar-26 15:47:50.456 +05:30
+# Last Update: Sat 2018-Mar-10 18:01:49 +05:30
+# date +'%a %Y-%b-%d %T %:z'
 
 
-# signRepositories V 1.1
+# signRepositories V 1.2
 ################################################################################
 # SET EACH TIME BEFORE SIGNING REPOSITORY                                      #
 #------------------------------------------------------------------------------#
 # readonly SETUP_ROOT_LOCN="/same/path/as/in/fdd-data.sh/";		# update to use base location
+readonly SETUP_ROOT_LOCN="/same/path/as/in/fdd-data.sh/";		# update to use base location
 readonly REPOSITORIES="deb-paks-Ax64 deb-paks-ubuntu-Yx64";
-/
+
 
 #------------------------------------------------------------------------------#
 # Set each time before creating keys                                           #
@@ -21,7 +23,7 @@ readonly KEY_PVT="Fdd-RepoSign-pvt.key";
 # WRITE HEADER IN CONSOLE                                                      #
 #------------------------------------------------------------------------------#
 clear;
-echo -n "running script $0 - "; date +"%T [%a] %d %b %Y";
+echo "Running script $0 @ $(date +'%T [%a] %d %b %Y')";
 
 #------------------------------------------------------------------------------#
 # PRIVATE VARIABLES NOT TO BE MODIFIED CASUALLY                                #
@@ -57,13 +59,26 @@ signRepositories(){
 	echo ;
 	echo "gpg --allow-secret-key-import --import ${KEY_LOCN}/${KEY_PVT}";
 	echo ;
-	read -p "Press ENTER to continue..." CONTINUE_FLAG;
+	read -p "Press ENTER to continue or Ctrl+C to abort." CONTINUE_FLAG;
 
 	pushd ${SETUP_ROOT_LOCN};
+	echo ;
+	echo "BEGIN - process all repositories.";
 	for REPOSITORY in ${REPOSITORIES};
 	do
+		if [ ! -d ${REPOSITORY} ]; then	# SKIP IF BAD DESTINATION
+			echo "----------------------------------------------------------------------------------------------------";
+			echo;
+			echo "${REPOSITORY} @ ${PWD}";
+			echo "    Bad location. Does NOT exist";
+			echo;
+			echo "----------------------------------------------------------------------------------------------------";
+			continue;
+		fi;
 		signRepository ${REPOSITORY};
 	done
+	echo "DONE - process all repositories.";
+	echo ;
 	popd; # return back to start locn
 }
 
@@ -113,13 +128,11 @@ EOHEAD
 	echo -n "Signing Repository NOW... ";
 	if [ -e Release.gpg ]; then rm -fv Release.gpg; fi;	# Remove old key to avoid overwrite prompt
 	# [ -e Release.gpg ] && rm -fv Release.gpg;         # Alternate syntax
-	echo "Use ||${PASS_PHRASE}||";
+	echo "Use || ${PASS_PHRASE} ||";
 	gpg --armor --detach-sign --output Release.gpg Release;
 
 	# copy public key to repository for convenience
 	cp -fv ${KEY_LOCN}/${KEY_PUB} .;
-
-	popd;	# return back to start locn
 
 	echo "----------------------------------------------------------------------------------------------------";
 	echo "SUCCESS";
@@ -127,7 +140,10 @@ EOHEAD
 	echo "----------------------------------------------------------------------------------------------------";
 	echo "Add the following line in /etc/apt/sources.list to enable and use this repository";
 	echo "deb file:$1 /";
+	echo "----------------------------------------------------------------------------------------------------";
 	echo;
+
+	popd;	# return back to start locn
 
 }
 
@@ -192,6 +208,18 @@ instalCertInAPT(){
 #                                                                              #
 #------------------------------------------------------------------------------#
 
+# CHECK PATH IS GOOD
+
+if [[ -z ${SETUP_ROOT_LOCN} || ! -d ${SETUP_ROOT_LOCN} ]]; then
+	echo;
+	echo "ERROR: Bad Path";
+	echo "SETUP_ROOT_LOCN = '${SETUP_ROOT_LOCN}'";
+	echo;
+	echo "Ensure path is set correctly and try again";
+	echo;
+	exit 501;
+fi;
+
 #  CREATE AND EXPORT KEYS FOR SIGNING REPOSITORIES ----------------------------#
 # prepNexportCert;	# to generate and save new certificate
 
@@ -202,5 +230,6 @@ instalCertInAPT(){
 # signRepositories; 	# sign all repositories in location, using public key
 
 #------------------------------------------------------------------------------#
-echo "All work done.";date +"%T [%a] %d %b %Y";
+echo "All work done @ $(date +'%T [%a] %d %b %Y')";
+
 exit 0;
