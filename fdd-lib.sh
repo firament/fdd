@@ -158,14 +158,14 @@ cat > /etc/environment <<EOENV
 # Entries created by setup script - BEGIN
 # $(date +"%d-%b-%Y %T");
 #
-PL_LOADED=1;
-AUTORUN_LOG="/cdrom/logs/autorun.log";
+PL_LOADED=1
+AUTORUN_LOG="/cdrom/logs/autorun.log"
 #
-PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games";
+PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
 #
-GOROOT="${GOLANG_PATH}";
-TOOLSGOPATH="${APPS_BAS_DIR}/go-tools";
-GOPATH="${APPS_BAS_DIR}/go-package-lib";
+GOROOT="${GOLANG_PATH}"
+TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"
+GOPATH="${APPS_BAS_DIR}/go-package-lib"
 #
 # Entries created by setup script - END
 EOENV
@@ -560,7 +560,7 @@ PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/b
 GOROOT="${GOLANG_PATH}"
 TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"
 GOPATH="${APPS_BAS_DIR}/go-package-lib"
-AUTORUN_LOG="/cdrom/logs/autorun.log";
+AUTORUN_LOG="/cdrom/logs/autorun.log"
 PL_LOADED=1
 #
 # Entries created by setup script - END
