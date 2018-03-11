@@ -293,7 +293,7 @@ SetupDevApps(){
 	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
 	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
 
-	echo " - inspect values before running"
+	echo " - Inspect values before running"
 	echo "   GOROOT =      ${GOROOT}";
 	echo "   GOPATH =      ${GOPATH}";
 	echo "   TOOLSGOPATH = ${TOOLSGOPATH}";
@@ -493,6 +493,12 @@ InstallZekr(){
 	#------------------------------------------------------------------------------#
 }
 
+####################################################################################################
+#                                                                                                  #
+#	POST INSTALL PATCHES                                                                           #
+#   To be integrated into script before next run                                                   #
+#                                                                                                  #
+####################################################################################################
 ## HSS applications
 InstallHssApps(){
 
@@ -649,5 +655,52 @@ ApplyPatch03(){
 	echo "GOPATH =      ${GOPATH}";
 	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
 	echo "PATH =        ${PATH}";
+	echo;
+}
+
+## Patch 4
+ApplyPatch04(){
+	## SET-LINK BIN FOLDER. PATH WILL AUTO UPDATE ON REBOOT
+	echo "Preparing bin contents";
+	# [ -d ${HOME}/bin ] && rm -fRv ${HOME}/bin;
+	# mkdir -p /10-Base/bin;
+	rsync -vrh ${RESOURCE_FOLDER}/Copy/bin/ /10-Base/bin;
+	chmod -v +x /10-Base/bin/*;
+	ln -fsvT /10-Base/bin ${HOME}/bin;
+
+	## COPY SHORTCUTS
+	echo "Copying files and linking.";
+	rsync -vhr ${RESOURCE_FOLDER}/Copy/ShortCuts /10-Base/;
+	chmod -v 755 /10-Base/ShortCuts/*desktop;
+	# Make shortcuts universally availaible
+	sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
+
+
+	#### INSTALL VPUML CE
+	#------------------------------------------------------------------------------#
+	echo "Setting up VP UML CE now";
+	ClearFolder ${VPUML_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_DEV_DIR} -f ${VPUML_TARFILE};
+	mv -vf ${VPUML_PATH}* ${VPUML_PATH};
+	sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
+
+	#### Align with HSS applications
+	#------------------------------------------------------------------------------#
+	echo "Aligning paths for seamless debugging of HSS apps";
+	ln -vsT ${VSCODE_PATH}  /10-Base/VSCode-linux-x64;
+	ln -vsT ${SQLVQB_PATH}  /10-Base/SQLeoVQB;
+	ln -vsT ${MONGODB_PATH} /10-Base/mongodb;
+
+	#### TURN ON UTC SWITCH
+	#------------------------------------------------------------------------------#
+	# Will be ON by default
+	timedatectl status
+
+	echo "Inspect values from prev run"
+	echo "PL_LOADED . = ${PL_LOADED}";
+	echo "GOROOT .... = ${GOROOT}";
+	echo "GOPATH .... = ${GOPATH}";
+	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "PATH ...... = ${PATH}";
 	echo;
 }

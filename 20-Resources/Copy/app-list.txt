@@ -1,6 +1,6 @@
 location:/usr/share/applications/atom.desktop
 location:/usr/share/applications/code.desktop
-location:/home/sak/.local/share/applications/vpuml-ce.desktop
+location:/usr/share/applications/vpuml-ce.desktop
 location:/usr/share/applications/giteye.desktop
 location:/usr/share/applications/SQLeoVQB.desktop
 location:/usr/share/applications/libreoffice-startcenter.desktop

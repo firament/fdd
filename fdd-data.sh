@@ -250,20 +250,20 @@ HealthCheck(){
 	echo -n "BEGIN checking files - "; date +"%d-%b-%Y %T";
 	echo "";
 
-	# [[ -f ${ORA_JRE_TAR} ]]     && echo -n "OK  " || echo -n "FAIL"; echo " Check ORA_JRE_TAR     >> ${ORA_JRE_TAR}";
-	[[ -f ${NODEJS_TAR} ]]      && echo -n "OK  " || echo -n "FAIL"; echo " Check NODEJS_TAR      >> ${NODEJS_TAR}";
-	[[ -f ${DNETCORE_TAR} ]]    && echo -n "OK  " || echo -n "FAIL"; echo " Check DNETCORE_TAR    >> ${DNETCORE_TAR}";
-	[[ -f ${GOLANG_TAR} ]]      && echo -n "OK  " || echo -n "FAIL"; echo " Check GOLANG_TAR      >> ${GOLANG_TAR}";
-	[[ -f ${ATOM_TAR} ]]        && echo -n "OK  " || echo -n "FAIL"; echo " Check ATOM_TAR        >> ${ATOM_TAR}";
-	[[ -f ${VSCODE_TAR} ]]      && echo -n "OK  " || echo -n "FAIL"; echo " Check VSCODE_TAR      >> ${VSCODE_TAR}";
-	[[ -f ${VPUML_TARFILE} ]]   && echo -n "OK  " || echo -n "FAIL"; echo " Check VPUML_TARFILE   >> ${VPUML_TARFILE}";
-	[[ -f ${GITEYE_TAR} ]]      && echo -n "OK  " || echo -n "FAIL"; echo " Check GITEYE_TAR      >> ${GITEYE_TAR}";
-	[[ -f ${PLIB_TARFILE} ]]    && echo -n "OK  " || echo -n "FAIL"; echo " Check PLIB_TARFILE    >> ${PLIB_TARFILE}";
-	[[ -f ${SQLVQB_TARFILE} ]]  && echo -n "OK  " || echo -n "FAIL"; echo " Check SQLVQB_TARFILE  >> ${SQLVQB_TARFILE}";
-	[[ -f ${MONGODB_TARFILE} ]] && echo -n "OK  " || echo -n "FAIL"; echo " Check MONGODB_TARFILE >> ${MONGODB_TARFILE}";
-	[[ -f ${ROBO3T_TARFILE} ]]  && echo -n "OK  " || echo -n "FAIL"; echo " Check ROBO3T_TARFILE  >> ${ROBO3T_TARFILE}";
-	[[ -f ${PANDOC_TARFILE} ]]  && echo -n "OK  " || echo -n "FAIL"; echo " Check PANDOC_TARFILE  >> ${PANDOC_TARFILE}";
-	# [[ -f ${FIREFOX_TAR} ]]     && echo -n "OK  " || echo -n "FAIL"; echo " Check FIREFOX_TAR     >> ${FIREFOX_TAR}";
+	# [[ -f ${ORA_JRE_TAR} ]]     && echo -n " OK " || echo -n "FAIL"; echo " ORA_JRE_TAR     >> ${ORA_JRE_TAR}";
+	[[ -f ${NODEJS_TAR} ]]      && echo -n " OK " || echo -n "FAIL"; echo " NODEJS_TAR      >> ${NODEJS_TAR}";
+	[[ -f ${DNETCORE_TAR} ]]    && echo -n " OK " || echo -n "FAIL"; echo " DNETCORE_TAR    >> ${DNETCORE_TAR}";
+	[[ -f ${GOLANG_TAR} ]]      && echo -n " OK " || echo -n "FAIL"; echo " GOLANG_TAR      >> ${GOLANG_TAR}";
+	[[ -f ${ATOM_TAR} ]]        && echo -n " OK " || echo -n "FAIL"; echo " ATOM_TAR        >> ${ATOM_TAR}";
+	[[ -f ${VSCODE_TAR} ]]      && echo -n " OK " || echo -n "FAIL"; echo " VSCODE_TAR      >> ${VSCODE_TAR}";
+	[[ -f ${VPUML_TARFILE} ]]   && echo -n " OK " || echo -n "FAIL"; echo " VPUML_TARFILE   >> ${VPUML_TARFILE}";
+	[[ -f ${GITEYE_TAR} ]]      && echo -n " OK " || echo -n "FAIL"; echo " GITEYE_TAR      >> ${GITEYE_TAR}";
+	[[ -f ${PLIB_TARFILE} ]]    && echo -n " OK " || echo -n "FAIL"; echo " PLIB_TARFILE    >> ${PLIB_TARFILE}";
+	[[ -f ${SQLVQB_TARFILE} ]]  && echo -n " OK " || echo -n "FAIL"; echo " SQLVQB_TARFILE  >> ${SQLVQB_TARFILE}";
+	[[ -f ${MONGODB_TARFILE} ]] && echo -n " OK " || echo -n "FAIL"; echo " MONGODB_TARFILE >> ${MONGODB_TARFILE}";
+	[[ -f ${ROBO3T_TARFILE} ]]  && echo -n " OK " || echo -n "FAIL"; echo " ROBO3T_TARFILE  >> ${ROBO3T_TARFILE}";
+	[[ -f ${PANDOC_TARFILE} ]]  && echo -n " OK " || echo -n "FAIL"; echo " PANDOC_TARFILE  >> ${PANDOC_TARFILE}";
+	# [[ -f ${FIREFOX_TAR} ]]     && echo -n " OK " || echo -n "FAIL"; echo " FIREFOX_TAR     >> ${FIREFOX_TAR}";
 
 	echo "";
 	echo -n "DONE checking files - "; date +"%d-%b-%Y %T";
