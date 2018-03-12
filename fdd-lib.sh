@@ -161,7 +161,7 @@ cat > /etc/environment <<EOENV
 PL_LOADED=1
 AUTORUN_LOG="/cdrom/logs/autorun.log"
 #
-PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
+PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${APPS_BAS_DIR}/go-tools/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
 #
 GOROOT="${GOLANG_PATH}"
 TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"

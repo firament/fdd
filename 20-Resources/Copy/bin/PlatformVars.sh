@@ -76,6 +76,12 @@ function getTag(){
 ## Returns TAG, used for marker tags that do not have a value
 function getTagValue(){
 #	$1 = tag whose value we want
+#
+## USAGE
+#	TAG_OF_INT="live-media-path";
+#	TAG_VALUE=$(getTagValue "${TAG_OF_INT}");
+#	[[ -z ${TAG_VALUE} ]] && echo "Tag not specified" || echo ${TAG_VALUE};
+#
 	declare -a GARGS3;
 	CURR_ARG=0;
 	read -a GARGS3 <<< $( cat /proc/cmdline | tr "=" " " )
@@ -117,7 +123,14 @@ function putLine(){
 	echo "-----------------------------------------------------------------------------------";
 	}
 
-## USAGE
-#	TAG_OF_INT="live-media-path";
-#	TAG_VALUE=$(getTagValue "${TAG_OF_INT}");
-#	[[ -z ${TAG_VALUE} ]] && echo "Tag not specified" || echo ${TAG_VALUE};
+# Used in virtual disks
+# Get first availaible node
+getFirstFreeNBD(){
+	let "LI_INDEX = 0";
+	# TODO: ort the results, to ensure sequence
+	ALL_ELEMS=$(lsblk | grep "nbd" | sed "s/nbd//g" | cut -d " " -f1);
+	for ELEM in ${ALL_ELEMS}; do
+		[[ ${LI_INDEX} != ${ELEM} ]] && break; ((LI_INDEX++));
+	done;
+	echo "/dev/nbd${LI_INDEX}";
+	}

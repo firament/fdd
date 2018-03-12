@@ -100,24 +100,24 @@ dconf Editor > org > mate > mate-menu > plugins > applications
  > **Customized Contents**
 
 ```txt
+location:/usr/share/applications/atom.desktop
 location:/usr/share/applications/code.desktop
-location:/home/sak/.local/share/applications/atom.desktop
-location:/home/sak/.local/share/applications/vpuml-ce.desktop
+location:/usr/share/applications/vpuml-ce.desktop
 location:/usr/share/applications/giteye.desktop
+location:/usr/share/applications/SQLeoVQB.desktop
+location:/usr/share/applications/libreoffice-startcenter.desktop
 separator
 location:/usr/share/applications/google-chrome.desktop
-location:/usr/share/applications/vivaldi-stable.desktop
-location:/usr/share/applications/thunderbird.desktop
 location:/usr/share/applications/skypeforlinux.desktop
+location:/usr/share/applications/thunderbird.desktop
 location:/usr/share/applications/vlc.desktop
-location:/usr/share/applications/galculator.desktop
 separator
-location:/usr/share/applications/libreoffice-writer.desktop
 location:/usr/share/applications/mate-display-properties.desktop
-location:/usr/share/applications/libreoffice-calc.desktop
-location:/usr/share/applications/transmission-gtk.desktop
-location:/usr/share/applications/mate-system-log.desktop
-location:/usr/share/applications/virtualbox.desktop
+location:/usr/share/applications/mate-screenshot.desktop
+location:/usr/share/applications/mate-calc.desktop
+location:/usr/share/applications/mate-system-monitor.desktop
+location:/usr/share/applications/meld.desktop
+location:/usr/share/applications/gufw.desktop```
 ```
 
  > **Remove non-needed entries from Places**
@@ -238,7 +238,6 @@ CUSTOMISO="${BUILDLABEL}.iso"
 ---
 
 ## MakeDVD
-
 ```bash
 # pre-requisites
 # sudo apt-get -Vy install xorriso cdck     # for creating bootable ISO
