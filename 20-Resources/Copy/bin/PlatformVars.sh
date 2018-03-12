@@ -126,11 +126,18 @@ function putLine(){
 # Used in virtual disks
 # Get first availaible node
 getFirstFreeNBD(){
+	# Load dependency, if not done
+	if [[ -z $(lsmod | grep "^nbd") ]]; then
+		goSUDO; sudo modprobe nbd;
+	fi;
+
 	let "LI_INDEX = 0";
-	# TODO: ort the results, to ensure sequence
-	ALL_ELEMS=$(lsblk | grep "nbd" | sed "s/nbd//g" | cut -d " " -f1);
+	# TODO: sort the results, to ensure sequence
+	ALL_ELEMS=$(lsblk | grep "nbd" | sed "s/nbd//g" | sort | cut -d " " -f1);
 	for ELEM in ${ALL_ELEMS}; do
 		[[ ${LI_INDEX} != ${ELEM} ]] && break; ((LI_INDEX++));
 	done;
+
 	echo "/dev/nbd${LI_INDEX}";
+
 	}

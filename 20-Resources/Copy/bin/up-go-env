@@ -1,0 +1,166 @@
+#! /bin/bash
+# 12-Mar-2018 11:24:56 +05:30
+################################################################################
+#                                                                              #
+# /10-Base/bin/up-go-env                                                       #
+#                v 0.1                                                         #
+#                                                                              #
+#    script to mount containers for GO environment,                            #
+#        to support GO development in ive environment                          #
+#        and/or to maintain multiple GO versions side-by-side                  #
+#                                                                              #
+#    This is necessarily machine dependent, and should be updated              #
+#        per instance                                                          #
+#                                                                              #
+#    TODO: add container for MySql                                             #
+#    TODO: add container for MongoDB                                           #
+#    TODO: Take paths and file names from config file                          #
+#    TODO: move 'getFirstFreeNBD' to 'PlatformVars.sh'                         #
+#                                                                              #
+################################################################################
+
+# TODO:
+# [[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
+
+CONTAINER_ROOT="/media/sak/70_Current/Work/go-containers";
+CONTAINER_TOOLS="go1_10-tools";
+CONTAINER_PATH0="go1_10-path0";
+
+
+## Remove after integrating with PlatformVars.sh
+function goSUDO(){
+	sudo -S echo "NeverGue55" <<<"<plain-text-password>";	# run sudo to set creds
+	}
+
+# Utility function, use from 'PlatformVars.sh'
+# Get first availaible node
+getFirstFreeNBD(){
+	# Load dependency, if not done
+	if [[ -z $(lsmod | grep "^nbd") ]]; then
+		echo "needs loading";
+		goSUDO; # Will work after integrating with PlatformVars.sh
+		sudo modprobe nbd;
+	fi;
+	#
+	let "LI_INDEX = 0";
+	ALL_ELEMS=$(lsblk | grep "nbd" | sed "s/nbd//g" | sort | cut -d " " -f1);
+	for ELEM in ${ALL_ELEMS}; do
+		[[ ${LI_INDEX} != ${ELEM} ]] && break; ((LI_INDEX++));
+	done;
+	#
+	echo "/dev/nbd${LI_INDEX}";
+	#
+	}
+
+
+## Create and initialize disk ##################################################
+# One time activity, use with caution
+makeContainers(){
+	RUN_AS="${USER}";
+	#
+	return 500;	# To insure against accidental runs
+	#
+	CONTAINER_LIST="${CONTAINER_TOOLS} ${CONTAINER_PATH0}";
+	for LS_CONTAINER in ${CONTAINER_LIST}; do
+		echo "Processing '${LS_CONTAINER}'";
+		WORK_FILE_NAME="${CONTAINER_ROOT}/${LS_CONTAINER}.qc2";
+		MOUNT_POINT="/40-Upgrades/${LS_CONTAINER}";
+		mkdir -v -p ${MOUNT_POINT};
+		NBD=$(getFirstFreeNBD);
+		#
+		echo "Using Environment:";
+		echo "  NBD            = ${NBD}";
+		echo "  RUN_AS         = ${RUN_AS}";
+		echo "  LS_CONTAINER   = ${LS_CONTAINER}";
+		echo "  WORK_FILE_NAME = ${WORK_FILE_NAME}";
+		echo "  MOUNT_POINT    = ${MOUNT_POINT}";
+		echo "#";
+
+		qemu-img create -f qcow2 ${WORK_FILE_NAME} 1G
+		sudo qemu-nbd -c ${NBD} ${WORK_FILE_NAME};
+		sudo mke2fs -v -L ${LS_CONTAINER} -t ext4 ${NBD};
+		sudo mount -v -t ext4 ${NBD} ${MOUNT_POINT};
+		sudo chown -vR ${RUN_AS}:${RUN_AS} ${MOUNT_POINT};
+		# sudo umount -v ${MOUNT_POINT};
+		# mount -l;
+		echo "#------------------------------------------------------------------------------#";
+	done
+	#
+	echo "Mount list:";
+	mount -l | grep "^/dev/nbd";
+	echo "#==============================================================================#";
+	}
+
+## Mount virtual disk for use ##################################################
+initGoContainers(){
+# GOROOT .... = /10-Base/go
+# GOPATH .... = /10-Base/go-package-lib
+# TOOLSGOPATH = /10-Base/go-tools
+#
+	MOUNT_POINT="/10-Base/go-tools";
+	LS_CONTAINER="${CONTAINER_TOOLS}";
+	WORK_FILE_NAME="${CONTAINER_ROOT}/${LS_CONTAINER}.qc2";
+	NBD=$(getFirstFreeNBD);
+	#
+	echo "Using Environment:";
+	echo "  NBD            = ${NBD}";
+	echo "  RUN_AS         = ${RUN_AS}";
+	echo "  LS_CONTAINER   = ${LS_CONTAINER}";
+	echo "  WORK_FILE_NAME = ${WORK_FILE_NAME}";
+	echo "  MOUNT_POINT    = ${MOUNT_POINT}";
+	echo "#";
+	#
+	sudo qemu-nbd -c ${NBD} ${WORK_FILE_NAME};
+	sudo mount -v -t ext4 ${NBD} ${MOUNT_POINT};
+
+	MOUNT_POINT="/10-Base/go-package-lib";
+	MOUNT_POINT="${TOOLSGOPATH}";
+	LS_CONTAINER="${CONTAINER_PATH0}";
+	WORK_FILE_NAME="${CONTAINER_ROOT}/${LS_CONTAINER}.qc2";
+	NBD=$(getFirstFreeNBD);
+	#
+	echo "Using Environment:";
+	echo "  NBD            = ${NBD}";
+	echo "  RUN_AS         = ${RUN_AS}";
+	echo "  LS_CONTAINER   = ${LS_CONTAINER}";
+	echo "  WORK_FILE_NAME = ${WORK_FILE_NAME}";
+	echo "  MOUNT_POINT    = ${MOUNT_POINT}";
+	echo "#";
+	#
+	sudo qemu-nbd -c ${NBD} ${WORK_FILE_NAME};
+	sudo mount -v -t ext4 ${NBD} ${MOUNT_POINT};
+
+	echo "Mount list:";
+	mount -l | grep "^/dev/nbd";
+	echo "# Done.";
+	echo "#------------------------------------------------------------------------------#";
+
+	}
+
+## Cleanup after use (Release all nbd mounts) ##################################
+#  Use with caution
+freeAllContainers(){
+	ALL_NBDS=$(lsblk | grep "^/dev/nbd" | cut -d " " -f1);
+	for NBD_CURR in ${ALL_NBDS}; do
+		echo "Processing mount '${NBD_CURR}'";
+		sudo umount   -v ${NBD_CURR};
+	    sudo qemu-nbd -d ${NBD_CURR};
+	done;
+	# # Shutdown and unload 'nbd' module
+	# # Can leave loaded, system will cleanup on shutdown
+	# if [[ ! -z $(lsmod | grep "^nbd") ]]; then
+	# 	echo "Loading, can be unloaded";
+	# 	goSUDO; # Will work after integrating with PlatformVars.sh
+	# 	sudo rmmod -v nbd;
+	# fi;
+	#
+	}
+
+
+LOG_LOCN="${HOME}/Documents/init-go-logs";
+mkdir -v -p ${LOG_LOCN};
+
+## Do Tasks
+# makeContainers     2>&1 | tee ${LOG_LOCN}/makeContainers-$(date +"%Y%m%d-%s").log;	# ONE TIME only
+# initGoContainers   2>&1 | tee ${LOG_LOCN}/initGoContainers-$(date +"%Y%m%d-%s").log;
+# freeAllContainers  2>&1 | tee ${LOG_LOCN}/freeAllContainers-$(date +"%Y%m%d-%s").log;
