@@ -59,7 +59,7 @@ WINDUP_LOG=true;	# keep this OFF, will write log on each shutdown
 
 ## Set sudo mode
 function goSUDO(){
-	sudo -S echo "NeverGue55" <<<"HSS2017";	# run sudo to set creds
+	sudo -S echo "Activating Sudo now." <<<"<plain-text-password>";	# run sudo to set creds
 	}
 
 ## Returns the value of the TAG
@@ -127,17 +127,9 @@ function putLine(){
 # Get first availaible node
 getFirstFreeNBD(){
 	# Load dependency, if not done
-	if [[ -z $(lsmod | grep "^nbd") ]]; then
-		goSUDO; sudo modprobe nbd;
-	fi;
-
-	let "LI_INDEX = 0";
-	# TODO: sort the results, to ensure sequence
-	ALL_ELEMS=$(lsblk | grep "nbd" | sed "s/nbd//g" | sort | cut -d " " -f1);
-	for ELEM in ${ALL_ELEMS}; do
-		[[ ${LI_INDEX} != ${ELEM} ]] && break; ((LI_INDEX++));
-	done;
-
-	echo "/dev/nbd${LI_INDEX}";
-
+	[[ -z $(lsmod | grep "^nbd") ]] && sudo modprobe nbd;
+	BLOCKDEVS=($(lsblk | grep "^nbd" | cut -d " " -f1 | sed "s/nbd//g" | sort));
+	for (( iX=0; iX < ${#BLOCKDEVS[@]}; iX++ ));
+	  do [ ${iX} != ${BLOCKDEVS[$iX]} ] && break; done
+	echo "/dev/nbd${iX}";
 	}

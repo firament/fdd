@@ -290,7 +290,7 @@ SetupDevApps(){
 
 	export GOROOT="${GOLANG_PATH}";
 	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
-	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
+	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}/bin:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
 	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
 
 	echo " - Inspect values before running"

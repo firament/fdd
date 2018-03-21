@@ -1,0 +1,37 @@
+#! /bin/bash
+# 12-Mar-2018 11:24:56 +05:30
+################################################################################
+#                                                                              #
+# /10-Base/bin/down-nbd                                                        #
+#                v 0.1                                                         #
+#                                                                              #
+#    script to release all nbd mounts and unload module,                       #
+#        typically to be used just before shutdown                             #
+#                                                                              #
+################################################################################
+
+[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
+
+# TODO: Activate commands, put in 'echo' for testing.
+
+## Cleanup after use (Release all nbd mounts) ##################################
+#  Use with caution
+closeAllNbd(){
+	ALL_NBDS=$(lsblk | grep "^nbd" | cut -d " " -f1);
+	goSudo;
+	for NBD_CURR in ${ALL_NBDS}; do
+		echo "Processing mount '${NBD_CURR}'";
+		echo "sudo umount   -v /dev/${NBD_CURR}";
+	    echo "sudo qemu-nbd -d /dev/${NBD_CURR}";
+	done;
+	# Shutdown and unload 'nbd' module
+	# Can leave loaded, system will cleanup on shutdown
+	[[ ! -z $(lsmod | grep "^nbd") ]] && echo "sudo rmmod -v nbd";
+	}
+
+
+LOG_LOCN="${HOME}/Documents/init-go-logs";
+mkdir -v -p ${LOG_LOCN};
+
+## Do Tasks
+	closeAllNbd        2>&1 | tee ${LOG_LOCN}/closeAllNbd-$(date +"%Y%m%d-%s").log;

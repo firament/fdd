@@ -269,11 +269,14 @@ sudo modprobe nbd;
 
 # Get first availaible node
 getFirstFreeNBD(){
-  read -a BLOCKDEVS <<<$(lsblk | grep "nbd" | cut -d " " -f1 | sed "s/nbd//g")
-  for ((i=0; i<${#BLOCKDEVS[@]}; i++))
-    do [ ${i} != ${BLOCKDEVS[$i]} ] && break; done
-  echo "/dev/nbd${i}";
-  }
+	# Load dependency, if not done
+	[[ -z $(lsmod | grep "^nbd") ]] && sudo modprobe nbd;
+	# read -a BLOCKDEVS <<<$(lsblk | grep "nbd" | cut -d " " -f1 | sed "s/nbd//g")
+	BLOCKDEVS=($(lsblk | grep "^nbd" | cut -d " " -f1 | sed "s/nbd//g" | sort));
+	for (( iX=0; iX < ${#BLOCKDEVS[@]}; iX++ ));
+	  do [ ${iX} != ${BLOCKDEVS[$iX]} ] && break; done
+	echo "/dev/nbd${iX}";
+	}
 
 ## Part 2 - Create and initialize disk #########################################
 WORK_FILE_NAME="/cdrom/sak/curr/work-2GB-ext4.qc2";
