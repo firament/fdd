@@ -1,3 +1,4 @@
+// original file name: ${HOME}/.config/Code/User/settings.json
 {
     "extensions.autoUpdate": false,
     "debug.inlineValues": true,
@@ -15,12 +16,12 @@
     "editor.wordWrap": "on",
     "editor.autoIndent": true,
     "editor.useTabStops": true,
-    "editor.wrappingIndent": "indent",
+    "editor.wrappingIndent": "indent"
+,
     //
     "window.menuBarVisibility": "toggle",
     "files.defaultLanguage": "",
     "html.format.wrapAttributes": "force-aligned",
-    "html.suggest.angular1": false,
     //
     "markdown.preview.breaks": true,
     "markdown.preview.fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
@@ -37,9 +38,11 @@
     //
     //
     // Configure editor settings to be overridden for [go] language.
-    "[go]": {
+	"[go]": {
         "editor.insertSpaces": false,
-        "editor.wordWrap": "bounded"
+        "editor.wordWrap": "off",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
     },
     // Configure editor settings to be overridden for [json] language.
     "[json]": {
@@ -75,5 +78,7 @@
         "delay": 200
     },
     // Flags to pass to `go tool vet` (e.g. ['-all', '-shadow'])
-    "go.vetFlags": []
+    "go.vetFlags": [],
+    "html.suggest.angular1": false,
+    "workbench.startupEditor": "newUntitledFile"
 }
