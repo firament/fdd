@@ -1,5 +1,6 @@
 #! bash
 
+## For testing, delete all copies
 
 CONTAINER_ROOT="/media/sak/70_Current/Work/go-containers";
 CONTAINER_TOOLS="go1_10-tools";

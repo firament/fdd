@@ -7,8 +7,6 @@
 #
 [[ ! -z $(ps -e | grep "mysqld") ]] && exit 1;
 #
-[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
-goSUDO;
+[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh; goSUDO;
 sudo systemctl start mysql;
 #
-

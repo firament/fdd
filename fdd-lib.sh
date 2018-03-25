@@ -324,6 +324,10 @@ SetupDevApps(){
 	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
 	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
 
+	# Copy config templates, used by commands
+	mkdir -vp ${HOME}/Documents/VSCode-Configs/;
+	cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.json ${HOME}/Documents/VSCode-Configs/;
+
 	#### INSTALL VPUML CE
 	#------------------------------------------------------------------------------#
 	echo "Setting up VP UML CE now";
@@ -703,4 +707,94 @@ ApplyPatch04(){
 	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
 	echo "PATH ...... = ${PATH}";
 	echo;
+}
+
+
+ApplyPatch1803(){
+	echo "ApplyPatch1803() - Updates for 2018 March";
+
+	## Clean up junk
+	rm -vfR /10-Base/go-path-virt;
+
+	## linking not needed for patches, will be present
+
+	## SET-LINK BIN FOLDER. PATH WILL AUTO UPDATE ON REBOOT
+	echo "Preparing bin contents";
+	# [ -d ${HOME}/bin ] && rm -fRv ${HOME}/bin;
+	# mkdir -p /10-Base/bin;
+	rsync -vrh ${RESOURCE_FOLDER}/Copy/bin/ /10-Base/bin;
+	chmod -v +x /10-Base/bin/*;
+	# ln -fsvT /10-Base/bin ${HOME}/bin;
+
+	#### INSTALL NodeJS -- test for xz
+	#------------------------------------------------------------------------------#
+	echo "Setting up Node.js now";
+	ClearFolder ${NODEJS_PATH}; # Remove if upgrading
+	tar -xJ -C ${APPS_BAS_DIR} -f ${NODEJS_TAR};
+	mv -vf ${NODEJS_PATH}* ${NODEJS_PATH};
+	# sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
+	# sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
+	echo " - adding core dependencies"
+	npm install -g grunt-cli
+	# sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
+
+	#### INSTALL .NET Core
+	#------------------------------------------------------------------------------#
+	echo "Setting up .NET Core now";
+	ClearFolder ${DNETCORE_PATH};   # Remove if upgrading
+	makeOwnFolder ${DNETCORE_PATH}  # Folder needs to exist for tar to work
+	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
+
+	#### INSTALL GO LANG
+	#------------------------------------------------------------------------------#
+	echo "Setting up GO Lang now";
+	ClearFolder ${GOLANG_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_BAS_DIR} -f ${GOLANG_TAR};
+
+	# Initialize environment
+	echo "Initializing GO Environment.";
+	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
+	mkdir -v -p ${APPS_BAS_DIR}/go-package-lib;
+
+	export GOROOT="${GOLANG_PATH}";
+	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
+	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}/bin:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
+	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+
+	echo " - Inspect values before running"
+	echo "   GOROOT =      ${GOROOT}";
+	echo "   GOPATH =      ${GOPATH}";
+	echo "   TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "   PATH =        ${PATH}";
+	echo;
+
+	# echo " - installing package 'goimports'";
+	# go get golang.org/x/tools/cmd/goimports;
+
+
+	## /20-DEV
+
+	#### INSTALL Atom
+	#------------------------------------------------------------------------------#
+	echo "Setting up Atom now";
+	ClearFolder ${ATOM_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_DEV_DIR} -f ${ATOM_TAR};
+	mv -vf ${ATOM_PATH}* ${ATOM_PATH};
+	# sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
+
+	#### INSTALL Visual Studio Code
+	#------------------------------------------------------------------------------#
+	echo "Setting up Visual Studio Code now";
+	ClearFolder ${VSCODE_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_DEV_DIR} -f ${VSCODE_TAR};
+	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
+	# Initialize settings
+	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
+	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
+
+	# Copy config templates, used by commands
+	mkdir -vp ${HOME}/Documents/VSCode-Configs/;
+	cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.json ${HOME}/Documents/VSCode-Configs/;
+
+
 }

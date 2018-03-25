@@ -24,19 +24,19 @@ CONTAINER_ROOT="/media/sak/70_Current/Work/go-containers";
 CONTAINER_TOOLS="go1_10-tools";
 CONTAINER_PATH0="go1_10-path0";
 
-# TODO: Remove after update of installed image
-# Used in virtual disks
-# Get first availaible node
-getFirstFreeNBD(){
-	# Load dependency, if not done
-	[[ -z $(lsmod | grep "^nbd") ]] && sudo modprobe nbd;
-	BLOCKDEVS=($(lsblk | grep "^nbd" | cut -d " " -f1 | sed "s/nbd//g" | sort));
-	for (( iX=0; iX < ${#BLOCKDEVS[@]}; iX++ ));
-	  do [ ${iX} != ${BLOCKDEVS[$iX]} ] && break; done
-	echo "/dev/nbd${iX}";
-	}
-	
-	
+# # TODO: Remove after update of installed image
+# # Used in virtual disks
+# # Get first availaible node
+# getFirstFreeNBD(){
+# 	# Load dependency, if not done
+# 	[[ -z $(lsmod | grep "^nbd") ]] && sudo modprobe nbd;
+# 	BLOCKDEVS=($(lsblk | grep "^nbd" | cut -d " " -f1 | sed "s/nbd//g" | sort));
+# 	for (( iX=0; iX < ${#BLOCKDEVS[@]}; iX++ ));
+# 	  do [ ${iX} != ${BLOCKDEVS[$iX]} ] && break; done
+# 	echo "/dev/nbd${iX}";
+# 	}
+
+
 ## Create and initialize disk ##################################################
 # One time activity, use with caution
 makeContainers(){
@@ -157,4 +157,3 @@ mkdir -v -p ${LOG_LOCN};
 	# makeContainers     2>&1 | tee ${LOG_LOCN}/makeContainers-$(date +"%Y%m%d-%s").log;	# ONE TIME only
 	initGoContainers   2>&1 | tee ${LOG_LOCN}/initGoContainers-$(date +"%Y%m%d-%s").log;
 	showTodoMenu       2>&1 | tee ${LOG_LOCN}/showTodoMenu-$(date +"%Y%m%d-%s").log;
-	

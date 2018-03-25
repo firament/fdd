@@ -8,19 +8,28 @@ export PATH="/10-Base/go/bin:/10-Base/go-tools/bin:/30-EXT/mongodb/bin:${PATH}";
 export GOROOT="/10-Base/go";
 export TOOLSGOPATH="/10-Base/go-tools/bin";
 
-
-# These will be applied again in workspace settings
-# export GOROOT="/10-Base/go";
-# export TOOLSGOPATH="/10-Base/go-tools/bin";
-# export GOPATH="/10-Base/go-package-lib:/01-Work/aapi";
-
-# Add code to add the project path to GOPATH
+# Add project path to GOPATH
 if [[ ${1} && -d ${1} ]]; then
 	DIRNAME=${1};
 else
 	DIRNAME="${TEMPDIR}";
-	mkdir -v -p ${DIRNAME};
+	mkdir -vp ${DIRNAME};
 fi;
+
+mkdir -vp /10-Base/go-package-lib;
 export GOPATH="/10-Base/go-package-lib:${DIRNAME}";
+
+# echo "using Project Root: ${DIRNAME}";
+
+# Test if settings are appplied, if not copy over
+if [[ ! -e ${DIRNAME}/.vscode/settings.json ]]; then
+	echo;
+	echo "Not Present '${DIRNAME}/.vscode/*.json', copying settings now.";
+	mkdir -vp ${DIRNAME}/.vscode;
+	cat ${HOME}/Documents/VSCode-Config/vs-code-workspace-settings.json | sed s%${PATH_PLACE_HOLDER}%${DIRNAME}%g > ${DIRNAME}/.vscode/settings.json;
+	cat ${HOME}/Documents/VSCode-Config/vs-code-go-launch.json          | sed s%${PATH_PLACE_HOLDER}%${DIRNAME}%g > ${DIRNAME}/.vscode/launch.json;
+	echo;
+	ls -l ${DIRNAME}/.vscode/*.json;
+fi;
 
 /bin/code ${1};
