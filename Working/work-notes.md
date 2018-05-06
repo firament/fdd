@@ -1,39 +1,24 @@
 ## JAVA environments
 
 ## Add to README
-**Download Links**
-| App          | Download URL                                                                                |   Size |
-| ------------ | ------------------------------------------------------------------------------------------- | ------:|
-| GO Lang      | https://golang.org/dl/                                                                      |  99 MB |
-| .NET SDK     | https://www.microsoft.com/net/download/linux                                                | 144 MB |
-| nodejs       | https://nodejs.org/en/download/current/                                                     |  11 MB |
-|              |                                                                                             |        |
-| VS Code      | https://code.visualstudio.com/docs/?dv=linux64                                              |  64 MB |
-| atom         | https://github.com/atom/atom/releases                                                       | 125 MB |
-| GitEye       | https://www.collab.net/downloads/giteye#show-Linux                                          | 106 MB |
-| ProjectLibre | https://sourceforge.net/projects/projectlibre/files/ProjectLibre/                           |  15 MB |
-| VPUML        | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 429 MB |
-|              |                                                                                             |        |
-| mongodb      | https://www.mongodb.com/download-center#community                                           |  95 MB |
-| robo3t       | https://robomongo.org/download                                                              |  35 MB |
-|              |                                                                                             |        |
 
 **VS Code extensions**
-ext install ms-vscode.csharp
-ext install lukehoban.go
-ext install jsynowiec.vscode-insertdatestring
-ext install chrmarti.regex
-ext install shd101wyy.markdown-preview-enhanced
-ext install darkriszty.markdown-table-prettify
-ext install AlanWalk.markdown-toc
 
-ext install PeterJausovec.vscode-docker
-ext install joelday.docthis
-ext install dbaeumer.vscode-eslint
+- ext install ms-vscode.csharp
+- ext install lukehoban.go
+- ext install jsynowiec.vscode-insertdatestring
+- ext install chrmarti.regex
+- ext install shd101wyy.markdown-preview-enhanced
+- ext install darkriszty.markdown-table-prettify
+- ext install AlanWalk.markdown-toc
+
+- ext install PeterJausovec.vscode-docker
+- ext install joelday.docthis
+- ext install dbaeumer.vscode-eslint
 
 
 ## Create folder structure
-
+```sh
 pushd ${SETUP_ROOT_LOCN};
 
 mkdir -vp 10-Apps/
@@ -56,12 +41,15 @@ mkdir -vp 20-Resources/T-OneUse/
 mkdir -vp 20-Resources/certs/
 
 popd
+```
 
 ## GO
 is this needed?
+
 `export GOBIN="$GOPATH/bin"`
 
 see https://golang.org/doc/install#install
+
 `golang.org/x/tools`
 
 ### Tools
@@ -81,4 +69,17 @@ see https://golang.org/doc/install#install
 ## node updates
 `npm -g --depth 9999 update`
 
+## JRE install
+
+Manually:
+```sh
+https://linuxconfig.org/how-to-install-java-on-ubuntu-18-04-bionic-beaver-linux
+using `jre-8u172-linux-x64.tar.gz`
+sudo mkdir /opt/java-jre
+sudo tar -C /opt/java-jre -zxf jre-8u172-linux-x64.tar.gz
+
+sudo update-alternatives --install /usr/bin/java java /opt/java-jre/jre1.8.0_172/bin/java 1
+sudo update-alternatives --install /usr/bin/javac javac /opt/java-jre/jre1.8.0_172/bin/javac 1
+
+java --version
 ```

@@ -39,6 +39,7 @@ echo;
 #	ApplyPatch02       2>&1 | tee ${SETUPS_LOG_LOCN}/61-Patch02-c.log;
 #	ApplyPatch03       2>&1 | tee ${SETUPS_LOG_LOCN}/61-Patch03-a.log;
 #	ApplyPatch04       2>&1 | tee ${SETUPS_LOG_LOCN}/61-Patch04-a.log;
+#	ApplyPatch1803     2>&1 | tee ${SETUPS_LOG_LOCN}/61-ApplyPatch1803-a.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

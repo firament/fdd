@@ -161,7 +161,7 @@ cat > /etc/environment <<EOENV
 PL_LOADED=1
 AUTORUN_LOG="/cdrom/logs/autorun.log"
 #
-PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${APPS_BAS_DIR}/go-tools/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
+PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${APPS_BAS_DIR}/go-tools/bin:${PUBLIC_BIN_LOCN}/mongo/bin:${ORA_JRE_PATH}/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
 #
 GOROOT="${GOLANG_PATH}"
 TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"
@@ -230,19 +230,19 @@ InstallCoreApps(){
 	echo;
 	echo "Install Dev Tool Chain and Productivity Packages";
 	# sudo touch /etc/default/google-chrome;	# Uncomment if chrome is not be be updated
-	aptInstallApp git meld google-chrome-stable bleachbit skypeforlinux build-essential manpages-dev libunwind8 ruby-full zlib1g-dev openjdk-8-jre;
+	aptInstallApp git meld google-chrome-stable bleachbit skypeforlinux build-essential manpages-dev libunwind8 ruby-full zlib1g-dev;
 	# git-gui
 	# bootstrap4 build dependencies
-	# build-essential manpages-dev libunwind8 ruby-full;
+	# build-essential manpages-dev libunwind8 ruby-full zlib1g-dev;
 	echo "installing ruby gem bundler";
 	sudo gem install bundler    # for bootstrap compile
 	#
 
-	echo;
-	echo "INSTALL PINGUYBUILDER";
-	sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
-	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
-	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
+	# 	echo;
+	# 	echo "INSTALL PINGUYBUILDER";
+	# 	sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
+	# 	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
+	# 	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
 
 	echo "DONE  - InstallCoreApps()";
 }
@@ -253,10 +253,13 @@ SetupDevApps(){
 
 	#### INSTALL Oracle JRE
 	#------------------------------------------------------------------------------#
-	# echo "Setting up Oracle JRE now";
-	# ClearFolder ${ORA_JRE_PATH};   # Remove if upgrading
-	# tar -xz -C ${APPS_BAS_DIR} -f ${ORA_JRE_TAR};
-	# mv -vf ${ORA_JRE_PATH}* ${ORA_JRE_PATH};
+	echo "Setting up Oracle JRE now";
+	ClearFolder ${ORA_JRE_PATH};   # Remove if upgrading
+	tar -xz -C ${APPS_BAS_DIR} -f ${ORA_JRE_TAR};
+	mv -vf ${ORA_JRE_PATH}* ${ORA_JRE_PATH};
+	sudo update-alternatives --install /usr/bin/java  java  ${ORA_JRE_PATH}/bin/java 1
+	sudo update-alternatives --install /usr/bin/javac javac ${ORA_JRE_PATH}/bin/javac 1
+
 
 	#### INSTALL NodeJS -- test for xz
 	#------------------------------------------------------------------------------#
@@ -511,8 +514,18 @@ InstallHssApps(){
 	ln -vsT ${SQLVQB_PATH}  /10-Base/SQLeoVQB;
 	ln -vsT ${MONGODB_PATH} /10-Base/mongodb;
 
-	echo "Install HSS applications";
-	aptInstallApp mysql-workbench mysql-server-5.7;
+	echo "Install MySQL Server";
+	# Use installer to get correct version
+	# aptInstallApp mysql-workbench mysql-server-5.7;
+	# Install
+	sudo dpkg -i ${RESOURCE_FOLDER}/Install/mysql-apt-config_0.8.10-1_all.deb
+	sudo systemctl status mysql;
+	# Secure
+	sudo mysql_secure_installation;
+	# Add Addl Components
+	# This should be included in the installer
+	# sudo apt-get install mysql-workbench-community
+	# Start on need basis
 	sudo systemctl disable mysql;	# Keep to start on demand
 }
 

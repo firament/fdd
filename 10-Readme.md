@@ -97,7 +97,7 @@ dconf Editor > org > mate > mate-menu > plugins > applications
 - and manually rearrange entries to get the order you like.
 - *'Reload Plugins' applies the changes right away.*
 
- > **Customized Contents**
+> **Customized Contents**
 
 ```txt
 location:/usr/share/applications/atom.desktop
@@ -120,9 +120,10 @@ location:/usr/share/applications/meld.desktop
 location:/usr/share/applications/gufw.desktop```
 ```
 
- > **Remove non-needed entries from Places**
- > in file `/etc/xdg/user-dirs.defaults`,
- > will work after caja/nautilus reload.
+> **Remove non-needed entries from Places**
+
+- in file `/etc/xdg/user-dirs.defaults`,
+- will work after caja/nautilus reload.
 
 ---
 
@@ -225,6 +226,14 @@ cp -fv 10-Init.log 10-Init-$(date +"%Y-%m-%d-%s").bak;
 
 ---
 
+## Timestamp format for Pluma
+
+```
+%Y-%m-%d %H:%M:%S
+```
+
+---
+
 ## FROM `/etc/PinguyBuilder.conf`
 
 **TODO**: Verify '-' can be used in label?
@@ -234,6 +243,24 @@ BUILDLABEL="FDDa-Ax64-Mate-a"
 LIVECDLABEL="${BUILDLABEL}"
 CUSTOMISO="${BUILDLABEL}.iso"
 ```
+
+---
+
+## MySQL Server Installation
+
+https://www.tecmint.com/install-mysql-8-in-ubuntu/
+
+- wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.deb
+	- `sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb`
+- mysql-apt-config_0.8.10-1_all.deb
+	- APT repository for installing the MySQL server, client, and other components.
+	- Install before installing MySQL
+- Secure MySQL Server Installation
+	- `sudo mysql_secure_installation`
+- MySQL Products and Components
+	- `sudo apt-get install mysql-workbench-community libmysqlclient18`
+- See Also
+	- https://help.ubuntu.com/lts/serverguide/mysql.html
 
 ---
 
@@ -261,7 +288,8 @@ qemu-system-x86_64 ${DVD_PARENT}/${ISO_NAME}
 
 ## Code for virtual Disk
 
-``` bash
+```sh
+
 #// Abridged for cleaner reading. //#
 
 ## Part 1 - load and Initialize 'nbd' module ###################################
@@ -271,7 +299,6 @@ sudo modprobe nbd;
 getFirstFreeNBD(){
 	# Load dependency, if not done
 	[[ -z $(lsmod | grep "^nbd") ]] && sudo modprobe nbd;
-	# read -a BLOCKDEVS <<<$(lsblk | grep "nbd" | cut -d " " -f1 | sed "s/nbd//g")
 	BLOCKDEVS=($(lsblk | grep "^nbd" | cut -d " " -f1 | sed "s/nbd//g" | sort));
 	for (( iX=0; iX < ${#BLOCKDEVS[@]}; iX++ ));
 	  do [ ${iX} != ${BLOCKDEVS[$iX]} ] && break; done
@@ -282,8 +309,7 @@ getFirstFreeNBD(){
 WORK_FILE_NAME="/cdrom/sak/curr/work-2GB-ext4.qc2";
 MOUNT_POINT="/50-PARKING";
 RUN_AS="${USER}";
-# TODO: use 'NBD=$(getFirstFreeNBD);' instead of hardcoding '/dev/nbd5'
-NBD="/dev/nbd5";
+NBD=$(getFirstFreeNBD);
 qemu-img create -f qcow2 ${WORK_FILE_NAME} 2.5G
 sudo qemu-nbd -c ${NBD} ${WORK_FILE_NAME};
 sudo mke2fs -v -L CurrWork -t ext4 ${NBD};
@@ -298,7 +324,7 @@ sudo mount -v -t ext4 ${NBD} /70-CurrentWork;
 # sudo mount -v -l -t ext4 ${NBD} ${DIR_MOUNT}; # what are the parms?
 
 ## Part 4 - Cleanup after use (Release all nbd mounts) #########################
-read -a BLOKDEVS <<<$(lsblk | grep nbd | cut -d " " -f1);
+BLOCKDEVS=($(lsblk | grep "^nbd" | cut -d " " -f1 | sort));
 for ((i=0; i<${#BLOKDEVS[@]}; i++))
   do
     sudo umount -v /dev/${BLOKDEVS[$i]};
@@ -307,6 +333,7 @@ for ((i=0; i<${#BLOKDEVS[@]}; i++))
 
 ## Part 5 - Shutdown and unload 'nbd' module ###################################
 sudo rmmod -v nbd;
+
 ```
 
 ---
@@ -332,19 +359,21 @@ sudo swapoff -av;
 ## Grub menu entries
 
 ### Disk IDs:
-`/dev/sda1: LABEL="System Reserved" UUID="1428070E2806EE94" TYPE="ntfs" PARTUUID="63187631-01"`
-`/dev/sda2: UUID="3C7E0FC87E0F7A42" TYPE="ntfs" PARTUUID="63187631-02"`
-`/dev/sda3: LABEL="LinuxOS" UUID="2f09f1dd-49d0-4429-a8e4-c55941390455" TYPE="ext4" PARTUUID="63187631-03"`
-`/dev/sda4: LABEL="D1-Cache" UUID="1A159FBB4B0C2043" TYPE="ntfs" PARTUUID="63187631-04"`
-`/dev/sdc1: LABEL="System Reserved" UUID="9620E90620E8EDE5" TYPE="ntfs" PARTUUID="7a3cfdca-01"`
-`/dev/sdc2: UUID="390243f6-bc1c-4bf9-a6b5-6608194ab481" TYPE="ext4" PARTUUID="7a3cfdca-02"`
-`/dev/sdc3: LABEL="Volume_E" UUID="7EB80740B806F705" TYPE="ntfs" PARTUUID="7a3cfdca-03"`
-`/dev/sdc5: LABEL="Volume_D" UUID="5636906E369050BB" TYPE="ntfs" PARTUUID="7a3cfdca-05"`
-`/dev/sdb: PTUUID="f2d70044" PTTYPE="dos"`
-`/dev/sdd1: LABEL="Boot-Key" UUID="5840-70CF" TYPE="vfat" PARTUUID="0005cf60-01"`
-`/dev/sde1: LABEL="Sony_32GB" UUID="A144-E8BD" TYPE="vfat" PARTUUID="c3072e18-01"`
-`/dev/sdf1: LABEL="PRNTDOCS" UUID="2CAE-2F98" TYPE="vfat" PARTUUID="308432f4-01"`
-`/dev/sdf2: LABEL="St0rD1sk" UUID="A2BCB9DCBCB9AB65" TYPE="ntfs" PARTUUID="308432f4-02"`
+```
+/dev/sda1: LABEL="System Reserved" UUID="1428070E2806EE94" TYPE="ntfs" PARTUUID="63187631-01"
+/dev/sda2: UUID="3C7E0FC87E0F7A42" TYPE="ntfs" PARTUUID="63187631-02"
+/dev/sda3: LABEL="LinuxOS" UUID="2f09f1dd-49d0-4429-a8e4-c55941390455" TYPE="ext4" PARTUUID="63187631-03"
+/dev/sda4: LABEL="D1-Cache" UUID="1A159FBB4B0C2043" TYPE="ntfs" PARTUUID="63187631-04"
+/dev/sdc1: LABEL="System Reserved" UUID="9620E90620E8EDE5" TYPE="ntfs" PARTUUID="7a3cfdca-01"
+/dev/sdc2: UUID="390243f6-bc1c-4bf9-a6b5-6608194ab481" TYPE="ext4" PARTUUID="7a3cfdca-02"
+/dev/sdc3: LABEL="Volume_E" UUID="7EB80740B806F705" TYPE="ntfs" PARTUUID="7a3cfdca-03"
+/dev/sdc5: LABEL="Volume_D" UUID="5636906E369050BB" TYPE="ntfs" PARTUUID="7a3cfdca-05"
+/dev/sdb: PTUUID="f2d70044" PTTYPE="dos"
+/dev/sdd1: LABEL="Boot-Key" UUID="5840-70CF" TYPE="vfat" PARTUUID="0005cf60-01"
+/dev/sde1: LABEL="Sony_32GB" UUID="A144-E8BD" TYPE="vfat" PARTUUID="c3072e18-01"
+/dev/sdf1: LABEL="PRNTDOCS" UUID="2CAE-2F98" TYPE="vfat" PARTUUID="308432f4-01"
+/dev/sdf2: LABEL="St0rD1sk" UUID="A2BCB9DCBCB9AB65" TYPE="ntfs" PARTUUID="308432f4-02"
+```
 
 ### Windows
 
@@ -483,8 +512,8 @@ popd
 
 ### [Customizer](https://github.com/kamilion/customizer)
 
-Ubuntu Live CD remastering tool
-Customizer, formerly known as U-Customizer, is an advanced Live CD customization and remastering tool. Use any supported Ubuntu-based ISO image, such as Ubuntu Mini Remix, Ubuntu or its derivatives ISO image to build your own remix with a few mouse clicks.
+- Ubuntu Live CD remastering tool
+- Customizer, formerly known as U-Customizer, is an advanced Live CD customization and remastering tool. Use any supported Ubuntu-based ISO image, such as Ubuntu Mini Remix, Ubuntu or its derivatives ISO image to build your own remix with a few mouse clicks.
 
 - **Manual** https://github.com/kamilion/customizer/blob/master/docs/manual.md
 - **Wiki** https://github.com/kamilion/customizer/wiki
