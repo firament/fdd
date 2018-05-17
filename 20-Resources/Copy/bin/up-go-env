@@ -24,18 +24,6 @@ CONTAINER_ROOT="/media/sak/70_Current/Work/go-containers";
 CONTAINER_TOOLS="go1_10-tools";
 CONTAINER_PATH0="go1_10-path0";
 
-# # TODO: Remove after update of installed image
-# # Used in virtual disks
-# # Get first availaible node
-# getFirstFreeNBD(){
-# 	# Load dependency, if not done
-# 	[[ -z $(lsmod | grep "^nbd") ]] && sudo modprobe nbd;
-# 	BLOCKDEVS=($(lsblk | grep "^nbd" | cut -d " " -f1 | sed "s/nbd//g" | sort));
-# 	for (( iX=0; iX < ${#BLOCKDEVS[@]}; iX++ ));
-# 	  do [ ${iX} != ${BLOCKDEVS[$iX]} ] && break; done
-# 	echo "/dev/nbd${iX}";
-# 	}
-
 
 ## Create and initialize disk ##################################################
 # One time activity, use with caution
@@ -82,6 +70,26 @@ initGoContainers(){
 	#
 	goSUDO;
 
+	# Add check to verify path ${CONTAINER_ROOT}
+	if [[ ! -d ${CONTAINER_ROOT} ]]; then
+		echo;
+		echo "#------------------------------------------------------------------------------#";
+		echo;
+		echo "[ FAIL ] Path does not esist!";
+		echo "${CONTAINER_ROOT}";
+		echo;
+		echo "Aborting further processing. BYE!"
+		echo;
+		echo "#------------------------------------------------------------------------------#";
+		echo;
+		return;
+	fi;
+
+	#  -f, --format=FORMAT       set image format (raw, qcow2, ...)
+	#  -e, --shared=NUM          device can be shared by NUM clients (default '1')
+	#  -P, --partition=NUM       only expose partition NUM
+
+
 	MOUNT_POINT="/10-Base/go-tools";
 	LS_CONTAINER="${CONTAINER_TOOLS}";
 	WORK_FILE_NAME="${CONTAINER_ROOT}/${LS_CONTAINER}.qc2";
@@ -98,9 +106,9 @@ initGoContainers(){
 		mount -l | grep "${MOUNT_POINT}";
 		echo "    Already loaded, skipping mount action.";
 	else
-		echo "sudo qemu-nbd -c ${NBD} ${WORK_FILE_NAME};";
+		echo "sudo qemu-nbd --connect=${NBD} ${WORK_FILE_NAME};";
 		echo "sudo mount -v -t ext4 ${NBD} ${MOUNT_POINT};";
-		sudo qemu-nbd -c ${NBD} ${WORK_FILE_NAME};
+		sudo qemu-nbd --connect=${NBD} ${WORK_FILE_NAME};
 		sudo mount -v -t ext4 ${NBD} ${MOUNT_POINT};
 	fi;
 
@@ -120,9 +128,9 @@ initGoContainers(){
 		mount -l | grep "${MOUNT_POINT}";
 		echo "    Already loaded, skipping mount action.";
 	else
-		echo "sudo qemu-nbd -c ${NBD} ${WORK_FILE_NAME};";
+		echo "sudo qemu-nbd --connect=${NBD} ${WORK_FILE_NAME};";
 		echo "sudo mount -v -t ext4 ${NBD} ${MOUNT_POINT};";
-		sudo qemu-nbd -c ${NBD} ${WORK_FILE_NAME};
+		sudo qemu-nbd --connect=${NBD} ${WORK_FILE_NAME};
 		sudo mount -v -t ext4 ${NBD} ${MOUNT_POINT};
 	fi;
 
@@ -142,7 +150,7 @@ showTodoMenu(){
 	echo "## TODO Items:";
 	echo "--------------";
 	echo "#";
-	echo "#   Move 'getFirstFreeNBD()' to 'PlatformVarssh'";
+	echo "#   [ DONE ] Move 'getFirstFreeNBD()' to 'PlatformVarssh'";
 	echo "#   Remove echo statements from 'initGoContainers()'";
 	echo "#";
 	echo "#------------------------------------------------------------------------------#";
@@ -156,4 +164,4 @@ mkdir -v -p ${LOG_LOCN};
 ## Do Tasks
 	# makeContainers     2>&1 | tee ${LOG_LOCN}/makeContainers-$(date +"%Y%m%d-%s").log;	# ONE TIME only
 	initGoContainers   2>&1 | tee ${LOG_LOCN}/initGoContainers-$(date +"%Y%m%d-%s").log;
-	showTodoMenu       2>&1 | tee ${LOG_LOCN}/showTodoMenu-$(date +"%Y%m%d-%s").log;
+	# showTodoMenu       2>&1 | tee ${LOG_LOCN}/showTodoMenu-$(date +"%Y%m%d-%s").log;

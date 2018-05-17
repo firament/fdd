@@ -1,6 +1,7 @@
+####################################################################################################
 #                                                                                                  #
-#	fdd-lib.sh
-#   Working code to be called from the setup scripts
+#	fdd-lib.sh                                                                                     #
+#   Working code to be called from the setup scripts                                               #
 #                                                                                                  #
 ####################################################################################################
 
@@ -37,7 +38,7 @@ Init(){
 	#### MOUNT OFFLINE REPO AND UPGRADE
 	#------------------------------------------------------------------------------#
 	# Mount repository to well known location
-	mountRepository;
+	# mountRepository;
 
 	# Add specific repositories
 	if [ ! -e /etc/apt/sources.list.d/google-chrome.list ]; then
@@ -238,11 +239,13 @@ InstallCoreApps(){
 	sudo gem install bundler    # for bootstrap compile
 	#
 
-	# 	echo;
-	# 	echo "INSTALL PINGUYBUILDER";
-	# 	sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
-	# 	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
-	# 	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
+	echo;
+	echo "SETUP PINGUYBUILDER";
+	# pinguybuilder depends on gksu, and cannot be installed on 18.04+
+	# sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
+	sudo tar -xz -C / -f ${RESOURCE_FOLDER}/Install/pinguybuilder-files.tar.gz;
+	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
+	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
 
 	echo "DONE  - InstallCoreApps()";
 }
@@ -515,229 +518,67 @@ InstallHssApps(){
 	ln -vsT ${MONGODB_PATH} /10-Base/mongodb;
 
 	echo "Install MySQL Server";
-	# Use installer to get correct version
-	# aptInstallApp mysql-workbench mysql-server-5.7;
-	# Install
-	sudo dpkg -i ${RESOURCE_FOLDER}/Install/mysql-apt-config_0.8.10-1_all.deb
-	sudo systemctl status mysql;
-	# Secure
-	sudo mysql_secure_installation;
+
+	# MySQL 8.0
+	# Using installer to get current version
+	# sudo dpkg -i ${RESOURCE_FOLDER}/Install/mysql-apt-config_0.8.10-1_all.deb
 	# Add Addl Components
 	# This should be included in the installer
-	# sudo apt-get install mysql-workbench-community
+	# sudo apt-get install
+	# Set root password etc...
+
+	# MySQL 5.7.x
+	aptInstallApp mysql-workbench-community mysql-server-5.7;
+	sudo systemctl status mysql;
+
 	# Start on need basis
 	sudo systemctl disable mysql;	# Keep to start on demand
+
+	# Secure Installation
+	# sudo mysql_secure_installation;
 }
 
 ## Patch 1
 ApplyPatch01(){
+	echo;
+	echo "SETUP PINGUYBUILDER";
+	# sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
+	sudo tar -xz -C / -f ${RESOURCE_FOLDER}/Install/pinguybuilder-files.tar.gz;
+	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
+	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
+}
+
+## Patch 5
+ApplyPatch05(){
+	# gulp, atom
+	echo;
+	echo " - adding gulp";
+	npm install github:gulpjs/gulp#4.0 -g
+	sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/gulp/bin/gulp.js ${PUBLIC_BIN_LOCN}/gulp
+	echo " - Installed versions are";
+	echo "   - node : $(node -v)"
+	echo "   - npm  : $(npm -v)"
+	echo "   - gulp : $(gulp -v)"
+
+	#### INSTALL Atom
+	#------------------------------------------------------------------------------#
+	echo "Setting up Atom now";
+	ClearFolder ${ATOM_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_DEV_DIR} -f ${ATOM_TAR};
+	mv -vf ${ATOM_PATH}* ${ATOM_PATH};
+	# sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
+}
+
+## Update 18-05
+ApplyUpdate1805(){
+	echo;
+	echo "APPLY UPDATE 18-05";
 
 	## SET-LINK BIN FOLDER. PATH WILL AUTO UPDATE ON REBOOT
-	echo "Preparing bin contents";
-	[ -d ${HOME}/bin ] && rm -fRv ${HOME}/bin;
-	mkdir -p /10-Base/bin;
+	echo "Updating bin contents";
 	rsync -vrh ${RESOURCE_FOLDER}/Copy/bin/ /10-Base/bin;
 	chmod -v +x /10-Base/bin/*;
-	ln -fsvT /10-Base/bin ${HOME}/bin;
 
-	## COPY SHORTCUTS
-	echo "Copying files and linking.";
-	rsync -vhr ${RESOURCE_FOLDER}/Copy/ShortCuts /10-Base/;
-	chmod -v 755 /10-Base/ShortCuts/*desktop;
-	# Make shortcuts universally availaible
-	sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
-
-	## COPY DRIVERS
-	echo "Copying drivers.";
-	rsync -vhr ${SETUP_BASE_LOCN}/10-Base/drivers /10-Base;
-
-	#### SET ALIAS
-	#------------------------------------------------------------------------------#
-	echo;
- 	echo "Setting ALIASes. Will work after reboot.";
-	touch ~/.bash_aliases; # fix error that fails if file does not exist
-cat > ~/.bash_aliases <<EOALIAS
-# Entries created by setup script - BEGIN
-# $(date +"%d-%b-%Y %T");
-alias s2d='sed "s/ /-/g" <<< '
-alias runauto='/10-Base/bin/AutoRun 2>&1 | tee ${AUTORUN_LOG}'
-alias jc="java -jar jClock.jar &"
-alias tb='thunderbird --ProfileManager &'
-alias clean-vpuml='rm -vf *.vpp.bak*'
-# Entries created by setup script - END
-EOALIAS
-
-	#### UPDATE ENVIRONMENT FILE
-	#------------------------------------------------------------------------------#
-	echo;
- 	echo "Updating environment file. Will work after reboot.";
-	sudo chmod -vc 666 /etc/environment;                        # Enable editing
-	sudo cp -fv /etc/environment /etc/environment.$(date +"%Y%m%d-%s").bak           # backup for reference
-	cat /etc/environment                                        # Get contents to log, for verification
-	# Update contents
-cat > /etc/environment <<EOENV
-# Entries created by setup script - BEGIN
-# $(date +"%d-%b-%Y %T");
-#
-PATH="/bin:/usr/sbin:/usr/bin:/sbin:/usr/games:${DNETCORE_PATH}:${GOLANG_PATH}/bin:${PUBLIC_BIN_LOCN}/mongo/bin:/usr/local/sbin:/usr/local/bin:/usr/local/games"
-GOROOT="${GOLANG_PATH}"
-TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"
-GOPATH="${APPS_BAS_DIR}/go-package-lib"
-AUTORUN_LOG="/cdrom/logs/autorun.log"
-PL_LOADED=1
-#
-# Entries created by setup script - END
-EOENV
-	sudo chmod -vc 644 /etc/environment; ls -l /etc/environment;   # Reset Permission flags
-
-
-	## Apply GO Patch
-	# mkdir -v -p ${APPS_BAS_DIR}/go-path-virt;
-	rm -vfrd  ${APPS_BAS_DIR}/go-path-virt;
-	rmdir -v ${APPS_BAS_DIR}/go-path-virt;
-	ln -fsvT ${GOLANG_PATH} ${APPS_BAS_DIR}/go-path-virt;
-	#
-	export GOROOT="${GOLANG_PATH}";
-	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools/bin"; # Will be used by vscode to install tools
-	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
-	# Install Common tools/packages, Needs active network
-	export GOPATH="/${APPS_BAS_DIR}/go-path-virt";
-	go get golang.org/x/tools/cmd/goimports;
-	# Add command to install go-tools directly from here
-	# Add GO settings to VS Code settings file
-	# unset path to normal
-	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
-
-
-	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json ${HOME}/.config/Code/User/settings.json;
-
-	#### INSTALL Robo 3T
-	#------------------------------------------------------------------------------#
-	echo "Setting up Robo 3T now";
-	ClearFolder ${ROBO3T_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_EXT_DIR} -f ${ROBO3T_TARFILE};
-	mv -vf ${ROBO3T_PATH}* ${ROBO3T_PATH};
-	sudo ln -vsT ${ROBO3T_PATH}/bin/robo3t ${PUBLIC_BIN_LOCN}/robo3t;
-	# fix for ubuntu error
-	mkdir -v -p ${ROBO3T_PATH}/lib-bak;
-	mv -vf ${ROBO3T_PATH}/lib/libstdc++.so* ${ROBO3T_PATH}/lib-bak
-
-}
-
-## Patch 1
-ApplyPatch02(){
-	echo "Inspect values from prev run"
-	echo "GOROOT =      ${GOROOT}";
-	echo "GOPATH =      ${GOPATH}";
-	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
-	echo "PATH =        ${PATH}";
-	echo;
-
-	## Need working net connection to install import tool
-
-	export GOROOT="${GOLANG_PATH}";
-	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
-	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
-	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
-
-	echo "Inspect values before running"
-	echo "GOROOT =      ${GOROOT}";
-	echo "GOPATH =      ${GOPATH}";
-	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
-	echo "PATH =        ${PATH}";
-	echo;
-
-	# Installing go package 'goimports'
-	go get golang.org/x/tools/cmd/goimports;
-	# Add command to install go-tools directly from here
-	# Add GO settings to VS Code settings file
-	# unset path to normal
-	# export GOPATH="${APPS_BAS_DIR}/go-package-lib";
-}
-
-## Patch 3
-ApplyPatch03(){
-	## COPY CUSTOM FAVOURITES APP LIST
-	echo "Copying Favourites application list to ${HOME}/.config/mate-menu/applications.list.";
-	cat ${HOME}/.config/mate-menu/applications.list | tee ${SETUPS_LOG_LOCN}/applications-$(date +"%Y%m%d-%s").list;
-	cat ${RESOURCE_FOLDER}/Copy/app-list.txt        | tee ${HOME}/.config/mate-menu/applications.list;
-
-	## COPY Thunderbird Profiles
-	echo "Copying Thunderbird Profiles to ${HOME}/.thunderbird/";
-	mkdir -p ${HOME}/.thunderbird;
-	cp -vf ${RESOURCE_FOLDER}/Copy/thunderbird-profiles.ini ${HOME}/.thunderbird/profiles.ini;
-
-	echo "Inspect values from prev run"
-	echo "GOROOT =      ${GOROOT}";
-	echo "GOPATH =      ${GOPATH}";
-	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
-	echo "PATH =        ${PATH}";
-	echo;
-}
-
-## Patch 4
-ApplyPatch04(){
-	## SET-LINK BIN FOLDER. PATH WILL AUTO UPDATE ON REBOOT
-	echo "Preparing bin contents";
-	# [ -d ${HOME}/bin ] && rm -fRv ${HOME}/bin;
-	# mkdir -p /10-Base/bin;
-	rsync -vrh ${RESOURCE_FOLDER}/Copy/bin/ /10-Base/bin;
-	chmod -v +x /10-Base/bin/*;
-	ln -fsvT /10-Base/bin ${HOME}/bin;
-
-	## COPY SHORTCUTS
-	echo "Copying files and linking.";
-	rsync -vhr ${RESOURCE_FOLDER}/Copy/ShortCuts /10-Base/;
-	chmod -v 755 /10-Base/ShortCuts/*desktop;
-	# Make shortcuts universally availaible
-	sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
-
-
-	#### INSTALL VPUML CE
-	#------------------------------------------------------------------------------#
-	echo "Setting up VP UML CE now";
-	ClearFolder ${VPUML_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_DEV_DIR} -f ${VPUML_TARFILE};
-	mv -vf ${VPUML_PATH}* ${VPUML_PATH};
-	sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
-
-	#### Align with HSS applications
-	#------------------------------------------------------------------------------#
-	echo "Aligning paths for seamless debugging of HSS apps";
-	ln -vsT ${VSCODE_PATH}  /10-Base/VSCode-linux-x64;
-	ln -vsT ${SQLVQB_PATH}  /10-Base/SQLeoVQB;
-	ln -vsT ${MONGODB_PATH} /10-Base/mongodb;
-
-	#### TURN ON UTC SWITCH
-	#------------------------------------------------------------------------------#
-	# Will be ON by default
-	timedatectl status
-
-	echo "Inspect values from prev run"
-	echo "PL_LOADED . = ${PL_LOADED}";
-	echo "GOROOT .... = ${GOROOT}";
-	echo "GOPATH .... = ${GOPATH}";
-	echo "TOOLSGOPATH = ${TOOLSGOPATH}";
-	echo "PATH ...... = ${PATH}";
-	echo;
-}
-
-
-ApplyPatch1803(){
-	echo "ApplyPatch1803() - Updates for 2018 March";
-
-	## Clean up junk
-	rm -vfR /10-Base/go-path-virt;
-
-	## linking not needed for patches, will be present
-
-	## SET-LINK BIN FOLDER. PATH WILL AUTO UPDATE ON REBOOT
-	echo "Preparing bin contents";
-	# [ -d ${HOME}/bin ] && rm -fRv ${HOME}/bin;
-	# mkdir -p /10-Base/bin;
-	rsync -vrh ${RESOURCE_FOLDER}/Copy/bin/ /10-Base/bin;
-	chmod -v +x /10-Base/bin/*;
-	# ln -fsvT /10-Base/bin ${HOME}/bin;
 
 	#### INSTALL NodeJS -- test for xz
 	#------------------------------------------------------------------------------#
@@ -750,6 +591,11 @@ ApplyPatch1803(){
 	echo " - adding core dependencies"
 	npm install -g grunt-cli
 	# sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
+	echo "Testing versions";
+	node -v;
+	npm -v;
+	grunt -v;
+
 
 	#### INSTALL .NET Core
 	#------------------------------------------------------------------------------#
@@ -781,8 +627,10 @@ ApplyPatch1803(){
 	echo "   PATH =        ${PATH}";
 	echo;
 
-	# echo " - installing package 'goimports'";
-	# go get golang.org/x/tools/cmd/goimports;
+	echo " - installing package 'goimports'";
+	go get golang.org/x/tools/cmd/goimports;
+	echo "Testing versions";
+	go version;
 
 
 	## /20-DEV
@@ -801,13 +649,35 @@ ApplyPatch1803(){
 	ClearFolder ${VSCODE_PATH}; # Remove if upgrading
 	tar -xz -C ${APPS_DEV_DIR} -f ${VSCODE_TAR};
 	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
-	# Initialize settings
-	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
-	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
+	# # Initialize settings
+	# cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
+	# cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
 
-	# Copy config templates, used by commands
-	mkdir -vp ${HOME}/Documents/VSCode-Configs/;
-	cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.json ${HOME}/Documents/VSCode-Configs/;
+	# # Copy config templates, used by commands
+	# mkdir -vp ${HOME}/Documents/VSCode-Configs/;
+	# cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.json ${HOME}/Documents/VSCode-Configs/;
+
+	#### INSTALL VPUML CE
+	#------------------------------------------------------------------------------#
+	echo "Setting up VP UML CE now";
+	ClearFolder ${VPUML_PATH}; # Remove if upgrading
+	ClearFolder ${HOME}/.config/VisualParadigm; # reset profile folder
+	tar -xz -C ${APPS_DEV_DIR} -f ${VPUML_TARFILE};
+	mv -vf ${VPUML_PATH}* ${VPUML_PATH};
+
+	#### INSTALL GitEye
+	#------------------------------------------------------------------------------#
+	echo "Setting up GitEye now";
+	ClearFolder ${GITEYE_PATH}; # Remove if upgrading
+	unzip ${GITEYE_TAR} -d ${GITEYE_PATH};
+
+	#### INSTALL Pandoc
+	#------------------------------------------------------------------------------#
+	echo "Setting up pandoc now";
+	ClearFolder ${PANDOC_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_EXT_DIR} -f ${PANDOC_TARFILE};
+	mv -vf ${PANDOC_PATH}* ${PANDOC_PATH};
+
 
 
 }

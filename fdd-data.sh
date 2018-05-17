@@ -1,13 +1,13 @@
 ####################################################################################################
 #                                                                                                  #
-#	fdd-data.sh
-#   Variables, constants, common functions and other static code
+#	fdd-data.sh                                                                                    #
+#   Variables, constants, common functions and other static code                                   #
 #                                                                                                  #
 ####################################################################################################
 
 echo "INFO: Loading data from fdd-data.sh";
 
-SETUP_ROOT_LOCN="/full/path/to/this/file";	# update to use base location
+# SETUP_ROOT_LOCN="/full/path/to/this/file";	# update to use base location
 
 readonly SETUPS_LOG_LOCN="${HOME}/Documents/$(basename $0 | sed "s%\.[a-z0-9]*%%")-logs";
 readonly SETUP_BASE_LOCN="${SETUP_ROOT_LOCN}/10-Apps";
@@ -50,16 +50,16 @@ readonly GOLANG_PATH="${APPS_BAS_DIR}/go";
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.26.1-amd64.tar.gz";
+readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.27.0-amd64.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.23.0-1525361119_amd64.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.23.1-1525968403_amd64.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
 readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_0_20180404_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
-readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.1.0-linux.x86.zip";
+readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.1.0-linux.x86_64.zip";
 readonly GITEYE_PATH="${APPS_DEV_DIR}/giteye";
 #
 readonly PLIB_TARFILE="${APPS_DEV_SRC}/projectlibre-1.7.0.tar.gz";

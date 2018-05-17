@@ -15,6 +15,7 @@ updateImage(){
 	echo "";
 	touch ${1}/grub-curr.cfg;
 	cat /boot/grub/grub.cfg >${1}/grub-$(date +"%Y%m%d-%s").cfg
+	cp -v ../../PinguyBuilder.log ${1}/PinguyBuilder-$(date +"%Y%m%d-%s").log;
 	cp -v ../../*iso.md5 ${1};
 	cp -vR ../.disk ${1};
 	cp -v filesystem.manifest-desktop ${1};
@@ -24,7 +25,7 @@ updateImage(){
 	cp -v initrd.gz ${1};
 	cp -v vmlinuz ${1};
 	cp -v filesystem.squashfs ${1};
-	# one off activity 
+	# one off activity
 	# cp -v ../../ODP6-Tx64-Mate-k.iso ${1};
 	}
 

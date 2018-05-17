@@ -29,7 +29,7 @@ releaseGoContainers(){
 	#
 	NBD_CURR="";
 	goSudo;
-
+	#
 	for CNTR in ${GO_CONTAINERSS}; do
 		echo;
 		echo "Processing Mount point: ${CNTR}";
@@ -37,8 +37,10 @@ releaseGoContainers(){
 		# TODO: Will error if container mounted multiple times
 		if [[ ! -z ${NBD_CURR} ]]; then
 			echo "Found '${NBD_CURR}', Unmounting now.";
-			echo "sudo umount   -v ${NBD_CURR};";
-			echo "sudo qemu-nbd -d ${MOUNT_NBD};";
+			echo "sudo umount   -v ${CNTR};";
+			echo "sudo qemu-nbd --disconnect ${NBD_CURR};";
+			sudo umount   -v ${CNTR};
+			sudo qemu-nbd --disconnect ${NBD_CURR};
 		else
 			echo "Not mounted, proceeding forward. ";
 		fi;

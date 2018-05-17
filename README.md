@@ -25,8 +25,8 @@ Updated on: 2018-05-06 19:54:10
 | GO Lang      | 1.10.2    | https://golang.org/dl/                                                                      | 126 MB |
 |              |           |                                                                                             |        |
 | Atom         | 1.26.1    | https://github.com/atom/atom/releases                                                       | 135 MB |
-| VS Code      | 1.23.0    | https://code.visualstudio.com/docs/?dv=linux64                                              |  66 MB |
-| GitEye       | 2.1.0     | https://www.collab.net/downloads/giteye#show-Linux                                          | 117 MB |
+| VS Code      | 1.23.1    | https://code.visualstudio.com/docs/?dv=linux64                                              |  66 MB |
+| GitEye       | 2.1.0     | https://www.collab.net/downloads/giteye#show-Linux                                          | 118 MB |
 | ProjectLibre | 1.7.0     | https://sourceforge.net/projects/projectlibre/files/ProjectLibre/                           |  15 MB |
 | VPUML        | 15.0.0404 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 426 MB |
 | SQLeoVQB     | 17.09rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      | 1.5 MB |
