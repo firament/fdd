@@ -1,5 +1,9 @@
 ## JAVA environments
 
+## TODOs
+- Create .tar for pinguybuilder
+- Add version info for all apps
+
 ## Add to README
 
 **VS Code extensions**

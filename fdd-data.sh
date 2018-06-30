@@ -7,7 +7,7 @@
 
 echo "INFO: Loading data from fdd-data.sh";
 
-# SETUP_ROOT_LOCN="/full/path/to/this/file";	# update to use base location
+SETUP_ROOT_LOCN="/full/path/to/this/file";	# update to use base location, from calling script
 
 readonly SETUPS_LOG_LOCN="${HOME}/Documents/$(basename $0 | sed "s%\.[a-z0-9]*%%")-logs";
 readonly SETUP_BASE_LOCN="${SETUP_ROOT_LOCN}/10-Apps";
@@ -37,26 +37,26 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly ORA_JRE_TAR="${APPS_BAS_SRC}/jre-8u172-linux-x64.tar.gz";
 readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v8.11.1-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v8.11.3-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
-readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.105-linux-x64.tar.gz";
+readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.301-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 #
-readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.10.2.linux-amd64.tar.gz";
+readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.10.3.linux-amd64.tar.gz";
 readonly GOLANG_PATH="${APPS_BAS_DIR}/go";
 
 ##
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.27.0-amd64.tar.gz";
+readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.28.0-amd64.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.23.1-1525968403_amd64.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.24.1-1528912196_amd64.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_0_20180404_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_0_20180701_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
 readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.1.0-linux.x86_64.zip";
@@ -78,7 +78,7 @@ readonly MONGODB_PATH="${APPS_EXT_DIR}/mongodb";
 readonly ROBO3T_TARFILE="${APPS_EXT_SRC}/robo3t-1.2.1-linux-x86_64-3e50a65.tar.gz";
 readonly ROBO3T_PATH="${APPS_EXT_DIR}/robo3t";
 #
-readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.2-linux.tar.gz";
+readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.2.1-linux.tar.gz";
 readonly PANDOC_PATH="${APPS_EXT_DIR}/pandoc";
 
 
@@ -266,11 +266,10 @@ HealthCheck(){
 	[[ -f ${PANDOC_TARFILE} ]]  && echo -n " OK " || echo -n "FAIL"; echo " PANDOC_TARFILE  >> ${PANDOC_TARFILE}";
 	# [[ -f ${FIREFOX_TAR} ]]     && echo -n " OK " || echo -n "FAIL"; echo " FIREFOX_TAR     >> ${FIREFOX_TAR}";
 
-	echo "";
-	echo -n "DONE checking files - "; date +"%d-%b-%Y %T";
-
 	# Safety valve to abort on missing files
 	echo "";
+	echo "";
+	echo -n "DONE checking files - "; date +"%d-%b-%Y %T";
 	echo "";
 	read -p "Press CTRL+C to abort, or ENTER to continue." -t 45;
 	echo "";

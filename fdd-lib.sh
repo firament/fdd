@@ -538,6 +538,18 @@ InstallHssApps(){
 	# sudo mysql_secure_installation;
 }
 
+## UpdatePinguyBuilder
+UpdtePinguyBuilder(){
+	echo;
+	echo "UPDATE PINGUYBUILDER";
+
+	cd ${RESOURCE_FOLDER}/Install;
+	sudo apt-get purge -V pinguybuilder;
+	sudo dpkg -i pinguybuilder_5.1-7_all.deb;
+	sudo apt-get install -Vf;
+
+}
+
 ## Patch 1
 ApplyPatch01(){
 	echo;
@@ -679,5 +691,109 @@ ApplyUpdate1805(){
 	mv -vf ${PANDOC_PATH}* ${PANDOC_PATH};
 
 
+
+}
+
+## Update 18-07
+ApplyUpdate1807(){
+	echo;
+	echo "APPLY UPDATE 18-07";
+
+
+	#### INSTALL NodeJS -- test for xz
+	#------------------------------------------------------------------------------#
+	echo "Setting up Node.js now";
+	ClearFolder ${NODEJS_PATH}; # Remove if upgrading
+	tar -xJ -C ${APPS_BAS_DIR} -f ${NODEJS_TAR};
+	mv -vf ${NODEJS_PATH}* ${NODEJS_PATH};
+	# sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
+	# sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
+	echo " - adding core dependencies"
+	npm install -g grunt-cli
+	# sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
+	echo "Testing Nodejs versions";
+	node -v;
+	npm -v;
+	grunt -v;
+
+
+	#### INSTALL .NET Core
+	#------------------------------------------------------------------------------#
+	echo "Setting up .NET Core now";
+	ClearFolder ${DNETCORE_PATH};   # Remove if upgrading
+	makeOwnFolder ${DNETCORE_PATH}  # Folder needs to exist for tar to work
+	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
+
+	#### INSTALL GO LANG
+	#------------------------------------------------------------------------------#
+	echo "Setting up GO Lang now";
+	ClearFolder ${GOLANG_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_BAS_DIR} -f ${GOLANG_TAR};
+
+	# Initialize environment
+	echo "Initializing GO Environment.";
+	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
+	mkdir -v -p ${APPS_BAS_DIR}/go-package-lib;
+
+	export GOROOT="${GOLANG_PATH}";
+	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
+	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}/bin:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
+	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+
+	echo " - Inspect values before running"
+	echo "   GOROOT =      ${GOROOT}";
+	echo "   GOPATH =      ${GOPATH}";
+	echo "   TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "   PATH =        ${PATH}";
+	echo;
+
+	echo " - installing package 'goimports'";
+	go get golang.org/x/tools/cmd/goimports;
+	echo "Testing versions";
+	go version;
+
+
+	## /20-DEV
+
+	#### INSTALL Atom
+	#------------------------------------------------------------------------------#
+	echo "Setting up Atom now";
+	ClearFolder ${ATOM_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_DEV_DIR} -f ${ATOM_TAR};
+	mv -vf ${ATOM_PATH}* ${ATOM_PATH};
+	# sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
+	echo "Testing Atom versions";
+	atom -v;
+
+	#### INSTALL Visual Studio Code
+	#------------------------------------------------------------------------------#
+	echo "Setting up Visual Studio Code now";
+	ClearFolder ${VSCODE_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_DEV_DIR} -f ${VSCODE_TAR};
+	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
+	# # Initialize settings
+	# cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
+	# cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
+
+	# # Copy config templates, used by commands
+	# mkdir -vp ${HOME}/Documents/VSCode-Configs/;
+	# cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.json ${HOME}/Documents/VSCode-Configs/;
+
+	#### INSTALL VPUML CE
+	#------------------------------------------------------------------------------#
+	echo "Setting up VP UML CE now";
+	ClearFolder ${VPUML_PATH}; # Remove if upgrading
+	ClearFolder ${HOME}/.config/VisualParadigm; # reset profile folder
+	tar -xz -C ${APPS_DEV_DIR} -f ${VPUML_TARFILE};
+	mv -vf ${VPUML_PATH}* ${VPUML_PATH};
+
+	#### INSTALL Pandoc
+	#------------------------------------------------------------------------------#
+	echo "Setting up pandoc now";
+	ClearFolder ${PANDOC_PATH}; # Remove if upgrading
+	tar -xz -C ${APPS_EXT_DIR} -f ${PANDOC_TARFILE};
+	mv -vf ${PANDOC_PATH}* ${PANDOC_PATH};
+	echo "Testing pandoc versions";
+	pandoc -v;
 
 }
