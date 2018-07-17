@@ -33,9 +33,7 @@ echo;
 #	InstallHssApps     2>&1 | tee ${SETUPS_LOG_LOCN}/40-InstallHssApps.log;
 
 ## Post Install stabilization patches
-#	UpdtePinguyBuilder 2>&1 | tee ${SETUPS_LOG_LOCN}/65-UpdtePinguyBuilder-a.log;
-#	ApplyUpdate1807    2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1807-a.log;
-	ApplyPatch06       2>&1 | tee ${SETUPS_LOG_LOCN}/61-Patch06-a.log;
+	ApplyUpdate1807    2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1807-b.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

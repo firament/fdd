@@ -1,4 +1,14 @@
 # TODO List
+
+30-07-2018
+> to fix broken ap system
+```
+/etc/apt/apt.conf.d/
+/etc/apt/sources.list.d/
+/etc/apt/sources.list
+
+```
+
 03-03-2018
 
 > Tasks to be done for refining FDD setup script
