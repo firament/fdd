@@ -190,6 +190,20 @@ ext install ms-vscode.theme-markdownkit
 
 1. `sudo grub-install --no-floppy --root-directory=/media/linuxUser/SONY_64GB /dev/sde`
 2. `sudo grub-install --no-floppy --root-directory=/media/ubuntu-mate/70_Current /dev/sdb`
+3. WIP
+```sh
+sudo 
+grub-install 
+--verbose
+--force
+--uefi-secure-boot
+--boot-directory=/media/sak/70_Current/boot/
+--efi-directory=/media/sak/70_Current/EFI
+/dev/sdb 
+2>&1 | tee 80-grub-install-a.log
+
+
+```
 
 ---
 

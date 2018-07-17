@@ -53,7 +53,7 @@ readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.28.0-amd64.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.24.1-1528912196_amd64.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.25.1-1531323788_amd64.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
 readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_0_20180701_Linux64_InstallFree.tar.gz";
@@ -72,7 +72,7 @@ readonly SQLVQB_PATH="${APPS_DEV_DIR}/SQLeoVQB";
 readonly APPS_EXT_DIR="/30-EXT";
 readonly APPS_EXT_SRC="${SETUP_BASE_LOCN}${APPS_EXT_DIR}";
 #
-readonly MONGODB_TARFILE="${APPS_EXT_SRC}/mongodb-linux-x86_64-ubuntu1604-3.6.4.tgz";
+readonly MONGODB_TARFILE="${APPS_EXT_SRC}/mongodb-linux-x86_64-ubuntu1604-4.0.0.tgz";
 readonly MONGODB_PATH="${APPS_EXT_DIR}/mongodb";
 #
 readonly ROBO3T_TARFILE="${APPS_EXT_SRC}/robo3t-1.2.1-linux-x86_64-3e50a65.tar.gz";
