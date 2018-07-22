@@ -1,0 +1,88 @@
+// Updated on `2018-Mar-23 11:44:43 +05:30`
+//
+// original file name: ${HOME}/.config/Code/User/settings.json
+// For guidance only, modify to your personal preference
+//
+{
+    "extensions.autoUpdate": false,
+    "debug.inlineValues": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    //
+    "editor.codeLens": true,
+    "editor.find.autoFindInSelection": false,
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.formatOnType": true,
+    "editor.insertSpaces": false,
+    "editor.lineHeight": 20,
+    "editor.fontSize": 14,
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 4,
+    "editor.wordWrap": "on",
+    "editor.autoIndent": true,
+    "editor.useTabStops": true,
+    "editor.wrappingIndent": "indent"
+,
+    //
+    "window.menuBarVisibility": "toggle",
+    "files.defaultLanguage": "",
+    "html.format.wrapAttributes": "force-aligned",
+    //
+    "markdown.preview.breaks": true,
+    "markdown.preview.fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
+    "markdown.preview.fontSize": 14,
+    "markdown.preview.lineHeight": 1.6,
+    "markdown.previewFrontMatter": "show",
+    // A list of URLs or local paths to CSS style sheets to use from the markdown preview. Relative paths are interpreted relative to the folder open in the explorer. If there is no open folder, they are interpreted relative to the location of the markdown file. All '\' need to be written as '\\'.
+    "markdown.styles": [],
+    //
+    // Enable this option will render markdown by pandoc instead of remarkable.
+    "markdown-preview-enhanced.usePandocParser": true,
+    "markdown-preview-enhanced.codeBlockTheme": "github.css",
+    "markdown-preview-enhanced.previewTheme": "github-light.css",
+    //
+    //
+    // Configure editor settings to be overridden for [go] language.
+	"[go]": {
+        "editor.insertSpaces": false,
+        "editor.wordWrap": "off",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+    },
+    // Configure editor settings to be overridden for [json] language.
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.tabSize": 2,
+        "editor.wordWrap": "bounded"
+    },
+    // Configure editor settings to be overridden for [markdown] language.
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.tabSize": 2,
+        "editor.quickSuggestions": false
+    },
+
+    "git.path": "/usr/bin/git",
+
+    // Feature level setting to enable/disable code lens for references and run/debug tests
+    "go.enableCodeLens": {
+        "references": false,
+        "runtest": true
+    },
+    "go.gopath": "/10-Base/go-package-lib",
+    "go.goroot": "/10-Base/go",
+    // Location to install the Go tools that the extension depends on if you don't want them in your GOPATH.
+    "go.toolsGopath": "/10-Base/go-tools",
+    "go.gotoSymbol.includeImports": false,
+    "go.lintFlags": [],
+    // Use gotype on the file currently being edited and report any semantic or syntactic errors found after configured delay.
+    "go.liveErrors": {
+        "enabled": true,
+        "delay": 200
+    },
+    // Flags to pass to `go tool vet` (e.g. ['-all', '-shadow'])
+    "go.vetFlags": [],
+    "html.suggest.angular1": false,
+    "workbench.startupEditor": "newUntitledFile"
+}

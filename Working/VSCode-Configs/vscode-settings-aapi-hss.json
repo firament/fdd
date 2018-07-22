@@ -1,0 +1,94 @@
+// Updated on `2018-Mar-23 11:44:43 +05:30`
+//
+// Settings in this file will override the User Settings
+//     this enables project specific settings to be applied
+//
+// Replace '/01-Work/gits/cloud-administration' with the your project path
+// e.g. '/01-Work/gits/project-abc'
+//
+// original file name: /01-Work/gits/cloud-administration/.vscode/settings.json
+//
+{
+    "go.inferGopath": false,
+    "go.goroot": "/10-Base/go",
+    "go.toolsGopath": "/10-Base/go-tools",
+    "go.gopath": "/10-Base/go-package-lib:/01-Work/gits/cloud-administration",
+    // Environment variables that will passed to the processes that run the Go tools (e.g. CGO_CFLAGS)
+    "go.toolsEnvVars": {
+        "GOPATH": "/10-Base/go-package-lib:/10-Base/go-tools:/01-Work/gits/cloud-administration"
+    },
+    "[go]": {
+        "editor.insertSpaces": true,
+        "editor.wordWrap": "off",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "editor.fontSize": 14,
+        "editor.codeLens": false,
+    },
+    // Use gotype on the file currently being edited and report any semantic or syntactic errors found after configured delay.
+    "go.liveErrors": {
+        "enabled": true,
+        "delay": 500
+    },
+    //
+    // FORMAT
+    //
+    // Pick 'gofmt', 'goimports' or 'goreturns' to run on format.
+    "go.formatTool": "goimports",
+    // Flags to pass to format tool (e.g. ['-s'])
+    "go.formatFlags": [],
+    //
+    // LINT
+    //
+    // Specifies Lint tool name.
+    "go.lintTool": "golint",
+    // Lints code on file save using the configured Lint tool. Options are 'workspace', 'package or 'off'.
+    "go.lintOnSave": "package",
+    // Flags to pass to Lint tool (e.g. ["-min_confidence=.8"])
+    "go.lintFlags": [],
+    //
+    // VET
+    //
+    // Vets code on file save using 'go tool vet'. Options are 'workspace', 'package or 'off'.
+    "go.vetOnSave": "package",
+    // Flags to pass to `go tool vet` (e.g. ['-all', '-shadow'])
+    "go.vetFlags": [],
+    //
+    // BUILD
+    //
+    // Enable gocode's autobuild feature
+    "go.gocodeAutoBuild": false,
+    // Flags to `go build`/`go test` used during build-on-save or running tests. (e.g. ['-ldflags="-s"'])
+    "go.buildFlags": [],
+    // Compiles code on file save using 'go build -i' or 'go test -c -i'. Options are 'workspace', 'package or 'off'.
+    "go.buildOnSave": "package",
+    //
+    // DOC
+    //
+    // Pick 'godoc' or 'gogetdoc' to get documentation. In Go 1.5, godoc is used regardless of the choice here.
+    "go.docsTool": "godoc",
+    //
+    // GENERAL
+    //
+    "go.coverOnTestPackage": false,
+    "go.enableCodeLens": {
+        "references": true,
+        "runtest": false
+    },
+    // If go, use standard Go package lookup rules for completions. If gb, use gb-specific lookup rules for completions
+    "go.gocodePackageLookupMode": "go",
+    // Folder names (not paths) to ignore while using Go to Symbol in Workspace feature
+    "go.gotoSymbol.ignoreFolders": [],
+    // If false, the import statements will be excluded while using the Go to Symbol in File feature
+    "go.gotoSymbol.includeImports": false,
+    // Complete functions with their parameter signature, including the variable types
+    "go.useCodeSnippetsOnFunctionSuggest": false,
+    // Complete functions with their parameter signature, excluding the variable types
+    "go.useCodeSnippetsOnFunctionSuggestWithoutType": false,
+    //
+    // EDITOR PREFERENCES
+    //
+    // Render vertical rulers after a certain number of monospace characters. Use multiple values for multiple rulers. No rulers are drawn if array is empty
+    "editor.rulers": [],
+    "editor.fontFamily": "Menlo, Consolas, DejaVu Sans Mono, monospace"
+}

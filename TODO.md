@@ -14,7 +14,9 @@
 > Tasks to be done for refining FDD setup script
 
 - [ ] update PlatformVars.sh in installed copy
+- [ ] Pluma - Set timestamp format
 - [ ] Atom - Set timestamp format
+- [ ] Chrome - add erail extension
 - [ ] Atom - update to current release version
 - [ ] VS Code - update to current release version
 - [ ] Fix linking error in go-path-virt

@@ -4,6 +4,16 @@
 - Create .tar for pinguybuilder
 - Add version info for all apps
 
+## Extract .bz2 archive
+'tar -xvj --strip-components=1 -C /home/sak/Downloads/usr -f /media/sak/70_Current/Downloads/New/ftp-clients-eval/FileZilla_3.25.2_x86_64-linux-gnu.tar.bz2'
+
+## Extract deb packs
+- To extract the .deb package into the directory /tmp/extract/:
+	- `dpkg-deb -x *.deb /tmp/extract/`
+- also see
+	- `dpkg-deb -R original.deb tmp`
+
+
 ## Add to README
 
 **VS Code extensions**
