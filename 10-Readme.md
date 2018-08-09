@@ -140,23 +140,14 @@ location:/usr/share/applications/gufw.desktop```
       file:///cdrom D1-Cache
       ```
 
-2. `~/.config/gtk-3.0/bookmarks`
-    - _Also see. Works even if this file is deleted._
-    - **Alternate**
-    - `Places` in Panel only, entries from bookmark will also get added
-    - `org > mate > mate-menu > plugins > places >`
-      - custom-names = "`['Notes', 'Work', 'Downloads']`"
-      - custom paths = "`['/media/sak/70_Current/_Notes', '/media/sak/70_Current/Work',   '/media/sak/70_Current/Downloads']`"
-
-3. **Remove Unwanted folder links:**
+2. **Remove Unwanted folder links:**
     - The XDG user dirs configuration is stored in the user-dirs.dir file in the location pointed to by the XDG_CONFIG_HOME environment variable.
     - File is `/etc/xdg/user-dirs.defaults`
     - Environment var `XDG_CONFIG_HOME` on installation does not exist
-
 ---
 
 ## Visual Studio Code Extensions
-
+> needs updating - 2018 Jul 27
 ```sh
 ## Launch VS Code Quick Open (Ctrl+P),
 ## paste the following commands individually,
@@ -192,14 +183,14 @@ ext install ms-vscode.theme-markdownkit
 2. `sudo grub-install --no-floppy --root-directory=/media/ubuntu-mate/70_Current /dev/sdb`
 3. WIP
 ```sh
-sudo 
-grub-install 
+sudo
+grub-install
 --verbose
 --force
 --uefi-secure-boot
 --boot-directory=/media/sak/70_Current/boot/
 --efi-directory=/media/sak/70_Current/EFI
-/dev/sdb 
+/dev/sdb
 2>&1 | tee 80-grub-install-a.log
 
 
@@ -253,7 +244,7 @@ cp -fv 10-Init.log 10-Init-$(date +"%Y-%m-%d-%s").bak;
 **TODO**: Verify '-' can be used in label?
 
 ``` bash
-BUILDLABEL="FDDa-Ax64-Mate-a"
+BUILDLABEL="FDDa-Bx64-Mate-a"
 LIVECDLABEL="${BUILDLABEL}"
 CUSTOMISO="${BUILDLABEL}.iso"
 ```
@@ -288,6 +279,10 @@ DVD_CONTENT="./folder-to-be-root-of-DVD/";     # Contents of this folder will be
 DVD_PARENT="/parent-folder-of-${DVD_CONTENT}"; # Also location of ISO file created
 ISO_NAME="name-of-ISO-file.iso";
 ISO_LABL="label-of-ISO_DVD-when-mounted";
+
+# Prep for custom grub file
+mkdir -vp ${DVD_CONTENT}/boot/grub/
+echo "grub entries should in this file." | tee -a ${DVD_CONTENT}/boot/grub/grub.cfg;
 
 # make DVD
 pushd ${DVD_PARENT};
@@ -446,6 +441,8 @@ menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menu
 ## Create folder structure
 
 > for installation source files
+> Needs to be updated - 2018 Jul 27
+
 ```sh
 pushd ${SETUP_ROOT_LOCN};
 ls -1 -R ./ | tee x-file-list.txt

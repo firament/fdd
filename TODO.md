@@ -6,13 +6,14 @@
 /etc/apt/apt.conf.d/
 /etc/apt/sources.list.d/
 /etc/apt/sources.list
-
 ```
+
 
 03-03-2018
 
 > Tasks to be done for refining FDD setup script
 
+- [ ] Use `tar --strip-components` option to install directly to install-folders
 - [ ] update PlatformVars.sh in installed copy
 - [ ] Pluma - Set timestamp format
 - [ ] Atom - Set timestamp format

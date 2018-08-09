@@ -5,7 +5,21 @@
 - Add version info for all apps
 
 ## Extract .bz2 archive
-'tar -xvj --strip-components=1 -C /home/sak/Downloads/usr -f /media/sak/70_Current/Downloads/New/ftp-clients-eval/FileZilla_3.25.2_x86_64-linux-gnu.tar.bz2'
+```sh
+
+# Test
+INSTALL_DIR="${HOME}/Downloads/usr";
+mkdir -vp ${INSTALL_DIR};
+tar -xvj --strip-components=1 -C ${INSTALL_DIR} -f ${TAR_FILE};
+ll ${INSTALL_DIR}/bin;
+
+# Install
+TAR_FILE="<full-path-to-file>";
+INSTALL_DIR="/usr";
+sudo tar -xvj --strip-components=1 -C ${INSTALL_DIR} -f ${TAR_FILE};
+which filezilla;
+
+```
 
 ## Extract deb packs
 - To extract the .deb package into the directory /tmp/extract/:
