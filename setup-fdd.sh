@@ -5,6 +5,13 @@
 #                                                                                                  #
 ####################################################################################################
 
+## Script Runtime Environment Setup - BEGIN
+#------------------------------------------------------------------------------#
+sudo -S echo "Activating SUDO mode." <<<"your-plain-text-password";  # plain_text_password
+SETUP_ROOT_LOCN="/full/path/to/this/file";	# update to use base location i.e. '$(dirname $0)'
+#------------------------------------------------------------------------------#
+## Script Runtime Environment Setup - END
+
 ## TODO:
 #	replaceText - verify and fix regex. result is broken now
 #	Add not to inform need for linking in live mode
@@ -15,8 +22,6 @@
 #------------------------------------------------------------------------------#
 source $(dirname $0)/fdd-data.sh;
 source $(dirname $0)/fdd-lib.sh;
-
-sudo -S echo "Your Password" <<<"plain-text-password";  # plain_text_password
 
 clear;
 mkdir -vp ${SETUPS_LOG_LOCN};
@@ -33,7 +38,7 @@ echo;
 #	InstallHssApps     2>&1 | tee ${SETUPS_LOG_LOCN}/40-InstallHssApps.log;
 
 ## Post Install stabilization patches
-	ApplyUpdate1807    2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1807-b.log;
+	ApplyUpdate1808    2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1808-a.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

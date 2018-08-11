@@ -7,7 +7,7 @@
 
 echo "INFO: Loading data from fdd-data.sh";
 
-SETUP_ROOT_LOCN="/full/path/to/this/file";	# update to use base location, from calling script
+# SETUP_ROOT_LOCN="/full/path/to/this/file";	# update to use base location, from calling script
 
 readonly SETUPS_LOG_LOCN="${HOME}/Documents/$(basename $0 | sed "s%\.[a-z0-9]*%%")-logs";
 readonly SETUP_BASE_LOCN="${SETUP_ROOT_LOCN}/10-Apps";
@@ -78,7 +78,7 @@ readonly MONGODB_PATH="${APPS_EXT_DIR}/mongodb";
 readonly ROBO3T_TARFILE="${APPS_EXT_SRC}/robo3t-1.2.1-linux-x86_64-3e50a65.tar.gz";
 readonly ROBO3T_PATH="${APPS_EXT_DIR}/robo3t";
 #
-readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.2.1-linux.tar.gz";
+readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.2.2.1-linux.tar.gz";
 readonly PANDOC_PATH="${APPS_EXT_DIR}/pandoc";
 
 
@@ -250,21 +250,22 @@ HealthCheck(){
 	echo "";
 	echo -n "BEGIN checking files - "; date +"%d-%b-%Y %T";
 	echo "";
+	FS="----";
 
-	[[ -f ${ORA_JRE_TAR} ]]     && echo -n " OK " || echo -n "FAIL"; echo " ORA_JRE_TAR     >> ${ORA_JRE_TAR}";
-	[[ -f ${NODEJS_TAR} ]]      && echo -n " OK " || echo -n "FAIL"; echo " NODEJS_TAR      >> ${NODEJS_TAR}";
-	[[ -f ${DNETCORE_TAR} ]]    && echo -n " OK " || echo -n "FAIL"; echo " DNETCORE_TAR    >> ${DNETCORE_TAR}";
-	[[ -f ${GOLANG_TAR} ]]      && echo -n " OK " || echo -n "FAIL"; echo " GOLANG_TAR      >> ${GOLANG_TAR}";
-	[[ -f ${ATOM_TAR} ]]        && echo -n " OK " || echo -n "FAIL"; echo " ATOM_TAR        >> ${ATOM_TAR}";
-	[[ -f ${VSCODE_TAR} ]]      && echo -n " OK " || echo -n "FAIL"; echo " VSCODE_TAR      >> ${VSCODE_TAR}";
-	[[ -f ${VPUML_TARFILE} ]]   && echo -n " OK " || echo -n "FAIL"; echo " VPUML_TARFILE   >> ${VPUML_TARFILE}";
-	[[ -f ${GITEYE_TAR} ]]      && echo -n " OK " || echo -n "FAIL"; echo " GITEYE_TAR      >> ${GITEYE_TAR}";
-	[[ -f ${PLIB_TARFILE} ]]    && echo -n " OK " || echo -n "FAIL"; echo " PLIB_TARFILE    >> ${PLIB_TARFILE}";
-	[[ -f ${SQLVQB_TARFILE} ]]  && echo -n " OK " || echo -n "FAIL"; echo " SQLVQB_TARFILE  >> ${SQLVQB_TARFILE}";
-	[[ -f ${MONGODB_TARFILE} ]] && echo -n " OK " || echo -n "FAIL"; echo " MONGODB_TARFILE >> ${MONGODB_TARFILE}";
-	[[ -f ${ROBO3T_TARFILE} ]]  && echo -n " OK " || echo -n "FAIL"; echo " ROBO3T_TARFILE  >> ${ROBO3T_TARFILE}";
-	[[ -f ${PANDOC_TARFILE} ]]  && echo -n " OK " || echo -n "FAIL"; echo " PANDOC_TARFILE  >> ${PANDOC_TARFILE}";
-	# [[ -f ${FIREFOX_TAR} ]]     && echo -n " OK " || echo -n "FAIL"; echo " FIREFOX_TAR     >> ${FIREFOX_TAR}";
+	[[ -f ${ORA_JRE_TAR} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  ORA_JRE_TAR     >> ${ORA_JRE_TAR}";
+	[[ -f ${NODEJS_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  NODEJS_TAR      >> ${NODEJS_TAR}";
+	[[ -f ${DNETCORE_TAR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  DNETCORE_TAR    >> ${DNETCORE_TAR}";
+	[[ -f ${GOLANG_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  GOLANG_TAR      >> ${GOLANG_TAR}";
+	[[ -f ${ATOM_TAR} ]]        && FS=" OK " || FS="FAIL"; echo "[${FS}]  ATOM_TAR        >> ${ATOM_TAR}";
+	[[ -f ${VSCODE_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  VSCODE_TAR      >> ${VSCODE_TAR}";
+	[[ -f ${VPUML_TARFILE} ]]   && FS=" OK " || FS="FAIL"; echo "[${FS}]  VPUML_TARFILE   >> ${VPUML_TARFILE}";
+	[[ -f ${GITEYE_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  GITEYE_TAR      >> ${GITEYE_TAR}";
+	[[ -f ${PLIB_TARFILE} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  PLIB_TARFILE    >> ${PLIB_TARFILE}";
+	[[ -f ${SQLVQB_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  SQLVQB_TARFILE  >> ${SQLVQB_TARFILE}";
+	[[ -f ${MONGODB_TARFILE} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  MONGODB_TARFILE >> ${MONGODB_TARFILE}";
+	[[ -f ${ROBO3T_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  ROBO3T_TARFILE  >> ${ROBO3T_TARFILE}";
+	[[ -f ${PANDOC_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  PANDOC_TARFILE  >> ${PANDOC_TARFILE}";
+	# [[ -f ${FIREFOX_TAR} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  FIREFOX_TAR     >> ${FIREFOX_TAR}";
 
 	# Safety valve to abort on missing files
 	echo "";

@@ -190,8 +190,8 @@ EOABMS
 	#------------------------------------------------------------------------------#
  	echo "Updating with additional fonts...";
 	pushd ${RESOURCE_FOLDER}/Install/;
-	sudo rsync -vrh fonts-zekr Sans-TTF Serif-TTF /usr/share/fonts/truetype/
-	sudo rsync -vrh Sans-OTF Serif-OTF  /usr/share/fonts/opentype/
+	sudo rsync -r fonts-zekr Sans-TTF Serif-TTF /usr/share/fonts/truetype/
+	sudo rsync -r Sans-OTF Serif-OTF  /usr/share/fonts/opentype/
 	popd;
 
 	# Make readable for all, or will not be usable
@@ -225,8 +225,9 @@ InstallCoreApps(){
 
 	echo;
 	echo "Install Live Imaging and Virtualization";
-	aptInstallApp qemu qemu-utils qemu-efi xorriso cdck dconf-editor # pinguybuilder # virtualbox	# Virtualbox is very heavy, install on need basis
-	# pinguybuilder
+	aptInstallApp qemu qemu-utils qemu-efi xorriso cdck dconf-editor virtualbox	# Virtualbox is very heavy, install on need basis
+	# pinguybuilder - install using dpkg
+	# libgconf? - Dependency for VS Code
 
 	echo;
 	echo "Install Dev Tool Chain and Productivity Packages";
@@ -518,15 +519,6 @@ InstallHssApps(){
 	ln -vsT ${MONGODB_PATH} /10-Base/mongodb;
 
 	echo "Install MySQL Server";
-
-	# MySQL 8.0
-	# Using installer to get current version
-	# sudo dpkg -i ${RESOURCE_FOLDER}/Install/mysql-apt-config_0.8.10-1_all.deb
-	# Add Addl Components
-	# This should be included in the installer
-	# sudo apt-get install
-	# Set root password etc...
-
 	# MySQL 5.7.x
 	aptInstallApp mysql-workbench-community mysql-server-5.7;
 	sudo systemctl status mysql;
@@ -548,71 +540,23 @@ ApplyPatch01(){
 	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
 }
 
-## Update 18-07
-ApplyUpdate1807(){
+## Update 18-08
+ApplyUpdate1808(){
 	echo;
-	echo "APPLY UPDATE 18-07";
+	echo "APPLY UPDATE 18-08";
 
-	echo "#------------------------------------------------------------------------------#";
-	echo "updating ruby gem bundler";
-	sudo gem install bundler    # for bootstrap compile
-	echo " - Testing ruby versions";
-	ruby -v
-	bundle -v
-
-	#### INSTALL NodeJS -- test for xz
+	#### INSTALL Pandoc
 	#------------------------------------------------------------------------------#
-	echo "#------------------------------------------------------------------------------#";
-	echo "Setting up Node.js now";
-	# ClearFolder ${NODEJS_PATH}; # Remove if upgrading
-	# tar -xJ -C ${APPS_BAS_DIR} -f ${NODEJS_TAR};
-	# mv -vf ${NODEJS_PATH}* ${NODEJS_PATH};
-	# sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
-	# sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
-	echo " - Updating core dependencies"
-	# npm install -g grunt-cli
-	npm install -g npm
-	# sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
-	echo " - Testing Nodejs versions";
-	node -v;
-	npm -v;
-	grunt -v;
-
-	## /20-DEV
+	echo "Setting up pandoc now";
+	echo "Also testing the tar --strip-components=1 option.";
+	#	ClearFolder ${PANDOC_PATH}; # Remove if upgrading
+	makeOwnFolder ${PANDOC_PATH};
+	tar -xz --strip-components=1 -C ${PANDOC_PATH} -f ${PANDOC_TARFILE};
+	ls -l ${PANDOC_PATH}*;
+	#	mv -vf ${PANDOC_PATH}* ${PANDOC_PATH};
+	#	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
+	#	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
+	# Add templates to a well-known-folder
 
 	echo "#------------------------------------------------------------------------------#";
-}
-
-## Patch 2
-ApplyPatch02(){
-	# apt files
-	echo;
-	echo " - extracting apt files";
-
-	sudo mkdir -vp /etc/apt;
-	sudo tar -xJ -C /etc/apt -f ${SETUP_ROOT_LOCN}/Working/apt-src.tar.xz;
-	sudo chown -vR 0:0  /etc/apt;
-
-	# Add specific repositories
-	echo;
-	echo " - updating google sources";
-	if [ ! -e /etc/apt/sources.list.d/google-chrome.list ]; then
-		# Add certificate to apt, one time need
-		# https://dl-ssl.google.com/linux/linux_signing_key.pub
-		sudo apt-key add ${GOOGL_PUB_KEY};
-		sudo touch /etc/apt/sources.list.d/google-chrome.list;
-		echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list.d/google-chrome.list;
-	fi;
-	#
-	echo;
-	echo " - updating skype sources";
-	if [ ! -e /etc/apt/sources.list.d/skype-stable.list ]; then
-		# Add certificate to apt, one time need
-		sudo apt-key add ${SKYPE_PUB_KEY};
-		sudo touch /etc/apt/sources.list.d/skype-stable.list;
-		echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee -a /etc/apt/sources.list.d/skype-stable.list;
-	fi;
-
-	# Update all repos
-	# sudo apt-get -y  update;
 }

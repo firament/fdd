@@ -1,46 +1,67 @@
 # TODO List
 
 30-07-2018
-> to fix broken ap system
+> to fix broken apt system
 ```
 /etc/apt/apt.conf.d/
 /etc/apt/sources.list.d/
 /etc/apt/sources.list
 ```
 
+## Tasks to be done for refining FDD setup script
 
-03-03-2018
-
-> Tasks to be done for refining FDD setup script
-
-- [ ] Use `tar --strip-components` option to install directly to install-folders
-- [ ] update PlatformVars.sh in installed copy
+- [ ] Add-Install VirtualBox
+- [ ] Show hidden files in caja
+- [ ] Add extensions in vscode
+	- [ ] GitLens — Git supercharged
+	- [ ] Markdown All in One
+	- [ ] Markdown Extended
+	- [ ] HTML CSS Support
+	- [ ] IntelliSense for CSS class names in HTML
+	- [ ] JS & CSS Minifier
+- [ ] Use `tar --strip-components=1` option to install directly in install-folders
+	- [ ] Comment call to `ClearFolder`
+	- [ ] Add call to `makeOwnFolder`
 - [ ] Pluma - Set timestamp format
-- [ ] Atom - Set timestamp format
+	- [ ] `%Y-%b-%d %T`
 - [ ] Chrome - add erail extension
-- [ ] Atom - update to current release version
-- [ ] VS Code - update to current release version
-- [ ] Fix linking error in go-path-virt
-	- [ ] rm; ln; goimports;
-	- [ ] `rm -vfr /10-Base/go-path-virt`
-	- [x] uodate /etc/enironment to fix path
+- [ ] Get fqdn from `$(dirname $0)` and use in setup-fdd.sh:11
 - [ ] Add GO Tools installation also to script
 	- [ ] refer env setup notes and update
-- [ ] Update Working/contents-files.txt with current content
-- [ ] Update clear-sys to reflect current environment
 - [ ] Include VP-UML settings file, for copy
-- [ ] pandoc instructions in 30-Ext
-	- [x] Add
-	- [ ] Verify
-- [ ] Add Mongo DB command support
-	- [x] Command `up-mongo` in /10-Base/bin
-	- [ ] change default port to custom port
-- [ ] Add Robo3T commands
-	- [ ] in /10-Base/bin
-	- [x] Shortcut, in 'Programming'
+	- [ ] `${HOME}/.config/VisualParadigm/ws/.vpprefdata/.vp.preference`
+- [ ] Update clear-sys to reflect current environment
+- [ ] Update Working/contents-files.txt with current content
+	- [ ] Very low priority, make script instead of manual update eachtime.
 - [ ] task placeholder
 
-## Done
+## Done - aka Changelog
+### 2018 Aug 11
+- [x] Move SETUP_ROOT_LOCN to setup-fdd.sh from fdd-data.sh
+
+
+### 2018 Jul 30
+
+> All changes before this date, to align with changelog format
+
+- [x] Atom - Set timestamp format
+	- [x] `ddd, DD-MMM-YYYY HH:mm:ss.SSS ZZ`
+- [x] update PlatformVars.sh in installed copy
+- [x] Atom - update to current release version
+- [x] VS Code - update to current release version
+- [x] Add Robo3T commands
+	- [x] in /10-Base/bin (start-robo3t)
+	- [x] Shortcut, in 'Programming'
+- [x] Fix linking error in go-path-virt
+	- [x] rm; ln; goimports;
+	- [x] `rm -vfr /10-Base/go-path-virt`
+	- [x] uodate /etc/enironment to fix path
+- [x] pandoc instructions in 30-Ext
+	- [x] Add
+	- [x] Verify
+- [ ] Add Mongo DB command support
+	- [x] Command `up-mongo` in /10-Base/bin
+	- [ ] ~~change default port to custom port~~
 - [x] VS Code settings - review and update
 	- [x] Workspace settings
 	- [x] User Settings
