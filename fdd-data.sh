@@ -7,7 +7,7 @@
 
 echo "INFO: Loading data from fdd-data.sh";
 
-# SETUP_ROOT_LOCN="/full/path/to/this/file";	# update to use base location, from calling script
+readonly SETUP_ROOT_LOCN="$(realpath $(dirname $0))";	# Root location of project
 
 readonly SETUPS_LOG_LOCN="${HOME}/Documents/$(basename $0 | sed "s%\.[a-z0-9]*%%")-logs";
 readonly SETUP_BASE_LOCN="${SETUP_ROOT_LOCN}/10-Apps";

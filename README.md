@@ -5,10 +5,8 @@ Automation scripts to bring a raw ubuntu installation to a known state
 
 ## Before Running
 
-1. In setup-fdd.sh
-	- Line 10 : Change `<plain-text-password>` to 'Actual password'
-	- Line 11 :Change `/full/path/to/this/file` to 'Actual path'
-		- Without any trailing `/` in path
+1. In setup-fdd.sh, Line 8
+	- Change `<plain-text-password>` to 'Actual password'
 
 ---
 

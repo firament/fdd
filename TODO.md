@@ -1,19 +1,10 @@
 # TODO List
 
-30-07-2018
-> to fix broken apt system
-```
-/etc/apt/apt.conf.d/
-/etc/apt/sources.list.d/
-/etc/apt/sources.list
-```
-
 ## Tasks to be done for refining FDD setup script
 
 - [ ] Use `tar --strip-components=1` option to install directly in install-folders
 	- [ ] Comment call to `ClearFolder`
 	- [ ] Add call to `makeOwnFolder`
-- [ ] Get fqdn from `$(dirname $0)` and use in setup-fdd.sh:11
 - [ ] Add GO Tools installation also to script
 	- [ ] refer env setup notes and update
 - [ ] Include VP-UML settings file, for copy
@@ -25,6 +16,8 @@
 
 ## Done - aka Changelog
 ### 2018 Aug 11
+- [x] Get fqdn from `$(dirname $0)` and use in setup-fdd.sh:11
+	- `$(realpath $(dirname $0))`
 - [x] Add-Install VirtualBox
 - [x] Show hidden files in caja
 - [x] Add extensions in vscode
