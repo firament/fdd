@@ -227,13 +227,13 @@ InstallCoreApps(){
 	echo "Install Live Imaging and Virtualization";
 	aptInstallApp qemu qemu-utils qemu-efi xorriso cdck dconf-editor virtualbox	# Virtualbox is very heavy, install on need basis
 	# pinguybuilder - install using dpkg
-	# libgconf? - Dependency for VS Code
 
 	echo;
 	echo "Install Dev Tool Chain and Productivity Packages";
 	# sudo touch /etc/default/google-chrome;	# Uncomment if chrome is not be be updated
-	aptInstallApp git meld google-chrome-stable bleachbit skypeforlinux build-essential manpages-dev libunwind8 ruby-full zlib1g-dev;
+	aptInstallApp libgconf2-4 git meld google-chrome-stable bleachbit skypeforlinux build-essential manpages-dev libunwind8 ruby-full zlib1g-dev;
 	# git-gui
+	# VS Code Dependency - libgconf2-4
 	# bootstrap4 build dependencies
 	# build-essential manpages-dev libunwind8 ruby-full zlib1g-dev;
 	echo "installing ruby gem bundler";
@@ -242,9 +242,7 @@ InstallCoreApps(){
 
 	echo;
 	echo "SETUP PINGUYBUILDER";
-	# pinguybuilder depends on gksu, and cannot be installed on 18.04+
-	# sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
-	sudo tar -xz -C / -f ${RESOURCE_FOLDER}/Install/pinguybuilder-files.tar.gz;
+	sudo dpkg-deb -vx ${RESOURCE_FOLDER}/Install/pinguybuilder_5.1-8_all.deb /;
 	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
 	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
 
@@ -258,9 +256,10 @@ SetupDevApps(){
 	#### INSTALL Oracle JRE
 	#------------------------------------------------------------------------------#
 	echo "Setting up Oracle JRE now";
-	ClearFolder ${ORA_JRE_PATH};   # Remove if upgrading
-	tar -xz -C ${APPS_BAS_DIR} -f ${ORA_JRE_TAR};
-	mv -vf ${ORA_JRE_PATH}* ${ORA_JRE_PATH};
+	# ClearFolder ${ORA_JRE_PATH};   # remove after next run. Needs testing.
+	makeOwnFolder ${ORA_JRE_PATH}  # Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${ORA_JRE_PATH} -f ${ORA_JRE_TAR};
+	# mv -vf ${ORA_JRE_PATH}* ${ORA_JRE_PATH};   # remove after next run. Needs testing.
 	sudo update-alternatives --install /usr/bin/java  java  ${ORA_JRE_PATH}/bin/java 1
 	sudo update-alternatives --install /usr/bin/javac javac ${ORA_JRE_PATH}/bin/javac 1
 
@@ -268,9 +267,10 @@ SetupDevApps(){
 	#### INSTALL NodeJS -- test for xz
 	#------------------------------------------------------------------------------#
 	echo "Setting up Node.js now";
-	ClearFolder ${NODEJS_PATH}; # Remove if upgrading
-	tar -xJ -C ${APPS_BAS_DIR} -f ${NODEJS_TAR};
-	mv -vf ${NODEJS_PATH}* ${NODEJS_PATH};
+	# ClearFolder ${NODEJS_PATH};   # remove after next run. Needs testing.
+	makeOwnFolder ${NODEJS_PATH}  # Folder should exist for tar to work
+	tar -xJ --strip-components=1 -C ${NODEJS_PATH} -f ${NODEJS_TAR};
+	# mv -vf ${NODEJS_PATH}* ${NODEJS_PATH};   # remove after next run. Needs testing.
 	sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
 	sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
 	echo " - adding core dependencies"
@@ -280,15 +280,16 @@ SetupDevApps(){
 	#### INSTALL .NET Core
 	#------------------------------------------------------------------------------#
 	echo "Setting up .NET Core now";
-	ClearFolder ${DNETCORE_PATH};   # Remove if upgrading
-	makeOwnFolder ${DNETCORE_PATH}  # Folder needs to exist for tar to work
+	# ClearFolder ${DNETCORE_PATH};   # remove after next run. Needs testing.
+	makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
 	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
 
 	#### INSTALL GO LANG
 	#------------------------------------------------------------------------------#
 	echo "Setting up GO Lang now";
-	ClearFolder ${GOLANG_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_BAS_DIR} -f ${GOLANG_TAR};
+	ClearFolder ${GOLANG_PATH}; # Prepare for clean install. IMP
+	makeOwnFolder ${GOLANG_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${GOLANG_PATH} -f ${GOLANG_TAR};
 
 	# Initialize environment
 	echo "Initializing GO Environment.";
@@ -316,16 +317,18 @@ SetupDevApps(){
 	#### INSTALL Atom
 	#------------------------------------------------------------------------------#
 	echo "Setting up Atom now";
-	ClearFolder ${ATOM_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_DEV_DIR} -f ${ATOM_TAR};
-	mv -vf ${ATOM_PATH}* ${ATOM_PATH};
+	# ClearFolder ${ATOM_PATH}; # remove after next run. Needs testing.
+	makeOwnFolder ${ATOM_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${ATOM_PATH} -f ${ATOM_TAR};
+	# mv -vf ${ATOM_PATH}* ${ATOM_PATH}; # remove after next run. Needs testing.
 	sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
 
 	#### INSTALL Visual Studio Code
 	#------------------------------------------------------------------------------#
 	echo "Setting up Visual Studio Code now";
-	ClearFolder ${VSCODE_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_DEV_DIR} -f ${VSCODE_TAR};
+	# ClearFolder ${VSCODE_PATH}; # remove after next run. Needs testing.
+	makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
 	sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
 	# Initialize settings
 	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
@@ -338,9 +341,10 @@ SetupDevApps(){
 	#### INSTALL VPUML CE
 	#------------------------------------------------------------------------------#
 	echo "Setting up VP UML CE now";
-	ClearFolder ${VPUML_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_DEV_DIR} -f ${VPUML_TARFILE};
-	mv -vf ${VPUML_PATH}* ${VPUML_PATH};
+	# ClearFolder ${VPUML_PATH}; # remove after next run. Needs testing.
+	makeOwnFolder ${VPUML_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
+	# mv -vf ${VPUML_PATH}* ${VPUML_PATH}; # remove after next run. Needs testing.
 	sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
 
 	#### INSTALL GitEye
@@ -353,9 +357,10 @@ SetupDevApps(){
 	#### INSTALL PROJECT LIBRE
 	#------------------------------------------------------------------------------#
 	echo "Setting up Project Libre now";
-	ClearFolder ${PLIB_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_DEV_DIR} -f ${PLIB_TARFILE};
-	mv -vf ${PLIB_PATH}* ${PLIB_PATH};
+	# ClearFolder ${PLIB_PATH}; # remove after next run. Needs testing.
+	makeOwnFolder ${PLIB_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${PLIB_PATH} -f ${PLIB_TARFILE};
+	# mv -vf ${PLIB_PATH}* ${PLIB_PATH}; # remove after next run. Needs testing.
 
 	#### INSTALL SQLeo Visual Query Builder
 	#------------------------------------------------------------------------------#
@@ -370,27 +375,30 @@ SetupDevApps(){
 	#### INSTALL Mongo DB
 	#------------------------------------------------------------------------------#
 	echo "Setting up Mongo DB now";
-	ClearFolder ${MONGODB_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_EXT_DIR} -f ${MONGODB_TARFILE};
-	mv -vf ${MONGODB_PATH}* ${MONGODB_PATH};
+	# ClearFolder ${MONGODB_PATH}; # remove after next run. Needs testing.
+	makeOwnFolder ${MONGODB_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${MONGODB_PATH} -f ${MONGODB_TARFILE};
+	# mv -vf ${MONGODB_PATH}* ${MONGODB_PATH}; # remove after next run. Needs testing.
 
 	#### INSTALL Robo 3T
 	#------------------------------------------------------------------------------#
 	echo "Setting up Robo 3T now";
-	ClearFolder ${ROBO3T_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_EXT_DIR} -f ${ROBO3T_TARFILE};
-	mv -vf ${ROBO3T_PATH}* ${ROBO3T_PATH};
+	# ClearFolder ${ROBO3T_PATH}; # remove after next run. Needs testing.
+	makeOwnFolder ${ROBO3T_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${ROBO3T_PATH} -f ${ROBO3T_TARFILE};
+	# mv -vf ${ROBO3T_PATH}* ${ROBO3T_PATH}; # remove after next run. Needs testing.
 	sudo ln -vsT ${ROBO3T_PATH}/bin/robo3t ${PUBLIC_BIN_LOCN}/robo3t;
-	# fix for ubuntu error
+	# fix for ubuntu error, check ni future versions if still needed
 	mkdir -v -p ${ROBO3T_PATH}/lib-bak;
 	mv -vf ${ROBO3T_PATH}/lib/libstdc++.so* ${ROBO3T_PATH}/lib-bak
 
 	#### INSTALL Pandoc
 	#------------------------------------------------------------------------------#
 	echo "Setting up pandoc now";
-	ClearFolder ${PANDOC_PATH}; # Remove if upgrading
-	tar -xz -C ${APPS_EXT_DIR} -f ${PANDOC_TARFILE};
-	mv -vf ${PANDOC_PATH}* ${PANDOC_PATH};
+	# ClearFolder ${PANDOC_PATH}; # remove after next run. Needs testing.
+	makeOwnFolder ${PANDOC_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${PANDOC_PATH} -f ${PANDOC_TARFILE};
+	# mv -vf ${PANDOC_PATH}* ${PANDOC_PATH}; # remove after next run. Needs testing.
 	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
 	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
 	# Add templates to a well-known-folder

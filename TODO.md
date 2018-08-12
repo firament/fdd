@@ -2,9 +2,11 @@
 
 ## Tasks to be done for refining FDD setup script
 
-- [ ] Use `tar --strip-components=1` option to install directly in install-folders
-	- [ ] Comment call to `ClearFolder`
-	- [ ] Add call to `makeOwnFolder`
+- [ ] Fix libre office menus to sides, to optimize wide-screen usage
+- [x] Add manual install for pinguybuilder - fix
+- [x] Use `tar --strip-components=1` option to install directly in install-folders
+	- [x] Comment call to `ClearFolder`
+	- [x] Add call to `makeOwnFolder`
 - [ ] Add GO Tools installation also to script
 	- [ ] refer env setup notes and update
 - [ ] Include VP-UML settings file, for copy
@@ -30,7 +32,7 @@
 - [x] Pluma - Set timestamp format
 	- [x] `%Y-%b-%d %T`
 - [x] Chrome - add erail extension
-- [x] Move SETUP_ROOT_LOCN to setup-fdd.sh from fdd-data.sh
+- [x] ~~Move SETUP_ROOT_LOCN to setup-fdd.sh from fdd-data.sh~~
 - [x] Remove directory from robo3t shortcut, to stop showing up in 'Open With'
 
 
