@@ -53,7 +53,7 @@ readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.28.0-amd64.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-code_1.25.1-1531323788_amd64.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1534444642.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
 readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_0_20180701_Linux64_InstallFree.tar.gz";
@@ -246,31 +246,57 @@ WriteFooter(){
 # Comment out files not in current use                                         #
 #------------------------------------------------------------------------------#
 HealthCheck(){
-	# TODO: Check for folders too...
 	echo "";
-	echo -n "BEGIN checking files - "; date +"%d-%b-%Y %T";
+	echo -n "BEGIN checking folders and files - "; date +"%d-%b-%Y %T";
 	echo "";
 	FS="----";
 
-	[[ -f ${ORA_JRE_TAR} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  ORA_JRE_TAR     >> ${ORA_JRE_TAR}";
-	[[ -f ${NODEJS_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  NODEJS_TAR      >> ${NODEJS_TAR}";
-	[[ -f ${DNETCORE_TAR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  DNETCORE_TAR    >> ${DNETCORE_TAR}";
-	[[ -f ${GOLANG_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  GOLANG_TAR      >> ${GOLANG_TAR}";
-	[[ -f ${ATOM_TAR} ]]        && FS=" OK " || FS="FAIL"; echo "[${FS}]  ATOM_TAR        >> ${ATOM_TAR}";
-	[[ -f ${VSCODE_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  VSCODE_TAR      >> ${VSCODE_TAR}";
-	[[ -f ${VPUML_TARFILE} ]]   && FS=" OK " || FS="FAIL"; echo "[${FS}]  VPUML_TARFILE   >> ${VPUML_TARFILE}";
-	[[ -f ${GITEYE_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  GITEYE_TAR      >> ${GITEYE_TAR}";
-	[[ -f ${PLIB_TARFILE} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  PLIB_TARFILE    >> ${PLIB_TARFILE}";
-	[[ -f ${SQLVQB_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  SQLVQB_TARFILE  >> ${SQLVQB_TARFILE}";
-	[[ -f ${MONGODB_TARFILE} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  MONGODB_TARFILE >> ${MONGODB_TARFILE}";
-	[[ -f ${ROBO3T_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  ROBO3T_TARFILE  >> ${ROBO3T_TARFILE}";
-	[[ -f ${PANDOC_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  PANDOC_TARFILE  >> ${PANDOC_TARFILE}";
+	echo "";
+	echo "Source Folders - Required:";
+	[[ -d ${SETUP_ROOT_LOCN} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  SETUP_ROOT_LOCN  >> ${SETUP_ROOT_LOCN}";
+	[[ -d ${SETUPS_LOG_LOCN} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  SETUPS_LOG_LOCN  >> ${SETUPS_LOG_LOCN}";
+	[[ -d ${SETUP_BASE_LOCN} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  SETUP_BASE_LOCN  >> ${SETUP_BASE_LOCN}";
+	[[ -d ${RESOURCE_FOLDER} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  RESOURCE_FOLDER  >> ${RESOURCE_FOLDER}";
+	[[ -d ${HOST_MENUS_LOCN} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  HOST_MENUS_LOCN  >> ${HOST_MENUS_LOCN}";
+	[[ -d ${PUBLIC_BIN_LOCN} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  PUBLIC_BIN_LOCN  >> ${PUBLIC_BIN_LOCN}";
+
+	echo "";
+	echo "Source Files - Required:";
+	[[ -f ${ORA_JRE_TAR} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  ORA_JRE_TAR      >> ${ORA_JRE_TAR}";
+	[[ -f ${NODEJS_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  NODEJS_TAR       >> ${NODEJS_TAR}";
+	[[ -f ${DNETCORE_TAR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  DNETCORE_TAR     >> ${DNETCORE_TAR}";
+	[[ -f ${GOLANG_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  GOLANG_TAR       >> ${GOLANG_TAR}";
+	[[ -f ${ATOM_TAR} ]]        && FS=" OK " || FS="FAIL"; echo "[${FS}]  ATOM_TAR         >> ${ATOM_TAR}";
+	[[ -f ${VSCODE_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  VSCODE_TAR       >> ${VSCODE_TAR}";
+	[[ -f ${VPUML_TARFILE} ]]   && FS=" OK " || FS="FAIL"; echo "[${FS}]  VPUML_TARFILE    >> ${VPUML_TARFILE}";
+	[[ -f ${GITEYE_TAR} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  GITEYE_TAR       >> ${GITEYE_TAR}";
+	[[ -f ${PLIB_TARFILE} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  PLIB_TARFILE     >> ${PLIB_TARFILE}";
+	[[ -f ${SQLVQB_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  SQLVQB_TARFILE   >> ${SQLVQB_TARFILE}";
+	[[ -f ${MONGODB_TARFILE} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  MONGODB_TARFILE  >> ${MONGODB_TARFILE}";
+	[[ -f ${ROBO3T_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  ROBO3T_TARFILE   >> ${ROBO3T_TARFILE}";
+	[[ -f ${PANDOC_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  PANDOC_TARFILE   >> ${PANDOC_TARFILE}";
 	# [[ -f ${FIREFOX_TAR} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  FIREFOX_TAR     >> ${FIREFOX_TAR}";
+
+	echo "";
+	echo "Source Folders - Optional:";
+	[[ -d ${APPS_BAS_DIR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  APPS_BAS_DIR     >> ${APPS_BAS_DIR}";
+	[[ -d ${APPS_DEV_DIR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  APPS_DEV_DIR     >> ${APPS_DEV_DIR}";
+	[[ -d ${APPS_EXT_DIR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  APPS_EXT_DIR     >> ${APPS_EXT_DIR}";
+	[[ -d ${REPOSITORY_ARCV} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  REPOSITORY_ARCV  >> ${REPOSITORY_ARCV}";
+	[[ -d ${REPOSITORY_LOCL} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  REPOSITORY_LOCL  >> ${REPOSITORY_LOCL}";
+
+	echo "";
+	echo "Source Files - Optional:";
+	[[ -f ${LIVE_IMG_CONFIG} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  LIVE_IMG_CONFIG  >> ${LIVE_IMG_CONFIG}";
+	[[ -f ${SIGNATR_PUB_KEY} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  SIGNATR_PUB_KEY  >> ${SIGNATR_PUB_KEY}";
+	[[ -f ${GOOGL_PUB_KEY} ]]   && FS=" OK " || FS="FAIL"; echo "[${FS}]  GOOGL_PUB_KEY    >> ${GOOGL_PUB_KEY}";
+	[[ -f ${SKYPE_PUB_KEY} ]]   && FS=" OK " || FS="FAIL"; echo "[${FS}]  SKYPE_PUB_KEY    >> ${SKYPE_PUB_KEY}";
+
 
 	# Safety valve to abort on missing files
 	echo "";
 	echo "";
-	echo -n "DONE checking files - "; date +"%d-%b-%Y %T";
+	echo -n "DONE checking folders and files - "; date +"%d-%b-%Y %T";
 	echo "";
 	read -p "Press CTRL+C to abort, or ENTER to continue." -t 45;
 	echo "";

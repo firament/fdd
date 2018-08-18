@@ -548,23 +548,25 @@ ApplyPatch01(){
 	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
 }
 
-## Update 18-08
-ApplyUpdate1808(){
+## Update 18-09
+ApplyUpdate1809(){
 	echo;
-	echo "APPLY UPDATE 18-08";
+	echo "APPLY UPDATE 18-09";
 
-	#### INSTALL Pandoc
+	#### INSTALL Visual Studio Code
 	#------------------------------------------------------------------------------#
-	echo "Setting up pandoc now";
-	echo "Also testing the tar --strip-components=1 option.";
-	#	ClearFolder ${PANDOC_PATH}; # Remove if upgrading
-	makeOwnFolder ${PANDOC_PATH};
-	tar -xz --strip-components=1 -C ${PANDOC_PATH} -f ${PANDOC_TARFILE};
-	ls -l ${PANDOC_PATH}*;
-	#	mv -vf ${PANDOC_PATH}* ${PANDOC_PATH};
-	#	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
-	#	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
-	# Add templates to a well-known-folder
+	echo "Setting up Visual Studio Code now";
+	# ClearFolder ${VSCODE_PATH}; # remove after next run. Needs testing.
+	makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
+	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
+	# Initialize settings
+	# cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
+	# cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
+
+	# Copy config templates, used by commands
+	# mkdir -vp ${HOME}/Documents/VSCode-Configs/;
+	# cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.json ${HOME}/Documents/VSCode-Configs/;
 
 	echo "#------------------------------------------------------------------------------#";
 }
