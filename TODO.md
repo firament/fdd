@@ -2,11 +2,7 @@
 
 ## Tasks to be done for refining FDD setup script
 
-- [ ] Fix libre office menus to sides, to optimize wide-screen usage
-- [x] Add manual install for pinguybuilder - fix
-- [x] Use `tar --strip-components=1` option to install directly in install-folders
-	- [x] Comment call to `ClearFolder`
-	- [x] Add call to `makeOwnFolder`
+- [ ] Clean up GO configuration, WS copy
 - [ ] Add GO Tools installation also to script
 	- [ ] refer env setup notes and update
 - [ ] Include VP-UML settings file, for copy
@@ -17,6 +13,19 @@
 - [ ] task placeholder
 
 ## Done - aka Changelog
+### 2018 Aug 28
+- [x] Fix libre office menus to sides, to optimize wide-screen usage
+- [x] Set 'Eye of MATE Image Viewer' as default images for png and jpeg files
+- [x] VSCode
+	- [x] Update extensions
+	- [x] Add sidebar toggle in `${HOME}/.config/Code/User/keybindings.json`
+
+### 2018 Aug 23
+- [x] Use `tar --strip-components=1` option to install directly in install-folders
+	- [x] Comment call to `ClearFolder`
+	- [x] Add call to `makeOwnFolder`
+- [x] Add manual install for pinguybuilder - fix
+
 ### 2018 Aug 11
 - [x] Get fqdn from `$(dirname $0)` and use in setup-fdd.sh:11
 	- `$(realpath $(dirname $0))`

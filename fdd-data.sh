@@ -12,7 +12,7 @@ readonly SETUP_ROOT_LOCN="$(realpath $(dirname $0))";	# Root location of project
 readonly SETUPS_LOG_LOCN="${HOME}/Documents/$(basename $0 | sed "s%\.[a-z0-9]*%%")-logs";
 readonly SETUP_BASE_LOCN="${SETUP_ROOT_LOCN}/10-Apps";
 readonly RESOURCE_FOLDER="${SETUP_ROOT_LOCN}/20-Resources";
-readonly REPOSITORY_ARCV="${SETUP_ROOT_LOCN}/deb-paks-ubuntu-Yx64";
+readonly REPOSITORY_ARCV="${SETUP_ROOT_LOCN}/deb-paks-Bx64";
 readonly REPOSITORY_LOCL="/60-APT-REPOSITORY";
 
 readonly LIVE_IMG_CONFIG="/etc/PinguyBuilder.conf";
@@ -40,7 +40,7 @@ readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v8.11.3-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
-readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.301-linux-x64.tar.gz";
+readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.401-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 #
 readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.10.3.linux-amd64.tar.gz";
@@ -56,7 +56,7 @@ readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1534444642.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_0_20180701_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_1_20180807_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
 readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.1.0-linux.x86_64.zip";
@@ -81,6 +81,8 @@ readonly ROBO3T_PATH="${APPS_EXT_DIR}/robo3t";
 readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.2.2.1-linux.tar.gz";
 readonly PANDOC_PATH="${APPS_EXT_DIR}/pandoc";
 
+## Individual Files
+readonly PINGUYBLDR_TAR="${RESOURCE_FOLDER}/Install/pinguybuilder_5.1-8_all.deb";
 
 ##
 readonly FIREFOX_TAR="${RESOURCE_FOLDER}/Install/firefox-55.0.3.tar.bz2";
@@ -275,6 +277,7 @@ HealthCheck(){
 	[[ -f ${MONGODB_TARFILE} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  MONGODB_TARFILE  >> ${MONGODB_TARFILE}";
 	[[ -f ${ROBO3T_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  ROBO3T_TARFILE   >> ${ROBO3T_TARFILE}";
 	[[ -f ${PANDOC_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  PANDOC_TARFILE   >> ${PANDOC_TARFILE}";
+	[[ -f ${PINGUYBLDR_TAR} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  PINGUYBLDR_TAR   >> ${PINGUYBLDR_TAR}";
 	# [[ -f ${FIREFOX_TAR} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  FIREFOX_TAR     >> ${FIREFOX_TAR}";
 
 	echo "";

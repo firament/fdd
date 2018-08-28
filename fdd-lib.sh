@@ -242,9 +242,9 @@ InstallCoreApps(){
 
 	echo;
 	echo "SETUP PINGUYBUILDER";
-	sudo dpkg-deb -vx ${RESOURCE_FOLDER}/Install/pinguybuilder_5.1-8_all.deb /;
+	sudo dpkg-deb -vx ${PINGUYBLDR_TAR} /;
 	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
-	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
+	sudo cp -fv ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
 
 	echo "DONE  - InstallCoreApps()";
 }
@@ -331,8 +331,8 @@ SetupDevApps(){
 	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
 	sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
 	# Initialize settings
-	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
-	cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
+	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.json  ${HOME}/.config/Code/User/settings.json;
+	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json    ${HOME}/.config/Code/User/keybindings.json;
 
 	# Copy config templates, used by commands
 	mkdir -vp ${HOME}/Documents/VSCode-Configs/;
@@ -553,20 +553,36 @@ ApplyUpdate1809(){
 	echo;
 	echo "APPLY UPDATE 18-09";
 
+	# #### INSTALL .NET Core
+	# #------------------------------------------------------------------------------#
+	# echo "Setting up .NET Core now";
+	# # ClearFolder ${DNETCORE_PATH};   # remove after next run. Needs testing.
+	# makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
+	# tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
+
 	#### INSTALL Visual Studio Code
 	#------------------------------------------------------------------------------#
-	echo "Setting up Visual Studio Code now";
+	# echo "Setting up Visual Studio Code now";
 	# ClearFolder ${VSCODE_PATH}; # remove after next run. Needs testing.
-	makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
-	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
+	# makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
+	# tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
 	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
 	# Initialize settings
-	# cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-settings.json    ${HOME}/.config/Code/User/settings.json;
-	# cp -fvR ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json ${HOME}/.config/Code/User/keybindings.json;
+	# cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.json  ${HOME}/.config/Code/User/settings.json;
+	# cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.json    ${HOME}/.config/Code/User/keybindings.json;
 
-	# Copy config templates, used by commands
+	# # Copy config templates, used by commands
 	# mkdir -vp ${HOME}/Documents/VSCode-Configs/;
 	# cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.json ${HOME}/Documents/VSCode-Configs/;
+
+	#### INSTALL VPUML CE
+	#------------------------------------------------------------------------------#
+	# echo "Setting up VP UML CE now";
+	# ClearFolder ${VPUML_PATH}; # remove after next run. Needs testing.
+	# makeOwnFolder ${VPUML_PATH};	# Folder should exist for tar to work
+	# tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
+	# mv -vf ${VPUML_PATH}* ${VPUML_PATH}; # remove after next run. Needs testing.
+	# sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
 
 	echo "#------------------------------------------------------------------------------#";
 }

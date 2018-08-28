@@ -15,7 +15,7 @@ Updated on: Tue, 17-Jul-2018 16:09:27.224 +0530
 
 | App           | Curr Ver  | Download URL                                                                                |   Size |
 | ------------- | --------- | ------------------------------------------------------------------------------------------- | ------:|
-| .NET SDK      | 2.1.301   | https://www.microsoft.com/net/download/linux                                                | 155 MB |
+| .NET SDK      | 2.1.401   | https://www.microsoft.com/net/download/linux                                                | 156 MB |
 | node.js       | 8.11.3    | https://nodejs.org/en/download/                                                             |  11 MB |
 | GO Lang       | 1.10.3    | https://golang.org/dl/                                                                      | 126 MB |
 |               |           |                                                                                             |        |
@@ -23,7 +23,7 @@ Updated on: Tue, 17-Jul-2018 16:09:27.224 +0530
 | VS Code       | 1.25.1    | https://code.visualstudio.com/docs/?dv=linux64                                              |  67 MB |
 | GitEye        | 2.1.0     | https://www.collab.net/downloads/giteye#show-Linux                                          | 118 MB |
 | ProjectLibre  | 1.7.0     | https://sourceforge.net/projects/projectlibre/files/ProjectLibre/                           |  15 MB |
-| VPUML         | 15.0.0701 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 500 MB |
+| VPUML         | 15.1.0807 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 506 MB |
 | SQLeoVQB      | 17.09rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      | 1.5 MB |
 |               |           |                                                                                             |        |
 | mongodb       | 4.0.0     | https://www.mongodb.com/download-center#community                                           |  95 MB |
