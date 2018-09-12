@@ -351,12 +351,11 @@ sudo mount -v -t ext4 ${NBD} /70-CurrentWork;
 # sudo mount -v -l -t ext4 ${NBD} ${DIR_MOUNT}; # what are the parms?
 
 ## Part 4 - Cleanup after use (Release all nbd mounts) #########################
-BLOCKDEVS=($(lsblk | grep "^nbd" | cut -d " " -f1 | sort));
-for ((i=0; i<${#BLOKDEVS[@]}; i++))
+for BLOCKDEV in `lsblk | grep "^nbd" | cut -d " " -f1 | sort`;
   do
-    sudo umount -v /dev/${BLOKDEVS[$i]};
-    sudo qemu-nbd -d /dev/${BLOKDEVS[$i]};
-  done
+    sudo umount -v /dev/${BLOCKDEV};
+    sudo qemu-nbd -d /dev/${BLOCKDEV};
+  done;
 
 ## Part 5 - Shutdown and unload 'nbd' module ###################################
 sudo rmmod -v nbd;
