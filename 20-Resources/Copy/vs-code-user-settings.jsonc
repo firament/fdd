@@ -1,14 +1,33 @@
 // original file name: ${HOME}/.config/Code/User/settings.json
 {
+	//
+	// COMMMON
     "update.enableWindowsBackgroundUpdates": false,
     "extensions.autoCheckUpdates": true,
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": false,
     "extensions.showRecommendationsOnlyOnDemand": false,
     //
+	// FILES
+    // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
+    "files.associations": {},
+    "files.insertFinalNewline": true,
+    // Configure glob patterns for excluding files and folders.
+    // For example, the files explorer decides which files and folders to show or hide based on this setting.
+    // Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
+    },
+    //
+	// GIT
     "git.path": "/usr/bin/git",
     "git.promptToSaveFilesBeforeCommit": true,
     //
+	// EDITOR
     "editor.codeLens": false,
     "editor.fontFamily": "'monospace', 'ubuntu mono', monospace",
     "editor.fontSize": 14,
@@ -22,14 +41,12 @@
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent",
     //
+	// WORKBENCH
     "workbench.colorTheme": "Default Dark+",
     "workbench.editor.revealIfOpen": true,
     "workbench.startupEditor": "none",
     //
-    // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
-    "files.associations": {},
-    "files.insertFinalNewline": true,
-    //
+	// MARKDOWN
     "markdown.preview.breaks": true,
     "markdown.previewFrontMatter": "show",
     "markdown.preview.fontFamily": "Carlito, Calibri, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
@@ -37,6 +54,7 @@
     // A list of URLs or local paths to CSS style sheets to use from the markdown preview. Relative paths are interpreted relative to the folder open in the explorer. If there is no open folder, they are interpreted relative to the location of the markdown file. All '\' need to be written as '\\'.
     "markdown.styles": [],
     //
+	// CUSTOM LANGUAGES
     // Configure editor settings to be overridden for [go] language.
     "[go]": {
         "editor.insertSpaces": false,
@@ -54,11 +72,13 @@
         "editor.quickSuggestions": false
     },
     //
+	// DOC-THIS
     "docthis.includeDateTag": true,
     "docthis.includeDescriptionTag": true,
     "docthis.includeMemberOfOnInterfaceMembers": true,
     "docthis.includeTypes": true,
     //
+	// GO LANG
     "go.enableCodeLens": {
         "references": false,
         "runtest": true
@@ -76,6 +96,7 @@
         "suppressShowKeyBindingsNotice": true
     },
     //
+	// ES6 
     // Generate JavaScript sourcemap files.
     "es6-css-minify.genJSmap": true,
     //

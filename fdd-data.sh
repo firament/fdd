@@ -37,7 +37,7 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly ORA_JRE_TAR="${APPS_BAS_SRC}/jre-8u172-linux-x64.tar.gz";
 readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v8.11.3-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v10.9.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
 readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.401-linux-x64.tar.gz";

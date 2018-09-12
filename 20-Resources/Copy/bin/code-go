@@ -28,8 +28,8 @@ if [[ ! -e ${DIRNAME}/.vscode/settings.json ]]; then
 	echo "Not Present '${DIRNAME}/.vscode/*.json', copying settings now.";
 	mkdir -vp ${DIRNAME}/.vscode;
 
-	cat ${HOME}/Documents/VSCode-Configs/vs-code-workspace-settings.json | sed s%${PATH_PLACE_HOLDER}%${DIRNAME}%g > ${DIRNAME}/.vscode/settings.json;
-	cat ${HOME}/Documents/VSCode-Configs/vs-code-go-launch.json          | sed s%${PATH_PLACE_HOLDER}%${DIRNAME}%g > ${DIRNAME}/.vscode/launch.json;
+	cat ${HOME}/Documents/VSCode-Configs/vs-code-workspace-settings.jsonc | sed s%${PATH_PLACE_HOLDER}%${DIRNAME}%g > ${DIRNAME}/.vscode/settings.json;
+	cat ${HOME}/Documents/VSCode-Configs/vs-code-go-launch.jsonc          | sed s%${PATH_PLACE_HOLDER}%${DIRNAME}%g > ${DIRNAME}/.vscode/launch.json;
 	echo;
 	ls -l ${DIRNAME}/.vscode/*.json;
 fi;

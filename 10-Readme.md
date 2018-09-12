@@ -1,5 +1,23 @@
 # Post setup customizations
 
+## Install on-demand apps
+
+### From Deb packs
+```sh
+DEB_FILE="full-path-to-file.deb";
+DIR_DEST="/";
+sudo dpkg-deb -vx ${DEB_FILE} ${DIR_DEST};
+# which app-name
+```
+
+### From tar (.bz2)
+```sh
+TAR_FILE="full-path-to-file.bz2";
+DIR_DEST="/usr";
+sudo tar -vxj --strip-components=1 -C ${DIR_DEST} -f ${TAR_FILE};
+# which app-name
+```
+
 ## Size suffixes
 
 | Suffix | Units     | Byte Equivalent |
