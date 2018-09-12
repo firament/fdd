@@ -293,10 +293,10 @@ https://www.tecmint.com/install-mysql-8-in-ubuntu/
 # sudo apt-get -Vy install xorriso cdck     # for creating bootable ISO
 # also qemu-utils,                          # for testing ISO
 
-DVD_CONTENT="./folder-to-be-root-of-DVD/";     # Contents of this folder will be at root of DVD
-DVD_PARENT="/parent-folder-of-${DVD_CONTENT}"; # Also location of ISO file created
 ISO_NAME="name-of-ISO-file.iso";
 ISO_LABL="label-of-ISO_DVD-when-mounted";
+DVD_CONTENT="./folder-to-be-root-of-DVD";    # Contents of this folder will be at root of DVD. No Trailing /
+DVD_PARENT="$(dirname ${DVD_CONTENT})";      # Also location of ISO file created
 
 # Prep for custom grub file
 mkdir -vp ${DVD_CONTENT}/boot/grub/
