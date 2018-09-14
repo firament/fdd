@@ -11,24 +11,24 @@ Automation scripts to bring a raw ubuntu installation to a known state
 ---
 
 ## Quick Download Links
-Updated on: Tue, 17-Jul-2018 16:09:27.224 +0530
+Updated on: 2018-09-14 13:30:09
 
 | App           | Curr Ver  | Download URL                                                                                |   Size |
 | ------------- | --------- | ------------------------------------------------------------------------------------------- | ------:|
-| .NET SDK      | 2.1.401   | https://www.microsoft.com/net/download/linux                                                | 156 MB |
-| node.js       | 8.11.3    | https://nodejs.org/en/download/                                                             |  11 MB |
-| GO Lang       | 1.10.3    | https://golang.org/dl/                                                                      | 126 MB |
+| .NET SDK      | 2.1.402   | https://www.microsoft.com/net/download/linux                                                | 156 MB |
+| node.js       | 10.10.0   | https://nodejs.org/en/download/                                                             |  12 MB |
+| GO Lang       | 1.11.0    | https://golang.org/dl/                                                                      | 121 MB |
 |               |           |                                                                                             |        |
-| Atom          | 1.28.0    | https://github.com/atom/atom/releases                                                       | 132 MB |
-| VS Code       | 1.25.1    | https://code.visualstudio.com/docs/?dv=linux64                                              |  67 MB |
+| Atom          | 1.30.0    | https://github.com/atom/atom/releases                                                       | 135 MB |
+| VS Code       | 1.27.2    | https://code.visualstudio.com/docs/?dv=linux64                                              |  64 MB |
 | GitEye        | 2.1.0     | https://www.collab.net/downloads/giteye#show-Linux                                          | 118 MB |
 | ProjectLibre  | 1.7.0     | https://sourceforge.net/projects/projectlibre/files/ProjectLibre/                           |  15 MB |
-| VPUML         | 15.1.0807 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 506 MB |
+| VPUML         | 15.1.0931 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 507 MB |
 | SQLeoVQB      | 17.09rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      | 1.5 MB |
 |               |           |                                                                                             |        |
 | mongodb       | 4.0.0     | https://www.mongodb.com/download-center#community                                           |  95 MB |
 | robo3t        | 1.2.1     | https://robomongo.org/download                                                              |  35 MB |
-| pandoc        | 2.2.1     | https://github.com/jgm/pandoc/releases                                                      |  26 MB |
+| pandoc        | 2.2.3.2   | https://github.com/jgm/pandoc/releases                                                      |  25 MB |
 | Mongo driver  | 3.7.0     | https://oss.sonatype.org/content/repositories/releases/org/mongodb/mongodb-driver/          |   1 MB |
 | MySql driver  | 8.0.11    | https://dev.mysql.com/downloads/connector/j/                                                |   5 MB |
 | MSSql driver  | 6.4       | https://dev.mysql.com/downloads/connector/j/                                                |   4 MB |

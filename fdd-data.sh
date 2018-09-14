@@ -37,26 +37,26 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly ORA_JRE_TAR="${APPS_BAS_SRC}/jre-8u172-linux-x64.tar.gz";
 readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v10.9.0-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v10.10.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
-readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.401-linux-x64.tar.gz";
+readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.402-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 #
-readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.10.3.linux-amd64.tar.gz";
+readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.11.linux-amd64.tar.gz";
 readonly GOLANG_PATH="${APPS_BAS_DIR}/go";
 
 ##
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.28.0-amd64.tar.gz";
+readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.30.0-amd64.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1534444642.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1536736541.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_1_20180807_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_1_20180931_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
 readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.1.0-linux.x86_64.zip";
@@ -78,7 +78,7 @@ readonly MONGODB_PATH="${APPS_EXT_DIR}/mongodb";
 readonly ROBO3T_TARFILE="${APPS_EXT_SRC}/robo3t-1.2.1-linux-x86_64-3e50a65.tar.gz";
 readonly ROBO3T_PATH="${APPS_EXT_DIR}/robo3t";
 #
-readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.2.2.1-linux.tar.gz";
+readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.2.3.2-linux.tar.gz";
 readonly PANDOC_PATH="${APPS_EXT_DIR}/pandoc";
 
 ## Individual Files

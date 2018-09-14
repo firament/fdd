@@ -2,6 +2,19 @@
 
 ## Tasks to be done for refining FDD setup script
 
+- [ ] Clean ~/Documents folder manually
+	- [ ] all except 'setup-fdd-logs'
+- [ ] Update Extensions (0903)
+	- [ ] Atom
+	- [ ] VSCode
+	- [ ] DNC
+- [ ] Update VSCode default settings
+- [ ] Clean up script, with test updates
+- [ ] Clean up x-* binaries
+- [ ] x
+- [ ] Move `/10-Base/DNC/sdk/NuGetFallbackFolder` to a container
+	- 1+ GB on disk
+	- [ ] Add `~/Documents/containers.md` with commands to mount common containers
 - [ ] Clean up GO configuration, WS copy
 - [ ] Add GO Tools installation also to script
 	- [ ] refer env setup notes and update

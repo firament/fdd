@@ -264,23 +264,21 @@ SetupDevApps(){
 	sudo update-alternatives --install /usr/bin/javac javac ${ORA_JRE_PATH}/bin/javac 1
 
 
-	#### INSTALL NodeJS -- test for xz
+	#### INSTALL NodeJS
 	#------------------------------------------------------------------------------#
 	echo "Setting up Node.js now";
-	# ClearFolder ${NODEJS_PATH};   # remove after next run. Needs testing.
 	makeOwnFolder ${NODEJS_PATH}  # Folder should exist for tar to work
 	tar -xJ --strip-components=1 -C ${NODEJS_PATH} -f ${NODEJS_TAR};
-	# mv -vf ${NODEJS_PATH}* ${NODEJS_PATH};   # remove after next run. Needs testing.
 	sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
 	sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
 	echo " - adding core dependencies"
 	npm install -g grunt-cli
 	sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
 
-	#### INSTALL .NET Core
+	#### INSTALL .NET Core SDK
 	#------------------------------------------------------------------------------#
 	echo "Setting up .NET Core now";
-	# ClearFolder ${DNETCORE_PATH};   # remove after next run. Needs testing.
+	ClearFolder ${DNETCORE_PATH};   # Required to avoid parallel versions
 	makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
 	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
 
@@ -317,16 +315,13 @@ SetupDevApps(){
 	#### INSTALL Atom
 	#------------------------------------------------------------------------------#
 	echo "Setting up Atom now";
-	# ClearFolder ${ATOM_PATH}; # remove after next run. Needs testing.
 	makeOwnFolder ${ATOM_PATH};	# Folder should exist for tar to work
 	tar -xz --strip-components=1 -C ${ATOM_PATH} -f ${ATOM_TAR};
-	# mv -vf ${ATOM_PATH}* ${ATOM_PATH}; # remove after next run. Needs testing.
 	sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
 
 	#### INSTALL Visual Studio Code
 	#------------------------------------------------------------------------------#
 	echo "Setting up Visual Studio Code now";
-	# ClearFolder ${VSCODE_PATH}; # remove after next run. Needs testing.
 	makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
 	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
 	sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
@@ -341,10 +336,8 @@ SetupDevApps(){
 	#### INSTALL VPUML CE
 	#------------------------------------------------------------------------------#
 	echo "Setting up VP UML CE now";
-	# ClearFolder ${VPUML_PATH}; # remove after next run. Needs testing.
 	makeOwnFolder ${VPUML_PATH};	# Folder should exist for tar to work
 	tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
-	# mv -vf ${VPUML_PATH}* ${VPUML_PATH}; # remove after next run. Needs testing.
 	sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
 
 	#### INSTALL GitEye
@@ -357,10 +350,8 @@ SetupDevApps(){
 	#### INSTALL PROJECT LIBRE
 	#------------------------------------------------------------------------------#
 	echo "Setting up Project Libre now";
-	# ClearFolder ${PLIB_PATH}; # remove after next run. Needs testing.
 	makeOwnFolder ${PLIB_PATH};	# Folder should exist for tar to work
 	tar -xz --strip-components=1 -C ${PLIB_PATH} -f ${PLIB_TARFILE};
-	# mv -vf ${PLIB_PATH}* ${PLIB_PATH}; # remove after next run. Needs testing.
 
 	#### INSTALL SQLeo Visual Query Builder
 	#------------------------------------------------------------------------------#
@@ -395,10 +386,8 @@ SetupDevApps(){
 	#### INSTALL Pandoc
 	#------------------------------------------------------------------------------#
 	echo "Setting up pandoc now";
-	# ClearFolder ${PANDOC_PATH}; # remove after next run. Needs testing.
 	makeOwnFolder ${PANDOC_PATH};	# Folder should exist for tar to work
 	tar -xz --strip-components=1 -C ${PANDOC_PATH} -f ${PANDOC_TARFILE};
-	# mv -vf ${PANDOC_PATH}* ${PANDOC_PATH}; # remove after next run. Needs testing.
 	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
 	sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
 	# Add templates to a well-known-folder
@@ -548,35 +537,96 @@ ApplyPatch01(){
 	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
 }
 
-## Update 18-09
+## Update 18-09 [2018-09-14 13:45:25]
 ApplyUpdate1809(){
 	echo;
 	echo "APPLY UPDATE 18-09";
 	# Execution is Pending.
 
+	#### INSTALL NodeJS
+	#------------------------------------------------------------------------------#
+	echo "Setting up Node.js now";
+	makeOwnFolder ${NODEJS_PATH}  # Folder should exist for tar to work
+	tar -xJ --strip-components=1 -C ${NODEJS_PATH} -f ${NODEJS_TAR};
+	# sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
+	# sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
+	echo " - adding core dependencies"
+	npm install -g grunt-cli
+	# sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
+
+	#### INSTALL .NET Core
+	#------------------------------------------------------------------------------#
+	echo "Setting up .NET Core now";
+	ClearFolder ${DNETCORE_PATH};   # remove after next run. Needs testing.
+	makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
+	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
+
+	#### INSTALL GO LANG
+	#------------------------------------------------------------------------------#
+	echo "Setting up GO Lang now";
+	ClearFolder ${GOLANG_PATH}; # Prepare for clean install. IMP
+	makeOwnFolder ${GOLANG_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${GOLANG_PATH} -f ${GOLANG_TAR};
+
+	# Initialize environment
+	echo "Initializing GO Environment.";
+	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
+	mkdir -v -p ${APPS_BAS_DIR}/go-package-lib;
+
+	export GOROOT="${GOLANG_PATH}";
+	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
+	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}/bin:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
+	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+
+	echo " - Inspect values before running"
+	echo "   GOROOT =      ${GOROOT}";
+	echo "   GOPATH =      ${GOPATH}";
+	echo "   TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "   PATH =        ${PATH}";
+	echo;
+
+	echo " - installing package 'goimports'";
+	go get golang.org/x/tools/cmd/goimports;
+
+
+	## /20-DEV
+
+	#### INSTALL Atom
+	#------------------------------------------------------------------------------#
+	echo "Setting up Atom now";
+	makeOwnFolder ${ATOM_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${ATOM_PATH} -f ${ATOM_TAR};
+	# sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
+
 	#### INSTALL Visual Studio Code
 	#------------------------------------------------------------------------------#
-	# echo "Setting up Visual Studio Code now";
-	# ClearFolder ${VSCODE_PATH}; # remove after next run. Needs testing.
-	# makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
-	# tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
+	echo "Setting up Visual Studio Code now";
+	makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
 	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
 	# Initialize settings
 	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
 	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
 
-	# # Copy config templates, used by commands
+	# Copy config templates, used by commands
 	mkdir -vp ${HOME}/Documents/VSCode-Configs/;
 	cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
 
 	#### INSTALL VPUML CE
 	#------------------------------------------------------------------------------#
-	# echo "Setting up VP UML CE now";
-	# ClearFolder ${VPUML_PATH}; # remove after next run. Needs testing.
-	# makeOwnFolder ${VPUML_PATH};	# Folder should exist for tar to work
-	# tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
-	# mv -vf ${VPUML_PATH}* ${VPUML_PATH}; # remove after next run. Needs testing.
+	echo "Setting up VP UML CE now";
+	makeOwnFolder ${VPUML_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
 	# sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
+
+	#### INSTALL Pandoc
+	#------------------------------------------------------------------------------#
+	echo "Setting up pandoc now";
+	makeOwnFolder ${PANDOC_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${PANDOC_PATH} -f ${PANDOC_TARFILE};
+	# sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
+	# sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
+	# Add templates to a well-known-folder
 
 	echo "#------------------------------------------------------------------------------#";
 }
