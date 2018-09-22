@@ -2,16 +2,15 @@
 
 ## Tasks to be done for refining FDD setup script
 
-- [ ] Clean ~/Documents folder manually
-	- [ ] all except 'setup-fdd-logs'
-- [ ] Update Extensions (0903)
-	- [ ] Atom
-	- [ ] VSCode
-	- [ ] DNC
-- [ ] Update VSCode default settings
-- [ ] Clean up script, with test updates
-- [ ] Clean up x-* binaries
 - [ ] x
+- [ ] Add local cache to `~/.nuget/NuGet/NuGet.Config`
+	- [ ] `/media/sak/70_Current/Downloads/NuGetFallbackFolder`
+- [ ] Clean up x-* binaries
+- [ ] Review VSCode settings
+	- Multi Cursor Modifier (Why does alt works on some?)
+	- editor.autoClosingBrackets
+	- editor.autoClosingQuotes
+	- html.format.wrapAttributes
 - [ ] Move `/10-Base/DNC/sdk/NuGetFallbackFolder` to a container
 	- 1+ GB on disk
 	- [ ] Add `~/Documents/containers.md` with commands to mount common containers
@@ -26,6 +25,16 @@
 - [ ] task placeholder
 
 ## Done - aka Changelog
+### 2018 Sep 22
+- [x] Clean ~/Documents folder manually
+	- [x] all except 'setup-fdd-logs'
+- [ ] Update Extensions (0903)
+	- [x] Atom
+	- [x] VSCode
+	- [x] DNC
+- [x] Update VSCode default settings
+- [x] Clean up script, with test updates
+
 ### 2018 Aug 28
 - [x] Fix libre office menus to sides, to optimize wide-screen usage
 - [x] Set 'Eye of MATE Image Viewer' as default images for png and jpeg files

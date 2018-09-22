@@ -27,6 +27,19 @@ which filezilla;
 - also see
 	- `dpkg-deb -R original.deb tmp`
 
+## Sync to backup
+```sh
+SRC_DIR="/path/to/source-root/setup-fdd-a/";
+TGT_DIR="/path/to/target-root/setup-fdd-a";
+
+rsync -vrh
+ --exclude=".git"
+ --exclude="x-*"
+ --exclude="deb-paks-*"
+ --exclude="Win-Files/"
+ ${SRC_DIR}
+ ${TGT_DIR}
+```
 
 ## Add to README
 

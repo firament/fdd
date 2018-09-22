@@ -40,6 +40,10 @@
     "editor.mouseWheelZoom": true,
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent",
+    // The modifier to be used to add multiple cursors with the mouse. The Go To Definition and Open Link mouse gestures will adapt such that they do not conflict with the multicursor modifier. [Read more](https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier).
+    //  - ctrlCmd: Maps to `Control` on Windows and Linux and to `Command` on macOS.
+    //  - alt: Maps to `Alt` on Windows and Linux and to `Option` on macOS.
+    "editor.multiCursorModifier": "ctrlCmd",
     //
 	// WORKBENCH
     "workbench.colorTheme": "Default Dark+",
@@ -71,6 +75,15 @@
         "editor.wordWrap": "off",
         "editor.quickSuggestions": false
     },
+    //
+    // HTML
+    // Wrap attributes.
+    //  - auto: Wrap attributes only when line length is exceeded.
+    //  - force: Wrap each attribute except first.
+    //  - force-aligned: Wrap each attribute except first and keep aligned.
+    //  - force-expand-multiline: Wrap each attribute.
+    //  - aligned-multiple: Wrap when line length is exceeded, align attributes vertically.
+    "html.format.wrapAttributes": "force-aligned",
     //
 	// DOC-THIS
     "docthis.includeDateTag": true,

@@ -541,7 +541,7 @@ ApplyPatch01(){
 ApplyUpdate1809(){
 	echo;
 	echo "APPLY UPDATE 18-09";
-	# Execution is Pending.
+	# Applied on 2018-09-16 14:15:12
 
 	#### INSTALL NodeJS
 	#------------------------------------------------------------------------------#

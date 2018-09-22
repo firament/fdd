@@ -401,6 +401,47 @@ sudo swapoff -av;
 /dev/sdf2: LABEL="St0rD1sk" UUID="A2BCB9DCBCB9AB65" TYPE="ntfs" PARTUUID="308432f4-02"
 ```
 
+### Sample Hook file
+```
+####################################################################################################
+#                                                                                                  #
+#   M A C H I N E   S P E C I F I C   E N T R I E S                                                #
+#                                                                                                  #
+#   ASSUMPTIONS:                                                                                   #
+#   The following statements have been executed, and the variables set correctly                   #
+#       set MC-NAME_HDD="1A159FBB4B0C2043"                                                         #
+#       search --no-floppy --fs-uuid --set=MC-NAME_HDD_GRUB ${MC-NAME_HDD}                         #
+#   And these variables are availaible for use                                                     #
+#       ${MC-NAME_HDD}                                                                             #
+#       ${MC-NAME_HDD_GRUB}                                                                        #
+#                                                                                                  #
+#   TODO:                                                                                          #
+#       Replace 'MC-NAME' with current machine name/code                                           #
+#                                                                                                  #
+####################################################################################################
+#--------------------------------------------------------------------------------------------------#
+# FDD Bionic AMD64 (b)
+menuentry "[LIVE] FDD B Bionic AMD64 (w ubuntu-mate)" {
+    set root=${MC-NAME_HDD_GRUB}
+    set lmPATHtb="/OSLib/FDD-B"
+    #
+    linux  ${lmPATHtb}/vmlinuz \
+        boot=casper live-media-path=${lmPATHtb} \
+        root=(${root})${lmPATHtb} \
+        max_loop=8 \
+        debug \
+        verbose \
+        fdd-autorun=/cdrom/CustomScripts/Custom-FDDb-MC-NAME.sh \
+        parm-for-working-dir=/70-CurrentWork
+    initrd ${lmPATHtb}/initrd.gz
+}
+#--------------------------------------------------------------------------------------------------#
+#                                                                                                  #
+set default="2" # To set an entry as default, 1 based counter.                                     #
+set timeout=10	# Keep this line and end of file.                                                  #
+#--------------------------------------------------------------------------------------------------#
+```
+
 ### Windows
 
 ```txt
