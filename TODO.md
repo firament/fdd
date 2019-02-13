@@ -5,6 +5,9 @@
 - [ ] x
 - [ ] Add local cache to `~/.nuget/NuGet/NuGet.Config`
 	- [ ] `/media/sak/70_Current/Downloads/NuGetFallbackFolder`
+- [ ] Add Pinguybuilder install function
+	- [ ] include all dependencies
+	- [ ] install deb directly
 - [ ] Clean up x-* binaries
 - [ ] Review VSCode settings
 	- Multi Cursor Modifier (Why does alt works on some?)

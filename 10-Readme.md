@@ -135,7 +135,7 @@ location:/usr/share/applications/mate-screenshot.desktop
 location:/usr/share/applications/mate-calc.desktop
 location:/usr/share/applications/mate-system-monitor.desktop
 location:/usr/share/applications/meld.desktop
-location:/usr/share/applications/gufw.desktop```
+location:/usr/share/applications/gufw.desktop
 ```
 
 > **Remove non-needed entries from Places**
@@ -166,6 +166,7 @@ location:/usr/share/applications/gufw.desktop```
 
 ## Visual Studio Code Extensions
 > needs updating - 2018 Jul 27
+
 ```sh
 ## Launch VS Code Quick Open (Ctrl+P),
 ## paste the following commands individually,
@@ -200,19 +201,17 @@ ext install ms-vscode.theme-markdownkit
 1. `sudo grub-install --no-floppy --root-directory=/media/linuxUser/SONY_64GB /dev/sde`
 2. `sudo grub-install --no-floppy --root-directory=/media/ubuntu-mate/70_Current /dev/sdb`
 3. WIP
-```sh
-sudo
-grub-install
---verbose
---force
---uefi-secure-boot
---boot-directory=/media/sak/70_Current/boot/
---efi-directory=/media/sak/70_Current/EFI
-/dev/sdb
-2>&1 | tee 80-grub-install-a.log
-
-
-```
+	```sh
+	sudo
+	grub-install
+	--verbose
+	--force
+	--uefi-secure-boot
+	--boot-directory=/media/sak/70_Current/boot/
+	--efi-directory=/media/sak/70_Current/EFI
+	/dev/sdb
+	2>&1 | tee 80-grub-install-a.log
+	```
 
 ---
 

@@ -14,17 +14,17 @@ Automation scripts to bring a raw ubuntu installation to a known state
 Updated on: 2018-09-14 13:30:09
 
 | App           | Curr Ver  | Download URL                                                                                |   Size |
-| ------------- | --------- | ------------------------------------------------------------------------------------------- | ------:|
-| .NET SDK      | 2.1.402   | https://www.microsoft.com/net/download/linux                                                | 156 MB |
-| node.js       | 10.10.0   | https://nodejs.org/en/download/                                                             |  12 MB |
-| GO Lang       | 1.11.0    | https://golang.org/dl/                                                                      | 121 MB |
+| ------------- | --------- | ------------------------------------------------------------------------------------------- | -----: |
+| .NET SDK      | 2.2.103   | https://www.microsoft.com/net/download/linux                                                | 158 MB |
+| node.js       | 11.9.0    | https://nodejs.org/en/download/                                                             |  13 MB |
+| GO Lang       | 1.11.5    | https://golang.org/dl/                                                                      | 134 MB |
 |               |           |                                                                                             |        |
-| Atom          | 1.30.0    | https://github.com/atom/atom/releases                                                       | 135 MB |
-| VS Code       | 1.27.2    | https://code.visualstudio.com/docs/?dv=linux64                                              |  64 MB |
-| GitEye        | 2.1.0     | https://www.collab.net/downloads/giteye#show-Linux                                          | 118 MB |
-| ProjectLibre  | 1.7.0     | https://sourceforge.net/projects/projectlibre/files/ProjectLibre/                           |  15 MB |
+| Atom          | 1.34.0    | https://github.com/atom/atom/releases                                                       | 135 MB |
+| VS Code       | 1.31.0    | https://code.visualstudio.com/docs/?dv=linux64                                              |  68 MB |
+| GitEye        | 2.2.0     | https://www.collab.net/downloads/giteye#show-Linux                                          | 123 MB |
+| ProjectLibre  | 1.8.0     | https://sourceforge.net/projects/projectlibre/files/ProjectLibre/                           |  17 MB |
 | VPUML         | 15.1.0931 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 507 MB |
-| SQLeoVQB      | 17.09rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      | 1.5 MB |
+| SQLeoVQB      | 19.01rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      |   3 MB |
 |               |           |                                                                                             |        |
 | mongodb       | 4.0.0     | https://www.mongodb.com/download-center#community                                           |  95 MB |
 | robo3t        | 1.2.1     | https://robomongo.org/download                                                              |  35 MB |

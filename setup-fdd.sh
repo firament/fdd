@@ -34,6 +34,7 @@ echo;
 
 ## Post Install stabilization patches
 #	ApplyUpdate1809    2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1809-0916a.log;
+#	ApplyUpdate1902    2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1902-0212a.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

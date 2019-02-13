@@ -190,7 +190,7 @@ EOABMS
 	#------------------------------------------------------------------------------#
  	echo "Updating with additional fonts...";
 	pushd ${RESOURCE_FOLDER}/Install/;
-	sudo rsync -r fonts-zekr Sans-TTF Serif-TTF /usr/share/fonts/truetype/
+	sudo rsync -r fonts-zekr Sans-TTF Serif-TTF Mono-TTF /usr/share/fonts/truetype/
 	sudo rsync -r Sans-OTF Serif-OTF  /usr/share/fonts/opentype/
 	popd;
 
@@ -198,6 +198,7 @@ EOABMS
 	sudo chmod -R +r /usr/share/fonts/truetype/fonts-zekr
 	sudo chmod -R +r /usr/share/fonts/truetype/Sans-TTF
 	sudo chmod -R +r /usr/share/fonts/truetype/Serif-TTF
+	sudo chmod -R +r /usr/share/fonts/truetype/Mono-TTF
 	sudo chmod -R +r /usr/share/fonts/opentype/Sans-OTF
 	sudo chmod -R +r /usr/share/fonts/opentype/Serif-OTF
 
@@ -627,6 +628,162 @@ ApplyUpdate1809(){
 	# sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
 	# sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
 	# Add templates to a well-known-folder
+
+	echo "#------------------------------------------------------------------------------#";
+}
+
+PatchAPT(){
+	# Update Contents
+	sudo cp -vf Working/sources.list ${DIR_DEST}/sources.list;
+
+	# Add specific repositories
+	if [ ! -e /etc/apt/sources.list.d/google-chrome.list ]; then
+		# Add certificate to apt, one time need
+		# https://dl-ssl.google.com/linux/linux_signing_key.pub
+		sudo apt-key add ${GOOGL_PUB_KEY};
+		sudo touch /etc/apt/sources.list.d/google-chrome.list;
+		echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee -a /etc/apt/sources.list.d/google-chrome.list;
+	fi;
+	#
+	if [ ! -e /etc/apt/sources.list.d/skype-stable.list ]; then
+		# Add certificate to apt, one time need
+		sudo apt-key add ${SKYPE_PUB_KEY};
+		sudo touch /etc/apt/sources.list.d/skype-stable.list;
+		echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee -a /etc/apt/sources.list.d/skype-stable.list;
+	fi;
+}
+
+## Update 19-02 [2019-02-12 21:56:54]
+ApplyUpdate1902(){
+	echo;
+	echo "APPLY UPDATE 19-02";
+	# to be applied
+
+	# # FIX: repair broken APT
+	# TAR_FILE="Working/apt-src.tar.xz";
+	# CMP_TYPE="J";
+	# DIR_DEST="/media/sak/9883e860-1080-414b-b541-4f4d188a2856/etc/apt";
+	# sudo mkdir -vp ${DIR_DEST};
+	# sudo tar -vx${CMP_TYPE} -C ${DIR_DEST} -f ${TAR_FILE};
+	# 
+	# # Update all repos
+	# sudo apt-get -y  update;
+	# sudo apt-get -Vy upgrade;
+
+	# Add additional apps
+	aptInstallApp remmina;
+
+	#### ADDING FONTS ##
+	#------------------------------------------------------------------------------#
+ 	echo "Updating with additional fonts...";
+	pushd ${RESOURCE_FOLDER}/Install/;
+	sudo rsync -r Mono-TTF /usr/share/fonts/truetype/
+	popd;
+
+	# Make readable for all, or will not be usable
+	sudo chmod -R +r /usr/share/fonts/truetype/Mono-TTF
+
+	# Update system aware of new fonts
+	sudo fc-cache -fv /usr/share/fonts/
+
+
+	## /10-Base
+
+	#### INSTALL NodeJS
+	#------------------------------------------------------------------------------#
+	echo "Setting up Node.js now";
+	makeOwnFolder ${NODEJS_PATH}  # Folder should exist for tar to work
+	tar -xJ --strip-components=1 -C ${NODEJS_PATH} -f ${NODEJS_TAR};
+	# sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
+	# sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
+	echo " - adding core dependencies"
+	npm install -g grunt-cli
+	# sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
+
+	#### INSTALL .NET Core
+	#------------------------------------------------------------------------------#
+	echo "Setting up .NET Core now";
+	ClearFolder ${DNETCORE_PATH};   # remove after next run. Needs testing.
+	makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
+	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
+
+	#### INSTALL GO LANG
+	#------------------------------------------------------------------------------#
+	echo "Setting up GO Lang now";
+	ClearFolder ${GOLANG_PATH}; # Prepare for clean install. IMP
+	makeOwnFolder ${GOLANG_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${GOLANG_PATH} -f ${GOLANG_TAR};
+
+	# Initialize environment
+	echo "Initializing GO Environment.";
+	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
+	mkdir -v -p ${APPS_BAS_DIR}/go-package-lib;
+
+	export GOROOT="${GOLANG_PATH}";
+	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
+	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}/bin:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
+	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
+
+	echo " - Inspect values before running"
+	echo "   GOROOT =      ${GOROOT}";
+	echo "   GOPATH =      ${GOPATH}";
+	echo "   TOOLSGOPATH = ${TOOLSGOPATH}";
+	echo "   PATH =        ${PATH}";
+	echo;
+
+	echo " - installing package 'goimports'";
+	go get golang.org/x/tools/cmd/goimports;
+
+
+	## /20-DEV
+
+	#### INSTALL Atom
+	#------------------------------------------------------------------------------#
+	echo "Setting up Atom now";
+	makeOwnFolder ${ATOM_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${ATOM_PATH} -f ${ATOM_TAR};
+	# sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
+
+	#### INSTALL Visual Studio Code
+	#------------------------------------------------------------------------------#
+	echo "Setting up Visual Studio Code now";
+	makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
+	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
+	# # Initialize settings
+	# cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
+	# cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
+
+	# # Copy config templates, used by commands
+	# mkdir -vp ${HOME}/Documents/VSCode-Configs/;
+	# cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
+
+	#### INSTALL VPUML CE
+	#------------------------------------------------------------------------------#
+	echo "Setting up VP UML CE now";
+	makeOwnFolder ${VPUML_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
+	# sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
+
+	#### INSTALL GitEye
+	#------------------------------------------------------------------------------#
+	echo "Setting up GitEye now";
+	# ClearFolder ${GITEYE_PATH}; # Remove if upgrading
+	unzip ${GITEYE_TAR} -d ${GITEYE_PATH};
+	sudo ln -vsT ${GITEYE_PATH}/GitEye ${PUBLIC_BIN_LOCN}/GitEye
+
+	#### INSTALL PROJECT LIBRE
+	#------------------------------------------------------------------------------#
+	echo "Setting up Project Libre now";
+	makeOwnFolder ${PLIB_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${PLIB_PATH} -f ${PLIB_TARFILE};
+
+	#### INSTALL SQLeo Visual Query Builder
+	#------------------------------------------------------------------------------#
+	echo "Setting up SQLeo Visual Query Builder";
+	# ClearFolder ${SQLVQB_PATH}; # Remove if upgrading
+	unzip ${SQLVQB_TARFILE} -d ${APPS_DEV_DIR};
+	mv -vf ${SQLVQB_PATH}* ${SQLVQB_PATH};
 
 	echo "#------------------------------------------------------------------------------#";
 }

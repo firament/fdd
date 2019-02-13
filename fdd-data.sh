@@ -37,35 +37,35 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly ORA_JRE_TAR="${APPS_BAS_SRC}/jre-8u172-linux-x64.tar.gz";
 readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v10.10.0-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v11.9.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
-readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.1.402-linux-x64.tar.gz";
+readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.2.103-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 #
-readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.11.linux-amd64.tar.gz";
+readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.11.5.linux-amd64.tar.gz";
 readonly GOLANG_PATH="${APPS_BAS_DIR}/go";
 
 ##
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly ATOM_TAR="${APPS_DEV_SRC}/atom-1.30.0-amd64.tar.gz";
+readonly ATOM_TAR="${APPS_DEV_SRC}/atom-amd64-1.34.0.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1536736541.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1549443333.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_1_20180931_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_2_20190201_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
-readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.1.0-linux.x86_64.zip";
+readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.2.0-linux.x86_64.zip";
 readonly GITEYE_PATH="${APPS_DEV_DIR}/giteye";
 #
-readonly PLIB_TARFILE="${APPS_DEV_SRC}/projectlibre-1.7.0.tar.gz";
+readonly PLIB_TARFILE="${APPS_DEV_SRC}/projectlibre-1.8.0.tar.gz";
 readonly PLIB_PATH="${APPS_DEV_DIR}/projectlibre";
 #
-readonly SQLVQB_TARFILE="${APPS_DEV_SRC}/SQLeoVQB.2017.09.rc1.zip";
+readonly SQLVQB_TARFILE="${APPS_DEV_SRC}/SQLeoVQB.2019.01.rc1.zip";
 readonly SQLVQB_PATH="${APPS_DEV_DIR}/SQLeoVQB";
 
 ##
