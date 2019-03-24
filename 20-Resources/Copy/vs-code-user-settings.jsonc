@@ -1,14 +1,14 @@
 // original file name: ${HOME}/.config/Code/User/settings.json
 {
-	//
-	// COMMMON
+    //
+    // COMMMON
     "update.enableWindowsBackgroundUpdates": false,
     "extensions.autoCheckUpdates": true,
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": false,
     "extensions.showRecommendationsOnlyOnDemand": false,
     //
-	// FILES
+    // FILES
     // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
     "files.associations": {},
     "files.insertFinalNewline": true,
@@ -23,11 +23,11 @@
         "**/.DS_Store": true
     },
     //
-	// GIT
+    // GIT
     "git.path": "/usr/bin/git",
     "git.promptToSaveFilesBeforeCommit": true,
     //
-	// EDITOR
+    // EDITOR
     "editor.codeLens": false,
     "editor.fontFamily": "'Fira Code Retina', 'Liberation Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 14,
@@ -35,7 +35,7 @@
     "editor.formatOnType": true,
     "editor.insertSpaces": false,
     "editor.letterSpacing": 0,
-    "editor.lineHeight": 20,
+    "editor.lineHeight": 25,
     "editor.fontLigatures": true,
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
@@ -45,20 +45,21 @@
     //  - ctrlCmd: Maps to `Control` on Windows and Linux and to `Command` on macOS.
     //  - alt: Maps to `Alt` on Windows and Linux and to `Option` on macOS.
     "editor.multiCursorModifier": "ctrlCmd",
-	// Controls the font size in pixels of the terminal.
+    // Controls the font size in pixels of the terminal.
     "terminal.integrated.fontSize": 14,
-	// Controls the font family of the terminal, this defaults to `editor.fontFamily`'s value.
+    // Controls the font family of the terminal, this defaults to `editor.fontFamily`'s value.
     "terminal.integrated.fontFamily": "'Fira Code', 'Ubuntu Mono', monospace",
     // Controls the line height of the terminal, this number is multiplied by the terminal font size to get the actual line-height in pixels.
-	"terminal.integrated.lineHeight": 1.2,
-	"terminal.integrated.letterSpacing": 1,
+    "terminal.integrated.lineHeight": 1.2,
+    "terminal.integrated.letterSpacing": 2,
+    "terminal.integrated.rendererType": "canvas",
     //
-	// WORKBENCH
+    // WORKBENCH
     "workbench.colorTheme": "Default Dark+",
     "workbench.editor.revealIfOpen": true,
     "workbench.startupEditor": "none",
     //
-	// MARKDOWN
+    // MARKDOWN
     "markdown.preview.breaks": true,
     "markdown.previewFrontMatter": "show",
     "markdown.preview.fontFamily": "Carlito, Calibri, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
@@ -66,7 +67,7 @@
     // A list of URLs or local paths to CSS style sheets to use from the markdown preview. Relative paths are interpreted relative to the folder open in the explorer. If there is no open folder, they are interpreted relative to the location of the markdown file. All '\' need to be written as '\\'.
     "markdown.styles": [],
     //
-	// CUSTOM LANGUAGES
+    // CUSTOM LANGUAGES
     // Configure editor settings to be overridden for [go] language.
     "[go]": {
         "editor.insertSpaces": false,
@@ -93,13 +94,14 @@
     //  - aligned-multiple: Wrap when line length is exceeded, align attributes vertically.
     "html.format.wrapAttributes": "force-aligned",
     //
-	// DOC-THIS
+    // DOC-THIS
+    "docthis.authorName": "sak",
     "docthis.includeDateTag": true,
     "docthis.includeDescriptionTag": true,
     "docthis.includeMemberOfOnInterfaceMembers": true,
     "docthis.includeTypes": true,
     //
-	// GO LANG
+    // GO LANG
     "go.enableCodeLens": {
         "references": false,
         "runtest": true
@@ -117,7 +119,7 @@
         "suppressShowKeyBindingsNotice": true
     },
     //
-	// ES6
+    // ES6
     // Generate JavaScript sourcemap files.
     "es6-css-minify.genJSmap": true,
     //

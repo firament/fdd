@@ -33,8 +33,9 @@ echo;
 #	InstallHssApps     2>&1 | tee ${SETUPS_LOG_LOCN}/40-InstallHssApps.log;
 
 ## Post Install stabilization patches
-#	ApplyUpdate1809    2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1809-0916a.log;
-#	ApplyUpdate1902    2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1902-0212a.log;
+#	PatchAPT		   2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1902-0220a.log;
+#	ApplyUpdate1902B   2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1902-0220a.log;
+	UpgradeJava        2>&1 | tee ${SETUPS_LOG_LOCN}/66-UpgradeJava-a.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

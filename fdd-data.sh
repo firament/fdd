@@ -34,13 +34,13 @@ readonly XULR_TAR="${ZEKR_SRC}/xulrunner-Stable/xulrunner-33.1.1.en-US.linux-x86
 readonly APPS_BAS_DIR="/10-Base";
 readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 #
-readonly ORA_JRE_TAR="${APPS_BAS_SRC}/jre-8u172-linux-x64.tar.gz";
+readonly ORA_JRE_TAR="${APPS_BAS_SRC}/jdk-11.0.2_linux-x64_bin.tar.gz";
 readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 #
 readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v11.9.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
-readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.2.103-linux-x64.tar.gz";
+readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.2.104-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 #
 readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.11.5.linux-amd64.tar.gz";
@@ -53,7 +53,7 @@ readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 readonly ATOM_TAR="${APPS_DEV_SRC}/atom-amd64-1.34.0.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1549443333.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1549938209.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
 readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_2_20190201_Linux64_InstallFree.tar.gz";
