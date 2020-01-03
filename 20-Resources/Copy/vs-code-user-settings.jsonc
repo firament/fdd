@@ -10,8 +10,10 @@
     //
     // FILES
     // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
-    "files.associations": {},
-    "files.insertFinalNewline": true,
+	"files.associations": {
+		"*.ddl": "sql"
+	},
+	"files.insertFinalNewline": true,
     // Configure glob patterns for excluding files and folders.
     // For example, the files explorer decides which files and folders to show or hide based on this setting.
     // Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
@@ -22,77 +24,132 @@
         "**/CVS": true,
         "**/.DS_Store": true
     },
-    //
+	"files.watcherExclude": {
+		"**/bin/**": true,
+		"**/obj/**": true,
+		"**/vendor/bundle/**": true
+	},
+	//
     // GIT
     "git.path": "/usr/bin/git",
     "git.promptToSaveFilesBeforeCommit": true,
     //
     // EDITOR
     "editor.codeLens": false,
-    "editor.fontFamily": "'Fira Code Retina', 'Liberation Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "editor.fontSize": 14,
+	"editor.copyWithSyntaxHighlighting": true,
+	"editor.detectIndentation": false,
+	"editor.fontFamily": "'Fira Code Retina', 'Liberation Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+	"editor.fontLigatures": true,
+	"editor.fontSize": 14,
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,
     "editor.insertSpaces": false,
     "editor.letterSpacing": 0,
     "editor.lineHeight": 25,
-    "editor.fontLigatures": true,
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent",
-    // The modifier to be used to add multiple cursors with the mouse. The Go To Definition and Open Link mouse gestures will adapt such that they do not conflict with the multicursor modifier. [Read more](https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier).
+	// Controls whether the Find Widget should add extra lines on top of the editor. When true, you can scroll beyond the first line when the Find Widget is visible.
+	"editor.find.addExtraSpaceOnTop": false,
+	"breadcrumbs.enabled": false,
+	"zenMode.restore": true,
+	// Controls whether turning on Zen Mode also hides the editor line numbers.
+	"zenMode.hideLineNumbers": false,
+	// The modifier to be used to add multiple cursors with the mouse. The Go To Definition and Open Link mouse gestures will adapt such that they do not conflict with the multicursor modifier. [Read more](https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier).
     //  - ctrlCmd: Maps to `Control` on Windows and Linux and to `Command` on macOS.
     //  - alt: Maps to `Alt` on Windows and Linux and to `Option` on macOS.
     "editor.multiCursorModifier": "ctrlCmd",
-    // Controls the font size in pixels of the terminal.
-    "terminal.integrated.fontSize": 14,
+    //
+    // TERMINAL
     // Controls the font family of the terminal, this defaults to `editor.fontFamily`'s value.
     "terminal.integrated.fontFamily": "'Fira Code', 'Ubuntu Mono', monospace",
+    // Controls the font size in pixels of the terminal.
+    "terminal.integrated.fontSize": 14,
     // Controls the line height of the terminal, this number is multiplied by the terminal font size to get the actual line-height in pixels.
-    "terminal.integrated.lineHeight": 1.2,
-    "terminal.integrated.letterSpacing": 2,
+    "terminal.integrated.lineHeight": 1.1,
+    "terminal.integrated.letterSpacing": 1,
     "terminal.integrated.rendererType": "canvas",
-    //
+	//
+	// Debug Console
+	// Controls the font family in the debug console.
+	"debug.console.fontFamily": "'Fira Code', 'Ubuntu Mono', monospace",
+	// Controls the font size in pixels in the debug console.
+	"debug.console.fontSize": 12,
+	// Controls the line height in pixels in the debug console. Use 0 to compute the line height from the font size.
+	"debug.console.lineHeight": 14,
+	//
     // WORKBENCH
     "workbench.colorTheme": "Default Dark+",
     "workbench.editor.revealIfOpen": true,
     "workbench.startupEditor": "none",
-    //
-    // MARKDOWN
-    "markdown.preview.breaks": true,
-    "markdown.previewFrontMatter": "show",
-    "markdown.preview.fontFamily": "Carlito, Calibri, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
-    "markdown.preview.fontSize": 14,
-    // A list of URLs or local paths to CSS style sheets to use from the markdown preview. Relative paths are interpreted relative to the folder open in the explorer. If there is no open folder, they are interpreted relative to the location of the markdown file. All '\' need to be written as '\\'.
-    "markdown.styles": [],
-    //
-    // CUSTOM LANGUAGES
-    // Configure editor settings to be overridden for [go] language.
+	// Controls the format of the label for an editor.
+	"workbench.editor.labelFormat": "short",
+	// Controls whether to use the split JSON editor when editing settings as JSON.
+	"workbench.settings.useSplitJSON": true,
+	////
+	// CUSTOM LANGUAGES
+	////
+	//
+	// JSON
+	// Configure editor settings to be overridden for [json] language.
+	"[json]": {
+		"editor.quickSuggestions": {
+			"strings": true
+		}
+	},
+	//
+	// javascript
+	"javascript.format.insertSpaceAfterConstructor": true,
+	"javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+	"javascript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+	"javascript.suggest.completeFunctionCalls": true,
+	"typescript.suggest.completeFunctionCalls": true,
+	//
+	// HTML
+	// Wrap attributes.
+	//  - auto: Wrap attributes only when line length is exceeded.
+	//  - force: Wrap each attribute except first.
+	//  - force-aligned: Wrap each attribute except first and keep aligned.
+	//  - force-expand-multiline: Wrap each attribute.
+	//  - aligned-multiple: Wrap when line length is exceeded, align attributes vertically.
+	"html.format.wrapAttributes": "force-aligned",
+	//
+	// MARKDOWN
+	"markdown.extension.list.indentationSize": "inherit",
+	"markdown.extension.showExplorer": true,
+	"markdown.extension.tableFormatter.normalizeIndentation": true,
+	"markdown.extension.toc.githubCompatibility": true,
+	"markdown.extension.toc.plaintext": true,
+	"markdown.preview.breaks": true,
+	"markdown.previewFrontMatter": "show",
+	"markdown.preview.fontFamily": "Carlito, Calibri, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
+	"markdown.preview.fontSize": 14,
+	// A list of URLs or local paths to CSS style sheets to use from the markdown preview. Relative paths are interpreted relative to the folder open in the explorer. If there is no open folder, they are interpreted relative to the location of the markdown file. All '\' need to be written as '\\'.
+	"markdown.styles": [],
+	// Configure editor settings to be overridden for [markdown] language.
+	"[markdown]": {
+		"editor.insertSpaces": false,
+		"editor.quickSuggestions": false,
+		"editor.wordWrap": "off",
+		// "editor.detectIndentation": false,
+	},
+	//
+	// GO Lang
     "[go]": {
         "editor.insertSpaces": false,
         "editor.formatOnSave": true
     },
-    // Configure editor settings to be overridden for [json] language.
-    "[json]": {
-        "editor.quickSuggestions": {
-            "strings": true
-        }
-    },
-    // Configure editor settings to be overridden for [markdown] language.
-    "[markdown]": {
-        "editor.wordWrap": "off",
-        "editor.quickSuggestions": false
-    },
-    //
-    // HTML
-    // Wrap attributes.
-    //  - auto: Wrap attributes only when line length is exceeded.
-    //  - force: Wrap each attribute except first.
-    //  - force-aligned: Wrap each attribute except first and keep aligned.
-    //  - force-expand-multiline: Wrap each attribute.
-    //  - aligned-multiple: Wrap when line length is exceeded, align attributes vertically.
-    "html.format.wrapAttributes": "force-aligned",
+	////
+	// Extensions
+	////
+	//
+	// ES6 
+	// Generate JavaScript sourcemap files.
+	"es6-css-minify.genJSmap": true,
+	//
+	// The eslint options object to provide args normally passed to eslint when executed from a command line (see http://eslint.org/docs/developer-guide/nodejs-api#cliengine).
+	"eslint.options": {},
     //
     // DOC-THIS
     "docthis.authorName": "sak",
@@ -111,18 +168,12 @@
     "go.gotoSymbol.includeGoroot": true,
     "go.gotoSymbol.includeImports": true,
     "go.toolsGopath": "",
-    //
+	//
+	// Insert Date String
     "insertDateString.format": "YYYY-MM-DD hh:mm:ss",
     "insertDateString.formatDate": "YYYY MMM DD",
     "insertDateString.formatTime": "hh:mm:ss",
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
     },
-    //
-    // ES6
-    // Generate JavaScript sourcemap files.
-    "es6-css-minify.genJSmap": true,
-    //
-    // The eslint options object to provide args normally passed to eslint when executed from a command line (see http://eslint.org/docs/developer-guide/nodejs-api#cliengine).
-    "eslint.options": {},
 }

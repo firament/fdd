@@ -1,0 +1,34 @@
+Selecting previously unselected package pinguybuilder.
+(Reading database ... 213093 files and directories currently installed.)
+Preparing to unpack pinguybuilder_5.1-8_all.deb ...
+Unpacking pinguybuilder (5.1-8) ...
+dpkg: dependency problems prevent configuration of pinguybuilder:
+ pinguybuilder depends on dialog; however:
+  Package dialog is not installed.
+ pinguybuilder depends on casper; however:
+  Package casper is not installed.
+ pinguybuilder depends on user-setup; however:
+  Package user-setup is not installed.
+ pinguybuilder depends on discover1 | discover; however:
+  Package discover1 is not installed.
+  Package discover is not installed.
+ pinguybuilder depends on aufs-tools | unionfs-fuse; however:
+  Package aufs-tools is not installed.
+  Package unionfs-fuse is not installed.
+ pinguybuilder depends on python-glade2; however:
+  Package python-glade2 is not installed.
+ pinguybuilder depends on python-vte; however:
+  Package python-vte is not installed.
+ pinguybuilder depends on plymouth-x11; however:
+  Package plymouth-x11 is not installed.
+
+dpkg: error processing package pinguybuilder (--install):
+ dependency problems - leaving unconfigured
+Processing triggers for desktop-file-utils (0.23-1ubuntu3.18.04.2) ...
+Processing triggers for bamfdaemon (0.5.3+18.04.20180207.2-0ubuntu1) ...
+Rebuilding /usr/share/applications/bamf-2.index...
+Processing triggers for mime-support (3.60ubuntu1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Errors were encountered while processing:
+ pinguybuilder

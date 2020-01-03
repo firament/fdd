@@ -37,32 +37,35 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly ORA_JRE_TAR="${APPS_BAS_SRC}/jdk-11.0.2_linux-x64_bin.tar.gz";
 readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v11.9.0-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v12.14.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
-readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-2.2.104-linux-x64.tar.gz";
+# TODO: install side by side DNETCORE_TARS="dotnet-sdk-2.2.108-linux-x64.tar.gz dotnet-sdk-2.2.401-linux-x64.tar.gz dotnet-sdk-3.0.100-linux-x64.tar.gz dotnet-sdk-3.1.100-linux-x64.tar.gz";
+readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-3.1.100-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
+# readonly DNETCORE_PATH_2="${APPS_BAS_DIR}/DNC-2";
+# readonly DNETCORE_PATH_3="${APPS_BAS_DIR}/DNC-3";
 #
-readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.11.5.linux-amd64.tar.gz";
+readonly GOLANG_TAR="${APPS_BAS_SRC}/go1.13.5.linux-amd64.tar.gz";
 readonly GOLANG_PATH="${APPS_BAS_DIR}/go";
 
 ##
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly ATOM_TAR="${APPS_DEV_SRC}/atom-amd64-1.34.0.tar.gz";
+readonly ATOM_TAR="${APPS_DEV_SRC}/atom-amd64-1.42.0.tar.gz";
 readonly ATOM_PATH="${APPS_DEV_DIR}/atom";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1549938209.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-1576682093.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_15_2_20190201_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_16_1_20191237_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
 readonly GITEYE_TAR="${APPS_DEV_SRC}/GitEye-2.2.0-linux.x86_64.zip";
 readonly GITEYE_PATH="${APPS_DEV_DIR}/giteye";
 #
-readonly PLIB_TARFILE="${APPS_DEV_SRC}/projectlibre-1.8.0.tar.gz";
+readonly PLIB_TARFILE="${APPS_DEV_SRC}/projectlibre-1.9.1.tar.gz";
 readonly PLIB_PATH="${APPS_DEV_DIR}/projectlibre";
 #
 readonly SQLVQB_TARFILE="${APPS_DEV_SRC}/SQLeoVQB.2019.01.rc1.zip";
@@ -72,17 +75,17 @@ readonly SQLVQB_PATH="${APPS_DEV_DIR}/SQLeoVQB";
 readonly APPS_EXT_DIR="/30-EXT";
 readonly APPS_EXT_SRC="${SETUP_BASE_LOCN}${APPS_EXT_DIR}";
 #
-readonly MONGODB_TARFILE="${APPS_EXT_SRC}/mongodb-linux-x86_64-ubuntu1604-4.0.0.tgz";
+readonly MONGODB_TARFILE="${APPS_EXT_SRC}/mongodb-linux-x86_64-ubuntu1804-4.2.2.tgz";
 readonly MONGODB_PATH="${APPS_EXT_DIR}/mongodb";
 #
-readonly ROBO3T_TARFILE="${APPS_EXT_SRC}/robo3t-1.2.1-linux-x86_64-3e50a65.tar.gz";
+readonly ROBO3T_TARFILE="${APPS_EXT_SRC}/robo3t-1.3.1-linux-x86_64-7419c406.tar.gz";
 readonly ROBO3T_PATH="${APPS_EXT_DIR}/robo3t";
 #
-readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.2.3.2-linux.tar.gz";
+readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.9.1-linux-amd64.tar.gz";
 readonly PANDOC_PATH="${APPS_EXT_DIR}/pandoc";
 
 ## Individual Files
-readonly PINGUYBLDR_TAR="${RESOURCE_FOLDER}/Install/pinguybuilder_5.1-8_all.deb";
+readonly PINGUYBLDR_TAR="${RESOURCE_FOLDER}/Install/pinguybuilder_5.2-1_all.deb";
 
 ##
 readonly FIREFOX_TAR="${RESOURCE_FOLDER}/Install/firefox-55.0.3.tar.bz2";

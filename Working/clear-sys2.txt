@@ -1,0 +1,46 @@
+
+# Save files?
+- ${HOME}/.config/user-dirs.dirs
+	- /etc/xdg/user-dirs.defaults
+	- /etc/xdg/user-dirs.conf
+	- XDG_CONFIG_DIRS = /etc/xdg/xdg-mate:/etc/xdg
+- Reset by (applied on next login)
+	- `sudo pluma /etc/xdg/user-dirs.defaults &`
+	- `xdg-user-dirs-update`
+
+# Visual Studio Code
+rm -vfr ${HOME}/.config/Code/logs/*
+rm -vfr ${HOME}/.config/Code/Backups/*
+rm -vfr ${HOME}/.config/Code/CachedData/*
+rm -vfr ${HOME}/.config/Code/CachedExtensions/*
+rm -vfr ${HOME}/.config/Code/GPUCache/*
+rm -vfr "${HOME}/.config/Code/Local Storage/"*
+rm -vfr ${HOME}/.config/Code/User/workspaceStorage/*
+rm -vfr ${HOME}/.config/Code/Cookies
+rm -vfr ${HOME}/.config/Code/Cookies-journal
+
+# General
+rm -vfr ${HOME}/.giteye/.metadata/.log
+rm -vfr ${HOME}/.local/share/recently-used.xbel.*
+rm -vfr ${HOME}/hs_err_pid*.log
+rm -vfr ${HOME}/.xsession-errors
+rm -vfr ${HOME}/.xsession-errors.old
+
+# Visual Paradigm
+rm -vfr ${HOME}/.config/VisualParadigm/browser-logs/*
+rm -vfr ${HOME}/.config/VisualParadigm/browser-data-dir-browsercore-60.0.3112.113/*
+rm -vfr ${HOME}/.config/VisualParadigm/tmp/*
+
+## rm -vfr ${HOME}/.config/VisualParadigm/ws/.vpprefdata/.systemproject.vpp
+rm -vfr ${HOME}/.config/VisualParadigm/ws/.vpprefdata/.systemproject.vpp.bak_*
+rm -vfr ${HOME}/.config/VisualParadigm/ws/.lock
+rm -vfr ${HOME}/.config/VisualParadigm/vp.log
+rm -vfr ${HOME}/.config/VisualParadigm/vpupdate.log
+rm -vfr ${HOME}/.config/VisualParadigm/.BrowserCreation
+
+rm -vfr ${HOME}/.config/VisualParadigm/.installation
+rm -vfr ${HOME}/.config/VisualParadigm/.license.dat
+
+## Inspect contents of `${HOME}/.config/VisualParadigm/tmp/browsercore-60.0.3112.113.6.18_x64/locales/`
+
+

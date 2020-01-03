@@ -8,5 +8,15 @@
 	{
 		"key": "ctrl+b",
 		"command": "-workbench.action.toggleSidebarVisibility"
+	},
+	{
+		"key": "ctrl+shift+right",
+		"command": "-markdownExtended.MoveColumnRight",
+		"when": "editorTextFocus && editorLangId == 'markdown'"
+	},
+	{
+		"key": "ctrl+shift+left",
+		"command": "-markdownExtended.MoveColumnLeft",
+		"when": "editorTextFocus && editorLangId == 'markdown'"
 	}
 ]

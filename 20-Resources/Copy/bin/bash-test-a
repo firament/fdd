@@ -1,0 +1,125 @@
+#! /bin/bash
+################################################################################
+#                                                                              #
+# /10-Base/bin/bash-test-a                                                     #
+#                                                                              #
+################################################################################
+
+echo "$(realpath $(dirname $0))";
+exit 0;
+
+let "LI_INDEX = 0";
+let "LI_ODDEVEN = 0";
+MOUNT_DIR="";
+MOUNT_NBD="";
+
+echo "USING LIST + ARRAYs";
+CONTAINER_LIST="/dev/sda4 /dev/loop0 /dev/sdb2 /dev/nbd1 /dev/nbd2";
+CONTAINER_LIST="/dev/sda4 /dev/loop0 /dev /dev/sdb2 /dev/nbd1 /dev/nbd2";
+
+echo "${CONTAINER_LIST}";
+echo;
+for CNTR in ${CONTAINER_LIST}; do
+
+	MOUNTS_OF_INT=($(mount -l | grep ${CNTR} | cut -d " " -f1));
+	echo "Container    -> ${CNTR}";
+	echo "All elements -> ${MOUNTS_OF_INT[@]}";
+	echo "Length       -> ${#MOUNTS_OF_INT[@]}";
+	echo "NBD POINT    -> ${MOUNTS_OF_INT[0]}";
+
+	echo "${MOUNTS_OF_INT}";
+	if [[ ${#MOUNTS_OF_INT[@]} -gt 1 ]]; then
+		echo "${#MOUNTS_OF_INT[@]} elements found, expecting 1 only.";
+		echo "Elements are -> ${MOUNTS_OF_INT[@]}";
+		echo "#------------------------------------------------------------------------------#";
+
+		continue; # TODO: test with loop
+		echo "#------------------------------------------------------------------------------#";
+	else
+		echo "Exactly one element found";
+	fi;
+	echo "POST CONTINUE STATEMENTS";
+	echo "#------------------------------------------------------------------------------#";
+done;
+
+
+exit 0
+echo "USING TARGETED ARRAYs";
+# declare -a MOUNTS_OF_INT=($(mount -l | grep "^/dev/" | cut -d " " -f1));
+MOUNTS_OF_INT=($(mount -l | grep "/media/sak/70_Current " | cut -d " " -f1));
+MOUNTS_OF_INT=($(mount -l | grep "^/dev" | cut -d " " -f1));
+echo "All elements -> ${MOUNTS_OF_INT[@]}";
+echo "Length       -> ${#MOUNTS_OF_INT[@]}";
+echo "NBD POINT    -> ${MOUNTS_OF_INT[0]}";
+echo "#------------------------------------------------------------------------------#";
+if [[ ${#MOUNTS_OF_INT[@]} -gt 1 ]]; then
+	echo "More than one mount point found";
+	echo "Elements are -> ${MOUNTS_OF_INT[@]}";
+	# continue; # TODO: test with loop
+else
+	echo "Exactly one element found";
+fi;
+echo "#------------------------------------------------------------------------------#";
+for (( idx = 0; idx < ${#MOUNTS_OF_INT[@]}; idx++)); do
+	echo "${idx} = ${MOUNTS_OF_INT[${idx}]}";
+done;
+
+
+exit 0
+echo "USING ARRAYs";
+# declare -a MOUNTS_OF_INT=($(mount -l | grep "^/dev/" | cut -d " " -f1));
+MOUNTS_OF_INT=($(mount -l | grep "^/dev/" | cut -d " " -f1));
+echo "All elements -> ${MOUNTS_OF_INT[@]}";
+echo "Length       -> ${#MOUNTS_OF_INT[@]}";
+echo "#------------------------------------------------------------------------------#";
+for (( idx = 0; idx < ${#MOUNTS_OF_INT[@]}; idx++)); do
+	echo "${idx} = ${MOUNTS_OF_INT[${idx}]}";
+done;
+
+
+exit 0
+MOUNTS_OF_INT=$(mount -l | grep "^/dev/" | cut -d " " -f1);
+#MOUNTS_OF_INT=$(mount -l | grep "^/dev/nbd" | cut -d " " -f1);
+echo "${MOUNTS_OF_INT}";
+echo "#------------------------------------------------------------------------------#";
+# Loop only needed to avoid error condition
+for MOUNT_NBD in ${MOUNTS_OF_INT}; do
+	echo "sudo umount   -v ${MOUNT_NBD};";
+	echo "sudo qemu-nbd -d ${MOUNT_NBD};";
+	echo "#------------------------------------------------------------------------------#";
+done;
+
+
+exit 0
+MOUNTS_OF_INT=$(mount -l | grep "^/dev/" | sed "s/ on /\*/g" | cut -d " " -f1);
+echo "#------------------------------------------------------------------------------#";
+for MOUNT in ${MOUNTS_OF_INT}; do
+	echo "${MOUNT}";
+	MOUNT_NBD=$(echo ${MOUNT} | cut -d "*" -f1);
+	for NBD1 in ${MOUNT_NBD}; do
+		echo "${NBD1}";
+	done;
+done;
+
+
+exit 0
+## BEGIN - Loop for all Containers of Interest
+MOUNTS_OF_INT=$(mount -l | grep "^/dev/" | cut -d " " -f1,3);
+echo "${MOUNTS_OF_INT}"
+echo "#------------------------------------------------------------------------------#";
+for MOUNT in ${MOUNTS_OF_INT}; do
+	(( LI_ODDEVEN = LI_INDEX % 2 ))
+	[[ ${LI_ODDEVEN} -eq 0 ]] && MOUNT_NBD=${MOUNT} || MOUNT_DIR=${MOUNT};
+	# echo "${LI_INDEX} - ${LI_ODDEVEN} - ${MOUNT} - ${MOUNT_NBD} - ${MOUNT_DIR}";
+	# echo "${LI_ODDEVEN} -> ${MOUNT_NBD} + ${MOUNT_DIR}";
+
+	if [[ ${LI_ODDEVEN} -eq 1 ]]; then
+		echo "${LI_INDEX} -> ${MOUNT_NBD} + ${MOUNT_DIR}";
+		echo "sudo umount   -v ${MOUNT_DIR};";
+	    echo "sudo qemu-nbd -d ${MOUNT_NBD};";
+		echo "#------------------------------------------------------------------------------#";
+	fi;
+
+	((LI_INDEX++));
+done;
+## END - Loop for all Containers of Interest

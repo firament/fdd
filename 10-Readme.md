@@ -18,6 +18,22 @@ sudo tar -vxj --strip-components=1 -C ${DIR_DEST} -f ${TAR_FILE};
 # which app-name
 ```
 
+## Pinguy Builder
+- https://sourceforge.net/projects/pinguy-os/files/ISO_Builder/
+- To Install
+	```sh
+	sudo dpkg -i pinguybuilder*.deb
+	sudo apt-get install -f
+	# 2>&1 | tee 
+	```
+- Version 5.* works with *buntu systems 18.04
+  - pinguybuilder_5.1-8_all.deb
+  - pinguybuilder_5.1-7_all.deb (released on same day, why?)
+- Version 5.2-1 (UNTESTED) works with *buntu systems 19.04
+  - pinguybuilder_5.2-1_all.deb
+- Run in terminal without using GUI
+  - `sudo PinguyBuilder`
+
 ## Size suffixes
 
 | Suffix | Units     | Byte Equivalent |

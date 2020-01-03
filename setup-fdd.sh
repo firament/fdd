@@ -5,7 +5,8 @@
 #                                                                                                  #
 ####################################################################################################
 
-sudo -S echo "Activating SUDO mode." <<<"your-plain-text-password";  # plain_text_password
+# sudo -S echo "Activating SUDO mode." <<<"your-plain-text-password";  # plain_text_password
+
 
 ## TODO:
 #	replaceText - verify and fix regex. result is broken now
@@ -35,7 +36,9 @@ echo;
 ## Post Install stabilization patches
 #	PatchAPT		   2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1902-0220a.log;
 #	ApplyUpdate1902B   2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1902-0220a.log;
-	UpgradeJava        2>&1 | tee ${SETUPS_LOG_LOCN}/66-UpgradeJava-a.log;
+#	UpgradeJava        2>&1 | tee ${SETUPS_LOG_LOCN}/66-UpgradeJava-a.log;
+#	ApplyUpdate1910A   2>&1 | tee ${SETUPS_LOG_LOCN}/67-Update-1910-11a.log;
+	ApplyUpdate2001A   2>&1 | tee ${SETUPS_LOG_LOCN}/67-Update-2001-03a.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

@@ -273,6 +273,7 @@ SetupDevApps(){
 	sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
 	echo " - adding core dependencies"
 	npm install -g grunt-cli
+	# npm install -g node-sass	# Is this really required in global?
 	sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
 
 	#### INSTALL .NET Core SDK
@@ -369,7 +370,7 @@ SetupDevApps(){
 	# ClearFolder ${MONGODB_PATH}; # remove after next run. Needs testing.
 	makeOwnFolder ${MONGODB_PATH};	# Folder should exist for tar to work
 	tar -xz --strip-components=1 -C ${MONGODB_PATH} -f ${MONGODB_TARFILE};
-	# mv -vf ${MONGODB_PATH}* ${MONGODB_PATH}; # remove after next run. Needs testing.
+	# sudo ln -vsT ${MONGODB_PATH}/bin ${PUBLIC_BIN_LOCN}/mongo-bin;
 
 	#### INSTALL Robo 3T
 	#------------------------------------------------------------------------------#
@@ -507,188 +508,6 @@ InstallZekr(){
 #   To be integrated into script before next run                                                   #
 #                                                                                                  #
 ####################################################################################################
-## HSS applications
-InstallHssApps(){
-
-	echo "Aligning paths for seamless debugging of HSS apps";
-	ln -vsT ${VSCODE_PATH}  /10-Base/VSCode-linux-x64;
-	ln -vsT ${SQLVQB_PATH}  /10-Base/SQLeoVQB;
-	ln -vsT ${MONGODB_PATH} /10-Base/mongodb;
-
-	echo "Install MySQL Server";
-	# MySQL 5.7.x
-	aptInstallApp mysql-workbench-community mysql-server-5.7;
-	sudo systemctl status mysql;
-
-	# Start on need basis
-	sudo systemctl disable mysql;	# Keep to start on demand
-
-	# Secure Installation
-	# sudo mysql_secure_installation;
-}
-
-## Patch 1
-ApplyPatch01(){
-	echo;
-	echo "SETUP PINGUYBUILDER";
-	# sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
-	sudo tar -xz -C / -f ${RESOURCE_FOLDER}/Install/pinguybuilder-files.tar.gz;
-	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
-	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
-}
-
-## Update 18-09 [2018-09-14 13:45:25]
-ApplyUpdate1809(){
-	echo;
-	echo "APPLY UPDATE 18-09";
-	# Applied on 2018-09-16 14:15:12
-
-	#### INSTALL NodeJS
-	#------------------------------------------------------------------------------#
-	echo "Setting up Node.js now";
-	makeOwnFolder ${NODEJS_PATH}  # Folder should exist for tar to work
-	tar -xJ --strip-components=1 -C ${NODEJS_PATH} -f ${NODEJS_TAR};
-	# sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
-	# sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
-	echo " - adding core dependencies"
-	npm install -g grunt-cli
-	# sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
-
-	#### INSTALL .NET Core
-	#------------------------------------------------------------------------------#
-	echo "Setting up .NET Core now";
-	ClearFolder ${DNETCORE_PATH};   # remove after next run. Needs testing.
-	makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
-	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
-
-	#### INSTALL GO LANG
-	#------------------------------------------------------------------------------#
-	echo "Setting up GO Lang now";
-	ClearFolder ${GOLANG_PATH}; # Prepare for clean install. IMP
-	makeOwnFolder ${GOLANG_PATH};	# Folder should exist for tar to work
-	tar -xz --strip-components=1 -C ${GOLANG_PATH} -f ${GOLANG_TAR};
-
-	# Initialize environment
-	echo "Initializing GO Environment.";
-	mkdir -v -p ${APPS_BAS_DIR}/go-tools;
-	mkdir -v -p ${APPS_BAS_DIR}/go-package-lib;
-
-	export GOROOT="${GOLANG_PATH}";
-	export TOOLSGOPATH="${APPS_BAS_DIR}/go-tools"; # Will be used by vscode to install tools
-	export PATH="${GOLANG_PATH}/bin:${TOOLSGOPATH}/bin:${MONGODB_PATH}/bin:${ROBO3T_PATH}/bin:${PATH}";
-	export GOPATH="${APPS_BAS_DIR}/go-package-lib";
-
-	echo " - Inspect values before running"
-	echo "   GOROOT =      ${GOROOT}";
-	echo "   GOPATH =      ${GOPATH}";
-	echo "   TOOLSGOPATH = ${TOOLSGOPATH}";
-	echo "   PATH =        ${PATH}";
-	echo;
-
-	echo " - installing package 'goimports'";
-	go get golang.org/x/tools/cmd/goimports;
-
-
-	## /20-DEV
-
-	#### INSTALL Atom
-	#------------------------------------------------------------------------------#
-	echo "Setting up Atom now";
-	makeOwnFolder ${ATOM_PATH};	# Folder should exist for tar to work
-	tar -xz --strip-components=1 -C ${ATOM_PATH} -f ${ATOM_TAR};
-	# sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
-
-	#### INSTALL Visual Studio Code
-	#------------------------------------------------------------------------------#
-	echo "Setting up Visual Studio Code now";
-	makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
-	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
-	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
-	# Initialize settings
-	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
-	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
-
-	# Copy config templates, used by commands
-	mkdir -vp ${HOME}/Documents/VSCode-Configs/;
-	cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
-
-	#### INSTALL VPUML CE
-	#------------------------------------------------------------------------------#
-	echo "Setting up VP UML CE now";
-	makeOwnFolder ${VPUML_PATH};	# Folder should exist for tar to work
-	tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
-	# sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
-
-	#### INSTALL Pandoc
-	#------------------------------------------------------------------------------#
-	echo "Setting up pandoc now";
-	makeOwnFolder ${PANDOC_PATH};	# Folder should exist for tar to work
-	tar -xz --strip-components=1 -C ${PANDOC_PATH} -f ${PANDOC_TARFILE};
-	# sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
-	# sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
-	# Add templates to a well-known-folder
-
-	echo "#------------------------------------------------------------------------------#";
-}
-
-PatchAPT(){
-	# Restore deleted app
-	TAR_FILE="${SETUP_ROOT_LOCN}/Working/apt-src.tar.xz";
-	CMP_TYPE="J";
-	DIR_DEST="/etc/apt";
-	sudo mkdir -vp ${DIR_DEST};
-	sudo tar -vx${CMP_TYPE} -C ${DIR_DEST} -f ${TAR_FILE};
-}
-
-
-## Update 19-02 [2019-02-12 21:56:54]
-ApplyUpdate1902B(){
-	echo;
-	echo "APPLY Patch 19-02-B";
-	# done on....
-
-	# # FIX: repair broken APT
-	# TAR_FILE="Working/apt-src.tar.xz";
-	# CMP_TYPE="J";
-	# DIR_DEST="/media/sak/9883e860-1080-414b-b541-4f4d188a2856/etc/apt";
-	# sudo mkdir -vp ${DIR_DEST};
-	# sudo tar -vx${CMP_TYPE} -C ${DIR_DEST} -f ${TAR_FILE};
-	#
-	# # Update all repos
-	# sudo apt-get -y  update;
-	# sudo apt-get -Vy upgrade;
-
-	## COPY DRIVERS
-	echo "Copying drivers.";
-	rsync -vhr ${SETUP_BASE_LOCN}/10-Base/drivers /10-Base;
-
-	## /10-Base
-
-	#### INSTALL .NET Core
-	#------------------------------------------------------------------------------#
-	echo "Setting up .NET Core now";
-	ClearFolder ${DNETCORE_PATH};   # remove after next run. Needs testing.
-	makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
-	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
-
-	## /20-DEV
-
-	#### INSTALL Visual Studio Code
-	#------------------------------------------------------------------------------#
-	echo "Setting up Visual Studio Code now";
-	makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
-	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
-	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
-	# Initialize settings
-	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
-	# cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
-
-	# # Copy config templates, used by commands
-	# mkdir -vp ${HOME}/Documents/VSCode-Configs/;
-	cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
-
-	echo "#------------------------------------------------------------------------------#";
-}
 
 UpgradeJava(){
 	#### INSTALL Oracle JRE
@@ -709,3 +528,117 @@ UpgradeJava(){
 	# sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
 
 }
+
+## Patch 1
+ApplyPatch01(){
+	echo;
+	echo "SETUP PINGUYBUILDER";
+	# sudo gdebi ${RESOURCE_FOLDER}/Install/pinguybuilder_4.3-8_all-beta.deb;
+	sudo tar -xz -C / -f ${RESOURCE_FOLDER}/Install/pinguybuilder-files.tar.gz;
+	echo " - copying live imaging config to ${LIVE_IMG_CONFIG}";
+	sudo cp -fvR ${RESOURCE_FOLDER}/Copy/PinguyBuilder.conf ${LIVE_IMG_CONFIG};
+}
+
+PatchAPT(){
+	# Restore deleted app
+	TAR_FILE="${SETUP_ROOT_LOCN}/Working/apt-src.tar.xz";
+	CMP_TYPE="J";
+	DIR_DEST="/etc/apt";
+	sudo mkdir -vp ${DIR_DEST};
+	sudo tar -vx${CMP_TYPE} -C ${DIR_DEST} -f ${TAR_FILE};
+}
+
+
+## Update 20-01 A []
+ApplyUpdate2001A(){
+	echo;
+	echo "APPLY Update 20-01-A";
+	# done on
+
+	## COPY DRIVERS
+	echo "Copying drivers.";
+	rsync -vhr ${SETUP_BASE_LOCN}/10-Base/drivers /10-Base;
+
+	## /10-Base
+
+	#### INSTALL NodeJS
+	#------------------------------------------------------------------------------#
+	echo "Setting up Node.js now";
+	# makeOwnFolder ${NODEJS_PATH}  # Folder should exist for tar to work
+	tar -xJ --strip-components=1 -C ${NODEJS_PATH} -f ${NODEJS_TAR};
+	# sudo ln -vsT ${NODEJS_PATH}/bin/node ${PUBLIC_BIN_LOCN}/node
+	# sudo ln -vsT ${NODEJS_PATH}/bin/npm ${PUBLIC_BIN_LOCN}/npm
+	echo " - adding core dependencies"
+	npm install -g grunt-cli
+	npm install -g node-sass	# Is this really required in global?
+	# sudo ln -vsT ${NODEJS_PATH}/lib/node_modules/grunt-cli/bin/grunt ${PUBLIC_BIN_LOCN}/grunt
+
+	#### INSTALL .NET Core SDK
+	#------------------------------------------------------------------------------#
+	echo "Setting up .NET Core now";
+	ClearFolder ${DNETCORE_PATH};   # Required to avoid parallel versions
+	makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
+	tar -xz -C ${DNETCORE_PATH} -f ${DNETCORE_TAR};
+
+	#### INSTALL GO LANG
+	#------------------------------------------------------------------------------#
+	echo "Setting up GO Lang now";
+	ClearFolder ${GOLANG_PATH}; # Prepare for clean install. IMP
+	makeOwnFolder ${GOLANG_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${GOLANG_PATH} -f ${GOLANG_TAR};
+	echo " - installing package 'goimports'";
+	go get golang.org/x/tools/cmd/goimports;
+
+	## /20-DEV
+
+	#### INSTALL Atom
+	#------------------------------------------------------------------------------#
+	echo "Setting up Atom now";
+	makeOwnFolder ${ATOM_PATH};	# /Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${ATOM_PATH} -f ${ATOM_TAR};
+	# sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
+
+	#### INSTALL Visual Studio Code
+	#------------------------------------------------------------------------------#
+	echo "Setting up Visual Studio Code now";
+	# makeOwnFolder ${VSCODE_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
+	# sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code
+	# Initialize settings
+	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
+	cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
+
+	# Copy config templates, used by commands
+	# mkdir -vp ${HOME}/Documents/VSCode-Configs/;
+	cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
+
+	#### INSTALL VPUML CE
+	#------------------------------------------------------------------------------#
+	echo "Setting up VP UML CE now";
+	# makeOwnFolder ${VPUML_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
+	# sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
+
+	# /30-EXT
+
+	#### INSTALL Mongo DB
+	#------------------------------------------------------------------------------#
+	echo "Setting up Mongo DB now";
+	# ClearFolder ${MONGODB_PATH}; # remove after next run. Needs testing.
+	# makeOwnFolder ${MONGODB_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${MONGODB_PATH} -f ${MONGODB_TARFILE};
+	# sudo ln -vsT ${MONGODB_PATH}/bin ${PUBLIC_BIN_LOCN}/mongo-bin;
+
+	#### INSTALL Pandoc
+	#------------------------------------------------------------------------------#
+	echo "Setting up pandoc now";
+	makeOwnFolder ${PANDOC_PATH};	# Folder should exist for tar to work
+	tar -xz --strip-components=1 -C ${PANDOC_PATH} -f ${PANDOC_TARFILE};
+	# sudo ln -vsT ${PANDOC_PATH}/bin/pandoc          ${PUBLIC_BIN_LOCN}/pandoc;
+	# sudo ln -vsT ${PANDOC_PATH}/bin/pandoc-citeproc ${PUBLIC_BIN_LOCN}/pandoc-citeproc;
+	# Add templates to a well-known-folder
+
+
+}
+
+

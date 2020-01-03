@@ -1,17 +1,48 @@
+# Working Notes
+
 ## JAVA environments
 
 ## TODOs
 - Create .tar for pinguybuilder
 - Add version info for all apps
 
+## Sync tree
+- Option 1, without current binaries
+```sh
+DEST_ROOT="${HOME}/Downloads";
+rsync -vhr --exclude=".git" --exclude="deb-paks-*" --exclude="10-Apps" --exclude="Working/Win-Files" /cdrom/Work-ODP9/setup-fdd-a/ ${DEST_ROOT};
+```
+- Option 2, with current binaries
+```sh
+DEST_ROOT="${HOME}/Downloads";
+rsync \
+    -nvhr \
+    --exclude=".git" \
+	--exclude="x-*" \
+    --exclude="deb-paks-*" \
+	--exclude="20-Resources/Install/Sans-OTF" \
+	--exclude="20-Resources/Install/Sans-TTF" \
+	--exclude="20-Resources/Install/Serif-OTF" \
+	--exclude="20-Resources/Install/Serif-TTF" \
+	--exclude="Working/" \
+    /cdrom/Work-ODP9/setup-fdd-a/ \
+    ${DEST_ROOT};
+```
+
+## Restore APT
+```sh
+# TAR_FILE="apt-src.tar.xz";
+TAR_FILE="apt-src.tar.xz";
+CMP_TYPE="J";
+DIR_DEST="/etc/apt";
+sudo mkdir -vp ${DIR_DEST};
+echo " ==> Run following command to fix APT";
+echo sudo tar -vx${CMP_TYPE} -C ${DIR_DEST} -f ${TAR_FILE};
+# sudo cp -vf Working/sources.list ${DIR_DEST}/sources.list;
+```
+
 ## Extract .bz2 archive
 ```sh
-
-# Test
-INSTALL_DIR="${HOME}/Downloads/usr";
-mkdir -vp ${INSTALL_DIR};
-tar -xvj --strip-components=1 -C ${INSTALL_DIR} -f ${TAR_FILE};
-ll ${INSTALL_DIR}/bin;
 
 # Install
 TAR_FILE="<full-path-to-file>";
