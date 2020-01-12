@@ -40,7 +40,7 @@ readonly ORA_JRE_PATH="${APPS_BAS_DIR}/jre";
 readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v12.14.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
-# TODO: install side by side DNETCORE_TARS="dotnet-sdk-2.2.108-linux-x64.tar.gz dotnet-sdk-2.2.401-linux-x64.tar.gz dotnet-sdk-3.0.100-linux-x64.tar.gz dotnet-sdk-3.1.100-linux-x64.tar.gz";
+readonly DNETCORE_ALL_TARS="dotnet-sdk-2.1.607-linux-x64.tar.gz dotnet-sdk-2.2.108-linux-x64.tar.gz dotnet-sdk-2.2.207-linux-x64.tar.gz dotnet-sdk-3.1.100-linux-x64.tar.gz";
 readonly DNETCORE_TAR="${APPS_BAS_SRC}/dotnet-sdk-3.1.100-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 # readonly DNETCORE_PATH_2="${APPS_BAS_DIR}/DNC-2";
@@ -85,7 +85,22 @@ readonly PANDOC_TARFILE="${APPS_EXT_SRC}/pandoc-2.9.1-linux-amd64.tar.gz";
 readonly PANDOC_PATH="${APPS_EXT_DIR}/pandoc";
 
 ## Individual Files
-readonly PINGUYBLDR_TAR="${RESOURCE_FOLDER}/Install/pinguybuilder_5.2-1_all.deb";
+# readonly PINGUYBLDR_TAR="${RESOURCE_FOLDER}/Install/pinguybuilder_5.2-1_all.deb";
+readonly PINGUYBLDR_DEB="${RESOURCE_FOLDER}/Install/pinguybuilder_5.1-8_all.deb";
+
+##
+readonly RBENV_STUB="${HOME}/.rbenv";
+readonly RBENV_ROOT="/10-Base/rbenv-root";
+readonly RBENV_PLUGIN_PATH="${RBENV_ROOT}/plugins/ruby-build";
+readonly RUBY_VERSION_CURR="2.6.3";	# <- Update from list
+readonly RUBY_VERSION_LH="2.1.5";
+readonly BUNDLER_VER="1.17.3"; # <- IF ERROR, CHANGE TO 1.3.0
+readonly RBENV_GIT="https://github.com/rbenv/rbenv.git";
+readonly RBENV_BUILD_GIT="https://github.com/rbenv/ruby-build.git";
+
+##
+readonly HOT_PLUG_MARKER="hot-plug-marker.txt";
+readonly HOT_PLUG_TEXT="Marker file to indicate that folder is successfully hoisted.\n ** DO NOT DELETE ** ";
 
 ##
 readonly FIREFOX_TAR="${RESOURCE_FOLDER}/Install/firefox-55.0.3.tar.bz2";
@@ -280,7 +295,7 @@ HealthCheck(){
 	[[ -f ${MONGODB_TARFILE} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  MONGODB_TARFILE  >> ${MONGODB_TARFILE}";
 	[[ -f ${ROBO3T_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  ROBO3T_TARFILE   >> ${ROBO3T_TARFILE}";
 	[[ -f ${PANDOC_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  PANDOC_TARFILE   >> ${PANDOC_TARFILE}";
-	[[ -f ${PINGUYBLDR_TAR} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  PINGUYBLDR_TAR   >> ${PINGUYBLDR_TAR}";
+	[[ -f ${PINGUYBLDR_DEB} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  PINGUYBLDR_DEB   >> ${PINGUYBLDR_DEB}";
 	# [[ -f ${FIREFOX_TAR} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  FIREFOX_TAR     >> ${FIREFOX_TAR}";
 
 	echo "";

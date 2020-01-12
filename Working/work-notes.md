@@ -72,6 +72,14 @@ rsync -vrh
  ${TGT_DIR}
 ```
 
+## List partitions
+```sh
+sudo blkid | grep /dev/sd
+lsblk -o name,uuid,size,mountpoint
+ls -lh /dev/disk/by-uuid/
+udevadm info -q all -n /dev/sdc1 | grep -i by-uuid | head -1
+```
+
 ## Add to README
 
 **VS Code extensions**
@@ -154,4 +162,29 @@ sudo update-alternatives --install /usr/bin/java java /opt/java-jre/jre1.8.0_172
 sudo update-alternatives --install /usr/bin/javac javac /opt/java-jre/jre1.8.0_172/bin/javac 1
 
 java --version
+```
+
+## Launch Project IDEs
+```sh
+## Set sudo mode
+sudo -S echo "Activating SUDO mode." <<<"your-plain-text-password";
+up-dnc;
+
+echo "Hot linking documentation now.";
+SRC_DIR="path-to-docs-folder";
+DST_DIR="path-to-std-docss-folder";
+rm -vrf ${DST_DIR};
+ln -vsT ${SRC_DIR} ${DST_DIR};
+echo "Opening documentation in Visual Studio Code now.";
+nohup code ${DST_DIR} &>/dev/null &
+sleep 15;
+
+echo "Hot linking project now.";
+SRC_DIR="path-to-src-folder";
+DST_DIR="path-to-std-src-folder";
+rm -vrf ${DST_DIR};
+ln -vsT ${SRC_DIR} ${DST_DIR};
+echo "Opening project in Visual Studio Code now.";
+nohup code ${DST_DIR} &>/dev/null &
+
 ```

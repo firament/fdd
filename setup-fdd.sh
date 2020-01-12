@@ -28,17 +28,17 @@ echo;
 
 ## Individual steps that are to be executed
 	HealthCheck        2>&1 | tee ${SETUPS_LOG_LOCN}/00-HealthCheck-$(date +"%Y%m%d-%s").log;
-#	Init               2>&1 | tee ${SETUPS_LOG_LOCN}/10-Init.log;
-#	InstallCoreApps    2>&1 | tee ${SETUPS_LOG_LOCN}/20-InstallCoreApps.log;
-#	SetupDevApps       2>&1 | tee ${SETUPS_LOG_LOCN}/30-SetupDevApps.log;
-#	InstallHssApps     2>&1 | tee ${SETUPS_LOG_LOCN}/40-InstallHssApps.log;
+	# Init               2>&1 | tee ${SETUPS_LOG_LOCN}/10-Init.log;
+	# InstallCoreApps    2>&1 | tee ${SETUPS_LOG_LOCN}/20-InstallCoreApps.log;
+	# InstallMySQL       2>&1 | tee ${SETUPS_LOG_LOCN}/30-InstallMySQL.log;
+	# InstallRubyCurr    2>&1 | tee ${SETUPS_LOG_LOCN}/40-InstallRubyCurr.log;
+	# InstallRubyLH      2>&1 | tee ${SETUPS_LOG_LOCN}/41-InstallRubyLH.log;
+	# InstallDNCoreSDKs  2>&1 | tee ${SETUPS_LOG_LOCN}/50-InstallDNCoreSDKs.log;
 
 ## Post Install stabilization patches
-#	PatchAPT		   2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1902-0220a.log;
-#	ApplyUpdate1902B   2>&1 | tee ${SETUPS_LOG_LOCN}/65-Update-1902-0220a.log;
-#	UpgradeJava        2>&1 | tee ${SETUPS_LOG_LOCN}/66-UpgradeJava-a.log;
-#	ApplyUpdate1910A   2>&1 | tee ${SETUPS_LOG_LOCN}/67-Update-1910-11a.log;
-	ApplyUpdate2001A   2>&1 | tee ${SETUPS_LOG_LOCN}/67-Update-2001-03a.log;
+	# InstallJava        2>&1 | tee ${SETUPS_LOG_LOCN}/61-InstallJava-a.log;
+	# PatchAPT		   2>&1 | tee ${SETUPS_LOG_LOCN}/62-PatchAPT.log;
+	# ApplyUpdate2001A   2>&1 | tee ${SETUPS_LOG_LOCN}/67-Update-200103a.log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

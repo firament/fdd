@@ -1,0 +1,40 @@
+#! /bin/bash
+# 2020 Jan 05 23:24:06
+################################################################################
+#                                                                              #
+# /10-Base/bin/up-dnc                                                          #
+#                v 0.1                                                         #
+#                                                                              #
+#    script to mount containers for dotnet core environment,                   #
+#        to support dotnet development in live environment                     #
+#        and/or to support multiple SDK versions side-by-side                  #
+#                                                                              #
+#    This is necessarily machine dependent, and should be updated              #
+#        per instance                                                          #
+#                                                                              #
+#    TODO: Take paths and file names from config file                          #
+#                                                                              #
+################################################################################
+# echo "Marker file to hoist folder." | tee ${DNC_CONTAINER_ROOT}/hot-plug-marker.txt
+# echo "Marker file to hoist folder." | tee ${HOME}/.nuget/packages/hot-plug-marker.txt
+
+[[ ${PL_LOADED} -eq 1 ]] && source /10-Base/bin/PlatformVars.sh;
+if [ ! -d ${DNC_CONTAINER_ROOT} ]; then
+	echo "${DNC_CONTAINER_ROOT}";
+	echo "DNC Container missing missing, exiting now...";
+	exit 100;
+fi;
+if [ ! -d ${NGT_CONTAINER_ROOT} ]; then
+	echo "${NGT_CONTAINER_ROOT}";
+	echo "Nuget packages Container missing missing, exiting now...";
+	exit 100;
+fi;
+if [ ! -f ${HOME}/.nuget/packages/${HOT_PLUG_MARKER} ]; then
+	echo "Nuget Marker missing, linking now.";
+	ln -fsvT ${NGT_CONTAINER_ROOT} ${HOME}/.nuget/packages;
+fi;
+if [ ! -f /10-Base/DNC/${HOT_PLUG_MARKER} ]; then
+	echo "DNC Marker missing, linking now.";
+	ln -fsvT ${DNC_CONTAINER_ROOT} /10-Base/DNC;
+fi;
+dotnet --info

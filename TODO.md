@@ -2,6 +2,21 @@
 
 ## Tasks to be done for refining FDD setup script
 
+### v2.x tasks
+- [x] Add Ruby install code
+	- [x] Add ruby path to PATH
+- [x] Clean up font files
+- [ ] update favourites list
+- [x] drop aliases, hardly ever used.
+- [x] include mysql setup, as seperate function
+- [x] exclude ${RBENV_ROOT} and ${RBENV_STUB} from image script
+- [x] do up-dnc
+- [x] do up-ruby
+- [ ] Add Atom configuration file in setup script
+- [x] Add plug marker file from setup script
+- [ ] Verify mongo path
+
+## Older tasks (v1.x)
 - [ ] x
 - [ ] Try MonoDevelop (7.6.9.22)
 	```sh

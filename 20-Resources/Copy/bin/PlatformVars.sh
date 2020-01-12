@@ -19,6 +19,12 @@ RET_VAL="";										# GENERIC VAR FOR USER PROMPTS
 SKIP_LIVE_SCRIPTS="/SKIP_LIVE_SCRIPT.txt";		# flag to indicate if this is live image
 # AUTORUN_LOG="/10-S_A_K/logs/autorun.log";		# Move to Environment Vars
 
+# used for containers
+HOT_PLUG_MARKER="hot-plug-marker.txt";
+DNC_CONTAINER_ROOT="path-to-dotnet-root-same-as-DNETCORE_PATH";
+NGT_CONTAINER_ROOT="path-to-nuget-packages-root";
+RUBY_CONTAINER_ROOT="path-to-rbenv-root-same-as-RBENV_ROOT";
+
 # used in mntBookShelf
 BOOKSHELF_SFS_LOCN="";
 

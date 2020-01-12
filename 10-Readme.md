@@ -1,4 +1,93 @@
+# Pre Install steps
+
+## Update fiels for environment
+- $/setup-fdd.sh
+	- set correct password
+- $/20-Resources/Copy/PinguyBuilder.conf
+	- update customizations
+
+
 # Post setup customizations
+
+## Terminal based steps
+## MySQL Server
+> These can be integrated in script, if secrets are not a concern
+
+- MySQL default admin
+```sql
+-- From sql command started with `sudo mysql`
+
+-- Create new user, with workbench access
+CREATE USER 'sak'@'localhost' IDENTIFIED BY 'some-password-text';
+GRANT ALL PRIVILEGES ON * . * TO 'sak'@'localhost';
+GRANT GRANT OPTION ON * . * TO 'sak'@'localhost';
+
+-- Verify access
+SHOW GRANTS for sak@localhost;
+FLUSH PRIVILEGES;
+
+-- Show all users in system
+SELECT User, Host, plugin, password_expired, password_last_changed, password_lifetime, account_locked  FROM mysql.user;
+
+```
+
+- Customize MySQL port, from default port of 3306
+	- in file `/etc/mysql/mysql.conf.d/mysqld.cnf`
+
+- In /10-Base/bin/PlatformVars.sh
+	- Replace `your-plain-text-password`
+		- with your password
+	- Set Appropriate Paths for
+		- `DNC_CONTAINER_ROOT`
+		- `NGT_CONTAINER_ROOT`
+		- `RUBY_CONTAINER_ROOT`
+
+- /etc/PinguyBuilder.conf
+	- only if `$/20-Resources/Copy/PinguyBuilder.conf` not updated before running scripts
+	- 
+
+
+## VSCode Extensions
+> Update from nds machine
+- C#
+	- ms-vscode.csharp
+- C# XML Documentation Comments
+	- k--kato.docomment
+- GitLens — Git supercharged
+	- eamodio.gitlens
+- HTML CSS Support
+	- ecmel.vscode-html-css
+- Insert Date String
+	- jsynowiec.vscode-insertdatestring
+- JavaScript (ES6) code snippets
+	- xabikos.javascriptsnippets
+- jQuery Code Snippets
+	- donjayamanne.jquerysnippets
+- JS & CSS Minifier (Minify)
+	- olback.es6-css-minify
+- Markdown All in One
+	- yzhang.markdown-all-in-one
+- Markdown Extended
+	- jebbs.markdown-extended
+- Ruby
+	- rebornix.ruby
+- Rails
+	- bung87.rails
+- Ruby Solargraph
+	- castwide.solargraph
+- ESLint
+	- dbaeumer.vscode-eslint
+
+## Atom Extensions
+> Update from nds machine
+> Turn off spell check
+
+
+
+
+***
+## Oleder content to be edited
+***
 
 ## Install on-demand apps
 
@@ -281,24 +370,6 @@ BUILDLABEL="FDDa-Bx64-Mate-a"
 LIVECDLABEL="${BUILDLABEL}"
 CUSTOMISO="${BUILDLABEL}.iso"
 ```
-
----
-
-## MySQL Server Installation
-
-https://www.tecmint.com/install-mysql-8-in-ubuntu/
-
-- wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.deb
-	- `sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb`
-- mysql-apt-config_0.8.10-1_all.deb
-	- APT repository for installing the MySQL server, client, and other components.
-	- Install before installing MySQL
-- Secure MySQL Server Installation
-	- `sudo mysql_secure_installation`
-- MySQL Products and Components
-	- `sudo apt-get install mysql-workbench-community libmysqlclient18`
-- See Also
-	- https://help.ubuntu.com/lts/serverguide/mysql.html
 
 ---
 
