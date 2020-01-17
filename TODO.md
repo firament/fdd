@@ -12,9 +12,14 @@
 - [x] exclude ${RBENV_ROOT} and ${RBENV_STUB} from image script
 - [x] do up-dnc
 - [x] do up-ruby
-- [ ] Add Atom configuration file in setup script
+- [ ] in up-ruby add
+	- link /10-Base/rbenv-root/bin/rbenv to /10-Base/rbenv-root/libexec/rbenv
+- [x] Add Atom configuration file in setup script
 - [x] Add plug marker file from setup script
-- [ ] Verify mongo path
+- [x] Verify mongo path
+- [x] Disable mysql auto start
+- [ ] Add rbenv gits update function
+
 
 ## Older tasks (v1.x)
 - [ ] x

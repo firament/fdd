@@ -92,15 +92,16 @@ readonly PINGUYBLDR_DEB="${RESOURCE_FOLDER}/Install/pinguybuilder_5.1-8_all.deb"
 readonly RBENV_STUB="${HOME}/.rbenv";
 readonly RBENV_ROOT="/10-Base/rbenv-root";
 readonly RBENV_PLUGIN_PATH="${RBENV_ROOT}/plugins/ruby-build";
-readonly RUBY_VERSION_CURR="2.6.3";	# <- Update from list
+readonly RUBY_VERSION_CURR="2.7.0";	# <- Update current using 'rbenv install -l'
 readonly RUBY_VERSION_LH="2.1.5";
-readonly BUNDLER_VER="1.17.3"; # <- IF ERROR, CHANGE TO 1.3.0
+readonly RAKE_VERSION_LH="12.3.2"; # <- IF ERROR, CHANGE TO 12.3.1
+readonly BUNDLER_VRSN_LH="1.17.3"; # <- IF ERROR, CHANGE TO 1.3.0
 readonly RBENV_GIT="https://github.com/rbenv/rbenv.git";
 readonly RBENV_BUILD_GIT="https://github.com/rbenv/ruby-build.git";
 
 ##
 readonly HOT_PLUG_MARKER="hot-plug-marker.txt";
-readonly HOT_PLUG_TEXT="Marker file to indicate that folder is successfully hoisted.\n ** DO NOT DELETE ** ";
+readonly HOT_PLUG_TEXT="Marker file to indicate that container is successfully hoisted.\n ** DO NOT DELETE THIS FILE ** ";
 
 ##
 readonly FIREFOX_TAR="${RESOURCE_FOLDER}/Install/firefox-55.0.3.tar.bz2";

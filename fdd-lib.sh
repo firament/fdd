@@ -177,8 +177,8 @@ EOENV
 	#------------------------------------------------------------------------------#
 	echo;
  	echo "Setting Bookmarks. Will work after reboot.";
-	touch ${HOME}/.gtk-bookmarks; # fix error that fails if file does not exist
-cat >> ${HOME}/.gtk-bookmarks <<EOABMS
+	# touch ${HOME}/.gtk-bookmarks; # fix error that fails if file does not exist
+cat >> ${HOME}/.config/gtk-3.0/bookmarks <<EOABMS
 file:///media/sak/70_Current/_Notes
 file:///media/sak/70_Current/Work
 file:///media/sak/70_Current/Downloads
@@ -322,6 +322,8 @@ SetupDevApps(){
 	makeOwnFolder ${ATOM_PATH};	# Folder should exist for tar to work
 	tar -xz --strip-components=1 -C ${ATOM_PATH} -f ${ATOM_TAR};
 	sudo ln -vsT ${ATOM_PATH}/atom ${PUBLIC_BIN_LOCN}/atom
+	mkdir -vp ${HOME}/.atom;
+	cp -fv ${RESOURCE_FOLDER}/Copy/atom-config.cson  ${HOME}/.atom/config.cson;
 
 	#### INSTALL Visual Studio Code
 	#------------------------------------------------------------------------------#
@@ -465,19 +467,24 @@ InstallMySQL(){
 	# echo "Requires manual user input. (??)";
 	# sleep 3;
 	aptInstallApp libmysqlclient-dev mysql-client mysql-workbench mysql-server;
+	sudo systemctl disable mysql;	# Set to start on demand
 	echo "DONE  - InstallMySQL()";
 	echo "";
 }
 
 InstallJava(){
-	#### INSTALL Oracle JRE
+	#### INSTALL OpenJDK JRE
 	#------------------------------------------------------------------------------#
-	echo "Setting up Oracle JRE now";
-	ClearFolder ${ORA_JRE_PATH};   # remove after next run. Needs testing.
-	makeOwnFolder ${ORA_JRE_PATH}  # Folder should exist for tar to work
-	tar -xz --strip-components=1 -C ${ORA_JRE_PATH} -f ${ORA_JRE_TAR};
-	sudo update-alternatives --install /usr/bin/java  java  ${ORA_JRE_PATH}/bin/java 1
-	sudo update-alternatives --install /usr/bin/javac javac ${ORA_JRE_PATH}/bin/javac 1
+	echo "Setting up OpenJDK JRE now";
+	sudo apt install openjdk-11-jre-headless
+	# #### INSTALL Oracle JRE
+	# #------------------------------------------------------------------------------#
+	# echo "Setting up Oracle JRE now";
+	# ClearFolder ${ORA_JRE_PATH};   # remove after next run. Needs testing.
+	# makeOwnFolder ${ORA_JRE_PATH}  # Folder should exist for tar to work
+	# tar -xz --strip-components=1 -C ${ORA_JRE_PATH} -f ${ORA_JRE_TAR};
+	# sudo update-alternatives --install /usr/bin/java  java  ${ORA_JRE_PATH}/bin/java 1
+	# sudo update-alternatives --install /usr/bin/javac javac ${ORA_JRE_PATH}/bin/javac 1
 	echo "DONE  - InstallJava()";
 	echo "";
 }
@@ -498,28 +505,25 @@ InstallRubyCurr(){
 	echo "INSTALL 'rbenv'";
 	## Install rbenv and ruby-build plugin, from sources
 	mkdir -vp ${RBENV_ROOT}; cd ${RBENV_ROOT};
-	# from sources
 	git clone ${RBENV_GIT} ${RBENV_ROOT};
 	git clone ${RBENV_BUILD_GIT} ${RBENV_PLUGIN_PATH};
 	# NOTE: This now being set in /etc/environment
-	# - confirm if this needed here
+	# - confirm if this needed here. Yes, if 'Init()' was run in same session. No if reboot done after 'Init()' run
 	# # update PATH, and auto init
 	# echo "export PATH="${RBENV_ROOT}/bin:$PATH";" >> ${HOME}/.bashrc; # <- already set in /etc/environment
 	echo "# Initialize rbenv environment for session.";
-	echo 'eval "$(rbenv init -);"' >> ${HOME}/.bashrc;
-	# Test
-	tail -vn 2 ${HOME}/.bashrc;
-	# expected `eval "$(rbenv init -)"`
+	echo '[[ -f ${HOME}/.rbenv/bin/rbenv ]] && eval "$(rbenv init -)"' >> ${HOME}/.bashrc;
+	tail -vn 2 ${HOME}/.bashrc;    # Test    # expected `[[ -f ${HOME}/.rbenv/bin/rbenv ]] && eval "$(rbenv init -)";`
 
-	# Apply changes for current session. Reboot needed to apply effect
+	# Apply changes for current session. Skip if reboot done after 'Init()' run
 	export PATH="${RBENV_ROOT}/bin:$PATH";
 	echo "BEFORE = ${PATH}";
 	eval "$(rbenv init -)";
 	echo "AFTER  = ${PATH}";
 
 	# Test
-	rbenv -v;		# expected rbenv 1.1.2-2-g4e92322
-	type rbenv;		# expected 'rbenv is a function'
+	rbenv -v;
+	type rbenv;		        # expected 'rbenv is a function'
 	echo ${RBENV_SHELL};	# expected 'bash';
 
 	# Activate plugins
@@ -527,44 +531,42 @@ InstallRubyCurr(){
 
 	#### INSTALL Ruby, with debugging support
 	#------------------------------------------------------------------------------#
-
 	echo "Installing Ruby v${RUBY_VERSION_CURR} (Ruby Current)";
 	rbenv install -v ${RUBY_VERSION_CURR};
-	# set this as default version - if nothing set should go to latest version
 	echo "Setting global default version to ${RUBY_VERSION_CURR}";
 	rbenv global ${RUBY_VERSION_CURR};
-	ruby -v		# expected 'ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-linux-gnu]'
+	ruby -v;
 
 	echo "Installing debug dependency gems";
-	gem install bundler bundler:${BUNDLER_VER} rake ruby-debug-ide solargraph byebug debase fastri rcodetools rufo rubocop rubocop-performance;
+	gem install bundler rake ruby-debug-ide solargraph byebug debase fastri rcodetools rufo rubocop rubocop-performance;
+	# bundler:${BUNDLER_VRSN_LH} <- should not be needed here, install only on error
 
-	rbenv rehash;
-	# Test
-	bundle -v;	# expected 'Bundler version 1.17.3'
+	rbenv rehash;    # Activate gems
+	bundle -v;       # Test
 	gem list;
 	echo "Done installing Ruby Current.";
 
 	echo "Adding Hot Plug Marker";
 	echo "${HOT_PLUG_TEXT}" | tee ${RBENV_ROOT}/${HOT_PLUG_MARKER};
-	echo "Done hot plug marker.";
 
 	echo "DONE  - InstallRubyCurr()";
-	echo "";
 }
 
 InstallRubyLH(){
 	echo "Setting up Ruby Environment - litehouse Version";
 	PKG_CONFIG_PATH=/usr/include/openssl/; #- patch for libssl error -#
-	# CC="gcc-6";	# is this really required?
-	# Make and Install
-	rbenv install -v ${RUBY_VERSION_LH};
-	# set required version, for current session only
-	rbenv shell ${RUBY_VERSION_LH};
-	# Test
-	ruby -v;	# expected 'ruby 2.1.5p273 (2014-11-13 revision 48405) [x86_64-linux]'
+	# CC="gcc-6";	# Confirm if this really needed
+	rbenv install -v ${RUBY_VERSION_LH};    # Make and Install
+	rbenv shell ${RUBY_VERSION_LH};         # set required version, for current session only
+	ruby -v;
+	echo "Done installing Ruby Current - litehouse Version.";
 
-	echo "";
-	echo "Done installing Ruby LH.";
+	echo "Installing debug dependency gems";
+	gem install rake:${RAKE_VERSION_LH} bundler:${BUNDLER_VRSN_LH} ruby-debug-ide debase fastri rcodetools --no-ri --no-rdoc;
+	rbenv rehash;    # Activate gems
+	bundle -v;       # Test
+	gem list;
+	echo "DONE  - InstallRubyLH()";
 }
 
 InstallDNCoreSDKs(){
@@ -623,5 +625,3 @@ ApplyUpdate2001A(){
 
 
 }
-
-

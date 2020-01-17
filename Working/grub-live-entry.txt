@@ -1,0 +1,35 @@
+#--------------------------------------------------------------------------------------------------#
+# Custom Entry for live image
+menuentry "[LIVE] FDD_2 Beta 1" {
+    set Vostro3550_HDD="AE260AAD260A769D" # from sudo blkid | grep /dev/sda2
+    search --no-floppy --fs-uuid --set=Vostro3550_HDD_ROOT ${Vostro3550_HDD}
+    #
+    set lmpf2b="/OSLib/FDD_2-Beta"
+    set root=${Vostro3550_HDD_ROOT}
+    set root_path=(${root})${lmpf2b}
+    #
+    # DEBUG - BEGIN
+    echo "lmpf2b == ${lmpf2b}"
+    echo "root      == ${root}"
+    echo "root_path == ${root_path}"
+    read junk_var
+    ls (${root})/
+    read junk_var
+    ls ${root_path}/
+    read junk_var
+    echo "Preparing to boot '[LIVE] Ubuntu Mate Bionic AMD64'"
+    echo ""
+    # DEBUG - END
+    #
+    linux  ${lmpf2b}/vmlinuz \
+        boot=casper \
+        live-media-path=${lmpf2b} \
+        root=(${root})${lmpf2b} \
+        max_loop=24 \
+        debug verbose \
+        fdd-autorun=/cdrom/OSLib/CustomScripts/Custom-FDD2-V3550.sh                \
+        parm-for-working-dir=/70-CurrentWork
+    initrd ${lmpf2b}/initrd.gz
+}
+#--------------------------------------------------------------------------------------------------#
+

@@ -15,6 +15,8 @@ FLUSH PRIVILEGES;
 -- Show all users in system
 SELECT User, Host, plugin, password_expired, password_last_changed, password_lifetime, account_locked  FROM mysql.user;
 
+-- Change password, if dumb enough to run above command without reading
+ALTER USER 'sak'@'localhost' IDENTIFIED BY 'new-password-here';
 ```
 
 ## Commands for SystemD

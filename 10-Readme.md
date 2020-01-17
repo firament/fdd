@@ -356,6 +356,7 @@ cp -fv 10-Init.log 10-Init-$(date +"%Y-%m-%d-%s").bak;
 ## Timestamp format for Pluma
 
 ```
+# %d/%m/%Y %H:%M:%S
 %Y-%m-%d %H:%M:%S
 ```
 

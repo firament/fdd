@@ -2,8 +2,8 @@
 {
     //
     // COMMMON
-    "update.enableWindowsBackgroundUpdates": false,
-    "extensions.autoCheckUpdates": true,
+	"update.mode": "manual",
+	"extensions.autoCheckUpdates": true,
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": false,
     "extensions.showRecommendationsOnlyOnDemand": false,
@@ -157,17 +157,6 @@
     "docthis.includeDescriptionTag": true,
     "docthis.includeMemberOfOnInterfaceMembers": true,
     "docthis.includeTypes": true,
-    //
-    // GO LANG
-    "go.enableCodeLens": {
-        "references": false,
-        "runtest": true
-    },
-    "go.gopath": null,
-    "go.goroot": null,
-    "go.gotoSymbol.includeGoroot": true,
-    "go.gotoSymbol.includeImports": true,
-    "go.toolsGopath": "",
 	//
 	// Insert Date String
     "insertDateString.format": "YYYY-MM-DD hh:mm:ss",

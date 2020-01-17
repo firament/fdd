@@ -1,0 +1,43 @@
+"*":
+  core:
+    audioBeep: false
+    automaticallyUpdate: false
+    closeEmptyWindows: false
+    disabledPackages: [
+      "spell-check"
+    ]
+    openEmptyEditorOnStart: false
+    telemetryConsent: "limited"
+    themes: [
+      "one-light-ui"
+      "one-light-syntax"
+    ]
+  editor:
+    fontFamily: "\"Fira Code Retina\""
+    fontSize: 12
+    scrollPastEnd: true
+    showIndentGuide: true
+    softWrap: true
+    softWrapHangingIndent: 4
+    tabLength: 4
+    tabType: "hard"
+  "exception-reporting":
+    userId: "37453e07-8ab2-48af-94d5-b7e9fc7d286e"
+  "spell-check":
+    locales: [
+      "en-us"
+    ]
+    noticesMode: "popup"
+  welcome:
+    showOnStartup: false
+".cs.source":
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true
+    softWrap: true
+    softWrapHangingIndent: 2
+    tabLength: 4
+    tabType: "hard"
+".json.source":
+  editor:
+    softWrap: true
