@@ -1,13 +1,23 @@
 # Pre Install steps
 
-## Update fiels for environment
+## Update fields for environment
 - $/setup-fdd.sh
 	- set correct password
 - $/20-Resources/Copy/PinguyBuilder.conf
 	- update customizations
 
+## Generate random passwords
+- `openssl rand -hex 16`
+- `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 5`
 
 # Post setup customizations
+
+## Keyboad Shortcuts
+- [[Control Center]] > [[Keyboard Shortcuts]]
+	- `Hide all normal windows and set focus to the desktop` == [[Mod4 + M]]
+	- `Tile window to west (left) side of screen` == [[Mod4 + Left]]
+	- `Tile window to eat (right) side of screen` == [[Mod4 + Right]]
+	- See `/org/gnome/desktop/wm/keybindings/` in dconf editor
 
 ## Terminal based steps
 ## MySQL Server
@@ -48,45 +58,79 @@ SELECT User, Host, plugin, password_expired, password_last_changed, password_lif
 
 
 ## VSCode Extensions
-> Update from nds machine
+> Updated 2020 Dec 31
+
+- Markdown All in One
+	- yzhang.markdown-all-in-one
+- Markdown Extended
+	- jebbs.markdown-extended
+- Markdown Preview Github Styling
+	- bierner.markdown-preview-github-styles
+- Insert Date String
+	- jsynowiec.vscode-insertdatestring
+- Base64 Encode/Decode
+	- santoshkumarsingh.vscode-base64-enco
+- Encode Decode
+	- mitchdenny.ecdc
 - C#
 	- ms-vscode.csharp
 - C# XML Documentation Comments
 	- k--kato.docomment
+	- Deprecated: VSCode now officially supports the documentation comment from v1.23.8 (December 18th, 2020)
 - GitLens — Git supercharged
 	- eamodio.gitlens
 - HTML CSS Support
 	- ecmel.vscode-html-css
-- Insert Date String
-	- jsynowiec.vscode-insertdatestring
+- ESLint
+	- dbaeumer.vscode-eslint
 - JavaScript (ES6) code snippets
 	- xabikos.javascriptsnippets
 - jQuery Code Snippets
 	- donjayamanne.jquerysnippets
 - JS & CSS Minifier (Minify)
 	- olback.es6-css-minify
-- Markdown All in One
-	- yzhang.markdown-all-in-one
-- Markdown Extended
-	- jebbs.markdown-extended
 - Ruby
 	- rebornix.ruby
 - Rails
 	- bung87.rails
 - Ruby Solargraph
 	- castwide.solargraph
-- ESLint
-	- dbaeumer.vscode-eslint
+- Snippets
+	- tahabasri.snippets
+- Angular Snippets (Version 11)
+	- johnpapa.angular2
+
+
+**Trails**
+
+- React Native Tools
+	- msjsdiag.vscode-react-native
+- Angular Language Service
+	- angular.ng-template
+- Docker
+	- ms-azuretools.vscode-docker
+- Live Sass Compiler
+	- ritwickdey.live-sass
+- Sass Helper
+	- ramyaraoa.sass-helper
+- Sass Autocompile
+	- darius2652.sass-autocompile
+
+
+- TODO:
+	- https://marketplace.visualstudio.com/items?itemName=stamminger.vscode-markdown-preview-include
+	- https://marketplace.visualstudio.com/items?itemName=joernberkefeld.markdown-preview-bitbucket-innersource
+	- https://marketplace.visualstudio.com/items?itemName=hbrok.markdown-preview-bitbucket
+	- https://marketplace.visualstudio.com/items?itemName=TakumiI.markdowntable
+	- https://marketplace.visualstudio.com/items?itemName=hellorusk.markdown-table-maker
 
 ## Atom Extensions
 > Update from nds machine
 > Turn off spell check
 
 
-
-
 ***
-## Oleder content to be edited
+## Older content to be edited
 ***
 
 ## Install on-demand apps

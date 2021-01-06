@@ -65,7 +65,7 @@ WINDUP_LOG=true;	# keep this OFF, will write log on each shutdown
 
 ## Set sudo mode
 function goSUDO(){
-	sudo -S echo "Activating SUDO mode." <<<"your-plain-text-password"; # run sudo to set creds
+	sudo -S echo "Activating SUDO mode." <<<"plain_text_password"; # run sudo to set creds
 	}
 
 ## Returns the value of the TAG

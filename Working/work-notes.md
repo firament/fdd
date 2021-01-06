@@ -1,6 +1,20 @@
 # Working Notes
 
-## JAVA environments
+## Xubuntu Notes
+- [Offline Package Management](https://docs.xubuntu.org/latest/user/C/offline-packages.html)
+	- apt-offline-gui
+```sh
+# Installs
+apt-offline set --update apt-offline.sig
+apt-offline get --bundle bundle.zip apt-offline.sig # From online device
+sudo apt-offline install bundle.zip
+sudo apt-get install PACKAGENAME
+# Upgrades
+apt-offline set --update --upgrade apt-offline.sig
+sudo apt-offline get --bundle bundle.zip apt-offline.sig # From online device
+sudo apt-offline install bundle.zip
+sudo apt-get upgrade
+```
 
 ## TODOs
 - Create .tar for pinguybuilder
@@ -9,12 +23,28 @@
 ## Sync tree
 - Option 1, without current binaries
 ```sh
-DEST_ROOT="${HOME}/Downloads";
-rsync -vhr --exclude=".git" --exclude="deb-paks-*" --exclude="10-Apps" --exclude="Working/Win-Files" /cdrom/Work-ODP9/setup-fdd-a/ ${DEST_ROOT};
+# Without binaries
+DEST_ROOT="/media/fsap/St0rD1sk/ODP-Setups/setup-fdd-a/";
+rsync \
+    -nvhr \
+    --exclude=".git" \
+	--exclude="x-*" \
+    --exclude="deb-paks-*" \
+	--exclude="10-Apps" \
+	--exclude="20-Resources/Install/Sans-OTF" \
+	--exclude="20-Resources/Install/Sans-TTF" \
+	--exclude="20-Resources/Install/Serif-OTF" \
+	--exclude="20-Resources/Install/Serif-TTF" \
+	--exclude="20-Resources/Install/fonts-zekr" \
+	--exclude="Working/" \
+    /home/fsap/Downloads/fdd-master/* \
+    ${DEST_ROOT};
+
 ```
 - Option 2, with current binaries
 ```sh
-DEST_ROOT="${HOME}/Downloads";
+# With binaries
+DEST_ROOT="/media/fsap/St0rD1sk/ODP-Setups/setup-fdd-a/";
 rsync \
     -nvhr \
     --exclude=".git" \
@@ -24,8 +54,11 @@ rsync \
 	--exclude="20-Resources/Install/Sans-TTF" \
 	--exclude="20-Resources/Install/Serif-OTF" \
 	--exclude="20-Resources/Install/Serif-TTF" \
-	--exclude="Working/" \
-    /cdrom/Work-ODP9/setup-fdd-a/ \
+	--exclude="20-Resources/Install/fonts-zekr" \
+	--exclude="10-Apps/40-EXP" \
+	--exclude="Working/driver-packs/" \
+	--exclude="Working/pinguybuilder-logs/" \
+    /home/fsap/Downloads/fdd-master/* \
     ${DEST_ROOT};
 ```
 
@@ -39,6 +72,51 @@ sudo mkdir -vp ${DIR_DEST};
 echo " ==> Run following command to fix APT";
 echo sudo tar -vx${CMP_TYPE} -C ${DIR_DEST} -f ${TAR_FILE};
 # sudo cp -vf Working/sources.list ${DIR_DEST}/sources.list;
+```
+
+## Extract zip with strip-components
+```sh
+
+# Convert to a function
+
+# Parameters
+SOURCE_FILE="CSharp-0.9.1.zip";	# parm 1
+DEST_PATH="trancode-output";	# parm 2
+OSL=1	                        # parm 3
+STRIP_LEVEL=$(( ${OSL} + 1));
+# Working variables
+TMP_DIR="/run/user/$(id -g ${USER})/$(openssl rand -hex 4)";
+TMP_TAR=${TMP_DIR}.tar
+
+
+# Inspect
+# echo ${TMP_NAME}
+echo "SOURCE_FILE = ${SOURCE_FILE}"
+echo "DEST_PATH   = ${DEST_PATH}"
+echo "STRIP_LEVEL = ${STRIP_LEVEL}"
+echo "TMP_DIR     = ${TMP_DIR}"
+echo "TMP_TAR     = ${TMP_TAR}"
+
+# deflate
+unzip -q ${SOURCE_FILE} -d ${TMP_DIR}
+ls -l ${TMP_DIR}
+
+# transcode
+rm ${TMP_TAR}
+tar -c -v -C ${TMP_DIR} --file ${TMP_TAR} ./
+
+ls -l ${TMP_TAR}
+
+# Use
+rm -vrf ${DEST_PATH}
+mkdir -vp ${DEST_PATH}
+tar -x --strip-components=${STRIP_LEVEL} -C ${DEST_PATH} -f ${TMP_TAR};
+ls -l ${DEST_PATH}
+
+# Clean
+rm -vfr ${TMP_DIR}
+rm -vf ${TMP_TAR}
+
 ```
 
 ## Extract .bz2 archive
@@ -163,6 +241,14 @@ sudo update-alternatives --install /usr/bin/javac javac /opt/java-jre/jre1.8.0_1
 
 java --version
 ```
+
+- Get the physical path of link
+	- `readlink --canonicalize $(which eclipse)`
+
+- Read More:
+	- https://documentation.suse.com/sles/15-SP1/html/SLES-all/cha-update-alternative.html
+	- https://bitmingw.com/2019/08/28/ubuntu-update-alternatives/
+
 
 ## Launch Project IDEs
 ```sh

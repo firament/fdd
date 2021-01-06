@@ -1,8 +1,43 @@
 # TODO List
 
--- token test
-
 ## Tasks to be done for refining FDD setup script
+
+### v3.0 tasks
+> 2020-11-15 21:56:59
+- [ ] Link iteratively all bins
+	- [ ] /10-Base/node/bin
+	- [ ] mongo - remove dir from path
+	- [ ] mongosh
+	- [ ] 
+- [ ] Android Studio
+	- [x] Add setup
+	- [ ] Add offline build deps
+	- https://developer.android.com/studio#downloads
+		- a3f278a8162aa65f103bf51f8e664cf5179de0047c93111e2f86251d44d9dbc3 offline-android-gradle-plugin-preview.zip 
+		- f632eed0d7c2e540665242d7e44156efff1e10ddf878cffa4de312958f2c0e2f offline-gmaven-stable.zip
+	- https://developer.android.com/studio/intro/studio-config#offline
+- [x] Fix ruby bundles, investigate script
+- [x] Identify markdown extensions used earlier
+- [ ] Update scripts for addl apps
+	- [x] Postman
+	- [x] FileZilla
+	- [x] Eclipse
+		- Update ln in script, for project scripts
+	- [x] Netbeans
+	- [ ] Docker
+- [ ] Read release notes for dnc 5.0
+	- https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0.0/5.0.0.md
+    - [ ] [dotnet/sdk:](https://hub.docker.com/_/microsoft-dotnet-sdk/)
+    - [ ] [dotnet/aspnet:](https://hub.docker.com/_/microsoft-dotnet-aspnet/)
+    - [ ] [dotnet/runtime:](https://hub.docker.com/_/microsoft-dotnet-runtime/)
+    - [ ] [dotnet/runtime-deps](https://hub.docker.com/_/microsoft-dotnet-runtime-deps/)
+    - [ ] [dotnet/samples:](https://hub.docker.com/_/microsoft-dotnet-samples/)
+- [x] Configure markdown environment
+	- https://marketplace.visualstudio.com/items?itemName=jebbs.markdown-extended
+		- markdown-it-container
+		
+
+
 
 ### v2.x tasks
 - [x] Add Ruby install code
@@ -38,7 +73,7 @@
 - [ ] Add Pinguybuilder install function
 	- [ ] include all dependencies
 	- [ ] install deb directly
-- [ ] Clean up x-* binaries
+- [x] Clean up x-* binaries
 - [ ] Review VSCode settings
 	- Multi Cursor Modifier (Why does alt works on some?)
 	- editor.autoClosingBrackets
@@ -138,3 +173,35 @@
 	- [x] stat-mysql
 - [x] Add Shortcut for Robo3T
 - [x] Cleanup `20-Resources/Copy/ShortCuts/icons/`
+
+***
+
+## Pleiades bright stars
+| Name              | Distance (ly)[45] | Apparent magnitude | Pronunciation (IPA) | Designation     | Stellar classification |
+| ----------------- | ----------------- | ------------------ | ------------------- | --------------- | ---------------------- |
+| —                 | 444.30            | 5.66               | —                   | 18 Tauri        | B8V                    |
+| Sterope, Asterope | 431.10            | 5.64;6.41          | /(ə)ˈstɛrəpiː/      | 21 and 22 Tauri | B8Ve/B9V               |
+| Celaeno           | 434±10            | 5.44               | /sɪˈliːnoʊ/         | 16 Tauri        | B7IV                   |
+| Pleione           | 422±11            | 5.09 (var.)        | /ˈpliːəniː, ˈplaɪ-/ | 28 (BU) Tauri   | B8IVpe                 |
+| Taygeta           | 364±16            | 4.29               | /teɪˈɪdʒɪtə/        | 19 Tauri        | B6V                    |
+| Merope            | 344±16            | 4.17               | /ˈmɛrəpiː/          | 23 Tauri        | B6IVev                 |
+| Maia              | 344±25            | 3.86               | /ˈmeɪ.ə/            | 20 Tauri        | B7III                  |
+| Electra           | 375±23            | 3.70               | /ɪˈlɛktrə/          | 17 Tauri        | B6IIIe                 |
+| Atlas             | 387±26            | 3.62               | /ˈætləs/            | 27 Tauri        | B8III                  |
+| Alcyone           | 409±50            | 2.86               | /ælˈsaɪ.əniː/       | Eta (25) Tauri  | B7IIIe                 |
+
+
+| Name     | Dst | Mag–Min | Mag-Max | Mag-Scale | X | Y | Z |
+| -------- | --- | ------- | ------- | --------- | - | - | - |
+| Merope   | 344 | 4.17    | 4.17    |           |   |   | x |
+| Maia     | 344 | 3.86    | 3.86    |           |   |   | x |
+| Taygeta  | 364 | 4.29    | 4.29    |           |   |   | x |
+| Electra  | 375 | 3.7     | 3.7     |           |   |   | x |
+| Atlas    | 387 | 3.62    | 3.62    |           |   |   | x |
+| Alcyone  | 409 | 2.86    | 2.86    |           |   |   | x |
+| Pleione  | 422 | 5.09    | 5.09    |           |   |   | x |
+| Sterope  | 431 | 5.64    | 6.41    |           |   |   | x |
+| Asterope | 431 | 5.64    | 6.41    |           |   |   |   |
+| Celaeno  | 434 | 5.44    | 5.44    |           |   |   | x |
+
+***

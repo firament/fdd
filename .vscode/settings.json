@@ -1,0 +1,13 @@
+{
+    "[shellscript]": {
+        "files.eol": "\n",
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.autoIndent": "advanced",
+        "editor.folding": true,
+		"editor.formatOnPaste": true,
+		"editor.stickyTabStops": true,
+		"files.insertFinalNewline": true
+    },
+}
