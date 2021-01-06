@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=/10-Base/ShortCuts/icons/filezilla.svg
+Categories=Network;Tools
+Exec=/30-EXT/FileZilla3/bin/filezilla
+Name=FileZilla
+Comment=FTP Client v3

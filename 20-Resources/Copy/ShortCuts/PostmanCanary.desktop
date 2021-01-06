@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=/10-Base/ShortCuts/icons/PostmanCanary.png
+Categories=Application;Development;Tools
+Exec=/30-EXT/PostmanCanary/app/PostmanCanary
+Name=Postman Canary
+Comment=API test client - Development

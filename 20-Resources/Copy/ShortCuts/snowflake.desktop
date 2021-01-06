@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Snowflake SSH Client
+GenericName=snowflake
+Comment=Connect to an SSH server with snowflake
+Type=Application
+Exec=java -jar /30-EXT/snowflake/snowflake.jar
+Icon=/10-Base/ShortCuts/icons/snowflake.png
+Keywords=ssh;connect;
+Categories=java;Network;SSH

@@ -1,0 +1,28 @@
+#! /bin/bash
+# 2020-12-30 21:47:37
+################################################################################
+#                                                                              #
+# /10-Base/bin/touch-node                                                      #
+#                v 0.1                                                         #
+#                                                                              #
+#    script to update links to executables in node/bin folder,                 #
+#        to keep links updated when new global modules are added               #
+#                                                                              #
+#    This is necessarily machine dependent, and should be updated              #
+#        per instance                                                          #
+#                                                                              #
+#    TODO: Take paths and file names from config file                          #
+#                                                                              #
+################################################################################
+
+NODEJS_BIN_PATH="/10-Base/node/bin";
+PUBLIC_BIN_LOCN="/bin";
+pushd ${NODEJS_BIN_PATH};
+for NFILE in *; do 
+    if [ -e ${NFILE} ] && [ ! -f /bin/${NFILE} ] ; then
+	    sudo ln -vsT ${NODEJS_BIN_PATH}/${NFILE} ${PUBLIC_BIN_LOCN}/${NFILE};
+    else
+        echo "OK  ${NFILE}"
+	fi;
+done;
+popd;
