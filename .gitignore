@@ -1,4 +1,5 @@
-/.project
 _lcl_notes.md
-10-Apps/*
-# 20-Resources
+.ecode
+/.project
+10-Apps
+20-Resources/certs

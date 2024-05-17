@@ -1,0 +1,6 @@
+#!/bin/bash
+# /home/fsap/bin/up-docker
+# 
+sudo systemctl start docker.service
+sudo systemctl start containerd.service
+echo "Docker services started.";

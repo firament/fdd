@@ -1,0 +1,6 @@
+#!/bin/bash
+# /home/fsap/bin/down-docker
+# 
+sudo systemctl stop docker.service
+sudo systemctl stop containerd.service
+echo "Docker services stopped.";

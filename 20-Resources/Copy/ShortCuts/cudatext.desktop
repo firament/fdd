@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=CudaText
+Comment=Cross-platform code editor
+Exec=/usr/bin/cudatext %F
+Icon=/10-Base/ShortCuts/icons/cudatext-512.png
+Categories=Application;Development;TextEditor
+StartupNotify=false
+Version=1.209.0.5
+Type=Application
+Terminal=false
+MimeType=text/plain;x-directory/normal;inode/directory;
