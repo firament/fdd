@@ -271,11 +271,10 @@ Working/github-scopes.png
 Working/grub-NP540U3C.cfg
 Working/grub-live-entry.txt
 Working/ruby-install.md
-Working/sources.list
 Working/sql-server-on-linux.md
+Working/work-notes-01.md
 Working/work-notes-02.md
 Working/work-notes-03.md
-Working/work-notes.md
 Working/VSCode-Configs/
 Working/VSCode-Configs/aap-go.env
 Working/VSCode-Configs/vs-code-go-launch.json
@@ -296,5 +295,5 @@ docs/
 docs/docker-ubuntu.md
 docs/ssh-service.md
 
-sent 10.26K bytes  received 974 bytes  22.47K bytes/sec
-total size is 2.67G  speedup is 237,456.37 (DRY RUN)
+sent 10.25K bytes  received 971 bytes  22.44K bytes/sec
+total size is 2.67G  speedup is 237,795.45 (DRY RUN)
