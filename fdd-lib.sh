@@ -291,14 +291,14 @@ SetupDevApps(){
     sudo ln -vsT ${ECODE_PATH}/ecode ${PUBLIC_BIN_LOCN}/ecode
     echo "";
 
-    #### INSTALL lapce
-    #------------------------------------------------------------------------------#
-    echo "Setting up lapce now";
-    ClearFolder ${LAPCE_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${LAPCE_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${LAPCE_PATH} -f ${LAPCE_TARFILE};
-    sudo ln -vsT ${LAPCE_PATH}/lapce ${PUBLIC_BIN_LOCN}/lapce
-    echo "";
+    # #### INSTALL lapce
+    # #------------------------------------------------------------------------------#
+    # echo "Setting up lapce now";
+    # ClearFolder ${LAPCE_PATH}; # Clean curent install for legacy files
+    # makeOwnFolder ${LAPCE_PATH};    # Folder should exist for tar to work
+    # tar -xz --strip-components=1 -C ${LAPCE_PATH} -f ${LAPCE_TARFILE};
+    # sudo ln -vsT ${LAPCE_PATH}/lapce ${PUBLIC_BIN_LOCN}/lapce
+    # echo "";
 
     #### INSTALL pulsar
     #------------------------------------------------------------------------------#
@@ -320,7 +320,7 @@ SetupDevApps(){
 
     #### INSTALL textadept
     #------------------------------------------------------------------------------#
-    echo "Setting up xxx now";
+    echo "Setting up textadept now";
     ClearFolder ${TEXTADEPT_PATH}; # Clean curent install for legacy files
     makeOwnFolder ${TEXTADEPT_PATH};    # Folder should exist for tar to work
     tar -xz --strip-components=1 -C ${TEXTADEPT_PATH} -f ${TEXTADEPT_TARFILE};
@@ -340,57 +340,6 @@ SetupDevAppsXtra(){
 
     # /30-EXT
 
-    #### INSTALL ecode
-    #------------------------------------------------------------------------------#
-    echo "Setting up ecode now";
-    ClearFolder ${ECODE_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${ECODE_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${ECODE_PATH} -f ${ECODE_TARFILE};
-    sudo ln -vsT ${ECODE_PATH}/ecode ${PUBLIC_BIN_LOCN}/ecode
-    echo "";
-
-    #### INSTALL lapce
-    #------------------------------------------------------------------------------#
-    echo "Setting up lapce now";
-    ClearFolder ${LAPCE_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${LAPCE_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${LAPCE_PATH} -f ${LAPCE_TARFILE};
-    sudo ln -vsT ${LAPCE_PATH}/lapce ${PUBLIC_BIN_LOCN}/lapce
-    echo "";
-
-    #### INSTALL pulsar
-    #------------------------------------------------------------------------------#
-    echo "Setting up pulsar now";
-    ClearFolder ${PULSAR_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${PULSAR_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${PULSAR_PATH} -f ${PULSAR_TARFILE};
-    sudo ln -vsT ${PULSAR_PATH}/pulsar ${PUBLIC_BIN_LOCN}/pulsar
-    echo "";
-
-    #### INSTALL lite-xl
-    #------------------------------------------------------------------------------#
-    echo "Setting up lite-xl now";
-    ClearFolder ${LITEXL_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${LITEXL_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${LITEXL_PATH} -f ${LITEXL_TARFILE};
-    sudo ln -vsT ${LITEXL_PATH}/lite-xl ${PUBLIC_BIN_LOCN}/lite-xl
-    echo "";
-
-    #### INSTALL textadept
-    #------------------------------------------------------------------------------#
-    echo "Setting up xxx now";
-    ClearFolder ${TEXTADEPT_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${TEXTADEPT_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${TEXTADEPT_PATH} -f ${TEXTADEPT_TARFILE};
-    sudo ln -vsT ${TEXTADEPT_PATH}/textadept ${PUBLIC_BIN_LOCN}/textadept
-    echo "";
-
-    ## COPY SHORTCUTS
-    echo "Copying files and linking.";
-    rsync -vhr ${RESOURCE_FOLDER}/Copy/ShortCuts /10-Base/;
-    chmod -v 755 /10-Base/ShortCuts/*desktop;
-    # Make shortcuts universally availaible
-    sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
 }
 
 ####################################################################################################
@@ -403,8 +352,8 @@ SetupDevAppsXtra(){
 
 ApplyUpdate2405A(){
     echo;
-    echo "APPLY Update 21-01-A";
-    # done on: 2020-12-31 12:38:15
+    echo "APPLY Update 24-05-A";
+    # done on: 2024-05-01 01:02:03
  
     # INSTALL whatever addl steps or misses are
     echo "";

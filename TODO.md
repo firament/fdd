@@ -1,8 +1,7 @@
 # TODO List
-
 - [ ] Add links from `/10-Base/bin` to `/usr/local/sbin`, to enable sudo commands
 
-***
+---
 
 ## Pleiades bright stars
 | Name              | Distance (ly)[45] | Apparent magnitude | Pronunciation (IPA) | Designation     | Stellar classification |
@@ -32,4 +31,4 @@
 | Asterope | 431 | 5.64    | 6.41    |           |   |   |   |
 | Celaeno  | 434 | 5.44    | 5.44    |           |   |   | x |
 
-***
+---

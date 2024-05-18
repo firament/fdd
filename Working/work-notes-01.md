@@ -1,26 +1,8 @@
 # Working Notes
 
-## Xubuntu Notes
-- [Offline Package Management](https://docs.xubuntu.org/latest/user/C/offline-packages.html)
-	- apt-offline-gui
-```sh
-# Installs
-apt-offline set --update apt-offline.sig
-apt-offline get --bundle bundle.zip apt-offline.sig # From online device
-sudo apt-offline install bundle.zip
-sudo apt-get install PACKAGENAME
-# Upgrades
-apt-offline set --update --upgrade apt-offline.sig
-sudo apt-offline get --bundle bundle.zip apt-offline.sig # From online device
-sudo apt-offline install bundle.zip
-sudo apt-get upgrade
-```
-
-## TODOs
-- Create .tar for pinguybuilder
-- Add version info for all apps
-
 ## Sync tree
+> To resuse a prepared fdd folder on other machines
+
 - Option 1, without current binaries
 ```sh
 # Without binaries
@@ -39,7 +21,6 @@ rsync \
 	--exclude="Working/" \
     /home/fsap/Downloads/fdd-master/* \
     ${DEST_ROOT};
-
 ```
 - Option 2, with current binaries
 ```sh
@@ -63,6 +44,7 @@ rsync \
 ```
 
 ## Restore APT
+> For cases where `sys-clean` or `bleachbit` wipes the initial files.
 ```sh
 # TAR_FILE="apt-src.tar.xz";
 TAR_FILE="apt-src.tar.xz";
@@ -76,9 +58,6 @@ echo sudo tar -vx${CMP_TYPE} -C ${DIR_DEST} -f ${TAR_FILE};
 
 ## Extract zip with strip-components
 ```sh
-
-# Convert to a function
-
 # Parameters
 SOURCE_FILE="CSharp-0.9.1.zip";	# parm 1
 DEST_PATH="trancode-output";	# parm 2
@@ -87,7 +66,6 @@ STRIP_LEVEL=$(( ${OSL} + 1));
 # Working variables
 TMP_DIR="/run/user/$(id -g ${USER})/$(openssl rand -hex 4)";
 TMP_TAR=${TMP_DIR}.tar
-
 
 # Inspect
 # echo ${TMP_NAME}
@@ -121,13 +99,11 @@ rm -vf ${TMP_TAR}
 
 ## Extract .bz2 archive
 ```sh
-
 # Install
 TAR_FILE="<full-path-to-file>";
 INSTALL_DIR="/usr";
 sudo tar -xvj --strip-components=1 -C ${INSTALL_DIR} -f ${TAR_FILE};
 which filezilla;
-
 ```
 
 ## Extract deb packs
@@ -135,20 +111,6 @@ which filezilla;
 	- `dpkg-deb -x *.deb /tmp/extract/`
 - also see
 	- `dpkg-deb -R original.deb tmp`
-
-## Sync to backup
-```sh
-SRC_DIR="/path/to/source-root/setup-fdd-a/";
-TGT_DIR="/path/to/target-root/setup-fdd-a";
-
-rsync -vrh
- --exclude=".git"
- --exclude="x-*"
- --exclude="deb-paks-*"
- --exclude="Win-Files/"
- ${SRC_DIR}
- ${TGT_DIR}
-```
 
 ## List partitions
 ```sh
@@ -158,67 +120,9 @@ ls -lh /dev/disk/by-uuid/
 udevadm info -q all -n /dev/sdc1 | grep -i by-uuid | head -1
 ```
 
+***
+
 ## Add to README
-
-**VS Code extensions**
-
-- ext install ms-vscode.csharp
-- ext install lukehoban.go
-- ext install jsynowiec.vscode-insertdatestring
-- ext install chrmarti.regex
-- ext install shd101wyy.markdown-preview-enhanced
-- ext install darkriszty.markdown-table-prettify
-- ext install AlanWalk.markdown-toc
-
-- ext install PeterJausovec.vscode-docker
-- ext install joelday.docthis
-- ext install dbaeumer.vscode-eslint
-
-
-## Create folder structure
-```sh
-pushd ${SETUP_ROOT_LOCN};
-
-mkdir -vp 10-Apps/
-mkdir -vp 10-Apps/10-Base/
-mkdir -vp 10-Apps/10-Base/drivers/
-mkdir -vp 10-Apps/20-DEV/
-mkdir -vp 10-Apps/30-EXT/
-mkdir -vp 20-Resources/
-mkdir -vp 20-Resources/Copy/
-mkdir -vp 20-Resources/Copy/ShortCuts/
-mkdir -vp 20-Resources/Copy/ShortCuts/icons/
-mkdir -vp 20-Resources/Copy/bin/
-mkdir -vp 20-Resources/Install/
-mkdir -vp 20-Resources/Install/Sans-OTF/
-mkdir -vp 20-Resources/Install/Sans-TTF/
-mkdir -vp 20-Resources/Install/Serif-OTF/
-mkdir -vp 20-Resources/Install/Serif-TTF/
-mkdir -vp 20-Resources/Install/fonts-zekr/
-mkdir -vp 20-Resources/T-OneUse/
-mkdir -vp 20-Resources/certs/
-
-popd
-```
-
-## GO
-is this needed?
-
-`export GOBIN="$GOPATH/bin"`
-
-see https://golang.org/doc/install#install
-
-`golang.org/x/tools`
-
-### Tools
-- Option 1:
-	- `go get -u golang.org/x/tools/...`
-- Option 2
-	- manually clone the git repo
-	```sh
-	cd $GOPATH/src/golang.org/x/tools;
-	git clone https://github.com/golang/tools.git ...
-	```
 
 ### Chromium
 `sudo apt-get install chromium-browser`
@@ -274,3 +178,4 @@ echo "Opening project in Visual Studio Code now.";
 nohup code ${DST_DIR} &>/dev/null &
 
 ```
+***

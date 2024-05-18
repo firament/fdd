@@ -2,6 +2,16 @@
 // Place your key bindings in this file to overwrite the defaults
 [
 	{
+		"key": "ctrl+d",
+		"command": "editor.action.copyLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+d",
+		"command": "markdown.extension.onCopyLineDown",
+		"when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+	},
+	{
 		"key": "ctrl+shift+right",
 		"command": "-markdownExtended.MoveColumnRight",
 		"when": "editorTextFocus && editorLangId == 'markdown'"
@@ -10,5 +20,28 @@
 		"key": "ctrl+shift+left",
 		"command": "-markdownExtended.MoveColumnLeft",
 		"when": "editorTextFocus && editorLangId == 'markdown'"
-	}
+	},
+	{
+		"key": "ctrl+shift+t",
+		"command": "workbench.action.tasks.runTask"
+	},
+	{
+		"key": "ctrl+shift+b",
+		"command": "workbench.action.tasks.build",
+		"when": "taskCommandsRegistered"
+	},
+	{
+		"key": "shift+cmd+b",
+		"command": "-workbench.action.tasks.build",
+		"when": "taskCommandsRegistered"
+	},
+	{
+		"key": "ctrl+k ctrl+f",
+		"command": "editor.action.formatDocument.none",
+		"when": "editorTextFocus && !editorHasDocumentFormattingProvider && !editorReadonly"
+	},
+	{
+		"key": "cmd+l cmd+s",
+		"command": "dotnet.restartServer"
+	},
 ]

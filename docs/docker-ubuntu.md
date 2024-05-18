@@ -11,15 +11,15 @@
 	- go to `pool/stable/`
 	- select architecture (amd64, armhf, arm64, or s390x)
 	- download deb files for the Docker Engine, CLI, containerd, and Docker Compose packages:
-		- containerd.io_<version>_<arch>.deb
-		- docker-ce_<version>_<arch>.deb
-		- docker-ce-cli_<version>_<arch>.deb
-		- docker-buildx-plugin_<version>_<arch>.deb
-		- docker-compose-plugin_<version>_<arch>.deb
+		- `containerd.io_<version>_<arch>.deb`
+		- `docker-ce_<version>_<arch>.deb`
+		- `docker-ce-cli_<version>_<arch>.deb`
+		- `docker-buildx-plugin_<version>_<arch>.deb`
+		- `docker-compose-plugin_<version>_<arch>.deb`
 
 ***
 ## Install
-	- Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
+- Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
 	```sh
 	sudo dpkg -i \
 		./containerd.io_<version>_<arch>.deb \
@@ -30,25 +30,24 @@
 	```
 	- actuals
 	```sh
-sudo dpkg -i \
-    containerd.io_1.6.31-1_amd64.deb \
-    docker-ce_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
-    docker-ce-cli_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
-    docker-buildx-plugin_0.14.0-1~ubuntu.22.04~jammy_amd64.deb \
-    docker-compose-plugin_2.27.0-1~ubuntu.22.04~jammy_amd64.deb \
-    ;
+    sudo dpkg -i \
+        containerd.io_1.6.31-1_amd64.deb \
+        docker-ce_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
+        docker-ce-cli_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
+        docker-buildx-plugin_0.14.0-1~ubuntu.22.04~jammy_amd64.deb \
+        docker-compose-plugin_2.27.0-1~ubuntu.22.04~jammy_amd64.deb \
+        ;
 
-    # addl, not documented
-    docker-ce-rootless-extras_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
-    docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb \
-	
+    # # addl, not documented
+    # docker-ce-rootless-extras_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
+    # docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb \
 	```
 
 ***
 ## Verify
-	```sh
-	docker --version
-	```
+```sh
+docker --version
+```
 
 ***
 ## Refine - sudo-less
@@ -79,3 +78,4 @@ sudo dpkg -i \
 	-S,  --server-response           print server response
 	-P,  --directory-prefix=PREFIX   save files to PREFIX/..
 	```
+***

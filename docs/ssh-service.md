@@ -1,8 +1,8 @@
 # SSH Service
 > WIP
 > For usage, replace place holders with values
-> - ${USER}
-> - ${machine-name}
+> - `${USER}`
+> - `${machine-name}`
 
 ## TODO:
 
@@ -13,14 +13,14 @@
   - `ssh-add /10-Base/files/${machine-name}-ssh`
   - Copy to `${HOME}/.ssh/`, both pvt and pub key
 - [ ] import host fingerprint
-  - `ssh-keyscan -H -O hashalg=sha256 -t ed25519 -p 22 192.168.0.151 >> ${HOME}/.ssh/known_hosts`
+  - `ssh-keyscan -H -O hashalg=sha256 -t ed25519 -p 22 192.168.0.101 >> ${HOME}/.ssh/known_hosts`
 - [ ] Create entry in `${HOME}/.ssh/config`
 	```
 	Host mnp14
-	HostName 192.168.0.151
-	port 22
-	User ${USER}
-	IdentityFile /10-Base/files/${machine-name}-ssh.pub
+      HostName 192.168.0.101
+      port 22
+      User ${USER}
+      IdentityFile /10-Base/files/${machine-name}-ssh.pub
 	```
 - [ ] Add key to Server
   - [ ] update `${HOME}/.ssh/authorized_keys` with pub key
@@ -49,7 +49,8 @@
 	sudo systemctl enable ssh
 	sudo systemctl start ssh
 	sudo systemctl stop ssh
-	# for modern ssh servers, include socket service also
+	
+  # for modern ssh servers, include socket service also
   sudo systemctl status ssh.socket
   sudo systemctl start ssh.socket
   sudo systemctl stop ssh.socket
