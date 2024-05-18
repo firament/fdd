@@ -1,6 +1,6 @@
 ####################################################################################################
 #                                                                                                  #
-#    fdd-data.sh                                                                                    #
+#   fdd-data.sh                                                                                    #
 #   Variables, constants, common functions and other static code                                   #
 #                                                                                                  #
 ####################################################################################################
@@ -296,5 +296,5 @@ HealthCheck(){
     read -p "Press CTRL+C to abort, or ENTER to continue." -t 45;
     echo "";
 
-    # read: usage: read [-ers] [-a array] [-d delim] [-i text] [-n nchars] [-N nchars] [-p prompt] [-t timeout] [-u fd] [name ...]
+    # read usage: read [-ers] [-a array] [-d delim] [-i text] [-n nchars] [-N nchars] [-p prompt] [-t timeout] [-u fd] [name ...]
 }

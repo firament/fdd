@@ -56,62 +56,6 @@ echo sudo tar -vx${CMP_TYPE} -C ${DIR_DEST} -f ${TAR_FILE};
 # sudo cp -vf Working/sources.list ${DIR_DEST}/sources.list;
 ```
 
-## Extract zip with strip-components
-```sh
-# Parameters
-SOURCE_FILE="CSharp-0.9.1.zip";	# parm 1
-DEST_PATH="trancode-output";	# parm 2
-OSL=1	                        # parm 3
-STRIP_LEVEL=$(( ${OSL} + 1));
-# Working variables
-TMP_DIR="/run/user/$(id -g ${USER})/$(openssl rand -hex 4)";
-TMP_TAR=${TMP_DIR}.tar
-
-# Inspect
-# echo ${TMP_NAME}
-echo "SOURCE_FILE = ${SOURCE_FILE}"
-echo "DEST_PATH   = ${DEST_PATH}"
-echo "STRIP_LEVEL = ${STRIP_LEVEL}"
-echo "TMP_DIR     = ${TMP_DIR}"
-echo "TMP_TAR     = ${TMP_TAR}"
-
-# deflate
-unzip -q ${SOURCE_FILE} -d ${TMP_DIR}
-ls -l ${TMP_DIR}
-
-# transcode
-rm ${TMP_TAR}
-tar -c -v -C ${TMP_DIR} --file ${TMP_TAR} ./
-
-ls -l ${TMP_TAR}
-
-# Use
-rm -vrf ${DEST_PATH}
-mkdir -vp ${DEST_PATH}
-tar -x --strip-components=${STRIP_LEVEL} -C ${DEST_PATH} -f ${TMP_TAR};
-ls -l ${DEST_PATH}
-
-# Clean
-rm -vfr ${TMP_DIR}
-rm -vf ${TMP_TAR}
-
-```
-
-## Extract .bz2 archive
-```sh
-# Install
-TAR_FILE="<full-path-to-file>";
-INSTALL_DIR="/usr";
-sudo tar -xvj --strip-components=1 -C ${INSTALL_DIR} -f ${TAR_FILE};
-which filezilla;
-```
-
-## Extract deb packs
-- To extract the .deb package into the directory /tmp/extract/:
-	- `dpkg-deb -x *.deb /tmp/extract/`
-- also see
-	- `dpkg-deb -R original.deb tmp`
-
 ## List partitions
 ```sh
 sudo blkid | grep /dev/sd
@@ -120,7 +64,7 @@ ls -lh /dev/disk/by-uuid/
 udevadm info -q all -n /dev/sdc1 | grep -i by-uuid | head -1
 ```
 
-***
+---
 
 ## Add to README
 
@@ -132,8 +76,9 @@ udevadm info -q all -n /dev/sdc1 | grep -i by-uuid | head -1
 `npm -g --depth 9999 update`
 
 ## JRE install
+> TODO: Likely out of date. Review and update
 
-Manually:
+- Manually:
 ```sh
 https://linuxconfig.org/how-to-install-java-on-ubuntu-18-04-bionic-beaver-linux
 using `jre-8u172-linux-x64.tar.gz`
@@ -155,6 +100,8 @@ java --version
 
 
 ## Launch Project IDEs
+> convenience command to launch all workspaces for a given project.
+
 ```sh
 ## Set sudo mode
 sudo -S echo "Activating SUDO mode." <<<"your-plain-text-password";
@@ -178,4 +125,4 @@ echo "Opening project in Visual Studio Code now.";
 nohup code ${DST_DIR} &>/dev/null &
 
 ```
-***
+---

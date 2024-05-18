@@ -10,7 +10,7 @@
 - `openssl rand -hex 16`
 - `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 5`
 
-***
+---
 # Post setup customizations
 
 ## Keyboad Shortcuts
@@ -23,9 +23,9 @@
 ## Terminal based steps
 TBD
 
-***
+---
 # Older content to be edited
-***
+---
 
 ## Size suffixes
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# /home/fsap/bin/up-docker
+# /10-Base/bin/up-docker
 # 
 sudo systemctl start docker.service
 sudo systemctl start containerd.service

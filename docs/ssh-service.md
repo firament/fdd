@@ -4,8 +4,6 @@
 > - `${USER}`
 > - `${machine-name}`
 
-## TODO:
-
 ### On Client
 - [ ] Create key-pair (for each host)
   - `ssh-keygen -t ed25519 -b 4096 -C "user@${machine-name}" -f /10-Base/files/${machine-name}-ssh`
@@ -56,8 +54,7 @@
   sudo systemctl stop ssh.socket
 	```
 	
-
-***	
+---
 ## Working Notes
 - /etc/ssh/sshd_config
     - Port 22
@@ -70,4 +67,4 @@
 - /lib/systemd/system/ssh.socket
     - ListenStream=22
     
-***
+---

@@ -2,15 +2,122 @@
 {
     //
     // COMMMON
-	"update.mode": "manual",
-	"extensions.autoCheckUpdates": true,
+    "update.mode": "manual",
+    "extensions.autoCheckUpdates": true,
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": false,
-    "extensions.showRecommendationsOnlyOnDemand": false,
+    //
+    // WORKBENCH
+    "workbench.editor.revealIfOpen": true,
+    "workbench.startupEditor": "none",
     //
     // FILES
+    "files.insertFinalNewline": true,
     // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
-	"files.associations": {
-		"*.ddl": "sql"
-	},
+    "files.associations": {
+        "*.ddl": "sql"
+    },
+    //
+    // GIT
+    "git.path": "/usr/bin/git",
+    "git.promptToSaveFilesBeforeCommit": "always",
+    //
+    // EDITOR
+    "editor.autoIndent": "advanced",
+    "editor.codeLens": false,
+    "editor.fontFamily": "'Fira Code', 'Andale Mono', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 12,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.insertSpaces": true,
+    "editor.letterSpacing": 0,
+    "editor.lineHeight": 25,
+    "editor.minimap.enabled": false,
+    "editor.mouseWheelZoom": true,
+    "editor.multiCursorModifier": "alt",
+    // The modifier to be used to add multiple cursors with the mouse. The Go To Definition and Open Link mouse gestures will adapt such that they do not conflict with the multicursor modifier. [Read more](https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier).
+    //  - ctrlCmd: Maps to `Control` on Windows and Linux and to `Command` on macOS.
+    //  - alt: Maps to `Alt` on Windows and Linux and to `Option` on macOS.
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent",
+    //
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "window.customTitleBarVisibility": "auto",
+    //
+    // TERMINAL
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontFamily": "'Fira Code Regular', 'Ubuntu Mono', monospace",
+    // Controls the line height of the terminal, this number is multiplied by the terminal font size to get the actual line-height in pixels.
+    "terminal.integrated.lineHeight": 1.2,
+    "terminal.integrated.letterSpacing": 2,
+    //
+    // MARKDOWN
+    "markdown.preview.breaks": true,
+    "markdown.preview.fontFamily": "Carlito, Calibri, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
+    "markdown.preview.fontSize": 14,
+    // A list of URLs or local paths to CSS style sheets to use from the markdown preview. Relative paths are interpreted relative to the folder open in the explorer. If there is no open folder, they are interpreted relative to the location of the markdown file. All '\' need to be written as '\\'.
+    "markdown.styles": [],
+    //
+    // HTML
+    // Wrap attributes.
+    //  - auto: Wrap attributes only when line length is exceeded.
+    //  - force: Wrap each attribute except first.
+    //  - force-aligned: Wrap each attribute except first and keep aligned.
+    //  - force-expand-multiline: Wrap each attribute.
+    //  - aligned-multiple: Wrap when line length is exceeded, align attributes vertically.
+    "html.format.wrapAttributes": "force-expand-multiline",
+    //
+    // DOTNET
+    "dotnet.implementType.propertyGenerationBehavior": "preferAutoProperties",
+    "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,
+    "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
+    "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
+    "csharp.inlayHints.enableInlayHintsForTypes": true,
+    "dotnet.inlayHints.enableInlayHintsForIndexerParameters": true,
+    "dotnet.inlayHints.enableInlayHintsForParameters": true,
+    // "csharp.debug.console": "externalTerminal",
+    //
+    //
+    // CUSTOM LANGUAGES BEGIN
+    //
+    //
+    // Configure editor settings to be overridden for [json] language.
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+    },
+    // Configure editor settings to be overridden for [markdown] language.
+    "[markdown]": {
+        "editor.wordWrap": "off",
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": "on",
+            "comments": "off",
+            "strings": "off"
+        },
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    // Configure editor settings to be overridden for [ShellScript] files.
+    "[shellscript]": {
+        "files.eol": "\n",
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.autoIndent": "advanced",
+        "editor.folding": true,
+        "editor.formatOnPaste": true,
+        "editor.stickyTabStops": true,
+        "files.insertFinalNewline": true
+    }
+    //
+    //
+    // CUSTOM LANGUAGES FINIS
+    //
+    //
 }

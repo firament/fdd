@@ -1,5 +1,5 @@
 #!/bin/bash
-# /home/fsap/bin/down-docker
+# /10-Base/bin/down-docker
 # 
 sudo systemctl stop docker.service
 sudo systemctl stop containerd.service

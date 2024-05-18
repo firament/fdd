@@ -17,7 +17,7 @@
 		- `docker-buildx-plugin_<version>_<arch>.deb`
 		- `docker-compose-plugin_<version>_<arch>.deb`
 
-***
+---
 ## Install
 - Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
 	```sh
@@ -43,13 +43,13 @@
     # docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb \
 	```
 
-***
+---
 ## Verify
 ```sh
 docker --version
 ```
 
-***
+---
 ## Refine - sudo-less
 > https://docs.docker.com/engine/install/linux-postinstall/
 - Apply
@@ -67,15 +67,15 @@ docker --version
 	sudo systemctl disable docker.service
 	sudo systemctl disable containerd.service
 	```
-***
+---
 
 ## Working notes
 - https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/
-- automate
+- automate downloads
 	```
 	wget [OPTION]... [URL]...
 	-B,  --base=URL                  resolves HTML input-file links (-i -F) relative to URL
 	-S,  --server-response           print server response
 	-P,  --directory-prefix=PREFIX   save files to PREFIX/..
 	```
-***
+---

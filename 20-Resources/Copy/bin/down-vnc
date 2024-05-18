@@ -1,5 +1,5 @@
 #!/bin/bash
-# /home/sak/bin/down-vnc
+# /10-Base/bin/down-vnc
 # 
 # Sanity checks
 [[ $(whoami) == "root" ]] && echo "Root cant use VNC" && echo "Quitting" && exit      || echo "OK. Not Root";

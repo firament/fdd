@@ -1,2 +1,4 @@
 #!/bin/bash
+# /10-Base/bin/Visual_Paradigm
+# 
 bash /20-DEV/Visual_Paradigm_CE/Visual_Paradigm;
