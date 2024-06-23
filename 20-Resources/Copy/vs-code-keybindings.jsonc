@@ -41,7 +41,20 @@
 		"when": "editorTextFocus && !editorHasDocumentFormattingProvider && !editorReadonly"
 	},
 	{
-		"key": "cmd+l cmd+s",
-		"command": "dotnet.restartServer"
+		"key": "ctrl+`",
+		"command": "-workbench.action.terminal.toggleTerminal",
+		"when": "terminal.active"
 	},
+	// Also built into system, addl not required
+	// {
+	// 	"key": "ctrl+shift+`",
+	// 	"command": "workbench.action.terminal.new",
+	// 	"when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+	// },
+	// Not needed frequently, enable as needed.
+	// {
+	// 	"key": "cmd+l cmd+s",
+	// 	"command": "dotnet.restartServer"
+	// },
 ]
+

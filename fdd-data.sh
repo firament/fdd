@@ -27,27 +27,27 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly JAVA_TAR="${APPS_BAS_SRC}/openjdk-22.0.1_linux-x64_bin.tar.gz";
 readonly JAVA_PATH="${APPS_BAS_DIR}/java";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v20.12.2-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v20.14.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
 # NOTE: Keep in release order, older first
-readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.204-linux-x64.tar.gz";
+readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.302-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 
 ##
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-x64-1714529314.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-x64-1718139773.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly DBEAVER_TAR="${APPS_DEV_SRC}/dbeaver-ce-24.0.3-linux.gtk.x86_64-nojdk.tar.gz";
+readonly DBEAVER_TAR="${APPS_DEV_SRC}/dbeaver-ce-24.1.0-linux.gtk.x86_64.tar.gz";
 readonly DBEAVER_PATH="${APPS_DEV_DIR}/dbeaver-ce";
 #
-readonly CUDATEXT_TAR="${APPS_DEV_SRC}/cudatext-linux-gtk2-amd64-1.214.2.0.tar.xz";
+readonly CUDATEXT_TAR="${APPS_DEV_SRC}/cudatext-linux-gtk2-amd64-1.215.0.2.tar.xz";
 readonly CUDATEXT_PATH="${APPS_DEV_DIR}/CudaText";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_17_1_20240307_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_17_2_20240608_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
 readonly SQLVQB_TARFILE="${APPS_DEV_SRC}/SQLeoVQB.2019.01.rc1.zip";
@@ -69,7 +69,7 @@ readonly ECODE_PATH="${APPS_EXT_DIR}/ecode";
 readonly LAPCE_TARFILE="${APPS_EXT_SRC}/lapce-linux-amd64.tar.gz";
 readonly LAPCE_PATH="${APPS_EXT_DIR}/lapce";
 #
-readonly PULSAR_TARFILE="${APPS_EXT_SRC}/Linux.pulsar-1.116.0.tar.gz";
+readonly PULSAR_TARFILE="${APPS_EXT_SRC}/Linux.pulsar-1.118.0.tar.gz";
 readonly PULSAR_PATH="${APPS_EXT_DIR}/pulsar";
 #
 readonly LITEXL_TARFILE="${APPS_EXT_SRC}/lite-xl-v2.1.4-addons-linux-x86_64-portable.tar.gz";

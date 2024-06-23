@@ -10,12 +10,14 @@
     // WORKBENCH
     "workbench.editor.revealIfOpen": true,
     "workbench.startupEditor": "none",
+    "workbench.colorTheme": "Default Dark+",
     //
     // FILES
     "files.insertFinalNewline": true,
     // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
     "files.associations": {
-        "*.ddl": "sql"
+        "*.ddl": "sql",
+        "*NLog.config": "html"
     },
     //
     // GIT
@@ -27,7 +29,7 @@
     "editor.codeLens": false,
     "editor.fontFamily": "'Fira Code', 'Andale Mono', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
-    "editor.fontSize": 12,
+    "editor.fontSize": 14,
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,
     "editor.insertSpaces": true,
@@ -41,9 +43,8 @@
     //  - alt: Maps to `Alt` on Windows and Linux and to `Option` on macOS.
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent",
-    //
-    "diffEditor.hideUnchangedRegions.enabled": true,
-    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.find.addExtraSpaceOnTop": false,
+    "diffEditor.ignoreTrimWhitespace": true,
     "window.customTitleBarVisibility": "auto",
     //
     // TERMINAL
@@ -75,8 +76,11 @@
     "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
     "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
     "csharp.inlayHints.enableInlayHintsForTypes": true,
+    "dotnet.implementType.propertyGenerationBehavior": "preferAutoProperties",
     "dotnet.inlayHints.enableInlayHintsForIndexerParameters": true,
     "dotnet.inlayHints.enableInlayHintsForParameters": true,
+    "dotnet.preferCSharpExtension": true,
+    "dotnet.server.useOmnisharp": true,
     // "csharp.debug.console": "externalTerminal",
     //
     //
@@ -101,7 +105,12 @@
             "strings": "off"
         },
         "editor.tabSize": 4,
-        "editor.insertSpaces": true
+        "editor.insertSpaces": true,
+    },
+    // Configure editor settings to be overridden for [C#] files.
+    "[csharp]": {
+        "editor.formatOnType": true,
+        "editor.maxTokenizationLineLength": 2500,
     },
     // Configure editor settings to be overridden for [ShellScript] files.
     "[shellscript]": {
@@ -114,10 +123,20 @@
         "editor.formatOnPaste": true,
         "editor.stickyTabStops": true,
         "files.insertFinalNewline": true
-    }
+    },
+    // Configure editor settings to be overridden for [Html, Xml] files.
+    "[html]": {
+        "editor.tabSize": 2,
+    },
+    // Configure editor settings to be overridden for [SQL, DDL] files.
+    "[sql]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+    },
     //
     //
     // CUSTOM LANGUAGES FINIS
     //
     //
 }
+

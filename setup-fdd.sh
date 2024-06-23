@@ -6,6 +6,12 @@
 ####################################################################################################
 
 # sudo -S echo "Activating SUDO mode." <<<"plain_text_password";  # plain_text_password
+echo "";
+echo "";
+echo "FATAL: Sudo mode NOT activated.";
+echo "Comment the warning when password is set.";
+echo "";
+echo "";
 
 ## TODO:
 #    replaceText - verify and fix regex. result is broken now
@@ -31,7 +37,7 @@ echo;
     # SetupDevAppsXtra   2>&1 | tee -a ${SETUPS_LOG_LOCN}/41-SetupDevAppsXtra-$(date +"%Y%m%d-%s").log;
 
 ## Post Install stabilization patches
-    # ApplyUpdate2405A   2>&1 | tee -a ${SETUPS_LOG_LOCN}/55-Updates--$(date +"%Y%m%d-%s").log;
+    # ApplyUpdate2406A   2>&1 | tee -a ${SETUPS_LOG_LOCN}/55-Updates--$(date +"%Y%m%d-%s").log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

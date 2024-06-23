@@ -11,24 +11,24 @@ Automation scripts to bring a raw ubuntu installation to a known state
 ---
 
 ## Quick Download Links
-- Updated on: 2024-05-18
+- Updated on: 2024-06-19
 
 | Loc     | App          | Curr Ver  | Download URL                                                                                |   Size |
 | ------- | ------------ | --------- | ------------------------------------------------------------------------------------------- | ------:|
-| 10-Base | .NET SDK     | 8.0.204   | https://www.microsoft.com/net/download/linux                                                | 216 MB |
+| 10-Base | .NET SDK     | 8.0.302   | https://www.microsoft.com/net/download/linux                                                | 212 MB | *
 | 10-Base | Java SDK     | 22.0.1    | https://jdk.java.net/                                                                       | 193 MB |
-| 10-Base | node.js      | 20.12.2   | https://nodejs.org/en/download/                                                             |  25 MB |
+| 10-Base | node.js      | 20.12.2   | https://nodejs.org/en/download/                                                             |  25 MB | *
 |         |              |           |                                                                                             |        |
-| 20-DEV  | VS Code      | 1.89.0    | https://code.visualstudio.com/docs/?dv=linux64                                              | 137 MB |
-| 20-DEV  | VPUML        | 17.1.0307 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 766 MB |
+| 20-DEV  | VS Code      | 1.89.0    | https://code.visualstudio.com/docs/?dv=linux64                                              | 138 MB | *
+| 20-DEV  | VPUML        | 17.2.0608 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 747 MB | *
 | 20-DEV  | SQLeoVQB     | 19.01rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      |   3 MB |
-| 20-DEV  | DBeaver      | 24.0.3    | https://dbeaver.io/download/                                                                |  86 MB |
-| 20-DEV  | CudaText     | 1.214.2.0 | https://sourceforge.net/projects/cudatext/files/release/                                    |   7 MB |
+| 20-DEV  | DBeaver      | 24.1.0    | https://dbeaver.io/download/                                                                | 122 MB | *
+| 20-DEV  | CudaText     | 1.215.0.2 | https://sourceforge.net/projects/cudatext/files/release/                                    |   7 MB | *
 |         |              |           |                                                                                             |        |
 | 30-EXT  | Lite XL      | 2.1.4     | https://github.com/lite-xl/lite-xl/releases                                                 |   2 MB |
 | 30-EXT  | Textadept    | 12.4      | https://orbitalquark.github.io/textadept/                                                   |   7 MB |
 | 30-EXT  | ecode        | 0.5.2     | https://github.com/SpartanJ/ecode/releases                                                  |  22 MB |
-| 30-EXT  | Pulsar       | 1.116.0   | https://github.com/pulsar-edit/pulsar/releases/                                             | 213 MB |
+| 30-EXT  | Pulsar       | 1.118.0   | https://github.com/pulsar-edit/pulsar/releases/                                             | 213 MB | *
 | 30-EXT  | FileZilla    | 3.67.0    | https://filezilla-project.org/download.php?show_all=1                                       |  15 MB |
 | 30-EXT  | SnowFlake    | 1.0.4     | https://github.com/subhra74/snowflake/releases                                              |  39 MB |
 |         |              |           |                                                                                             |        |
