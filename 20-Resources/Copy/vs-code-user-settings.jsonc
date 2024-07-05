@@ -6,18 +6,20 @@
     "extensions.autoCheckUpdates": true,
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": false,
+    "telemetry.telemetryLevel": "off",
+    "explorer.copyRelativePathSeparator": "/",
     //
     // WORKBENCH
-    "workbench.editor.revealIfOpen": true,
-    "workbench.startupEditor": "none",
     "workbench.colorTheme": "Default Dark+",
+    "workbench.editor.revealIfOpen": true,
+    "workbench.startupEditor": "welcomePageInEmptyWorkbench",
     //
     // FILES
     "files.insertFinalNewline": true,
     // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
     "files.associations": {
         "*.ddl": "sql",
-        "*NLog.config": "html"
+        "*NLog.config": "xml"
     },
     //
     // GIT
@@ -27,34 +29,60 @@
     // EDITOR
     "editor.autoIndent": "advanced",
     "editor.codeLens": false,
+    "editor.find.addExtraSpaceOnTop": false,
     "editor.fontFamily": "'Fira Code', 'Andale Mono', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
     "editor.formatOnPaste": true,
+    // "editor.formatOnSave": true,
+    // "editor.formatOnSaveMode": "modificationsIfAvailable",
     "editor.formatOnType": true,
+    "editor.indentSize": "tabSize",
     "editor.insertSpaces": true,
-    "editor.letterSpacing": 0,
-    "editor.lineHeight": 25,
+    "editor.letterSpacing": 1,
+    "editor.lineHeight": 24,
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
-    "editor.multiCursorModifier": "alt",
+    "editor.tabSize": 4,
     // The modifier to be used to add multiple cursors with the mouse. The Go To Definition and Open Link mouse gestures will adapt such that they do not conflict with the multicursor modifier. [Read more](https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier).
     //  - ctrlCmd: Maps to `Control` on Windows and Linux and to `Command` on macOS.
     //  - alt: Maps to `Alt` on Windows and Linux and to `Option` on macOS.
+    "editor.multiCursorModifier": "alt",
+    "editor.unicodeHighlight.ambiguousCharacters": false,
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent",
-    "editor.find.addExtraSpaceOnTop": false,
     "diffEditor.ignoreTrimWhitespace": true,
     "window.customTitleBarVisibility": "auto",
     //
     // TERMINAL
-    "terminal.integrated.fontSize": 14,
+    "terminal.external.linuxExec": "/usr/bin/xfce4-terminal",
+    "terminal.explorerKind": "external",
+    "terminal.integrated.copyOnSelection": false,
+    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "terminal.integrated.fontFamily": "'Fira Code Regular', 'Ubuntu Mono', monospace",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.letterSpacing": 2,
     // Controls the line height of the terminal, this number is multiplied by the terminal font size to get the actual line-height in pixels.
     "terminal.integrated.lineHeight": 1.2,
-    "terminal.integrated.letterSpacing": 2,
+    "terminal.integrated.automationProfile.linux": {
+        "overrideName": false,
+        "path": "/usr/bin/xfce4-terminal",
+    },
     //
     // MARKDOWN
+    // "markdown.server.log": "debug",
+    "markdown-preview-github-styles.colorTheme": "light",
+    "markdown-preview-github-styles.darkTheme": "light",
+    "markdown-preview-github-styles.lightTheme": "light",
+    "markdown.extension.list.indentationSize": "inherit",
+    "markdown.extension.print.absoluteImgPath": false,
+    "markdown.extension.print.imgToBase64": true,
+    "markdown.extension.tableFormatter.normalizeIndentation": true,
+    "markdown.extension.theming.decoration.renderHardLineBreak": true,
+    "markdown.extension.toc.orderedList": true,
+    "markdown.extension.toc.plaintext": true,
     "markdown.preview.breaks": true,
     "markdown.preview.fontFamily": "Carlito, Calibri, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
     "markdown.preview.fontSize": 14,
@@ -62,16 +90,31 @@
     "markdown.styles": [],
     //
     // HTML
+    "html.format.enable": true,
+    "html.format.indentInnerHtml": true,
     // Wrap attributes.
     //  - auto: Wrap attributes only when line length is exceeded.
     //  - force: Wrap each attribute except first.
     //  - force-aligned: Wrap each attribute except first and keep aligned.
     //  - force-expand-multiline: Wrap each attribute.
     //  - aligned-multiple: Wrap when line length is exceeded, align attributes vertically.
-    "html.format.wrapAttributes": "force-expand-multiline",
+    "html.format.wrapAttributes": "aligned-multiple",
+    "html.format.wrapLineLength": 140,
     //
-    // DOTNET
-    "dotnet.implementType.propertyGenerationBehavior": "preferAutoProperties",
+    // XML [redhat.vscode-xml]
+    "xml.foldings.includeClosingTagInFold": true,
+    "xml.format.emptyElements": "collapse",
+    "xml.format.enforceQuoteStyle": "preferred",
+    "xml.preferences.quoteStyle": "double",
+    "xml.format.joinCommentLines": true,
+    "xml.format.maxLineWidth": 240,
+    "xml.format.splitAttributes": "alignWithFirstAttr",
+    // "xml.java.home": "C:\\XCopyInstalls\\jdk-20.0.1",
+    "xml.java.home": "/10-Base/java",
+    "xml.server.vmargs": "-Xmx512M",
+    "xml.symbols.maxItemsComputed": 12000,
+    //
+    // DOTNET [ms-dotnettools.csharp]
     "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,
     "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
     "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
@@ -79,39 +122,82 @@
     "dotnet.implementType.propertyGenerationBehavior": "preferAutoProperties",
     "dotnet.inlayHints.enableInlayHintsForIndexerParameters": true,
     "dotnet.inlayHints.enableInlayHintsForParameters": true,
-    "dotnet.preferCSharpExtension": true,
-    "dotnet.server.useOmnisharp": true,
+    "dotnet.dotnetPath": "/10-Base/DNC",
+    "dotnet.enableXamlTools": false,
+    // "dotnet.preferCSharpExtension": true,
+    // "dotnet.server.useOmnisharp": true,
     // "csharp.debug.console": "externalTerminal",
+    //
+    // SQL-FORMATTER EXTENSION  [ReneSaarsoo.sql-formatter-vsc]
+    "SQL-Formatter-VSCode.denseOperators": true,
+    "SQL-Formatter-VSCode.dialect": "transactsql",
+    "SQL-Formatter-VSCode.expressionWidth": 120,
+    "SQL-Formatter-VSCode.ignoreTabSettings": true,
+    "SQL-Formatter-VSCode.keywordCase": "upper",
+    "SQL-Formatter-VSCode.linesBetweenQueries": 2,
+    "SQL-Formatter-VSCode.newlineBeforeSemicolon": true,
+    "SQL-Formatter-VSCode.tabSizeOverride": 4,
     //
     //
     // CUSTOM LANGUAGES BEGIN
     //
     //
-    // Configure editor settings to be overridden for [json] language.
+    //
+    // Configure editor settings to be overridden for [json, jsonc] files.
     "[json]": {
         "editor.quickSuggestions": {
             "strings": true
         },
-        "editor.tabSize": 4,
+        "editor.autoClosingBrackets": "beforeWhitespace",
+        "editor.autoClosingQuotes": "beforeWhitespace",
+        "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+        "editor.defaultFormatter": "vscode.json-language-features",
         "editor.insertSpaces": true,
+        "editor.tabSize": 4
     },
-    // Configure editor settings to be overridden for [markdown] language.
+    // Configure editor settings to be overridden for [json, jsonc] files.
+    "[jsonc]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.autoClosingBrackets": "beforeWhitespace",
+        "editor.autoClosingQuotes": "beforeWhitespace",
+        "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+    //
+    // Configure editor settings to be overridden for [markdown] files.
     "[markdown]": {
-        "editor.wordWrap": "off",
-        "editor.autoIndent": "advanced",
         "editor.quickSuggestions": {
             "other": "on",
             "comments": "off",
             "strings": "off"
         },
-        "editor.tabSize": 4,
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+        "editor.fontSize": 14,
         "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.wordWrap": "off",
     },
     // Configure editor settings to be overridden for [C#] files.
     "[csharp]": {
         "editor.formatOnType": true,
         "editor.maxTokenizationLineLength": 2500,
     },
+    // Configure editor settings to be overridden for [python] files.
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    // Configure editor settings to be overridden for [html] files.
+    "[html]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "vscode.html-language-features",
+    },
+    // Configure editor settings to be overridden for [xml] files.
+    "[xml]": {},
     // Configure editor settings to be overridden for [ShellScript] files.
     "[shellscript]": {
         "files.eol": "\n",
@@ -124,10 +210,6 @@
         "editor.stickyTabStops": true,
         "files.insertFinalNewline": true
     },
-    // Configure editor settings to be overridden for [Html, Xml] files.
-    "[html]": {
-        "editor.tabSize": 2,
-    },
     // Configure editor settings to be overridden for [SQL, DDL] files.
     "[sql]": {
         "editor.tabSize": 4,
@@ -139,4 +221,3 @@
     //
     //
 }
-

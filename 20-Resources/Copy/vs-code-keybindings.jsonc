@@ -1,16 +1,8 @@
 // original file name: ${HOME}/.config/Code/User/keybindings.json
 // Place your key bindings in this file to overwrite the defaults
+// `"command": "-` indicates removed keybindings.
 [
-	{
-		"key": "ctrl+d",
-		"command": "editor.action.copyLinesDownAction",
-		"when": "editorTextFocus && !editorReadonly"
-	},
-	{
-		"key": "ctrl+d",
-		"command": "markdown.extension.onCopyLineDown",
-		"when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
-	},
+	// Removed keybindings
 	{
 		"key": "ctrl+shift+right",
 		"command": "-markdownExtended.MoveColumnRight",
@@ -22,6 +14,47 @@
 		"when": "editorTextFocus && editorLangId == 'markdown'"
 	},
 	{
+		"key": "shift+cmd+b",
+		"command": "-workbench.action.tasks.build",
+		"when": "taskCommandsRegistered"
+	},
+	{
+		"key": "ctrl+`",
+		"command": "-workbench.action.terminal.toggleTerminal",
+		"when": "terminal.active"
+	},
+	{
+		"key": "ctrl+f12",
+		"command": "-editor.action.revealDefinition",
+		"when": "editorHasDefinitionProvider && editorTextFocus && isWeb"
+	},
+	{
+		"key": "ctrl+k ctrl+f",
+		"command": "-editor.action.formatSelection",
+		"when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+shift+i",
+		"command": "-editor.action.formatDocument.none",
+		"when": "editorTextFocus && !editorHasDocumentFormattingProvider && !editorReadonly"
+	},
+	{
+		"key": "ctrl+shift+i",
+		"command": "-editor.action.formatDocument",
+		"when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+	},
+	// New Keybindings
+	{
+		"key": "ctrl+d",
+		"command": "editor.action.copyLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+d",
+		"command": "markdown.extension.onCopyLineDown",
+		"when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+	},
+	{
 		"key": "ctrl+shift+t",
 		"command": "workbench.action.tasks.runTask"
 	},
@@ -31,30 +64,26 @@
 		"when": "taskCommandsRegistered"
 	},
 	{
-		"key": "shift+cmd+b",
-		"command": "-workbench.action.tasks.build",
-		"when": "taskCommandsRegistered"
+		"key": "ctrl+k ctrl+d",
+		"command": "editor.action.formatDocument",
+		"when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
 	},
 	{
-		"key": "ctrl+k ctrl+f",
-		"command": "editor.action.formatDocument.none",
-		"when": "editorTextFocus && !editorHasDocumentFormattingProvider && !editorReadonly"
+		"key": "ctrl+shift+`",
+		"command": "workbench.action.terminal.toggleTerminal"
 	},
 	{
 		"key": "ctrl+`",
-		"command": "-workbench.action.terminal.toggleTerminal",
-		"when": "terminal.active"
+		"command": "workbench.action.terminal.new",
+		"when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
 	},
-	// Also built into system, addl not required
-	// {
-	// 	"key": "ctrl+shift+`",
-	// 	"command": "workbench.action.terminal.new",
-	// 	"when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
-	// },
-	// Not needed frequently, enable as needed.
-	// {
-	// 	"key": "cmd+l cmd+s",
-	// 	"command": "dotnet.restartServer"
-	// },
+	{
+		"key": "ctrl+shift+`",
+		"command": "-workbench.action.terminal.new",
+		"when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+	},
+	{
+		"key": "ctrl+k ctrl+c",
+		"command": "workbench.panel.repl.view.focus"
+	}
 ]
-
