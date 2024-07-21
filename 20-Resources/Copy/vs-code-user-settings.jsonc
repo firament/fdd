@@ -32,7 +32,7 @@
     "editor.find.addExtraSpaceOnTop": false,
     "editor.fontFamily": "'Fira Code', 'Andale Mono', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
-    "editor.fontSize": 14,
+    // "editor.fontSize": 14, // Let users choose and apply in user config.
     "editor.formatOnPaste": true,
     // "editor.formatOnSave": true,
     // "editor.formatOnSaveMode": "modificationsIfAvailable",
@@ -62,7 +62,7 @@
     "terminal.integrated.defaultProfile.linux": "bash",
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "terminal.integrated.fontFamily": "'Fira Code Regular', 'Ubuntu Mono', monospace",
-    "terminal.integrated.fontSize": 14,
+    // "terminal.integrated.fontSize": 14,  // Let users choose and apply in user config.
     "terminal.integrated.letterSpacing": 2,
     // Controls the line height of the terminal, this number is multiplied by the terminal font size to get the actual line-height in pixels.
     "terminal.integrated.lineHeight": 1.2,
@@ -85,7 +85,7 @@
     "markdown.extension.toc.plaintext": true,
     "markdown.preview.breaks": true,
     "markdown.preview.fontFamily": "Carlito, Calibri, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
-    "markdown.preview.fontSize": 14,
+    // "markdown.preview.fontSize": 14,  // Let users choose and apply in user config.
     // A list of URLs or local paths to CSS style sheets to use from the markdown preview. Relative paths are interpreted relative to the folder open in the explorer. If there is no open folder, they are interpreted relative to the location of the markdown file. All '\' need to be written as '\\'.
     "markdown.styles": [],
     //
@@ -177,7 +177,7 @@
         },
         "editor.autoIndent": "advanced",
         "editor.defaultFormatter": "yzhang.markdown-all-in-one",
-        "editor.fontSize": 14,
+        // "editor.fontSize": 14,  // Let users choose and apply in user config.
         "editor.insertSpaces": true,
         "editor.tabSize": 4,
         "editor.wordWrap": "off",

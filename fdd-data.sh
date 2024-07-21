@@ -27,21 +27,21 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly JAVA_TAR="${APPS_BAS_SRC}/openjdk-22.0.1_linux-x64_bin.tar.gz";
 readonly JAVA_PATH="${APPS_BAS_DIR}/java";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v20.14.0-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v20.15.1-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
 # NOTE: Keep in release order, older first
-readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.302-linux-x64.tar.gz";
+readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.303-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 
 ##
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-x64-1718139773.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-x64-1720562902.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly DBEAVER_TAR="${APPS_DEV_SRC}/dbeaver-ce-24.1.0-linux.gtk.x86_64.tar.gz";
+readonly DBEAVER_TAR="${APPS_DEV_SRC}/dbeaver-ce-24.1.2-linux.gtk.x86_64-nojdk.tar.gz";
 readonly DBEAVER_PATH="${APPS_DEV_DIR}/dbeaver-ce";
 #
 readonly CUDATEXT_TAR="${APPS_DEV_SRC}/cudatext-linux-gtk2-amd64-1.215.0.2.tar.xz";

@@ -333,7 +333,9 @@ SetupDevApps(){
 #                                                                                                  #
 #   ADITIONAL APPS NOT REQUIRED ON LITE SYSTEMS                                                    #
 #   Moved from 'SetupDevApps()'                                                                    #
+####################################################################################################
 SetupDevAppsXtra(){
+    echo; # empty function will throw syntax error. Atleast one command must exist.
     ## /10-Base
 
     ## /20-DEV
@@ -350,101 +352,11 @@ SetupDevAppsXtra(){
 ####################################################################################################
 
 
-ApplyUpdate2406A(){
+ApplyUpdate2407A(){
     echo;
-    echo "APPLY Update 24-06-A";
-    # done on: 
+    echo "APPLY Update 24-07-A";
+    # done on: 2024-07-12
  
-    #### INSTALL NodeJS
-    #------------------------------------------------------------------------------#
-    echo "Setting up Node.js now";
-    makeOwnFolder ${NODEJS_PATH}  # Folder should exist for tar to work
-    tar -xJ --strip-components=1 -C ${NODEJS_PATH} -f ${NODEJS_TAR};
-    echo "- linking all executables to public space";
-    pushd ${NODEJS_PATH}/bin/;
-    for NFILE in *; do 
-        if [ -e ${NFILE} ] && [ ! -f /bin/${NFILE} ] ; then
-            sudo ln -vsT ${NODEJS_PATH}/bin/${NFILE} ${PUBLIC_BIN_LOCN}/${NFILE};
-        fi;
-    done;
-    popd;
-    echo "";
-
-    # #### INSTALL .NET Core SDKs
-    #------------------------------------------------------------------------------#
-    echo "Setting up Dot Net Core, all SDKs";
-    makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
-    mkdir -vp ${HOME}/.nuget/packages;
-    for DNC_TAR in ${DNETCORE_ALL_TARS}; do
-       # [[ -f ${APPS_BAS_SRC}/${DNC_TAR} ]] && echo "Good         : ${DNC_TAR}" || echo "Missing       : ${DNC_TAR}";
-       if [ -f ${APPS_BAS_SRC}/${DNC_TAR} ]; then
-          echo "Good         : ${DNC_TAR}";
-          tar -xz -C ${DNETCORE_PATH} -f ${APPS_BAS_SRC}/${DNC_TAR};
-       else
-          echo "Missing       : ${DNC_TAR}";
-          echo "ERROR: Skipping extraction of missing tar ${APPS_BAS_SRC}/${DNC_TAR}";
-       fi;
-    done
-    # sudo ln -vsT ${DNETCORE_PATH}/dotnet ${PUBLIC_BIN_LOCN}/dotnet;
-    echo "";
-    echo "Verifying now..."
-    dotnet --info
-
-    echo "";
-    echo "DEBUG:: BEGIN ================================================================================"
-    echo "- Check contents of folder '/10-Base/DNC/sdk/NuGetFallbackFolder'. Should be empty on fresh install";
-    # ls -1 /10-Base/DNC/sdk/NuGetFallbackFolder/
-    echo "DEBUG:: END   ================================================================================"
-
-    echo "";
-
-    #### INSTALL Visual Studio Code
-    #------------------------------------------------------------------------------#
-    echo "Setting up Visual Studio Code now";
-    makeOwnFolder ${VSCODE_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
-    # sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code;
-    # sudo ln -vsT ${VSCODE_PATH}/bin/code ${PUBLIC_BIN_LOCN}/code-cli;
-    # Initialize settings
-    mkdir -vp ${HOME}/.config/Code/User/;
-    # cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
-    # cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
-    # Copy config templates for reference, used by commands
-    mkdir -vp ${HOME}/Documents/VSCode-Configs/;
-    cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
-    # Install default extensions
-    code-cli --version;
-    ${PUBLIC_BIN_LOCN}/code-cli --list-extensions;
-
-    echo "";
-
-    #### INSTALL DBeaver CE
-    #------------------------------------------------------------------------------#
-    echo "Setting up DBeaver CE now";
-    # ClearFolder ${DBEAVER_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${DBEAVER_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${DBEAVER_PATH} -f ${DBEAVER_TAR};
-    # sudo ln -vsT ${DBEAVER_PATH}/dbeaver ${PUBLIC_BIN_LOCN}/dbeaver
-    echo "";
-
-    #### INSTALL CudaText
-    #------------------------------------------------------------------------------#
-    echo "Setting up CudaText now";
-    makeOwnFolder ${CUDATEXT_PATH}  # Folder should exist for tar to work
-    tar -xJ --strip-components=1 -C ${CUDATEXT_PATH} -f ${CUDATEXT_TAR};
-    echo "- linking all executables to public space";
-    # sudo ln -vsT ${CUDATEXT_PATH}/cudatext ${PUBLIC_BIN_LOCN}/cudatext
-    echo "";
-
-    #### INSTALL pulsar
-    #------------------------------------------------------------------------------#
-    echo "Setting up pulsar now";
-    # ClearFolder ${PULSAR_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${PULSAR_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${PULSAR_PATH} -f ${PULSAR_TARFILE};
-    sudo ln -vsT ${PULSAR_PATH}/pulsar ${PUBLIC_BIN_LOCN}/pulsar
-    echo "";
-
     # INSTALL whatever addl steps or misses are
     echo "";
 }
