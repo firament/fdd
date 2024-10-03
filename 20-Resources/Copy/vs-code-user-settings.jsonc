@@ -40,7 +40,7 @@
     "editor.indentSize": "tabSize",
     "editor.insertSpaces": true,
     "editor.letterSpacing": 1,
-    "editor.lineHeight": 24,
+    "editor.lineHeight": 1.9,
     "editor.minimap.enabled": false,
     "editor.mouseWheelZoom": true,
     "editor.tabSize": 4,
@@ -220,4 +220,11 @@
     // CUSTOM LANGUAGES FINIS
     //
     //
+    "workbench.colorCustomizations": {
+        "list.activeSelectionBackground": "#ebc6a881",
+        "list.inactiveSelectionBackground": "#704119",
+        "list.inactiveFocusOutline": "#ff0000",
+        // #704119 -> for Dark themes
+        // #d5853f -> for Light themes
+    },
 }

@@ -37,7 +37,7 @@ echo;
     # SetupDevAppsXtra   2>&1 | tee -a ${SETUPS_LOG_LOCN}/41-SetupDevAppsXtra-$(date +"%Y%m%d-%s").log;
 
 ## Post Install stabilization patches
-    # ApplyUpdate2407A   2>&1 | tee -a ${SETUPS_LOG_LOCN}/55-Updates--$(date +"%Y%m%d-%s").log;
+    # ApplyUpdate2409A   2>&1 | tee -a ${SETUPS_LOG_LOCN}/55-Updates--$(date +"%Y%m%d-%s").log;
 
 ## Signoff
 echo -n "Done running script $0 - "; date +"%T [%a] %d %b %Y";

@@ -15,15 +15,15 @@ Automation scripts to bring a raw ubuntu installation to a known state
 
 | Loc     | App          | Curr Ver  | Download URL                                                                                |   Size |
 | ------- | ------------ | --------- | ------------------------------------------------------------------------------------------- | ------:|
-| 10-Base | .NET SDK     | 8.0.303   | https://www.microsoft.com/net/download/linux                                                | 213 MB |
+| 10-Base | .NET SDK     | 8.0.401   | https://www.microsoft.com/net/download/linux                                                | 204 MB |
 | 10-Base | Java SDK     | 22.0.1    | https://jdk.java.net/                                                                       | 193 MB |
 | 10-Base | node.js      | 20.15.1   | https://nodejs.org/en/download/                                                             |  24 MB |
 |         |              |           |                                                                                             |        |
-| 20-DEV  | VS Code      | 1.91.0    | https://code.visualstudio.com/docs/?dv=linux64                                              | 136 MB |
+| 20-DEV  | VS Code      | 1.93.0    | https://code.visualstudio.com/docs/?dv=linux64                                              | 194 MB |
 | 20-DEV  | VPUML        | 17.2.0608 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 747 MB |
 | 20-DEV  | SQLeoVQB     | 19.01rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      |   3 MB |
-| 20-DEV  | DBeaver      | 24.1.2    | https://dbeaver.io/download/                                                                |  86 MB |
-| 20-DEV  | CudaText     | 1.215.0.2 | https://sourceforge.net/projects/cudatext/files/release/                                    |   7 MB |
+| 20-DEV  | DBeaver      | 24.2.1    | https://dbeaver.io/download/                                                                | 120 MB |
+| 20-DEV  | CudaText     | 1.217.7.0 | https://sourceforge.net/projects/cudatext/files/release/                                    |   7 MB |
 |         |              |           |                                                                                             |        |
 | 30-EXT  | Lite XL      | 2.1.4     | https://github.com/lite-xl/lite-xl/releases                                                 |   2 MB |
 | 30-EXT  | Textadept    | 12.4      | https://orbitalquark.github.io/textadept/                                                   |   7 MB |
