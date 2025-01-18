@@ -1,0 +1,12 @@
+[Desktop Entry]
+Comment=
+Exec=lapce %F
+Icon=/10-Base/ShortCuts/icons/lapce.png
+Name=lapce
+NoDisplay=false
+StartupNotify=true
+Type=Application
+Type=Application
+Terminal=false
+MimeType=text/plain;x-directory/normal;inode/directory;
+Categories=Application;Development;TextEditor;IDE;

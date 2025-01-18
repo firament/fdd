@@ -1,11 +1,7 @@
-#!/usr/bin/env xdg-open
-
 [Desktop Entry]
-Version=1.0
+Name=Eclipse IDE
+Exec=/30-EXT/eclipse/eclipse %u
+Icon=/10-Base/ShortCuts/icons/eclipse-icon.xpm
+NoDisplay=true
 Type=Application
-Terminal=false
-Icon=/10-Base/ShortCuts/icons/eclipse.xpm
-Categories=Application;Development;TextEditor;IDE;Java
-Exec=/bin/eclipse %F
-Name=Eclipse
-Comment=Eclipse IDE
+MimeType=x-scheme-handler/eclipse+mpc;

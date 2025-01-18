@@ -1,0 +1,10 @@
+#! /bin/bash
+################################################################################
+#                                                                              #
+# /10-Base/bin/clean-vpuml                                                     #
+# Cleanup all  backup files of Visual Paradigm sessions                        #
+# Invoke from folder where the files are                                       #
+#                                                                              #
+################################################################################
+rm -vf *.vpp.bak*;
+echo "Done!"

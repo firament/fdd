@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=A lightweight multi-platform code editor designed for modern hardware
+Exec=ecode %F
+Icon=/10-Base/ShortCuts/icons/ecode.svg
+Name=ecode
+NoDisplay=false
+StartupNotify=true
+Type=Application
+Terminal=false
+MimeType=text/plain;x-directory/normal;inode/directory;
+Categories=Application;Development;TextEditor;IDE;

@@ -1,0 +1,13 @@
+#!/bin/bash
+# /10-Base/bin/up-vnc
+# 
+# Sanity checks
+[[ $(whoami) == "root" ]] && echo "Root cant use VNC" && echo "Quitting" && exit              || echo "OK. Not Root";
+[[ -z ${USER} ]]          && export USER=$(whoami)    && echo "User set to '${USER}'"         || echo "OK. ${USER}";
+[[ -z ${VNC_HOST} ]]      && export VNC_HOST="vhost"  && echo "VNC_HOST set to '${VNC_HOST}'" || echo "OK. ${VNC_HOST}";
+[[ -z ${VNC_PORT} ]]      && export VNC_PORT=19191    && echo "VNC_PORT set to '${VNC_PORT}'" || echo "OK. ${VNC_PORT}";
+# Close any orphaned sessions
+vncserver -kill -clean;
+# start new instance in background
+vncserver -localhost no -desktop ${VNC_HOST} -rfbport ${VNC_PORT};
+echo "VNC Server started.";

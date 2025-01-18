@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=pulsar
+Comment=A lightweight text editor
+Exec=/usr/bin/pulsar %F
+Icon=/10-Base/ShortCuts/icons/pulsar.png
+Terminal=false
+StartupWMClass=lite-xl
+Categories=Development;IDE;
+MimeType=text/plain;inode/directory;
+

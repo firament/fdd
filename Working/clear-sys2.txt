@@ -20,7 +20,6 @@ rm -vfr ${HOME}/.config/Code/Cookies
 rm -vfr ${HOME}/.config/Code/Cookies-journal
 
 # General
-rm -vfr ${HOME}/.giteye/.metadata/.log
 rm -vfr ${HOME}/.local/share/recently-used.xbel.*
 rm -vfr ${HOME}/hs_err_pid*.log
 rm -vfr ${HOME}/.xsession-errors

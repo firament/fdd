@@ -1,3 +1,3 @@
-/grub-*.cfg
-/driver-packs/*
-/pinguybuilder-logs/*
+downloads
+grub-*.cfg
+T15-*

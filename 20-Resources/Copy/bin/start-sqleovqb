@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# start-sqleovqb
+# /10-Base/bin/start-sqleovqb
 #
 # 04 Feb 2018
 # Utility script to start SQLeo Visual Query Builder
