@@ -66,5 +66,18 @@
 
 - /lib/systemd/system/ssh.socket
     - ListenStream=22
-    
+
+- Sample entries in ${HOME}/.ssh/config
+```
+Host yoga9w
+    HostName 192.168.0.161
+    port 22
+    User sak
+    IdentityFile ${HOME}/.ssh/fsap-mnp14-ssh.pub
+
+Host bb-fsg
+    HostName bitbucket.org
+    User git
+    IdentityFile ${HOME}/.ssh/fsg-mnp14-ssh
+```
 ---

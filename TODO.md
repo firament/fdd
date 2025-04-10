@@ -1,5 +1,19 @@
 # TODO List
 - [ ] Add links from `/10-Base/bin` to `/usr/local/sbin`, to enable sudo commands
+- [ ] Extract Appimage and install as regular XCopy
+    ```sh
+    mkdir -vp theia-mount;
+    TheiaIDE.AppImage --appimage-offset
+    188392
+    sudo mount TheiaIDE.AppImage theia-mount/ -o offset=188392
+    # alt syntax
+    sudo mount TheiaIDE.AppImage theia-mount/ -o offset=`./TheiaIDE.AppImage --appimage-offset`
+    
+    ```
+- [ ] Test and add code to install extensions 
+    ```sh
+    theia --install-plugin PKief.material-icon-theme
+    ```
 
 ---
 

@@ -229,14 +229,31 @@ SetupDevApps(){
 
     echo "";
 
-    #### INSTALL DBeaver CE
+    #### INSTALL Codium
     #------------------------------------------------------------------------------#
-    echo "Setting up DBeaver CE now";
-    ClearFolder ${DBEAVER_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${DBEAVER_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${DBEAVER_PATH} -f ${DBEAVER_TAR};
-    sudo ln -vsT ${DBEAVER_PATH}/dbeaver ${PUBLIC_BIN_LOCN}/dbeaver
-    echo "";
+    echo "Setting up Codium now";
+    makeOwnFolder ${CODIUM_PATH};    # Folder should exist for tar to work
+    tar -xz --strip-components=0 -C ${CODIUM_PATH} -f ${CODIUM_TARFILE};
+    sudo ln -vsT ${CODIUM_PATH}/codium ${PUBLIC_BIN_LOCN}/codium;
+    sudo ln -vsT ${CODIUM_PATH}/bin/codium ${PUBLIC_BIN_LOCN}/codium-cli;
+    # # Initialize settings
+    # mkdir -vp ${HOME}/.config/Code/User/;
+    # cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
+    # cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
+    # # Copy config templates for reference, used by commands
+    # mkdir -vp ${HOME}/Documents/VSCode-Configs/;
+    # cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
+    # Install default extensions
+    codium-cli --version;
+    ${PUBLIC_BIN_LOCN}/codium-cli --list-extensions;
+    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension jsynowiec.vscode-insertdatestring;
+    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension yzhang.markdown-all-in-one;
+    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension bierner.markdown-preview-github-styles;
+    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension pharndt.vscode-markdown-table;
+    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension mhutchie.git-graph;
+    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension mechatroner.rainbow-csv;
+    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension volkerdobler.insertnums;
+    ${PUBLIC_BIN_LOCN}/codium-cli --list-extensions;
 
     #### INSTALL CudaText
     #------------------------------------------------------------------------------#
@@ -245,6 +262,24 @@ SetupDevApps(){
     tar -xJ --strip-components=1 -C ${CUDATEXT_PATH} -f ${CUDATEXT_TAR};
     echo "- linking all executables to public space";
     sudo ln -vsT ${CUDATEXT_PATH}/cudatext ${PUBLIC_BIN_LOCN}/cudatext
+    echo "";
+
+    #### INSTALL textadept
+    #------------------------------------------------------------------------------#
+    echo "Setting up textadept now";
+    ClearFolder ${TEXTADEPT_PATH}; # Clean curent install for legacy files
+    makeOwnFolder ${TEXTADEPT_PATH};    # Folder should exist for tar to work
+    tar -xz --strip-components=1 -C ${TEXTADEPT_PATH} -f ${TEXTADEPT_TARFILE};
+    sudo ln -vsT ${TEXTADEPT_PATH}/textadept ${PUBLIC_BIN_LOCN}/textadept
+    echo "";
+
+    #### INSTALL DBeaver CE
+    #------------------------------------------------------------------------------#
+    echo "Setting up DBeaver CE now";
+    ClearFolder ${DBEAVER_PATH}; # Clean curent install for legacy files
+    makeOwnFolder ${DBEAVER_PATH};    # Folder should exist for tar to work
+    tar -xz --strip-components=1 -C ${DBEAVER_PATH} -f ${DBEAVER_TAR};
+    sudo ln -vsT ${DBEAVER_PATH}/dbeaver ${PUBLIC_BIN_LOCN}/dbeaver
     echo "";
 
     #### INSTALL VPUML CE
@@ -284,6 +319,8 @@ SetupDevApps(){
     cp -vf ${SNOWFLAKE_TARFILE} ${SNOWFLAKE_PATH};
     echo "";
 
+    echo "";
+
     #### INSTALL ecode
     #------------------------------------------------------------------------------#
     echo "Setting up ecode now";
@@ -320,13 +357,18 @@ SetupDevApps(){
     sudo ln -vsT ${LITEXL_PATH}/lite-xl ${PUBLIC_BIN_LOCN}/lite-xl
     echo "";
 
-    #### INSTALL textadept
+    # /40-APPIMAGES
+
+    #### INSTALL Theia IDE
     #------------------------------------------------------------------------------#
-    echo "Setting up textadept now";
-    ClearFolder ${TEXTADEPT_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${TEXTADEPT_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${TEXTADEPT_PATH} -f ${TEXTADEPT_TARFILE};
-    sudo ln -vsT ${TEXTADEPT_PATH}/textadept ${PUBLIC_BIN_LOCN}/textadept
+    echo "Setting up Theia IDE now";
+    IMAGE_THEIA=${APPS_IMG_DIR}/${THEIA_TARFILE};
+    # Consider deleting current image before copying
+    rm -fv ${IMAGE_THEIA};
+    cp -fv ${IMAGE_THEIA} ${APPS_IMG_DIR};
+    sudo ln -vsT ${IMAGE_THEIA} ${PUBLIC_BIN_LOCN}/theia;
+    # TODO: Add extensions
+    # TODO: If needed to fix plugins, extract appimage and install as xcopy folder
     echo "";
 
 }
@@ -356,87 +398,9 @@ SetupDevAppsXtra(){
 
 ApplyUpdate2409A(){
     echo;
-    echo "APPLY Update 24-09-A";
-    # done on: 2024-09-27
+    echo "APPLY Update 25-04-A";
+    # done on: yyyy-mm-dd
  
-    # #### INSTALL .NET Core SDKs
-    #------------------------------------------------------------------------------#
-    echo "Setting up Dot Net Core, all SDKs";
-    # makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
-    # mkdir -vp ${HOME}/.nuget/packages;
-    for DNC_TAR in ${DNETCORE_ALL_TARS}; do
-       # [[ -f ${APPS_BAS_SRC}/${DNC_TAR} ]] && echo "Good         : ${DNC_TAR}" || echo "Missing       : ${DNC_TAR}";
-       if [ -f ${APPS_BAS_SRC}/${DNC_TAR} ]; then
-          echo "Good         : ${DNC_TAR}";
-          tar -xz -C ${DNETCORE_PATH} -f ${APPS_BAS_SRC}/${DNC_TAR};
-       else
-          echo "Missing       : ${DNC_TAR}";
-          echo "ERROR: Skipping extraction of missing tar ${APPS_BAS_SRC}/${DNC_TAR}";
-       fi;
-    done
-    # sudo ln -vsT ${DNETCORE_PATH}/dotnet ${PUBLIC_BIN_LOCN}/dotnet;
-    echo "";
-    echo "Verifying now..."
-    dotnet --info
-
-    echo "";
-    echo "DEBUG:: BEGIN ================================================================================"
-    echo "- Check contents of folder '/10-Base/DNC/sdk/NuGetFallbackFolder'. Should be empty on fresh install";
-    ls -1 /10-Base/DNC/sdk/NuGetFallbackFolder/
-    echo "DEBUG:: END   ================================================================================"
-
-    echo "";
-
-    #### INSTALL Visual Studio Code
-    #------------------------------------------------------------------------------#
-    echo "Setting up Visual Studio Code now";
-    # makeOwnFolder ${VSCODE_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
-    # sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code;
-    # sudo ln -vsT ${VSCODE_PATH}/bin/code ${PUBLIC_BIN_LOCN}/code-cli;
-    # Initialize settings
-    # mkdir -vp ${HOME}/.config/Code/User/;
-    # cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
-    # cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
-    # Copy config templates for reference, used by commands
-    # mkdir -vp ${HOME}/Documents/VSCode-Configs/;
-    # cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
-    # Install default extensions
-    # code-cli --version;
-    # ${PUBLIC_BIN_LOCN}/code-cli --list-extensions;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension jsynowiec.vscode-insertdatestring;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension yzhang.markdown-all-in-one;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension bierner.markdown-preview-github-styles;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension pharndt.vscode-markdown-table;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension ms-dotnettools.vscode-dotnet-runtime;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension ms-dotnettools.csharp;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension mhutchie.git-graph;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension mechatroner.rainbow-csv;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension volkerdobler.insertnums;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension renesaarsoo.sql-formatter-vsc;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension tuxtina.json2yaml;
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension okorieware.ttsyntax
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension ms-dotnettools.csdevkit;
-    ${PUBLIC_BIN_LOCN}/code-cli --list-extensions;
-    echo "";
-
-    #### INSTALL DBeaver CE
-    #------------------------------------------------------------------------------#
-    echo "Setting up DBeaver CE now";
-    # ClearFolder ${DBEAVER_PATH}; # Clean curent install for legacy files
-    # makeOwnFolder ${DBEAVER_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${DBEAVER_PATH} -f ${DBEAVER_TAR};
-    # sudo ln -vsT ${DBEAVER_PATH}/dbeaver ${PUBLIC_BIN_LOCN}/dbeaver
-    echo "";
-
-    #### INSTALL CudaText
-    #------------------------------------------------------------------------------#
-    echo "Setting up CudaText now";
-    # makeOwnFolder ${CUDATEXT_PATH}  # Folder should exist for tar to work
-    tar -xJ --strip-components=1 -C ${CUDATEXT_PATH} -f ${CUDATEXT_TAR};
-    # echo "- linking all executables to public space";
-    # sudo ln -vsT ${CUDATEXT_PATH}/cudatext ${PUBLIC_BIN_LOCN}/cudatext
-    echo "";
 
 
     # INSTALL whatever addl steps or misses are

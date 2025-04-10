@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=VS Codium
+Comment=Open Source Code Editor
+Exec=/bin/codium %F
+Icon=/10-Base/ShortCuts/icons/codium.png
+Categories=Application;Development;TextEditor
+StartupNotify=false
+Version=1.98.2
+Type=Application
+Terminal=false
+MimeType=text/plain;x-directory/normal;inode/directory;

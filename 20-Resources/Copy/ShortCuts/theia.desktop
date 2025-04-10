@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Theia IDE
+Comment=Eclipse Open Source IDE
+Exec=/bin/theia %F
+Icon=/10-Base/ShortCuts/icons/theia.png
+Categories=Application;Development;TextEditor
+StartupNotify=false
+Version=1.59.1
+Type=Application
+Terminal=false
+MimeType=text/plain;x-directory/normal;inode/directory;

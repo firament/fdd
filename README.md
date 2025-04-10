@@ -15,18 +15,18 @@ Automation scripts to bring a raw ubuntu installation to a known state
 
 | Loc     | App          | Curr Ver  | Download URL                                                                                |   Size |
 | ------- | ------------ | --------- | ------------------------------------------------------------------------------------------- | ------:|
-| 10-Base | .NET SDK     | 8.0.401   | https://www.microsoft.com/net/download/linux                                                | 204 MB |
-| 10-Base | Java SDK     | 22.0.1    | https://jdk.java.net/                                                                       | 193 MB |
-| 10-Base | node.js      | 20.15.1   | https://nodejs.org/en/download/                                                             |  24 MB |
+| 10-Base | .NET SDK     | 8.0.408   | https://www.microsoft.com/net/download/linux                                                | 204 MB |
+| 10-Base | Java SDK     | 24.0.1    | https://jdk.java.net/                                                                       | 210 MB |
+| 10-Base | node.js      | 22.14.0   | https://nodejs.org/en/download/                                                             |  24 MB |
 |         |              |           |                                                                                             |        |
-| 20-DEV  | VS Code      | 1.93.0    | https://code.visualstudio.com/docs/?dv=linux64                                              | 194 MB |
+| 20-DEV  | VS Code      | 1.99.1    | https://code.visualstudio.com/docs/?dv=linux64                                              | 194 MB |
 | 20-DEV  | VPUML        | 17.2.0608 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 747 MB |
 | 20-DEV  | SQLeoVQB     | 19.01rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      |   3 MB |
 | 20-DEV  | DBeaver      | 24.2.1    | https://dbeaver.io/download/                                                                | 120 MB |
 | 20-DEV  | CudaText     | 1.217.7.0 | https://sourceforge.net/projects/cudatext/files/release/                                    |   7 MB |
+| 20-DEV  | Textadept    | 12.4      | https://orbitalquark.github.io/textadept/                                                   |   7 MB |
 |         |              |           |                                                                                             |        |
 | 30-EXT  | Lite XL      | 2.1.4     | https://github.com/lite-xl/lite-xl/releases                                                 |   2 MB |
-| 30-EXT  | Textadept    | 12.4      | https://orbitalquark.github.io/textadept/                                                   |   7 MB |
 | 30-EXT  | ecode        | 0.5.2     | https://github.com/SpartanJ/ecode/releases                                                  |  22 MB |
 | 30-EXT  | Pulsar       | 1.118.0   | https://github.com/pulsar-edit/pulsar/releases/                                             | 213 MB |
 | 30-EXT  | FileZilla    | 3.67.0    | https://filezilla-project.org/download.php?show_all=1                                       |  15 MB |
@@ -51,6 +51,7 @@ Automation scripts to bring a raw ubuntu installation to a known state
 mkdir -vp 10-Apps/10-Base/drivers;
 mkdir -vp 10-Apps/20-DEV;
 mkdir -vp 10-Apps/30-EXT;
+mkdir -vp 10-Apps/40-APPIMAGES;
 mkdir -vp 20-Resources/Copy/bin/;
 mkdir -vp 20-Resources/Copy/ShortCuts/;
 mkdir -vp 20-Resources/Install/;
