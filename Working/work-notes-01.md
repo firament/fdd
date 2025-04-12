@@ -126,3 +126,31 @@ nohup code ${DST_DIR} &>/dev/null &
 
 ```
 ---
+## Theia and Codium Extensions
+### VSIX
+- https://open-vsx.org/extension/yzhang/markdown-all-in-one
+- https://open-vsx.org/extension/shd101wyy/markdown-preview-enhanced
+- https://open-vsx.org/extension/darkriszty/markdown-table-prettify
+- https://open-vsx.org/extension/raer0/codium-insertdatestring
+- https://open-vsx.org/extension/imgildev/vscode-json-flow
+- https://open-vsx.org/extension/qcz/text-power-tools
+- Other interesting, look deeper
+    - https://open-vsx.org/extension/madeindjs/notable
+    - https://open-vsx.org/extension/MindElixir/mark-elixir
+
+## Command line reference
+### theia IDE
+
+```sh
+# $ which theia 
+# /usr/bin/theia
+# ${HOME}/.theia-ide/plugins
+
+theia --version
+theia list-plugins
+theia --install-plugin publisher.name[@version]
+theia --plugins=local-dir:${HOME}/.theia-ide/plugins
+
+theia --set-preference
+```
+---
