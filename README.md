@@ -13,29 +13,32 @@ Automation scripts to bring a raw ubuntu installation to a known state
 ## Quick Download Links
 - Updated on: 2024-06-19
 
-| Loc     | App          | Curr Ver  | Download URL                                                                                |   Size |
-| ------- | ------------ | --------- | ------------------------------------------------------------------------------------------- | ------:|
-| 10-Base | .NET SDK     | 8.0.408   | https://www.microsoft.com/net/download/linux                                                | 204 MB |
-| 10-Base | Java SDK     | 24.0.1    | https://jdk.java.net/                                                                       | 210 MB |
-| 10-Base | node.js      | 22.14.0   | https://nodejs.org/en/download/                                                             |  24 MB |
-|         |              |           |                                                                                             |        |
-| 20-DEV  | VS Code      | 1.99.1    | https://code.visualstudio.com/docs/?dv=linux64                                              | 194 MB |
-| 20-DEV  | VPUML        | 17.2.0608 | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 747 MB |
-| 20-DEV  | SQLeoVQB     | 19.01rc1  | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      |   3 MB |
-| 20-DEV  | DBeaver      | 24.2.1    | https://dbeaver.io/download/                                                                | 120 MB |
-| 20-DEV  | CudaText     | 1.217.7.0 | https://sourceforge.net/projects/cudatext/files/release/                                    |   7 MB |
-| 20-DEV  | Textadept    | 12.4      | https://orbitalquark.github.io/textadept/                                                   |   7 MB |
-|         |              |           |                                                                                             |        |
-| 30-EXT  | Lite XL      | 2.1.4     | https://github.com/lite-xl/lite-xl/releases                                                 |   2 MB |
-| 30-EXT  | ecode        | 0.5.2     | https://github.com/SpartanJ/ecode/releases                                                  |  22 MB |
-| 30-EXT  | Pulsar       | 1.118.0   | https://github.com/pulsar-edit/pulsar/releases/                                             | 213 MB |
-| 30-EXT  | FileZilla    | 3.67.0    | https://filezilla-project.org/download.php?show_all=1                                       |  15 MB |
-| 30-EXT  | SnowFlake    | 1.0.4     | https://github.com/subhra74/snowflake/releases                                              |  39 MB |
-|         |              |           |                                                                                             |        |
-| drivers | PgSQL driver | 42.7.3    | https://jdbc.postgresql.org/download/                                                       |   1 MB |
-| drivers | MySql driver | 8.4.0     | https://dev.mysql.com/downloads/connector/j/                                                |   4 MB |
-| drivers | MSSql driver | 12.6.1    | https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server      |   8 MB |
-|         |              |           |                                                                                             |        |
+| Loc     | App          | Curr Ver   | Download URL                                                                                |   Size |
+| ------- | ------------ | ---------- | ------------------------------------------------------------------------------------------- | ------:|
+| 10-Base | .NET SDK     | 8.0.408    | https://www.microsoft.com/net/download/linux                                                | 204 MB |
+| 10-Base | Java SDK     | 24.0.1     | https://jdk.java.net/                                                                       | 210 MB |
+| 10-Base | node.js      | 22.14.0    | https://nodejs.org/en/download/                                                             |  24 MB |
+|         |              |            |                                                                                             |        |
+| 20-DEV  | VS Code      | 1.99.1     | https://code.visualstudio.com/docs/?dv=linux64                                              | 194 MB |
+| 20-DEV  | VSCodium     | 1.99.22418 | https://github.com/VSCodium/vscodium/releases                                               | 130 MB |
+| 20-DEV  | VPUML        | 17.2.0608  | https://www.visual-paradigm.com/download/community.jsp?platform=linux&arch=64bit&install=no | 747 MB |
+| 20-DEV  | SQLeoVQB     | 19.01rc1   | https://sourceforge.net/projects/sqleo/files/SQLeoVQB/                                      |   3 MB |
+| 20-DEV  | DBeaver      | 24.2.1     | https://dbeaver.io/download/                                                                | 120 MB |
+| 20-DEV  | CudaText     | 1.217.7.0  | https://sourceforge.net/projects/cudatext/files/release/                                    |   7 MB |
+| 20-DEV  | Textadept    | 12.4       | https://orbitalquark.github.io/textadept/                                                   |   7 MB |
+|         |              |            |                                                                                             |        |
+| 30-EXT  | Lite XL      | 2.1.4      | https://github.com/lite-xl/lite-xl/releases                                                 |   2 MB |
+| 30-EXT  | ecode        | 0.5.2      | https://github.com/SpartanJ/ecode/releases                                                  |  22 MB |
+| 30-EXT  | Pulsar       | 1.118.0    | https://github.com/pulsar-edit/pulsar/releases/                                             | 213 MB |
+| 30-EXT  | FileZilla    | 3.67.0     | https://filezilla-project.org/download.php?show_all=1                                       |  15 MB |
+| 30-EXT  | SnowFlake    | 1.0.4      | https://github.com/subhra74/snowflake/releases                                              |  39 MB |
+|         |              |            |                                                                                             |        |
+| 40-APP  | Theia IDE    | 1.60       | https://theia-ide.org/#theiaidedownload                                                     | 367 MB |
+|         |              |            |                                                                                             |        |
+| drivers | PgSQL driver | 42.7.3     | https://jdbc.postgresql.org/download/                                                       |   1 MB |
+| drivers | MySql driver | 8.4.0      | https://dev.mysql.com/downloads/connector/j/                                                |   4 MB |
+| drivers | MSSql driver | 12.6.1     | https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server      |   8 MB |
+|         |              |            |                                                                                             |        |
 
 ### Notes
 - [Lapce](https://github.com/lapce/lapce/releases) not working for now. exclude till resolved
