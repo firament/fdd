@@ -106,17 +106,25 @@ InstallCoreApps(){
     sudo snap install chromium;
     sudo dpkg -i \
         ${RESOURCE_FOLDER}/Install/google-chrome-stable_current_amd64.deb \
-        ${RESOURCE_FOLDER}/Install/${OPERA_PACKAGE} \
         ;
+    
+    # Needs user interaction, do manually later
+    #    ${RESOURCE_FOLDER}/Install/${OPERA_PACKAGE} \
 
+    echo;
+    echo "Install git support";
+    sudo dpkg -i \
+        ${RESOURCE_FOLDER}/Install/gcm-linux_amd64.2.6.1.deb \
+        ;
+    
     echo;
     echo "Install Docker engine";
     sudo dpkg -i \
-        ${RESOURCE_FOLDER}/Install/docker/containerd.io_1.6.31-1_amd64.deb \
-        ${RESOURCE_FOLDER}/Install/docker/docker-ce_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
-        ${RESOURCE_FOLDER}/Install/docker/docker-ce-cli_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
-        ${RESOURCE_FOLDER}/Install/docker/docker-buildx-plugin_0.14.0-1~ubuntu.22.04~jammy_amd64.deb \
-        ${RESOURCE_FOLDER}/Install/docker/docker-compose-plugin_2.27.0-1~ubuntu.22.04~jammy_amd64.deb \
+        ${RESOURCE_FOLDER}/Install/docker/containerd.io_*_amd64.deb \
+        ${RESOURCE_FOLDER}/Install/docker/docker-ce_*_amd64.deb \
+        ${RESOURCE_FOLDER}/Install/docker/docker-ce-cli_*_amd64.deb \
+        ${RESOURCE_FOLDER}/Install/docker/docker-buildx-plugin_*_amd64.deb \
+        ${RESOURCE_FOLDER}/Install/docker/docker-compose-plugin_*_amd64.deb \
         ;
     docker --version;
     echo;
@@ -221,10 +229,6 @@ SetupDevApps(){
     ${PUBLIC_BIN_LOCN}/code-cli --install-extension mhutchie.git-graph;
     ${PUBLIC_BIN_LOCN}/code-cli --install-extension mechatroner.rainbow-csv;
     ${PUBLIC_BIN_LOCN}/code-cli --install-extension volkerdobler.insertnums;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension renesaarsoo.sql-formatter-vsc;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension tuxtina.json2yaml;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension okorieware.ttsyntax
-    # ${PUBLIC_BIN_LOCN}/code-cli --install-extension ms-dotnettools.csdevkit;
     ${PUBLIC_BIN_LOCN}/code-cli --list-extensions;
 
     echo "";
@@ -244,16 +248,19 @@ SetupDevApps(){
     # mkdir -vp ${HOME}/Documents/VSCode-Configs/;
     # cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
     # Install default extensions
-    codium-cli --version;
+    ${PUBLIC_BIN_LOCN}/codium-cli --version;
     ${PUBLIC_BIN_LOCN}/codium-cli --list-extensions;
-    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension jsynowiec.vscode-insertdatestring;
-    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension yzhang.markdown-all-in-one;
-    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension bierner.markdown-preview-github-styles;
-    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension pharndt.vscode-markdown-table;
-    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension mhutchie.git-graph;
-    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension mechatroner.rainbow-csv;
-    ${PUBLIC_BIN_LOCN}/codium-cli --install-extension volkerdobler.insertnums;
-    ${PUBLIC_BIN_LOCN}/codium-cli --list-extensions;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension mhutchie.git-graph;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension yzhang.markdown-all-in-one;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension shd101wyy.markdown-preview-enhanced;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension darkriszty.markdown-table-prettify;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension bierner.markdown-preview-github-styles;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension raer0.codium-insertdatestring;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension mechatroner.rainbow-csv;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension imgildev.vscode-json-flow;
+	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension qcz.text-power-tools;
+
+	${PUBLIC_BIN_LOCN}/codium-cli --list-extensions --show-versions;
 
     #### INSTALL CudaText
     #------------------------------------------------------------------------------#
@@ -313,11 +320,11 @@ SetupDevApps(){
 
     #### INSTALL Snowflake
     #------------------------------------------------------------------------------#
-    echo "Setting up Snowflake now";
-    # ClearFolder ${SNOWFLAKE_PATH}; # remove after next run. Needs testing.
-    makeOwnFolder ${SNOWFLAKE_PATH};    # Folder should exist for tar to work
-    cp -vf ${SNOWFLAKE_TARFILE} ${SNOWFLAKE_PATH};
-    echo "";
+    # echo "Setting up Snowflake now";
+    # # ClearFolder ${SNOWFLAKE_PATH}; # remove after next run. Needs testing.
+    # makeOwnFolder ${SNOWFLAKE_PATH};    # Folder should exist for tar to work
+    # cp -vf ${SNOWFLAKE_TARFILE} ${SNOWFLAKE_PATH};
+    # echo "";
 
     echo "";
 
@@ -358,6 +365,7 @@ SetupDevApps(){
     echo "";
 
     # /40-APPIMAGES
+    makeOwnFolder ${APPS_IMG_DIR};    # Folder should exist for copy to work
 
     #### INSTALL Theia IDE
     #------------------------------------------------------------------------------#
@@ -366,11 +374,23 @@ SetupDevApps(){
     # Consider deleting current image before copying
     rm -fv ${IMAGE_THEIA};
     cp -fv ${IMAGE_THEIA} ${APPS_IMG_DIR};
+    chmod -v 755 ${IMAGE_THEIA};
     sudo ln -vsT ${IMAGE_THEIA} ${PUBLIC_BIN_LOCN}/theia;
     # TODO: Add extensions
     # TODO: If needed to fix plugins, extract appimage and install as xcopy folder
     echo "";
 
+    #### INSTALL Git GUI
+    #------------------------------------------------------------------------------#
+    echo "Setting up SourceGit now";
+    IMAGE_SOURCEGIT_SRC=${APPS_IMG_SRC}/${SOURCEGIT_TARFILE};
+    IMAGE_SOURCEGIT_TGT=${APPS_IMG_DIR}/sourcegit.AppImage;
+    # Delete current image before update
+    rm -fv ${IMAGE_SOURCEGIT_TGT};
+    cp -fv ${IMAGE_SOURCEGIT_SRC} ${IMAGE_SOURCEGIT_TGT};
+    chmod -v 755 ${IMAGE_SOURCEGIT_TGT};
+    sudo ln -vsT ${IMAGE_SOURCEGIT_TGT} ${PUBLIC_BIN_LOCN}/sourcegit;
+    echo "";
 }
 
 ####################################################################################################
@@ -396,11 +416,11 @@ SetupDevAppsXtra(){
 ####################################################################################################
 
 
-ApplyUpdate2409A(){
+ApplyUpdate2503B(){
     echo;
-    echo "APPLY Update 25-04-A";
+    echo "APPLY Update 25-03-B";
     # done on: yyyy-mm-dd
- 
+
 
 
     # INSTALL whatever addl steps or misses are

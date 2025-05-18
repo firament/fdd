@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=CherryTree
+Comment=Hierarchical Note Taking
+Exec=cherrytree --new_window %f
+Icon=/10-Base/ShortCuts/icons/cherrytree.ico
+MimeType=application/cherrytree-ctd;application/cherrytree-ctz;application/cherrytree-ctb;application/cherrytree-ctx;
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Development;GNOME;GTK;Utility;
+Keywords=editor;notes;note-taking;
+X-Purism-FormFactor=Workstation;Mobile;

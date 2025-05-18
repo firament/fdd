@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Theia IDE
 Comment=Eclipse Open Source IDE
-Exec=/bin/theia %F
+Exec=/usr/bin/theia %F
 Icon=/10-Base/ShortCuts/icons/theia.png
 Categories=Application;Development;TextEditor
 StartupNotify=false

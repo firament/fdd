@@ -1,8 +1,9 @@
 # SSH Service
 > WIP
 > For usage, replace place holders with values
-> - `${USER}`
+> - `${machine-user}`
 > - `${machine-name}`
+> - `${machine-ipv4}`
 
 ### On Server
 - [ ] Install service and verify port
@@ -37,28 +38,35 @@
   - `ssh-add /10-Base/files/${machine-name}-ssh`
   - Copy to `${HOME}/.ssh/`, both pvt and pub key
 - [ ] import host fingerprint
-  - `ssh-keyscan -H -O hashalg=sha256 -t ed25519 -p 22 192.168.0.101 >> ${HOME}/.ssh/known_hosts`
+  - `ssh-keyscan -H hashalg=sha256 -t ed25519 -p 22 192.168.0.101 >> ${HOME}/.ssh/known_hosts`
 - [ ] Create entry in `${HOME}/.ssh/config`
 	```
 	Host mnp14
       HostName 192.168.0.101
       port 22
-      User ${USER}
+      User ${machine-user}
       IdentityFile /10-Base/files/${machine-name}-ssh.pub
 	```
 - [ ] Add key to Server
   - [ ] update `${HOME}/.ssh/authorized_keys` with pub key
     - [ ] manually from `${HOME}/.ssh/${machine-name}-ssh.pub`
     - [ ] or, with command, run from client
-	```sh
-	ssh-copy-id -i ${HOME}/.ssh/${machine-name}-ssh.pub -p 22 YOUR_USER_NAME@IP_ADDRESS_OF_THE_SERVER
-	```
+    ```sh
+    ssh-copy-id -o IdentitiesOnly=yes -i ${HOME}/.ssh/${machine-name}-ssh.pub -p 22 ${machine-user}@${machine-name}
+    ```
 
 ---
 ## Working Notes
+- On Error `Too many authentication failures`
+  - Due to several keys present on client
+  - add flags to NOT use any keys
+  ```sh
+  ssh -o IdentitiesOnly=yes -p 22 -l ${machine-user} ${machine-name}
+  ```
+
 - /etc/ssh/sshd_config
     - Port 22
-    - AllowUsers ${USER}
+    - AllowUsers ${machine-user}
     - PermitRootLogin no
     - PermitEmptyPasswords no
     - PasswordAuthentication no

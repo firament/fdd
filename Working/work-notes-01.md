@@ -153,4 +153,22 @@ theia --plugins=local-dir:${HOME}/.theia-ide/plugins
 
 theia --set-preference
 ```
+
+### Add to script
+- Theia IDE
+	- These will launch IDE.
+	- Run manually from terminal, investigate further
+	```sh
+	theia --install-plugin mhutchie.git-graph;
+	theia --install-plugin yzhang.markdown-all-in-one;
+	theia --install-plugin shd101wyy.markdown-preview-enhanced;
+	theia --install-plugin darkriszty.markdown-table-prettify;
+	theia --install-plugin bierner.markdown-preview-github-styles;
+	theia --install-plugin raer0.codium-insertdatestring;
+	theia --install-plugin mechatroner.rainbow-csv;
+	theia --install-plugin imgildev.vscode-json-flow;
+	theia --install-plugin qcz.text-power-tools;
+
+	theia list-plugins;
+	```
 ---

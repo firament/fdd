@@ -227,7 +227,6 @@ Working/clear-sys2.txt
 Working/commit-notes.md
 Working/contents-files.txt
 Working/dpkg-deb.md
-Working/sql-server-on-linux.md
 Working/work-notes-01.md
 Working/downloads/
 Working/downloads/Caladea.zip
