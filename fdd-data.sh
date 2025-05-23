@@ -18,36 +18,42 @@ readonly REPOSITORY_LOCL="/60-APT-REPOSITORY";
 readonly PUBLIC_BIN_LOCN="/bin";
 readonly HOST_MENUS_LOCN="/usr/share/applications";
 
-readonly OPERA_PACKAGE="opera-stable_109.0.5097.68_amd64.deb";
+readonly OPERA_PACKAGE="opera-stable_117.0.5408.197_amd64.deb";
 
 ##
 readonly APPS_BAS_DIR="/10-Base";
 readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 #
-readonly JAVA_TAR="${APPS_BAS_SRC}/openjdk-22.0.1_linux-x64_bin.tar.gz";
+readonly JAVA_TAR="${APPS_BAS_SRC}/openjdk-24_linux-x64_bin.tar.gz";
 readonly JAVA_PATH="${APPS_BAS_DIR}/java";
 #
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v20.15.1-linux-x64.tar.xz";
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v22.14.0-linux-x64.tar.xz";
 readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 #
 # NOTE: Keep in release order, older first
-readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.401-linux-x64.tar.gz";
+readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.408-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 
 ##
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-x64-1726078107.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-x64-1744249013.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly DBEAVER_TAR="${APPS_DEV_SRC}/dbeaver-ce-24.2.1-linux.gtk.x86_64.tar.gz";
-readonly DBEAVER_PATH="${APPS_DEV_DIR}/dbeaver-ce";
+readonly CODIUM_TARFILE="${APPS_DEV_SRC}/VSCodium-linux-x64-1.99.22418.tar.gz";
+readonly CODIUM_PATH="${APPS_DEV_DIR}/codium";
 #
-readonly CUDATEXT_TAR="${APPS_DEV_SRC}/cudatext-linux-gtk2-amd64-1.217.7.0.tar.xz";
+readonly CUDATEXT_TAR="${APPS_DEV_SRC}/cudatext-linux-gtk2-amd64-1.223.0.5.tar.xz";
 readonly CUDATEXT_PATH="${APPS_DEV_DIR}/CudaText";
 #
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_17_2_20240608_Linux64_InstallFree.tar.gz";
+readonly TEXTADEPT_TARFILE="${APPS_DEV_SRC}/textadept_12.6.linux.tgz";
+readonly TEXTADEPT_PATH="${APPS_DEV_DIR}/textadept";
+#
+readonly DBEAVER_TAR="${APPS_DEV_SRC}/dbeaver-ce-25.0.2-linux.gtk.x86_64.tar.gz";
+readonly DBEAVER_PATH="${APPS_DEV_DIR}/dbeaver-ce";
+#
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_17_2_20250321_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
 #
 readonly SQLVQB_TARFILE="${APPS_DEV_SRC}/SQLeoVQB.2019.01.rc1.zip";
@@ -57,26 +63,30 @@ readonly SQLVQB_PATH="${APPS_DEV_DIR}/SQLeoVQB";
 readonly APPS_EXT_DIR="/30-EXT";
 readonly APPS_EXT_SRC="${SETUP_BASE_LOCN}${APPS_EXT_DIR}";
 #
-readonly FILZLA_TARFILE="${APPS_EXT_SRC}/FileZilla_3.67.0_x86_64-linux-gnu.tar.xz";
+readonly FILZLA_TARFILE="${APPS_EXT_SRC}/FileZilla_3.68.1_x86_64-linux-gnu.tar.xz";
 readonly FILZLA_PATH="${APPS_EXT_DIR}/FileZilla3";
 #
 readonly SNOWFLAKE_TARFILE="${APPS_EXT_SRC}/snowflake.jar";
 readonly SNOWFLAKE_PATH="${APPS_EXT_DIR}/snowflake";
 #
-readonly ECODE_TARFILE="${APPS_EXT_SRC}/ecode-linux-0.5.2-x86_64.tar.gz";
+readonly ECODE_TARFILE="${APPS_EXT_SRC}/ecode-linux-0.7.0-x86_64.tar.gz";
 readonly ECODE_PATH="${APPS_EXT_DIR}/ecode";
 #
 readonly LAPCE_TARFILE="${APPS_EXT_SRC}/lapce-linux-amd64.tar.gz";
 readonly LAPCE_PATH="${APPS_EXT_DIR}/lapce";
 #
-readonly PULSAR_TARFILE="${APPS_EXT_SRC}/Linux.pulsar-1.118.0.tar.gz";
+readonly PULSAR_TARFILE="${APPS_EXT_SRC}/Linux.pulsar-1.127.1.tar.gz";
 readonly PULSAR_PATH="${APPS_EXT_DIR}/pulsar";
 #
-readonly LITEXL_TARFILE="${APPS_EXT_SRC}/lite-xl-v2.1.4-addons-linux-x86_64-portable.tar.gz";
+readonly LITEXL_TARFILE="${APPS_EXT_SRC}/lite-xl-v2.1.7-addons-linux-x86_64-portable.tar.gz";
 readonly LITEXL_PATH="${APPS_EXT_DIR}/lite-xl";
+
+##
+readonly APPS_IMG_DIR="/40-APPIMAGES";
+readonly APPS_IMG_SRC="${SETUP_BASE_LOCN}${APPS_IMG_DIR}";
+readonly THEIA_TARFILE="TheiaIDE.AppImage";
+readonly SOURCEGIT_TARFILE="sourcegit-2025.17.linux.amd64.AppImage";
 #
-readonly TEXTADEPT_TARFILE="${APPS_EXT_SRC}/textadept_12.4.linux.tgz";
-readonly TEXTADEPT_PATH="${APPS_EXT_DIR}/textadept";
 
 ##
 readonly HOT_PLUG_MARKER="hot-plug-marker.txt";
@@ -255,6 +265,11 @@ HealthCheck(){
     echo "";
     FS="----";
 
+    echo "DEBUG";
+    echo "APPS_IMG_SRC      => ${APPS_IMG_SRC}";
+    echo "THEIA_TARFILE     => ${THEIA_TARFILE}";
+    echo "SOURCEGIT_TARFILE => ${SOURCEGIT_TARFILE}";
+
     echo "";
     echo "Source Folders - Required:";
     [[ -d ${SETUP_ROOT_LOCN} ]] && FS=" OK " || FS="FAIL"; echo "[${FS}]  SETUP_ROOT_LOCN  >> ${SETUP_ROOT_LOCN}";
@@ -272,21 +287,27 @@ HealthCheck(){
     [[ -f ${JAVA_TAR} ]]           && FS=" OK " || FS="FAIL"; echo "[${FS}]  JAVA_TAR            >> ${JAVA_TAR}";
     [[ -f ${NODEJS_TAR} ]]         && FS=" OK " || FS="FAIL"; echo "[${FS}]  NODEJS_TAR          >> ${NODEJS_TAR}";
     [[ -f ${VSCODE_TAR} ]]         && FS=" OK " || FS="FAIL"; echo "[${FS}]  VSCODE_TAR          >> ${VSCODE_TAR}";
+    [[ -f ${CODIUM_TARFILE} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  CODIUM_TARFILE      >> ${CODIUM_TARFILE}";
+    [[ -f ${CUDATEXT_TAR} ]]       && FS=" OK " || FS="FAIL"; echo "[${FS}]  CUDATEXT_TAR        >> ${CUDATEXT_TAR}";
+    [[ -f ${TEXTADEPT_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  TEXTADEPT_TARFILE   >> ${TEXTADEPT_TARFILE}";
+    [[ -f ${DBEAVER_TAR} ]]        && FS=" OK " || FS="FAIL"; echo "[${FS}]  DBEAVER_TAR         >> ${DBEAVER_TAR}";
     [[ -f ${VPUML_TARFILE} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  VPUML_TARFILE       >> ${VPUML_TARFILE}";
     [[ -f ${SQLVQB_TARFILE} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  SQLVQB_TARFILE      >> ${SQLVQB_TARFILE}";
     [[ -f ${FILZLA_TARFILE} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  FILZLA_TARFILE      >> ${FILZLA_TARFILE}";
+    [[ -f ${SNOWFLAKE_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  SNOWFLAKE_TARFILE   >> ${SNOWFLAKE_TARFILE}";
     [[ -f ${ECODE_TARFILE} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  ECODE_TARFILE       >> ${ECODE_TARFILE}";
     [[ -f ${LAPCE_TARFILE} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  LAPCE_TARFILE       >> ${LAPCE_TARFILE}";
     [[ -f ${PULSAR_TARFILE} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  PULSAR_TARFILE      >> ${PULSAR_TARFILE}";
     [[ -f ${LITEXL_TARFILE} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  LITEXL_TARFILE      >> ${LITEXL_TARFILE}";
-    [[ -f ${TEXTADEPT_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  TEXTADEPT_TARFILE   >> ${TEXTADEPT_TARFILE}";
-
+    [[ -f ${APPS_IMG_SRC}/${THEIA_TARFILE} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  THEIA_TARFILE       >> ${APPS_IMG_SRC}/${THEIA_TARFILE}";
+    [[ -f ${APPS_IMG_SRC}/${SOURCEGIT_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  SOURCEGIT_TARFILE   >> ${APPS_IMG_SRC}/${SOURCEGIT_TARFILE}";
 
     echo "";
     echo "Source Folders - Optional:";
     [[ -d ${APPS_BAS_DIR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  APPS_BAS_DIR     >> ${APPS_BAS_DIR}";
     [[ -d ${APPS_DEV_DIR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  APPS_DEV_DIR     >> ${APPS_DEV_DIR}";
     [[ -d ${APPS_EXT_DIR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  APPS_EXT_DIR     >> ${APPS_EXT_DIR}";
+    [[ -d ${APPS_IMG_DIR} ]]    && FS=" OK " || FS="FAIL"; echo "[${FS}]  APPS_IMG_DIR     >> ${APPS_IMG_DIR}";
 
     # Safety valve to abort on missing files
     echo "";

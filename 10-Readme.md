@@ -7,8 +7,18 @@
 	- [ ] update customizations
 
 ## Generate random passwords
-- `openssl rand -hex 16`
-- `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 5`
+- Simple
+  ```sh
+  openssl rand -hex 16
+  ```
+- Generates 20 instances of 32 char unique strings. 1 hex == 2 chars.
+  ```sh
+  for n in {1..20}; do openssl rand -hex 18; done | while read tagv; do echo "${tagv}"; done | uniq;
+  ```
+- Generates 5 instances of 32 char unique strings.
+  ```sh
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 5
+  ```
 
 ---
 # Post setup customizations

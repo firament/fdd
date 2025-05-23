@@ -1,4 +1,10 @@
 # TODO List
+- [ ] VS Code sandbox error fix in script
+- [ ] Add post install commands for manual steps
+    - [ ] Opera browser, from fdd-lib.sh
+    ```sh
+    sudo dpkg -i ${RESOURCE_FOLDER}/Install/${OPERA_PACKAGE}
+    ```
 - [ ] Add links from `/10-Base/bin` to `/usr/local/sbin`, to enable sudo commands
 
 ---
