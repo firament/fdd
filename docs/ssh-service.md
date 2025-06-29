@@ -38,7 +38,7 @@
   - `ssh-add /10-Base/files/${machine-name}-ssh`
   - Copy to `${HOME}/.ssh/`, both pvt and pub key
 - [ ] import host fingerprint
-  - `ssh-keyscan -H hashalg=sha256 -t ed25519 -p 22 192.168.0.101 >> ${HOME}/.ssh/known_hosts`
+  - `ssh-keyscan -v -t ed25519 -p 22 192.168.0.101 >> ${HOME}/.ssh/known_hosts`
 - [ ] Create entry in `${HOME}/.ssh/config`
 	```
 	Host mnp14
