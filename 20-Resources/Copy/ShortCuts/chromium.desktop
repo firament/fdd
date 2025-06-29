@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Chromium
+Comment=Access the Internet
+Exec=/usr/bin/chromium %U
+Icon=/10-Base/ShortCuts/icons/chromium.ico
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/pdf;
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Network;WebBrowser;
+Keywords=editor;notes;note-taking;
+StartupWMClass=chromium
+Actions=new-window;Incognito;TempProfile;

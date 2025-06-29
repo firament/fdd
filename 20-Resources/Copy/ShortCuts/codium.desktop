@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=VS Codium
 Comment=Open Source Code Editor
-Exec=/bin/codium %F
+Exec=/usr/bin/codium %F
 Icon=/10-Base/ShortCuts/icons/codium.png
 Categories=Application;Development;TextEditor
 StartupNotify=false

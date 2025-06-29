@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=SourceGit
 Comment=Open-source & Free Git GUI Client
-Exec=/bin/sourcegit
+Exec=/usr/bin/sourcegit
 Icon=/10-Base/ShortCuts/icons/sourcegit.png
 Terminal=false
 Type=Application

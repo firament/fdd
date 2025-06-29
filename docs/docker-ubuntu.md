@@ -5,16 +5,18 @@
 
 ## Prepare
 - download the deb files for your release and install manually
+- `lsb_release -a` to get current dist name
 - To upgrade, download the newer package files and repeat the installation procedure, pointing to the new files.
+- https://download.docker.com/linux/ubuntu/dists/noble/pool/stable/amd64/
 - https://download.docker.com/linux/ubuntu/dists/
 	- select Ubuntu version in the list
 	- go to `pool/stable/`
 	- select architecture (amd64, armhf, arm64, or s390x)
 	- download deb files for the Docker Engine, CLI, containerd, and Docker Compose packages:
 		- `containerd.io_<version>_<arch>.deb`
+		- `docker-buildx-plugin_<version>_<arch>.deb`
 		- `docker-ce_<version>_<arch>.deb`
 		- `docker-ce-cli_<version>_<arch>.deb`
-		- `docker-buildx-plugin_<version>_<arch>.deb`
 		- `docker-compose-plugin_<version>_<arch>.deb`
 
 ---

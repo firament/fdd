@@ -1,10 +1,7 @@
 # TODO List
-- [ ] VS Code sandbox error fix in script
-- [ ] Add post install commands for manual steps
-    - [ ] Opera browser, from fdd-lib.sh
-    ```sh
-    sudo dpkg -i ${RESOURCE_FOLDER}/Install/${OPERA_PACKAGE}
-    ```
+- [ ] Chromium - add xcopy steps to use `10-Apps/10-Base/Linux_x64_1463259_chrome-linux.zip`
+    - Add shortcut if needed
+    - Currently uses deb install `sudo dpkg -i ${RESOURCE_FOLDER}/Install/google-chrome-stable_current_amd64.deb`
 - [ ] Add links from `/10-Base/bin` to `/usr/local/sbin`, to enable sudo commands
 
 ---
