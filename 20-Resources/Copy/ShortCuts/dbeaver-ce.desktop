@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Terminal=false
-Name=/usr/bin/dbeaver-ce
+Name=DBeaver CE
 GenericName=Universal Database Manager
 Comment=Universal Database Manager and SQL Client.
 Path=/20-DEV/dbeaver-ce/
