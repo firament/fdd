@@ -2,7 +2,7 @@
 Type=Application
 Name=Lite XL
 Comment=A lightweight text editor written in Lua
-Exec=lite-xl %F
+Exec=/usr/bin/lite-xl %F
 Icon=/10-Base/ShortCuts/icons/lite-xl.svg
 Type=Application
 Terminal=false

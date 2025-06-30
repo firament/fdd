@@ -6,6 +6,6 @@ Type=Application
 Terminal=false
 Icon=/10-Base/ShortCuts/icons/filezilla.svg
 Categories=Network;Tools
-Exec=/30-EXT/FileZilla3/bin/filezilla
+Exec=/usr/bin/filezilla
 Name=FileZilla
 Comment=FTP Client v3

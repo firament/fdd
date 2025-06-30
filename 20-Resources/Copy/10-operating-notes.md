@@ -2,6 +2,33 @@
 
 > Copy this file to '~/Documents/' for easy access.
 
+## Misc
+- Get the physical path of a link
+    - `readlink --canonicalize $(which eclipse)`
+- List partitions
+    ```sh
+    sudo blkid | grep /dev/sd
+    lsblk -o name,uuid,size,mountpoint
+    ls -lh /dev/disk/by-uuid/
+    udevadm info -q all -n /dev/sdc1 | grep -i by-uuid | head -1
+    ```
+
+---
+## Generate random passwords
+- Simple
+  ```sh
+  openssl rand -hex 16
+  ```
+- Generates 20 instances of 32 char unique strings. `1 hex == 2 chars`.
+  ```sh
+  for n in {1..20}; do openssl rand -hex 18; done | while read tagv; do echo "${tagv}"; done | uniq;
+  ```
+- Generates 5 instances of 32 char unique strings.
+  ```sh
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 5
+  ```
+
+---
 ## Mount Container
 ```sh
 # Get first availaible node
@@ -32,7 +59,6 @@ sudo rmmod -v nbd;
 ```
 
 ---
-
 ## Install on-demand apps
 > Extract, XCopy
 

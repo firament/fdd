@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=A lightweight multi-platform code editor designed for modern hardware
-Exec=ecode %F
+Exec=/usr/bin/ecode %F
 Icon=/10-Base/ShortCuts/icons/ecode.svg
 Name=ecode
 NoDisplay=false

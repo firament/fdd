@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Visual Studio Code
 Comment=lightweight but powerful source code editor
-Exec=/bin/code %F
+Exec=/usr/bin/code %F
 Icon=/10-Base/ShortCuts/icons/code.png
 Categories=Application;Development;TextEditor
 StartupNotify=false

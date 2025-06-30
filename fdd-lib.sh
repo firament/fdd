@@ -53,6 +53,15 @@ Init(){
     # Make shortcuts universally availaible
     sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
 
+    ## SET ENVIRONMENT VARIABLES
+    echo "Applying environment variables. Will effect after next signin";
+    cat ${RESOURCE_FOLDER}/Copy/environment-variables.sh >> ${HOME}/.bashrc;
+
+    # ## COPY SECURITY POLICIES
+    # # Not needed when sandbox is enabled
+    # echo "Copying Security Policies.";
+    # sudo rsync -vhr ${RESOURCE_FOLDER}/Copy/SecurityPolicies /etc/apparmor.d/;
+
     ## COPY DRIVERS
     echo "Copying drivers.";
     rsync -vhr ${SETUP_BASE_LOCN}/10-Base/drivers /10-Base;
@@ -60,6 +69,11 @@ Init(){
     ## COPY WALLPAPER
     echo "Copying wallpaper to ${HOME}/Pictures.";
     cp -fvR ${RESOURCE_FOLDER}/Copy/bg-black.png ${HOME}/Pictures;
+
+    ## COPY INFO NOTES
+    echo "Copying Info notes to ${SETUPS_DOC_LOCN}.";
+    makeOwnFolder ${SETUPS_DOC_LOCN};
+    cp -fvR ${RESOURCE_FOLDER}/Copy/10-operating-notes.md ${SETUPS_DOC_LOCN};
 
     #### ADDING FONTS ##
     #------------------------------------------------------------------------------#
@@ -98,23 +112,10 @@ InstallCoreApps(){
                     tigervnc-standalone-server tigervnc-tools \
                     ;
 
-                    # libgconf-2-4 \
-    echo "Check if VS Code dependency on libgconf-2-4 still exists";
-
-    echo;
-    echo "Install Browsers";
-    sudo snap install chromium;
-    sudo dpkg -i \
-        ${RESOURCE_FOLDER}/Install/google-chrome-stable_current_amd64.deb \
-        ;
-    
-    # Needs user interaction, do manually later
-    #    ${RESOURCE_FOLDER}/Install/${OPERA_PACKAGE} \
-
     echo;
     echo "Install git support";
     sudo dpkg -i \
-        ${RESOURCE_FOLDER}/Install/gcm-linux_amd64.2.6.1.deb \
+        ${RESOURCE_FOLDER}/Install/${GCM_PACKAGE} \
         ;
     
     echo;
@@ -200,7 +201,19 @@ SetupDevApps(){
 
     echo "";
 
+    #### INSTALL Chromium browser
+    #------------------------------------------------------------------------------#
+    echo "Setting up Chromium browser";
+    ClearFolder ${CHROMIUM_PATH}; # Clear to rename later
+    unzip -q ${CHROMIUM_TAR} -d ${APPS_BAS_DIR};
+    mv -vf ${APPS_BAS_DIR}/chrome-linux ${CHROMIUM_PATH};
+    sudo ln -vsT ${CHROMIUM_PATH}/chrome ${PUBLIC_BIN_LOCN}/chromium;
+    # # Not needed when sandbox is enabled
+    # echo "enabling Security Policy - /etc/apparmor.d/chromium";
+    # sudo chmod -v 644 /etc/apparmor.d/chromium;
+    echo "";
 
+    
     ## /20-DEV
 
     #### INSTALL Visual Studio Code
@@ -210,6 +223,8 @@ SetupDevApps(){
     tar -xz --strip-components=1 -C ${VSCODE_PATH} -f ${VSCODE_TAR};
     sudo ln -vsT ${VSCODE_PATH}/code ${PUBLIC_BIN_LOCN}/code;
     sudo ln -vsT ${VSCODE_PATH}/bin/code ${PUBLIC_BIN_LOCN}/code-cli;
+    sudo chown root:root ${VSCODE_PATH}/chrome-sandbox;
+    sudo chmod 4755 ${VSCODE_PATH}/chrome-sandbox;
     # Initialize settings
     mkdir -vp ${HOME}/.config/Code/User/;
     cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
@@ -240,13 +255,12 @@ SetupDevApps(){
     tar -xz --strip-components=0 -C ${CODIUM_PATH} -f ${CODIUM_TARFILE};
     sudo ln -vsT ${CODIUM_PATH}/codium ${PUBLIC_BIN_LOCN}/codium;
     sudo ln -vsT ${CODIUM_PATH}/bin/codium ${PUBLIC_BIN_LOCN}/codium-cli;
+    sudo chown root:root ${CODIUM_PATH}/chrome-sandbox;
+    sudo chmod 4755 ${CODIUM_PATH}/chrome-sandbox;
     # # Initialize settings
     # mkdir -vp ${HOME}/.config/Code/User/;
     # cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-user-settings.jsonc  ${HOME}/.config/Code/User/settings.json;
     # cp -fv ${RESOURCE_FOLDER}/Copy/vs-code-keybindings.jsonc    ${HOME}/.config/Code/User/keybindings.json;
-    # # Copy config templates for reference, used by commands
-    # mkdir -vp ${HOME}/Documents/VSCode-Configs/;
-    # cp -vf ${RESOURCE_FOLDER}/Copy/vs-code-*.jsonc ${HOME}/Documents/VSCode-Configs/;
     # Install default extensions
     ${PUBLIC_BIN_LOCN}/codium-cli --version;
     ${PUBLIC_BIN_LOCN}/codium-cli --list-extensions;
@@ -363,19 +377,33 @@ SetupDevApps(){
     tar -xz --strip-components=1 -C ${LITEXL_PATH} -f ${LITEXL_TARFILE};
     sudo ln -vsT ${LITEXL_PATH}/lite-xl ${PUBLIC_BIN_LOCN}/lite-xl
     echo "";
+    
 
     # /40-APPIMAGES
     makeOwnFolder ${APPS_IMG_DIR};    # Folder should exist for copy to work
 
+    #### INSTALL Cherry Tree
+    #------------------------------------------------------------------------------#
+    echo "Setting up Cherry Tree now";
+    IMAGE_CHERYTREE_SRC=${APPS_IMG_SRC}/${CHERYTREE_TARFILE};
+    IMAGE_CHERYTREE_TGT=${APPS_IMG_DIR}/cherrytree.AppImage;
+    # Delete current image before update
+    rm -fv ${IMAGE_CHERYTREE_TGT};
+    cp -fv ${IMAGE_CHERYTREE_SRC} ${IMAGE_CHERYTREE_TGT};
+    chmod -v 755 ${IMAGE_CHERYTREE_TGT};
+    sudo ln -vsT ${IMAGE_CHERYTREE_TGT} ${PUBLIC_BIN_LOCN}/cherrytree;
+    echo "";
+
     #### INSTALL Theia IDE
     #------------------------------------------------------------------------------#
     echo "Setting up Theia IDE now";
-    IMAGE_THEIA=${APPS_IMG_DIR}/${THEIA_TARFILE};
-    # Consider deleting current image before copying
-    rm -fv ${IMAGE_THEIA};
-    cp -fv ${IMAGE_THEIA} ${APPS_IMG_DIR};
-    chmod -v 755 ${IMAGE_THEIA};
-    sudo ln -vsT ${IMAGE_THEIA} ${PUBLIC_BIN_LOCN}/theia;
+    IMAGE_THEIA_SRC=${APPS_IMG_SRC}/${THEIA_TARFILE};
+    IMAGE_THEIA_TGT=${APPS_IMG_DIR}/TheiaIDE.AppImage;
+    # Delete current image before update
+    rm -fv ${IMAGE_THEIA_TGT};
+    cp -fv ${IMAGE_THEIA_SRC} ${IMAGE_THEIA_TGT};
+    chmod -v 755 ${IMAGE_THEIA_TGT};
+    sudo ln -vsT ${IMAGE_THEIA_TGT} ${PUBLIC_BIN_LOCN}/theia;
     # TODO: Add extensions
     # TODO: If needed to fix plugins, extract appimage and install as xcopy folder
     echo "";
@@ -391,6 +419,32 @@ SetupDevApps(){
     chmod -v 755 ${IMAGE_SOURCEGIT_TGT};
     sudo ln -vsT ${IMAGE_SOURCEGIT_TGT} ${PUBLIC_BIN_LOCN}/sourcegit;
     echo "";
+
+    #### INSTALL Inkscape
+    #------------------------------------------------------------------------------#
+    echo "Setting up Inkscape now";
+    IMAGE_INKSCAPE_SRC=${APPS_IMG_SRC}/${INKSCAPE_TARFILE};
+    IMAGE_INKSCAPE_TGT=${APPS_IMG_DIR}/Inkscape.AppImage;
+    # Delete current image before update
+    rm -fv ${IMAGE_INKSCAPE_TGT};
+    cp -fv ${IMAGE_INKSCAPE_SRC} ${IMAGE_INKSCAPE_TGT};
+    chmod -v 755 ${IMAGE_INKSCAPE_TGT};
+    sudo ln -vsT ${IMAGE_INKSCAPE_TGT} ${PUBLIC_BIN_LOCN}/inkscape;
+    echo "";
+}
+
+####################################################################################################
+#                                                                                                  #
+#   Manual steps after script is done.                                                             #
+#                                                                                                  #
+####################################################################################################
+PostInstallActions(){
+    echo "Install Opera browser with command";
+    echo "sudo dpkg -i ${RESOURCE_FOLDER}/Install/${OPERA_PACKAGE}; sudo apt install -f;";
+    # The following additional packages will be installed:
+    # libdouble-conversion3 libmd4c0 libpcre2-16-0 libqt5core5t64 libqt5dbus5t64 libqt5gui5t64 libqt5network5t64 libqt5qml5 libqt5qmlmodels5 libqt5quick5 libqt5svg5 libqt5waylandclient5 libqt5waylandcompositor5 libqt5widgets5t64
+    # libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 qt5-gtk-platformtheme qttranslations5-l10n qtwayland5
+    
 }
 
 ####################################################################################################
@@ -416,13 +470,14 @@ SetupDevAppsXtra(){
 ####################################################################################################
 
 
-ApplyUpdate2503B(){
-    echo;
-    echo "APPLY Update 25-03-B";
-    # done on: yyyy-mm-dd
-
-
-
+ApplyUpdate2506A(){
     # INSTALL whatever addl steps or misses are
+    echo;
+    echo "APPLY Update 25-06-A";
+    # done on: 2025-06-29
+
+
+
     echo "";
 }
+

@@ -18,6 +18,13 @@
     - https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F1449244%2Fchrome-linux.zip?generation=1745139864940026&alt=media
     - https://www.googleapis.com/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F1449244%2Fchrome-linux.zip
     - https://www.googleapis.com/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F1449244%2Fchromedriver_linux64.zip
+#### Security Policy
+    - https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
+    - /etc/apparmor.d/chrome
+    - /etc/apparmor.d/chromium
+    ```sh
+    export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+    ```
 
 ***
 

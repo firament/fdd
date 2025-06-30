@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=CherryTree
 Comment=Hierarchical Note Taking
-Exec=cherrytree --new_window %f
+Exec=/usr/bin/cherrytree --new_window %f
 Icon=/10-Base/ShortCuts/icons/cherrytree.ico
 MimeType=application/cherrytree-ctd;application/cherrytree-ctz;application/cherrytree-ctb;application/cherrytree-ctx;
 Terminal=false
