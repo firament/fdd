@@ -440,7 +440,7 @@ SetupDevApps(){
 ####################################################################################################
 PostInstallActions(){
     echo "Install Opera browser with command";
-    echo "sudo dpkg -i ${RESOURCE_FOLDER}/Install/${OPERA_PACKAGE}; sudo apt install -f:";
+    echo "sudo dpkg -i ${RESOURCE_FOLDER}/Install/${OPERA_PACKAGE}; sudo apt install -f;";
     # The following additional packages will be installed:
     # libdouble-conversion3 libmd4c0 libpcre2-16-0 libqt5core5t64 libqt5dbus5t64 libqt5gui5t64 libqt5network5t64 libqt5qml5 libqt5qmlmodels5 libqt5quick5 libqt5svg5 libqt5waylandclient5 libqt5waylandcompositor5 libqt5widgets5t64
     # libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 qt5-gtk-platformtheme qttranslations5-l10n qtwayland5
@@ -470,20 +470,14 @@ SetupDevAppsXtra(){
 ####################################################################################################
 
 
-ApplyUpdate2505A(){
-    echo;
-    echo "APPLY Update 25-05-A";
-    # done on: yyyy-mm-dd
-
-    sudo rm -fv /etc/apparmor.d/chromium;
-
-    ## COPY INFO NOTES
-    echo "Copying Info notes to ${SETUPS_DOC_LOCN}.";
-    makeOwnFolder ${SETUPS_DOC_LOCN};
-    cp -fvR ${RESOURCE_FOLDER}/Copy/10-operating-notes.md ${SETUPS_DOC_LOCN};
-
-
+ApplyUpdate2506A(){
     # INSTALL whatever addl steps or misses are
+    echo;
+    echo "APPLY Update 25-06-A";
+    # done on: 2025-06-29
+
+
+
     echo "";
 }
 

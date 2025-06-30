@@ -44,6 +44,8 @@ Automation scripts to bring a raw ubuntu installation to a known state
 | drivers | MySql driver | 9.2.0       | https://dev.mysql.com/downloads/connector/j/                                                |   5 MB |
 | drivers | MSSql driver | 12.10.0     | https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server      |   8 MB |
 |         |              |             |                                                                                             |        |
+| Install | Opera        | 119.0.5497  | https://download.opera.com/download/get/?partner=www&opsys=Linux                            | 122 MB |
+|         |              |             |                                                                                             |        |
 
 
 ### Notes

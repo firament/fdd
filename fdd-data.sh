@@ -19,7 +19,7 @@ readonly REPOSITORY_LOCL="/60-APT-REPOSITORY";
 readonly PUBLIC_BIN_LOCN="/bin";
 readonly HOST_MENUS_LOCN="/usr/share/applications";
 
-readonly OPERA_PACKAGE="opera-stable_119.0.5497.40_amd64.deb";
+readonly OPERA_PACKAGE="opera-stable_119.0.5497.141_amd64.deb";
 readonly GCM_PACKAGE="gcm-linux_amd64.2.6.1.deb";
 
 ##
@@ -89,9 +89,9 @@ readonly LITEXL_PATH="${APPS_EXT_DIR}/lite-xl";
 ##
 readonly APPS_IMG_DIR="/40-APPIMAGES";
 readonly APPS_IMG_SRC="${SETUP_BASE_LOCN}${APPS_IMG_DIR}";
+readonly CHERYTREE_TARFILE="CherryTree-1.5.0-x86_64.AppImage";
 readonly THEIA_TARFILE="TheiaIDE.AppImage";
-readonly SOURCEGIT_TARFILE="sourcegit-2025.18.linux.amd64.AppImage";
-readonly CHERYTREE_TARFILE="CherryTree-1.4.0-x86_64.AppImage";
+readonly SOURCEGIT_TARFILE="sourcegit-2025.23.linux.amd64.AppImage";
 readonly INKSCAPE_TARFILE="Inkscape-ebf0e94-x86_64.AppImage";
 #
 
@@ -271,11 +271,6 @@ HealthCheck(){
     echo -n "BEGIN checking folders and files - "; date +"%d-%b-%Y %T";
     echo "";
     FS="----";
-
-    echo "DEBUG";
-    echo "APPS_IMG_SRC      => ${APPS_IMG_SRC}";
-    echo "THEIA_TARFILE     => ${THEIA_TARFILE}";
-    echo "SOURCEGIT_TARFILE => ${SOURCEGIT_TARFILE}";
 
     echo "";
     echo "Source Folders - Required:";
