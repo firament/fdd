@@ -29,6 +29,25 @@
   ```
 
 ---
+## ISO to Bootable USB disk
+> Using `dd` command
+
+1. Identify plugged devices
+    ```sh
+    sudo fdisk -l
+    ```
+2. Write ISO, Assuming
+    - ISO file is in folder `/home/user/Downloads/other-large/`
+    - ISO file to write is `ubuntu-mate-22.04.5-desktop-amd64.iso`
+    - Device to write is `/dev/sda`
+    ```sh
+    cd /home/user/Downloads/other-large/
+    # unmount all partitions
+    umount /dev/sda1
+    sudo dd bs=1M status=progress conv=fdatasync of=/dev/sda if=ubuntu-mate-22.04.5-desktop-amd64.iso;
+    sudo eject /dev/sda
+    ```
+---
 ## Mount Container
 ```sh
 # Get first availaible node
