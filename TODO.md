@@ -1,7 +1,4 @@
 # TODO List
-- [ ] Chromium - add xcopy steps to use `10-Apps/10-Base/Linux_x64_1463259_chrome-linux.zip`
-    - Add shortcut if needed
-    - Currently uses deb install `sudo dpkg -i ${RESOURCE_FOLDER}/Install/google-chrome-stable_current_amd64.deb`
 - [ ] Organize shortcut contents for uniformity
     - Version=1.0
     - Type=Application

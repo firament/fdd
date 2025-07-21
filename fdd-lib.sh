@@ -56,6 +56,8 @@ Init(){
     ## SET ENVIRONMENT VARIABLES
     echo "Applying environment variables. Will effect after next signin";
     cat ${RESOURCE_FOLDER}/Copy/environment-variables.sh >> ${HOME}/.bashrc;
+    # Activate now, for usage in downstream script
+    source ${RESOURCE_FOLDER}/Copy/environment-variables.sh;
 
     # ## COPY SECURITY POLICIES
     # # Not needed when sandbox is enabled
@@ -109,18 +111,20 @@ InstallCoreApps(){
     aptInstallApp   dconf-editor git \
                     ca-certificates \
                     firefox \
+                    openssh-server \
                     tigervnc-standalone-server tigervnc-tools \
                     ;
 
     echo;
-    echo "Install git support";
-    sudo dpkg -i \
+    echo "Install Chrome browser, git support";
+    sudo dpkg --install \
         ${RESOURCE_FOLDER}/Install/${GCM_PACKAGE} \
+        ${RESOURCE_FOLDER}/Install/${CHROME_PACKAGE} \
         ;
-    
+
     echo;
     echo "Install Docker engine";
-    sudo dpkg -i \
+    sudo dpkg --install \
         ${RESOURCE_FOLDER}/Install/docker/containerd.io_*_amd64.deb \
         ${RESOURCE_FOLDER}/Install/docker/docker-ce_*_amd64.deb \
         ${RESOURCE_FOLDER}/Install/docker/docker-ce-cli_*_amd64.deb \
@@ -145,6 +149,15 @@ InstallCoreApps(){
 SetupDevApps(){
 
     ## /10-Base
+
+    #### INSTALL Chromium browser
+    #------------------------------------------------------------------------------#
+    echo "Setting up Chromium browser";
+    ClearFolder ${CHROMIUM_PATH}; # Clear to rename later
+    unzip -q ${CHROMIUM_TAR} -d ${APPS_BAS_DIR};
+    mv -vf ${APPS_BAS_DIR}/chrome-linux ${CHROMIUM_PATH};
+    sudo ln -vsT ${CHROMIUM_PATH}/chrome ${PUBLIC_BIN_LOCN}/chromium;
+    echo "";
 
     #### INSTALL Java JDK
     #------------------------------------------------------------------------------#
@@ -179,7 +192,7 @@ SetupDevApps(){
     makeOwnFolder ${DNETCORE_PATH}  # Folder should exist for tar to work
     mkdir -vp ${HOME}/.nuget/packages;
     for DNC_TAR in ${DNETCORE_ALL_TARS}; do
-       # [[ -f ${APPS_BAS_SRC}/${DNC_TAR} ]] && echo "Good         : ${DNC_TAR}" || echo "Missing       : ${DNC_TAR}";
+       # [[ -f ${APPS_BAS_SRC}/${DNC_TAR} ]] && echo "Good   : ${DNC_TAR}" || echo "Missing: ${DNC_TAR}";
        if [ -f ${APPS_BAS_SRC}/${DNC_TAR} ]; then
           echo "Good         : ${DNC_TAR}";
           tar -xz -C ${DNETCORE_PATH} -f ${APPS_BAS_SRC}/${DNC_TAR};
@@ -199,18 +212,6 @@ SetupDevApps(){
     ls -1 /10-Base/DNC/sdk/NuGetFallbackFolder/
     echo "DEBUG:: END   ================================================================================"
 
-    echo "";
-
-    #### INSTALL Chromium browser
-    #------------------------------------------------------------------------------#
-    echo "Setting up Chromium browser";
-    ClearFolder ${CHROMIUM_PATH}; # Clear to rename later
-    unzip -q ${CHROMIUM_TAR} -d ${APPS_BAS_DIR};
-    mv -vf ${APPS_BAS_DIR}/chrome-linux ${CHROMIUM_PATH};
-    sudo ln -vsT ${CHROMIUM_PATH}/chrome ${PUBLIC_BIN_LOCN}/chromium;
-    # # Not needed when sandbox is enabled
-    # echo "enabling Security Policy - /etc/apparmor.d/chromium";
-    # sudo chmod -v 644 /etc/apparmor.d/chromium;
     echo "";
 
     
@@ -276,6 +277,32 @@ SetupDevApps(){
 
 	${PUBLIC_BIN_LOCN}/codium-cli --list-extensions --show-versions;
 
+    #### INSTALL VPUML CE
+    #------------------------------------------------------------------------------#
+    echo "Setting up VP UML CE now";
+    ClearFolder ${VPUML_PATH}; # Clean curent install for legacy files
+    makeOwnFolder ${VPUML_PATH};    # Folder should exist for tar to work
+    tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
+    sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
+    echo "";
+
+    #### INSTALL DBeaver CE
+    #------------------------------------------------------------------------------#
+    echo "Setting up DBeaver CE now";
+    ClearFolder ${DBEAVER_PATH}; # Clean curent install for legacy files
+    makeOwnFolder ${DBEAVER_PATH};    # Folder should exist for tar to work
+    tar -xz --strip-components=1 -C ${DBEAVER_PATH} -f ${DBEAVER_TAR};
+    sudo ln -vsT ${DBEAVER_PATH}/dbeaver ${PUBLIC_BIN_LOCN}/dbeaver
+    echo "";
+
+    #### INSTALL SQLeo Visual Query Builder
+    #------------------------------------------------------------------------------#
+    echo "Setting up SQLeo Visual Query Builder";
+    ClearFolder ${SQLVQB_PATH}; # Remove if upgrading
+    unzip -q ${SQLVQB_TARFILE} -d ${APPS_DEV_DIR};
+    mv -vf ${SQLVQB_PATH}* ${SQLVQB_PATH};
+    echo "";
+
     #### INSTALL CudaText
     #------------------------------------------------------------------------------#
     echo "Setting up CudaText now";
@@ -294,51 +321,17 @@ SetupDevApps(){
     sudo ln -vsT ${TEXTADEPT_PATH}/textadept ${PUBLIC_BIN_LOCN}/textadept
     echo "";
 
-    #### INSTALL DBeaver CE
-    #------------------------------------------------------------------------------#
-    echo "Setting up DBeaver CE now";
-    ClearFolder ${DBEAVER_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${DBEAVER_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${DBEAVER_PATH} -f ${DBEAVER_TAR};
-    sudo ln -vsT ${DBEAVER_PATH}/dbeaver ${PUBLIC_BIN_LOCN}/dbeaver
-    echo "";
-
-    #### INSTALL VPUML CE
-    #------------------------------------------------------------------------------#
-    echo "Setting up VP UML CE now";
-    ClearFolder ${VPUML_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${VPUML_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${VPUML_PATH} -f ${VPUML_TARFILE};
-    sudo ln -vsT ${VPUML_PATH}/Visual_Paradigm ${PUBLIC_BIN_LOCN}/Visual_Paradigm
-    echo "";
-
-    #### INSTALL SQLeo Visual Query Builder
-    #------------------------------------------------------------------------------#
-    echo "Setting up SQLeo Visual Query Builder";
-    ClearFolder ${SQLVQB_PATH}; # Remove if upgrading
-    unzip -q ${SQLVQB_TARFILE} -d ${APPS_DEV_DIR};
-    mv -vf ${SQLVQB_PATH}* ${SQLVQB_PATH};
-    echo "";
-
 
     # /30-EXT
 
-    #### INSTALL FileZilla
+    #### INSTALL lite-xl
     #------------------------------------------------------------------------------#
-    echo "Setting up FileZilla now";
-    # ClearFolder ${FILZLA_PATH}; # remove after next run. Needs testing.
-    makeOwnFolder ${FILZLA_PATH};    # Folder should exist for tar to work
-    tar -xJ --strip-components=1 -C ${FILZLA_PATH} -f ${FILZLA_TARFILE};
-    sudo ln -vsT ${FILZLA_PATH}/bin/filezilla ${PUBLIC_BIN_LOCN}/filezilla;
+    echo "Setting up lite-xl now";
+    ClearFolder ${LITEXL_PATH}; # Clean curent install for legacy files
+    makeOwnFolder ${LITEXL_PATH};    # Folder should exist for tar to work
+    tar -xz --strip-components=1 -C ${LITEXL_PATH} -f ${LITEXL_TARFILE};
+    sudo ln -vsT ${LITEXL_PATH}/lite-xl ${PUBLIC_BIN_LOCN}/lite-xl
     echo "";
-
-    #### INSTALL Snowflake
-    #------------------------------------------------------------------------------#
-    # echo "Setting up Snowflake now";
-    # # ClearFolder ${SNOWFLAKE_PATH}; # remove after next run. Needs testing.
-    # makeOwnFolder ${SNOWFLAKE_PATH};    # Folder should exist for tar to work
-    # cp -vf ${SNOWFLAKE_TARFILE} ${SNOWFLAKE_PATH};
-    # echo "";
 
     echo "";
 
@@ -351,6 +344,32 @@ SetupDevApps(){
     sudo ln -vsT ${ECODE_PATH}/ecode ${PUBLIC_BIN_LOCN}/ecode
     echo "";
 
+    #### INSTALL pulsar
+    #------------------------------------------------------------------------------#
+    echo "Setting up pulsar now";
+    ClearFolder ${PULSAR_PATH}; # Clean curent install for legacy files
+    makeOwnFolder ${PULSAR_PATH};    # Folder should exist for tar to work
+    tar -xz --strip-components=1 -C ${PULSAR_PATH} -f ${PULSAR_TARFILE};
+    sudo ln -vsT ${PULSAR_PATH}/pulsar ${PUBLIC_BIN_LOCN}/pulsar
+    echo "";
+    
+    # #### INSTALL FileZilla
+    # #------------------------------------------------------------------------------#
+    # echo "Setting up FileZilla now";
+    # # ClearFolder ${FILZLA_PATH}; # remove after next run. Needs testing.
+    # makeOwnFolder ${FILZLA_PATH};    # Folder should exist for tar to work
+    # tar -xJ --strip-components=1 -C ${FILZLA_PATH} -f ${FILZLA_TARFILE};
+    # sudo ln -vsT ${FILZLA_PATH}/bin/filezilla ${PUBLIC_BIN_LOCN}/filezilla;
+    # echo "";
+
+    #### INSTALL Snowflake
+    #------------------------------------------------------------------------------#
+    # echo "Setting up Snowflake now";
+    # # ClearFolder ${SNOWFLAKE_PATH}; # remove after next run. Needs testing.
+    # makeOwnFolder ${SNOWFLAKE_PATH};    # Folder should exist for tar to work
+    # cp -vf ${SNOWFLAKE_TARFILE} ${SNOWFLAKE_PATH};
+    # echo "";
+
     # #### INSTALL lapce
     # #------------------------------------------------------------------------------#
     # echo "Setting up lapce now";
@@ -360,24 +379,6 @@ SetupDevApps(){
     # sudo ln -vsT ${LAPCE_PATH}/lapce ${PUBLIC_BIN_LOCN}/lapce
     # echo "";
 
-    #### INSTALL pulsar
-    #------------------------------------------------------------------------------#
-    echo "Setting up pulsar now";
-    ClearFolder ${PULSAR_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${PULSAR_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${PULSAR_PATH} -f ${PULSAR_TARFILE};
-    sudo ln -vsT ${PULSAR_PATH}/pulsar ${PUBLIC_BIN_LOCN}/pulsar
-    echo "";
-
-    #### INSTALL lite-xl
-    #------------------------------------------------------------------------------#
-    echo "Setting up lite-xl now";
-    ClearFolder ${LITEXL_PATH}; # Clean curent install for legacy files
-    makeOwnFolder ${LITEXL_PATH};    # Folder should exist for tar to work
-    tar -xz --strip-components=1 -C ${LITEXL_PATH} -f ${LITEXL_TARFILE};
-    sudo ln -vsT ${LITEXL_PATH}/lite-xl ${PUBLIC_BIN_LOCN}/lite-xl
-    echo "";
-    
 
     # /40-APPIMAGES
     makeOwnFolder ${APPS_IMG_DIR};    # Folder should exist for copy to work
@@ -394,18 +395,16 @@ SetupDevApps(){
     sudo ln -vsT ${IMAGE_CHERYTREE_TGT} ${PUBLIC_BIN_LOCN}/cherrytree;
     echo "";
 
-    #### INSTALL Theia IDE
+    #### INSTALL Inkscape
     #------------------------------------------------------------------------------#
-    echo "Setting up Theia IDE now";
-    IMAGE_THEIA_SRC=${APPS_IMG_SRC}/${THEIA_TARFILE};
-    IMAGE_THEIA_TGT=${APPS_IMG_DIR}/TheiaIDE.AppImage;
+    echo "Setting up Inkscape now";
+    IMAGE_INKSCAPE_SRC=${APPS_IMG_SRC}/${INKSCAPE_TARFILE};
+    IMAGE_INKSCAPE_TGT=${APPS_IMG_DIR}/Inkscape.AppImage;
     # Delete current image before update
-    rm -fv ${IMAGE_THEIA_TGT};
-    cp -fv ${IMAGE_THEIA_SRC} ${IMAGE_THEIA_TGT};
-    chmod -v 755 ${IMAGE_THEIA_TGT};
-    sudo ln -vsT ${IMAGE_THEIA_TGT} ${PUBLIC_BIN_LOCN}/theia;
-    # TODO: Add extensions
-    # TODO: If needed to fix plugins, extract appimage and install as xcopy folder
+    rm -fv ${IMAGE_INKSCAPE_TGT};
+    cp -fv ${IMAGE_INKSCAPE_SRC} ${IMAGE_INKSCAPE_TGT};
+    chmod -v 755 ${IMAGE_INKSCAPE_TGT};
+    sudo ln -vsT ${IMAGE_INKSCAPE_TGT} ${PUBLIC_BIN_LOCN}/inkscape;
     echo "";
 
     #### INSTALL Git GUI
@@ -420,17 +419,20 @@ SetupDevApps(){
     sudo ln -vsT ${IMAGE_SOURCEGIT_TGT} ${PUBLIC_BIN_LOCN}/sourcegit;
     echo "";
 
-    #### INSTALL Inkscape
+    #### INSTALL Theia IDE
     #------------------------------------------------------------------------------#
-    echo "Setting up Inkscape now";
-    IMAGE_INKSCAPE_SRC=${APPS_IMG_SRC}/${INKSCAPE_TARFILE};
-    IMAGE_INKSCAPE_TGT=${APPS_IMG_DIR}/Inkscape.AppImage;
+    echo "Setting up Theia IDE now";
+    IMAGE_THEIA_SRC=${APPS_IMG_SRC}/${THEIA_TARFILE};
+    IMAGE_THEIA_TGT=${APPS_IMG_DIR}/TheiaIDE.AppImage;
     # Delete current image before update
-    rm -fv ${IMAGE_INKSCAPE_TGT};
-    cp -fv ${IMAGE_INKSCAPE_SRC} ${IMAGE_INKSCAPE_TGT};
-    chmod -v 755 ${IMAGE_INKSCAPE_TGT};
-    sudo ln -vsT ${IMAGE_INKSCAPE_TGT} ${PUBLIC_BIN_LOCN}/inkscape;
+    rm -fv ${IMAGE_THEIA_TGT};
+    cp -fv ${IMAGE_THEIA_SRC} ${IMAGE_THEIA_TGT};
+    chmod -v 755 ${IMAGE_THEIA_TGT};
+    sudo ln -vsT ${IMAGE_THEIA_TGT} ${PUBLIC_BIN_LOCN}/theia;
+    # TODO: Add extensions
+    # TODO: If needed to fix plugins, extract appimage and install as xcopy folder
     echo "";
+
 }
 
 ####################################################################################################
@@ -470,11 +472,23 @@ SetupDevAppsXtra(){
 ####################################################################################################
 
 
-ApplyUpdate2506A(){
+ApplyUpdate2507A(){
     # INSTALL whatever addl steps or misses are
     echo;
-    echo "APPLY Update 25-06-A";
-    # done on: 2025-06-29
+    echo "APPLY Update 25-07-A";
+    # done on: 2025-07-20
+
+    #### INSTALL Chromium browser
+    #------------------------------------------------------------------------------#
+    echo "Setting up Chromium browser";
+    ClearFolder ${CHROMIUM_PATH}; # Clear to rename later
+    unzip -q ${CHROMIUM_TAR} -d ${APPS_BAS_DIR};
+    mv -vf ${APPS_BAS_DIR}/chrome-linux ${CHROMIUM_PATH};
+    # sudo ln -vsT ${CHROMIUM_PATH}/chrome ${PUBLIC_BIN_LOCN}/chromium;
+    # # Not needed when sandbox is enabled
+    # echo "enabling Security Policy - /etc/apparmor.d/chromium";
+    # sudo chmod -v 644 /etc/apparmor.d/chromium;
+    echo "";
 
 
 
