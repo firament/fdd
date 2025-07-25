@@ -2,3 +2,6 @@
 10-Apps
 Working/commit-notes.md
 
+# Known location for working files. Reliable scripting support.
+Working/T01-Downloads/*
+!Working/T01-Downloads/.gitkeep
