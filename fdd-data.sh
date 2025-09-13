@@ -19,80 +19,81 @@ readonly REPOSITORY_LOCL="/60-APT-REPOSITORY";
 readonly PUBLIC_BIN_LOCN="/bin";
 readonly HOST_MENUS_LOCN="/usr/share/applications";
 
-readonly OPERA_PACKAGE="opera-stable_119.0.5497.141_amd64.deb";
 readonly GCM_PACKAGE="gcm-linux_amd64.2.6.1.deb";
+readonly CHROME_PACKAGE="google-chrome-stable_current_amd64.deb";
+readonly OPERA_PACKAGE="opera-stable_120.0.5543.93_amd64.deb";
 
 ##
 readonly APPS_BAS_DIR="/10-Base";
 readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 #
-readonly JAVA_TAR="${APPS_BAS_SRC}/openjdk-24.0.1_linux-x64_bin.tar.gz";
-readonly JAVA_PATH="${APPS_BAS_DIR}/java";
-#
-readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v24.0.2-linux-x64.tar.xz";
-readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
+readonly CHROMIUM_TAR="${APPS_BAS_SRC}/Linux_x64_1488637_chrome-linux.zip";
+readonly CHROMIUM_PATH="${APPS_BAS_DIR}/chromium";
 #
 # NOTE: Keep in release order, older first
-readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.409-linux-x64.tar.gz";
+readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.412-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 #
-readonly CHROMIUM_TAR="${APPS_BAS_SRC}/Linux_x64_1463259_chrome-linux.zip";
-readonly CHROMIUM_PATH="${APPS_BAS_DIR}/chromium";
+readonly JAVA_TAR="${APPS_BAS_SRC}/openjdk-24.0.2_linux-x64_bin.tar.gz";
+readonly JAVA_PATH="${APPS_BAS_DIR}/java";
+#
+readonly NODEJS_TAR="${APPS_BAS_SRC}/node-v24.4.1-linux-x64.tar.xz";
+readonly NODEJS_PATH="${APPS_BAS_DIR}/node";
 
 ##
 readonly APPS_DEV_DIR="/20-DEV";
 readonly APPS_DEV_SRC="${SETUP_BASE_LOCN}${APPS_DEV_DIR}";
 #
-readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-x64-1747260498.tar.gz";
+readonly VSCODE_TAR="${APPS_DEV_SRC}/code-stable-x64-1752598634.tar.gz";
 readonly VSCODE_PATH="${APPS_DEV_DIR}/VSCode-linux-x64";
 #
-readonly CODIUM_TARFILE="${APPS_DEV_SRC}/VSCodium-linux-x64-1.100.23258.tar.gz";
+readonly CODIUM_TARFILE="${APPS_DEV_SRC}/VSCodium-linux-x64-1.102.14746.tar.gz";
 readonly CODIUM_PATH="${APPS_DEV_DIR}/codium";
 #
-readonly CUDATEXT_TAR="${APPS_DEV_SRC}/cudatext-linux-gtk2-amd64-1.223.6.0.tar.xz";
-readonly CUDATEXT_PATH="${APPS_DEV_DIR}/CudaText";
-#
-readonly TEXTADEPT_TARFILE="${APPS_DEV_SRC}/textadept_12.7_beta_2.linux.tgz";
-readonly TEXTADEPT_PATH="${APPS_DEV_DIR}/textadept";
-#
-readonly DBEAVER_TAR="${APPS_DEV_SRC}/dbeaver-ce-25.0.5-linux.gtk.x86_64.tar.gz";
-readonly DBEAVER_PATH="${APPS_DEV_DIR}/dbeaver-ce";
-#
-readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_17_2_20250501_Linux64_InstallFree.tar.gz";
+readonly VPUML_TARFILE="${APPS_DEV_SRC}/Visual_Paradigm_CE_17_2_20250617_Linux64_InstallFree.tar.gz";
 readonly VPUML_PATH="${APPS_DEV_DIR}/Visual_Paradigm_CE";
+#
+readonly DBEAVER_TAR="${APPS_DEV_SRC}/dbeaver-ce-25.1.2-linux.gtk.x86_64-nojdk.tar.gz";
+readonly DBEAVER_PATH="${APPS_DEV_DIR}/dbeaver-ce";
 #
 readonly SQLVQB_TARFILE="${APPS_DEV_SRC}/SQLeoVQB.2019.01.rc1.zip";
 readonly SQLVQB_PATH="${APPS_DEV_DIR}/SQLeoVQB";
+#
+readonly CUDATEXT_TAR="${APPS_DEV_SRC}/cudatext-linux-gtk2-amd64-1.226.0.0.tar.xz";
+readonly CUDATEXT_PATH="${APPS_DEV_DIR}/CudaText";
+#
+readonly TEXTADEPT_TARFILE="${APPS_DEV_SRC}/textadept_12.7.linux.tgz";
+readonly TEXTADEPT_PATH="${APPS_DEV_DIR}/textadept";
 
 ##
 readonly APPS_EXT_DIR="/30-EXT";
 readonly APPS_EXT_SRC="${SETUP_BASE_LOCN}${APPS_EXT_DIR}";
 #
-readonly FILZLA_TARFILE="${APPS_EXT_SRC}/FileZilla_3.69.1_x86_64-linux-gnu.tar.xz";
+readonly LITEXL_TARFILE="${APPS_EXT_SRC}/lite-xl-v2.1.8-addons-linux-x86_64-portable.tar.gz";
+readonly LITEXL_PATH="${APPS_EXT_DIR}/lite-xl";
+#
+readonly ECODE_TARFILE="${APPS_EXT_SRC}/ecode-linux-0.7.1-x86_64.tar.gz";
+readonly ECODE_PATH="${APPS_EXT_DIR}/ecode";
+#
+readonly PULSAR_TARFILE="${APPS_EXT_SRC}/Linux.pulsar-1.128.0.tar.gz";
+readonly PULSAR_PATH="${APPS_EXT_DIR}/pulsar";
+#
+readonly FILZLA_TARFILE="${APPS_EXT_SRC}/FileZilla_3.69.2_x86_64-linux-gnu.tar.xz";
 readonly FILZLA_PATH="${APPS_EXT_DIR}/FileZilla3";
 #
 readonly SNOWFLAKE_TARFILE="${APPS_EXT_SRC}/snowflake.jar";
 readonly SNOWFLAKE_PATH="${APPS_EXT_DIR}/snowflake";
 #
-readonly ECODE_TARFILE="${APPS_EXT_SRC}/ecode-linux-0.7.1-x86_64.tar.gz";
-readonly ECODE_PATH="${APPS_EXT_DIR}/ecode";
-#
 readonly LAPCE_TARFILE="${APPS_EXT_SRC}/lapce-linux-amd64.tar.gz";
 readonly LAPCE_PATH="${APPS_EXT_DIR}/lapce";
-#
-readonly PULSAR_TARFILE="${APPS_EXT_SRC}/Linux.pulsar-1.128.0.tar.gz";
-readonly PULSAR_PATH="${APPS_EXT_DIR}/pulsar";
-#
-readonly LITEXL_TARFILE="${APPS_EXT_SRC}/lite-xl-v2.1.8-rc2-addons-linux-x86_64-portable.tar.gz";
-readonly LITEXL_PATH="${APPS_EXT_DIR}/lite-xl";
 
 ##
 readonly APPS_IMG_DIR="/40-APPIMAGES";
 readonly APPS_IMG_SRC="${SETUP_BASE_LOCN}${APPS_IMG_DIR}";
 readonly CHERYTREE_TARFILE="CherryTree-1.5.0-x86_64.AppImage";
-readonly THEIA_TARFILE="TheiaIDE.AppImage";
-readonly SOURCEGIT_TARFILE="sourcegit-2025.23.linux.amd64.AppImage";
 readonly INKSCAPE_TARFILE="Inkscape-ebf0e94-x86_64.AppImage";
+readonly SOURCEGIT_TARFILE="sourcegit-2025.26.linux.amd64.AppImage";
+readonly THEIA_TARFILE="TheiaIDE.AppImage";
 #
 
 ##

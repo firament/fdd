@@ -1,7 +1,14 @@
 # TODO List
-- [ ] Chromium - add xcopy steps to use `10-Apps/10-Base/Linux_x64_1463259_chrome-linux.zip`
-    - Add shortcut if needed
-    - Currently uses deb install `sudo dpkg -i ${RESOURCE_FOLDER}/Install/google-chrome-stable_current_amd64.deb`
+- [ ] Organize shortcut contents for uniformity
+    - Version=1.0
+    - Type=Application
+    - Terminal=false
+    - Name=
+    - Comment=
+    - Icon=/10-Base/ShortCuts/icons/
+    - Exec=/usr/bin/
+    - MimeType=
+    - Categories=
 - [ ] Add links from `/10-Base/bin` to `/usr/local/sbin`, to enable sudo commands
 
 ---
