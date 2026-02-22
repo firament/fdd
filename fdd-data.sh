@@ -301,7 +301,7 @@ HealthCheck(){
     [[ -f ${FILZLA_TARFILE} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  FILZLA_TARFILE      >> ${FILZLA_TARFILE}";
     [[ -f ${SNOWFLAKE_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  SNOWFLAKE_TARFILE   >> ${SNOWFLAKE_TARFILE}";
     [[ -f ${ECODE_TARFILE} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  ECODE_TARFILE       >> ${ECODE_TARFILE}";
-    # [[ -f ${LAPCE_TARFILE} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  LAPCE_TARFILE       >> ${LAPCE_TARFILE}";
+    [[ -f ${LAPCE_TARFILE} ]]      && FS=" OK " || FS="FAIL"; echo "[${FS}]  LAPCE_TARFILE       >> ${LAPCE_TARFILE}";
     [[ -f ${PULSAR_TARFILE} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  PULSAR_TARFILE      >> ${PULSAR_TARFILE}";
     [[ -f ${LITEXL_TARFILE} ]]     && FS=" OK " || FS="FAIL"; echo "[${FS}]  LITEXL_TARFILE      >> ${LITEXL_TARFILE}";
     [[ -f ${APPS_IMG_SRC}/${CHERYTREE_TARFILE} ]]  && FS=" OK " || FS="FAIL"; echo "[${FS}]  CHERYTREE_TARFILE   >> ${APPS_IMG_SRC}/${CHERYTREE_TARFILE}";

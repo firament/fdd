@@ -37,6 +37,7 @@ Automation scripts to bring a raw ubuntu installation to a known state
 | 30-EXT  | Lite XL      | 2.1.8       | https://github.com/lite-xl/lite-xl/releases                                                 |   3 MB |
 | 30-EXT  | ecode        | 0.7.4       | https://github.com/SpartanJ/ecode/releases                                                  |  28 MB |
 | 30-EXT  | Pulsar+      | 1.131.1     | https://github.com/pulsar-edit/pulsar/releases/                                             | 215 MB |
+| 30-EXT  | Lapce        | v0.4.6      | https://github.com/lapce/lapce/releases/                                                    |  23 MB |
 | 30-EXT  | FileZilla+   | 3.69.2      | https://filezilla-project.org/download.php?show_all=1                                       |  12 MB |
 | 30-EXT  | SnowFlake+   | 1.0.4       | https://github.com/subhra74/snowflake/releases                                              |  39 MB |
 |         |              |             |                                                                                             |        |

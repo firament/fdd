@@ -374,14 +374,14 @@ SetupDevApps(){
     # cp -vf ${SNOWFLAKE_TARFILE} ${SNOWFLAKE_PATH};
     # echo "";
 
-    # #### INSTALL lapce
-    # #------------------------------------------------------------------------------#
-    # echo "Setting up lapce now";
-    # ClearFolder ${LAPCE_PATH}; # Clean curent install for legacy files
-    # makeOwnFolder ${LAPCE_PATH};    # Folder should exist for tar to work
-    # tar -xz --strip-components=1 -C ${LAPCE_PATH} -f ${LAPCE_TARFILE};
-    # sudo ln -vsT ${LAPCE_PATH}/lapce ${PUBLIC_BIN_LOCN}/lapce
-    # echo "";
+    #### INSTALL lapce
+    #------------------------------------------------------------------------------#
+    echo "Setting up lapce now";
+    ClearFolder ${LAPCE_PATH}; # Clean curent install for legacy files
+    makeOwnFolder ${LAPCE_PATH};    # Folder should exist for tar to work
+    tar -xz --strip-components=1 -C ${LAPCE_PATH} -f ${LAPCE_TARFILE};
+    sudo ln -vsT ${LAPCE_PATH}/lapce ${PUBLIC_BIN_LOCN}/lapce
+    echo "";
 
 
     # /40-APPIMAGES
