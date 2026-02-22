@@ -33,18 +33,18 @@
 	- actuals
 	```sh
     sudo dpkg -i \
-        containerd.io_1.6.31-1_amd64.deb \
-        docker-ce_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
-        docker-ce-cli_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
-        docker-buildx-plugin_0.14.0-1~ubuntu.22.04~jammy_amd64.deb \
-        docker-compose-plugin_2.27.0-1~ubuntu.22.04~jammy_amd64.deb \
+        containerd.io_2.2.1-1~ubuntu.24.04~noble_amd64.deb \
+        docker-ce_29.2.1-1~ubuntu.24.04~noble_amd64.deb \
+        docker-ce-cli_29.2.1-1~ubuntu.24.04~noble_amd64.deb \
+        docker-buildx-plugin_0.31.1-1~ubuntu.24.04~noble_amd64.deb \
+        docker-compose-plugin_5.0.2-1~ubuntu.24.04~noble_amd64.deb \
         ;
 
     # # addl, not documented
-    # docker-ce-rootless-extras_26.1.1-1~ubuntu.22.04~jammy_amd64.deb \
+	# docker-ce-rootless-extras_29.2.1-1~ubuntu.24.04~noble_amd64.deb
+	# docker-model-plugin_1.0.9-1~ubuntu.24.04~noble_amd64.deb
     # docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb \
 	```
-
 ---
 ## Verify
 ```sh

@@ -1,17 +1,14 @@
 [Desktop Entry]
-Version=1.0
 Name=Inkscape
-GenericName=Vector Graphics Editor
 Comment=Create and edit Scalable Vector Graphics images
-Keywords=image;editor;vector;drawing;
-Type=Application
-Categories=Graphics;VectorGraphics;GTK;
-MimeType=image/svg+xml;
 Exec=/usr/bin/inkscape %F
-TryExec=inkscape
-Terminal=false
-StartupNotify=true
 Icon=/10-Base/ShortCuts/icons/inkscape.svg
+Categories=Graphics;VectorGraphics;GTK;
+StartupNotify=true
+Type=Application
+Terminal=false
+MimeType=image/svg+xml;
+Keywords=image;editor;vector;drawing;
 Actions=new-window;
 
 [Desktop Action new-window]

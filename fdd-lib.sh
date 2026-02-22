@@ -49,7 +49,9 @@ Init(){
     ## COPY SHORTCUTS
     echo "Copying files and linking.";
     rsync -vhr ${RESOURCE_FOLDER}/Copy/ShortCuts /10-Base/;
-    chmod -v 755 /10-Base/ShortCuts/*desktop;
+    # For Ununtu 755 is needed. For XFCE 644 is sufficient.
+    chmod -v 644 /10-Base/ShortCuts/*desktop;
+    chmod -v 644 /10-Base/ShortCuts/icons/*;
     # Make shortcuts universally availaible
     sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
 
@@ -351,6 +353,8 @@ SetupDevApps(){
     makeOwnFolder ${PULSAR_PATH};    # Folder should exist for tar to work
     tar -xz --strip-components=1 -C ${PULSAR_PATH} -f ${PULSAR_TARFILE};
     sudo ln -vsT ${PULSAR_PATH}/pulsar ${PUBLIC_BIN_LOCN}/pulsar
+    sudo chown root:root ${PULSAR_PATH}/chrome-sandbox;
+    sudo chmod 4755 ${PULSAR_PATH}/chrome-sandbox;
     echo "";
     
     # #### INSTALL FileZilla
@@ -395,6 +399,18 @@ SetupDevApps(){
     sudo ln -vsT ${IMAGE_CHERYTREE_TGT} ${PUBLIC_BIN_LOCN}/cherrytree;
     echo "";
 
+    #### INSTALL Cursor IDE
+    #------------------------------------------------------------------------------#
+    echo "Setting up Cursor IDE now";
+    IMAGE_CURSOR_SRC=${APPS_IMG_SRC}/${CURSOR_TARFILE};
+    IMAGE_CURSOR_TGT=${APPS_IMG_DIR}/cursor-ide.AppImage;
+    # Delete current image before update
+    rm -fv ${IMAGE_CURSOR_TGT};
+    cp -fv ${IMAGE_CURSOR_SRC} ${IMAGE_CURSOR_TGT};
+    chmod -v 755 ${IMAGE_CURSOR_TGT};
+    sudo ln -vsT ${IMAGE_CURSOR_TGT} ${PUBLIC_BIN_LOCN}/cursor;
+    echo "";
+
     #### INSTALL Inkscape
     #------------------------------------------------------------------------------#
     echo "Setting up Inkscape now";
@@ -417,6 +433,18 @@ SetupDevApps(){
     cp -fv ${IMAGE_SOURCEGIT_SRC} ${IMAGE_SOURCEGIT_TGT};
     chmod -v 755 ${IMAGE_SOURCEGIT_TGT};
     sudo ln -vsT ${IMAGE_SOURCEGIT_TGT} ${PUBLIC_BIN_LOCN}/sourcegit;
+    echo "";
+
+    #### INSTALL FreeCAD
+    #------------------------------------------------------------------------------#
+    echo "Setting up FreeCAD now";
+    IMAGE_FREECAD_SRC=${APPS_IMG_SRC}/${FREECAD_TARFILE};
+    IMAGE_FREECAD_TGT=${APPS_IMG_DIR}/freecad.AppImage;
+    # Delete current image before update
+    rm -fv ${IMAGE_FREECAD_TGT};
+    cp -fv ${IMAGE_FREECAD_SRC} ${IMAGE_FREECAD_TGT};
+    chmod -v 755 ${IMAGE_FREECAD_TGT};
+    sudo ln -vsT ${IMAGE_FREECAD_TGT} ${PUBLIC_BIN_LOCN}/freecad;
     echo "";
 
     #### INSTALL Theia IDE
@@ -472,26 +500,26 @@ SetupDevAppsXtra(){
 ####################################################################################################
 
 
-ApplyUpdate2507A(){
+ApplyUpdate2602A(){
     # INSTALL whatever addl steps or misses are
     echo;
-    echo "APPLY Update 25-07-A";
-    # done on: 2025-07-20
+    echo "APPLY Update 26-02-A";
+    # done on: 2026-02-22
 
-    #### INSTALL Chromium browser
-    #------------------------------------------------------------------------------#
-    echo "Setting up Chromium browser";
-    ClearFolder ${CHROMIUM_PATH}; # Clear to rename later
-    unzip -q ${CHROMIUM_TAR} -d ${APPS_BAS_DIR};
-    mv -vf ${APPS_BAS_DIR}/chrome-linux ${CHROMIUM_PATH};
-    # sudo ln -vsT ${CHROMIUM_PATH}/chrome ${PUBLIC_BIN_LOCN}/chromium;
-    # # Not needed when sandbox is enabled
-    # echo "enabling Security Policy - /etc/apparmor.d/chromium";
-    # sudo chmod -v 644 /etc/apparmor.d/chromium;
+    ## COPY SHORTCUTS
+    echo "Copying files and linking.";
+    rsync -vhr ${RESOURCE_FOLDER}/Copy/ShortCuts /10-Base/;
+    chmod -v 644 /10-Base/ShortCuts/*desktop;
+    chmod -v 644 /10-Base/ShortCuts/icons/*;
+    
+    # Make shortcuts universally availaible
+    sudo rsync -vh /10-Base/ShortCuts/*desktop ${HOST_MENUS_LOCN};
+
+    # Fix missing Cursor link
+    IMAGE_CURSOR_TGT=${APPS_IMG_DIR}/cursor-ide.AppImage;
+    sudo ln -vsT ${IMAGE_CURSOR_TGT} ${PUBLIC_BIN_LOCN}/cursor;
     echo "";
 
-
-
-    echo "";
+    echo "Done all...";
 }
 
