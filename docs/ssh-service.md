@@ -64,6 +64,14 @@
     ssh -o IdentitiesOnly=yes -p 22 -l ${machine-user} ${machine-name}
     ```
 
+- Test Passphrase
+    - Confirm if a passphrase is required
+    - Validate you have the correct passphrase
+    - On local, the passphrase can be tested multiple times without possibly compromising the account
+        ```sh
+        ssh-keygen -y -f /path/to/ssh_key
+        ```
+
 - Turn off Auto login
     - XFCE
         - `/etc/lightdm/lightdm.conf`
