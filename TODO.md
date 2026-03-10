@@ -1,14 +1,25 @@
 # TODO List
-- [ ] Organize shortcut contents for uniformity
-    - Version=1.0
-    - Type=Application
-    - Terminal=false
-    - Name=
-    - Comment=
-    - Icon=/10-Base/ShortCuts/icons/
-    - Exec=/usr/bin/
-    - MimeType=
-    - Categories=
+> Not in any specific order
+- [ ] Add setting/config files for
+    - [ ] Codium
+    - [ ] Cursor
+    - [ ] Cherry Tree
+    - [ ] DBeaver
+    - [ ] VPUML-CE
+- [ ] Create profiles for
+    - [ ] VS Code
+    - [ ] Codium
+    - [ ] Cursor ??
+- [ ] Test and add, if it fits workflow
+    - [ ] [Portainer Community Edition](https://github.com/portainer/portainer)
+    - [ ] [SilverBullet](https://github.com/silverbulletmd/silverbullet) or [silverbullet-ai](https://github.com/justyns/silverbullet-ai)
+- [ ] Start work on pocket OS
+    - [ ] [penguins-eggs](https://github.com/pieroproietti/penguins-eggs)
+    - [ ] [Ventoy](https://github.com/ventoy/Ventoy)
+    - [ ] with UEFI boot support
+- [ ] Check/Read
+    - [ ] [WinPE](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro)
+    - [ ] [Microsoft Validation OS](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/validation-os-overview)
 - [ ] Add links from `/10-Base/bin` to `/usr/local/sbin`, to enable sudo commands
 
 ---
