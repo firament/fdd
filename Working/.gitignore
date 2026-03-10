@@ -1,3 +1,5 @@
-downloads
+commit-notes.md
+downloads/*
+!downloads/.gitkeep
 grub-*.cfg
 T15-*

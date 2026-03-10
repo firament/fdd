@@ -8,10 +8,24 @@ Automation scripts to bring a raw ubuntu installation to a known state
 1. In setup-fdd.sh, Line 8
 	- Change `plain_text_password` to 'Actual password'
 
+2. scaffold working directories
+	- Do before starting downloads
+```sh
+mkdir -vp 10-Apps/10-Base/drivers;
+mkdir -vp 10-Apps/20-DEV;
+mkdir -vp 10-Apps/30-EXT;
+mkdir -vp 10-Apps/40-APPIMAGES;
+mkdir -vp 20-Resources/Copy/bin/;
+mkdir -vp 20-Resources/Copy/ShortCuts/;
+mkdir -vp 20-Resources/Install/;
+mkdir -vp 20-Resources/Install/Mono-TTF;
+mkdir -vp 20-Resources/Install/Sans-TTF;
+mkdir -vp 20-Resources/Install/Serif-TTF;
+```
 ---
 
 ## Quick Download Links
-- Updated on: 2025-07-19
+- Updated on: 2026-02-22
 
 | Loc     | App          | Curr Ver    | Download URL                                                                                |   Size |
 | ------- | ------------ | ----------- | ------------------------------------------------------------------------------------------- | ------:|
@@ -56,7 +70,6 @@ Automation scripts to bring a raw ubuntu installation to a known state
 
 
 ### Notes
-- [Lapce](https://github.com/lapce/lapce/releases) not working for now. exclude till resolved
 - Not used on all machines, exclude unless needed
 	- [SQLeoVQB](https://sourceforge.net/projects/sqleo/files/SQLeoVQB/)
 	- [ecode](https://github.com/SpartanJ/ecode/releases)
@@ -81,18 +94,3 @@ Automation scripts to bring a raw ubuntu installation to a known state
 	- Chromium [see](Working/Apps-to-add.md)
 ---
 
-## scaffold working directories
-> Do before starting downloads
-```sh
-mkdir -vp 10-Apps/10-Base/drivers;
-mkdir -vp 10-Apps/20-DEV;
-mkdir -vp 10-Apps/30-EXT;
-mkdir -vp 10-Apps/40-APPIMAGES;
-mkdir -vp 20-Resources/Copy/bin/;
-mkdir -vp 20-Resources/Copy/ShortCuts/;
-mkdir -vp 20-Resources/Install/;
-mkdir -vp 20-Resources/Install/Mono-TTF;
-mkdir -vp 20-Resources/Install/Sans-TTF;
-mkdir -vp 20-Resources/Install/Serif-TTF;
-```
----

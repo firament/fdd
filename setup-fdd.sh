@@ -5,7 +5,7 @@
 #                                                                                                  #
 ####################################################################################################
 
-sudo -S echo "Activating SUDO mode." <<<"welcome";  # plain_text_password
+sudo -S echo "Activating SUDO mode." <<<"plain_text_password";  # plain_text_password
 
 ## TODO:
 #    replaceText - verify and fix regex. result is broken now
