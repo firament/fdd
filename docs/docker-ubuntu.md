@@ -72,7 +72,7 @@ docker --version
 ---
 
 ## Working notes
-- https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/
+- https://download.docker.com/linux/ubuntu/dists/noble/pool/stable/amd64/
 - automate downloads
 	```
 	wget [OPTION]... [URL]...

@@ -30,7 +30,7 @@ readonly APPS_BAS_SRC="${SETUP_BASE_LOCN}${APPS_BAS_DIR}";
 readonly CHROMIUM_TAR="${APPS_BAS_SRC}/Linux_x64_1585201_chrome-linux.zip";
 readonly CHROMIUM_PATH="${APPS_BAS_DIR}/chromium";
 #
-# NOTE: Keep in release order, older first. Space delimited
+# NOTE: Space delimited, Keep in release order, Older first
 readonly DNETCORE_ALL_TARS="dotnet-sdk-8.0.418-linux-x64.tar.gz dotnet-sdk-10.0.103-linux-x64.tar.gz";
 readonly DNETCORE_PATH="${APPS_BAS_DIR}/DNC";
 #

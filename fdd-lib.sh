@@ -35,7 +35,7 @@ Init(){
     ## Backup GRUB
     echo "Backup Grub Config, and update with custom config";
     sudo cp -fv /boot/grub/grub.cfg /boot/grub/grub-$(date +"%Y%m%d-%s").cfg    # Add time stamp to file name
-    sudo cat /boot/grub/grub.cfg                        >${SETUPS_LOG_LOCN}/grub-$(date +"%Y%m%d-%s").cfg;
+    sudo cat /boot/grub/grub.cfg    >${SETUPS_LOG_LOCN}/grub-$(date +"%Y%m%d-%s").cfg;
 
     ## SET-LINK BIN FOLDER. PATH WILL AUTO UPDATE ON REBOOT
     echo "Preparing bin contents";
@@ -81,7 +81,7 @@ Init(){
 
     #### ADDING FONTS ##
     #------------------------------------------------------------------------------#
-     echo "Updating with additional fonts...";
+    echo "Updating with additional fonts...";
     pushd ${RESOURCE_FOLDER}/Install/;
     sudo rsync -r Sans-TTF Serif-TTF Mono-TTF /usr/share/fonts/truetype/
     popd;
@@ -333,8 +333,6 @@ SetupDevApps(){
     makeOwnFolder ${LITEXL_PATH};    # Folder should exist for tar to work
     tar -xz --strip-components=1 -C ${LITEXL_PATH} -f ${LITEXL_TARFILE};
     sudo ln -vsT ${LITEXL_PATH}/lite-xl ${PUBLIC_BIN_LOCN}/lite-xl
-    echo "";
-
     echo "";
 
     #### INSTALL ecode

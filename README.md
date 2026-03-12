@@ -1,8 +1,6 @@
 # fdd
 Automation scripts to bring a raw ubuntu installation to a known state
 
----
-
 ## Before Running
 
 1. In setup-fdd.sh, Line 8
@@ -81,8 +79,6 @@ mkdir -vp 20-Resources/Install/Serif-TTF;
 
 ### Other:
 - https://jdk.java.net/archive/
-- https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server
-- https://www.visual-paradigm.com/download/community.jsp?platform=windows&arch=64bit&install=no
 - Fonts
 	- https://github.com/microsoft/cascadia-code/releases/
 	- https://github.com/tonsky/FiraCode/releases/
