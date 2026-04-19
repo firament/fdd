@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Cursor
+Comment=The AI Code Editor.
+Exec=/usr/bin/cursor --no-sandbox %F
+Icon=/10-Base/ShortCuts/icons/cursor.png
+Categories=TextEditor;Development;IDE;
+StartupNotify=false
+Type=Application
+Terminal=false
+MimeType=application/x-cursor-workspace;
+Keywords=cursor;
+Actions=new-empty-window;
+
+[Desktop Action new-empty-window]
+Name=New Empty Window
+Exec=/usr/bin/cursor --no-sandbox --new-window %F
+Icon=/10-Base/ShortCuts/icons/cursor.png

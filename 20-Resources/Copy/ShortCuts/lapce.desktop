@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Lapce
+Comment=Lightning-fast and powerful code editor written in Rust
+Exec=/usr/bin/lapce
+Icon=/10-Base/ShortCuts/icons/lapce.png
+Categories=TextEditor;Development;IDE;
+StartupNotify=false
+Type=Application
+Terminal=false
+StartupWMClass=lapce
+Actions=new-window;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=lapce --new %F
+Icon=/10-Base/ShortCuts/icons/lapce.png

@@ -1,15 +1,13 @@
 [Desktop Entry]
-Version=1.0
-Type=Application
-Terminal=false
 Name=DBeaver CE
-GenericName=Universal Database Manager
 Comment=Universal Database Manager and SQL Client.
-Path=/20-DEV/dbeaver-ce/
 Exec=/usr/bin/dbeaver
 Icon=/10-Base/ShortCuts/icons/dbeaver.png
 Categories=IDE;Development;SQLClient
-StartupWMClass=DBeaver
 StartupNotify=true
-Keywords=Database;SQL;IDE;JDBC;ODBC;MySQL;PostgreSQL;Oracle;DB2;MariaDB
+Type=Application
+Terminal=false
 MimeType=application/sql
+Keywords=Database;SQL;IDE;JDBC;ODBC;MySQL;PostgreSQL;Oracle;DB2;MariaDB
+StartupWMClass=DBeaver
+Path=/20-DEV/dbeaver-ce/

@@ -1,12 +1,12 @@
 [Desktop Entry]
-Type=Application
 Name=Lite XL
 Comment=A lightweight text editor written in Lua
 Exec=/usr/bin/lite-xl %F
 Icon=/10-Base/ShortCuts/icons/lite-xl.svg
+Categories=Application;Development;TextEditor;IDE;
+StartupNotify=false
 Type=Application
 Terminal=false
-StartupWMClass=lite-xl
-Categories=Application;Development;TextEditor;IDE;
 MimeType=text/plain;inode/directory;
+StartupWMClass=lite-xl
 

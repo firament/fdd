@@ -9,11 +9,11 @@
 ### Chromium
 - Get latest release from
     - https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2FLAST_CHANGE?alt=media
-    - `1488637`
+    - `1585201`
 - Filter in
     - https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Linux_x64/
 - Using latest release number
-    - https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Linux_x64/1488637/
+    - https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Linux_x64/1585201/
 - Get
     - https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F1449244%2Fchrome-linux.zip?generation=1745139864940026&alt=media
     - https://www.googleapis.com/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F1449244%2Fchrome-linux.zip

@@ -1,14 +1,45 @@
 # TODO List
-- [ ] Organize shortcut contents for uniformity
-    - Version=1.0
-    - Type=Application
-    - Terminal=false
-    - Name=
-    - Comment=
-    - Icon=/10-Base/ShortCuts/icons/
-    - Exec=/usr/bin/
-    - MimeType=
-    - Categories=
+> Not in any specific order
+- [ ] Add shortcuts for
+    - [ ] KiCad | LibrePCB | CircuitMaker
+    - [ ] FreeCAD
+- [ ] Add output of `lsb_release -a` in HealthCheck function
+    - Check for anything else that will provide meaningful info on host platform
+    - Include flavor or desktop info also
+    - For use in analysis of usage
+- [ ] Make generic `/70-CurrentWork/make-keys.sh`
+    - Define arrays and iterate
+    - Occasionally used, readability and maintainability over effeciency
+    - Data in markdown format preferred for readability, `org | identity | note`
+- [ ] Identify and add VSCode extensions for
+    - [ ] Docker
+    - [ ] Dev Containers
+    - [ ] Terraform
+- [ ] Add setting/config files for
+    - [ ] Codium
+    - [ ] Cursor
+    - [ ] Cherry Tree
+    - [ ] DBeaver
+    - [ ] VPUML-CE
+- [ ] Create profiles for
+    - [ ] VS Code
+    - [ ] Codium
+    - [ ] Cursor ??
+- [ ] Test and add, if it fits workflow
+    - [ ] [ProjectLibre desktop](https://www.projectlibre.com/projectlibre-desktop/)
+    - [ ] [Portainer Community Edition](https://github.com/portainer/portainer)
+    - [ ] [SilverBullet](https://github.com/silverbulletmd/silverbullet) or [silverbullet-ai](https://github.com/justyns/silverbullet-ai)
+    - [ ] [Eclipse Papyrus Modeling environment](https://eclipse.dev/papyrus/)
+    - [ ] [KiCad](https://www.kicad.org/)
+    - [ ] [LibrePCB](https://librepcb.org/)
+    - [ ] [CircuitMaker Desktop](https://www.altium.com/circuitmaker)
+- [ ] Start work on pocket OS
+    - [ ] [penguins-eggs](https://github.com/pieroproietti/penguins-eggs)
+    - [ ] [Ventoy](https://github.com/ventoy/Ventoy)
+    - [ ] with UEFI boot support
+- [ ] Check/Read
+    - [ ] [WinPE](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro)
+    - [ ] [Microsoft Validation OS](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/validation-os-overview)
 - [ ] Add links from `/10-Base/bin` to `/usr/local/sbin`, to enable sudo commands
 
 ---

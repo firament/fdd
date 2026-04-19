@@ -1,11 +1,11 @@
 [Desktop Entry]
-Type=Application
 Name=pulsar
-Comment=A lightweight text editor
+Comment=A Community-led Hyper-Hackable Text Editor
 Exec=/usr/bin/pulsar %F
 Icon=/10-Base/ShortCuts/icons/pulsar.png
+Categories=Application;Development;TextEditor
+StartupNotify=true
+Type=Application
 Terminal=false
-StartupWMClass=lite-xl
-Categories=Development;IDE;
-MimeType=text/plain;inode/directory;
+StartupWMClass=Pulsar
 
