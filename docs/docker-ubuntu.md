@@ -5,9 +5,9 @@
 
 ## Prepare
 - download the deb files for your release and install manually
-- `lsb_release -a` to get current dist name
+- `lsb_release -a` to get current dist name (resolute)
 - To upgrade, download the newer package files and repeat the installation procedure, pointing to the new files.
-- https://download.docker.com/linux/ubuntu/dists/noble/pool/stable/amd64/
+- https://download.docker.com/linux/ubuntu/dists/resolute/pool/stable/amd64/
 - https://download.docker.com/linux/ubuntu/dists/
 	- select Ubuntu version in the list
 	- go to `pool/stable/`

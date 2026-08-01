@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=KiCad
+Comment=Suite of tools for schematic design and circuit board layout
+Exec=kicad %f
+Icon=/10-Base/ShortCuts/icons/kicad.png
+Categories=Application;Engineering;Science;Electronics;
+StartupNotify=true
+Type=Application
+Terminal=false
+MimeType=application/x-kicad-project;
+Keywords=pcbnew;PCB;Circuit;Layout;Design;Editor;Footprint;;
+StartupWMClass=kicad

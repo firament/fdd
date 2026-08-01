@@ -1,8 +1,29 @@
 # TODO List
 > Not in any specific order
-- [ ] Add shortcuts for
-    - [ ] KiCad | LibrePCB | CircuitMaker
-    - [ ] FreeCAD
+- [ ] Delete dummy shortcuts
+    - /usr/share/applications/theia.desktop
+    - /usr/share/applications/filezilla3.desktop
+- [ ] Check if any of these recommended apps will be helpful
+    - git-doc (1:2.53.0-1ubuntu1)
+    - git-email (1:2.53.0-1ubuntu1)
+    - git-gui (1:2.53.0-1ubuntu1)
+    - gitk (1:2.53.0-1ubuntu1)
+    - gitweb (1:2.53.0-1ubuntu1)
+    - git-cvs (1:2.53.0-1ubuntu1)
+    - git-svn (1:2.53.0-1ubuntu1)
+    - molly-guard (0.8.5build1)
+    - monkeysphere
+    - ssh-askpass (1:1.2.4.1-16build3)
+- [ ] Followup on docker install output
+    ```
+    Synchronizing state of docker.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+    Executing: /usr/lib/systemd/systemd-sysv-install disable docker
+    Removed '/etc/systemd/system/multi-user.target.wants/docker.service'.
+    Disabling 'docker.service', but its triggering units are still active:
+    docker.socket
+    Removed '/etc/systemd/system/multi-user.target.wants/containerd.service'.
+    ```
+- [ ] https://www.qownnotes.org/getting-started/overview.html
 - [ ] Add output of `lsb_release -a` in HealthCheck function
     - Check for anything else that will provide meaningful info on host platform
     - Include flavor or desktop info also
@@ -26,13 +47,11 @@
     - [ ] Codium
     - [ ] Cursor ??
 - [ ] Test and add, if it fits workflow
-    - [ ] [ProjectLibre desktop](https://www.projectlibre.com/projectlibre-desktop/)
+    - [x] [ProjectLibre desktop](https://www.projectlibre.com/projectlibre-desktop/)
     - [ ] [Portainer Community Edition](https://github.com/portainer/portainer)
     - [ ] [SilverBullet](https://github.com/silverbulletmd/silverbullet) or [silverbullet-ai](https://github.com/justyns/silverbullet-ai)
+        - Use docker option, with bash launcher
     - [ ] [Eclipse Papyrus Modeling environment](https://eclipse.dev/papyrus/)
-    - [ ] [KiCad](https://www.kicad.org/)
-    - [ ] [LibrePCB](https://librepcb.org/)
-    - [ ] [CircuitMaker Desktop](https://www.altium.com/circuitmaker)
 - [ ] Start work on pocket OS
     - [ ] [penguins-eggs](https://github.com/pieroproietti/penguins-eggs)
     - [ ] [Ventoy](https://github.com/ventoy/Ventoy)

@@ -238,16 +238,16 @@ SetupDevApps(){
     # Install default extensions
     code-cli --version;
     ${PUBLIC_BIN_LOCN}/code-cli --list-extensions;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension jsynowiec.vscode-insertdatestring;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension yzhang.markdown-all-in-one;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension bierner.markdown-preview-github-styles;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension pharndt.vscode-markdown-table;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension ms-dotnettools.vscode-dotnet-runtime;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension ms-dotnettools.csharp;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension mhutchie.git-graph;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension mechatroner.rainbow-csv;
-    ${PUBLIC_BIN_LOCN}/code-cli --install-extension volkerdobler.insertnums;
-    ${PUBLIC_BIN_LOCN}/code-cli --list-extensions;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension jsynowiec.vscode-insertdatestring;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension yzhang.markdown-all-in-one;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension bierner.markdown-preview-github-styles;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension pharndt.vscode-markdown-table;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension ms-dotnettools.vscode-dotnet-runtime;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension ms-dotnettools.csharp;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension mhutchie.git-graph;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension mechatroner.rainbow-csv;
+#     ${PUBLIC_BIN_LOCN}/code-cli --install-extension volkerdobler.insertnums;
+#     ${PUBLIC_BIN_LOCN}/code-cli --list-extensions;
 
     echo "";
 
@@ -267,17 +267,18 @@ SetupDevApps(){
     # Install default extensions
     ${PUBLIC_BIN_LOCN}/codium-cli --version;
     ${PUBLIC_BIN_LOCN}/codium-cli --list-extensions;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension mhutchie.git-graph;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension yzhang.markdown-all-in-one;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension shd101wyy.markdown-preview-enhanced;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension darkriszty.markdown-table-prettify;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension bierner.markdown-preview-github-styles;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension raer0.codium-insertdatestring;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension mechatroner.rainbow-csv;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension imgildev.vscode-json-flow;
-	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension qcz.text-power-tools;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension mhutchie.git-graph;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension yzhang.markdown-all-in-one;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension shd101wyy.markdown-preview-enhanced;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension darkriszty.markdown-table-prettify;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension bierner.markdown-preview-github-styles;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension raer0.codium-insertdatestring;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension mechatroner.rainbow-csv;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension imgildev.vscode-json-flow;
+# 	${PUBLIC_BIN_LOCN}/codium-cli --force --install-extension qcz.text-power-tools;
 
 	${PUBLIC_BIN_LOCN}/codium-cli --list-extensions --show-versions;
+    echo "";
 
     #### INSTALL VPUML CE
     #------------------------------------------------------------------------------#
@@ -443,6 +444,18 @@ SetupDevApps(){
     cp -fv ${IMAGE_FREECAD_SRC} ${IMAGE_FREECAD_TGT};
     chmod -v 755 ${IMAGE_FREECAD_TGT};
     sudo ln -vsT ${IMAGE_FREECAD_TGT} ${PUBLIC_BIN_LOCN}/freecad;
+    echo "";
+
+    #### INSTALL KiCad
+    #------------------------------------------------------------------------------#
+    echo "Setting up KiCad now";
+    IMAGE_KICAD_SRC=${APPS_IMG_SRC}/${KICAD_TARFILE};
+    IMAGE_KIAD_TGT=${APPS_IMG_DIR}/kicad.AppImage;
+    # Delete current image before update
+    rm -fv ${IMAGE_KIAD_TGT};
+    cp -fv ${IMAGE_KICAD_SRC} ${IMAGE_KIAD_TGT};
+    chmod -v 755 ${IMAGE_KIAD_TGT};
+    sudo ln -vsT ${IMAGE_KIAD_TGT} ${PUBLIC_BIN_LOCN}/kicad;
     echo "";
 
     #### INSTALL Theia IDE
